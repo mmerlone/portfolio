@@ -42,7 +42,6 @@ const Weather = () => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto my-8">
       <div className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-        <>
         {isLoading ? (
           <LoadingSpinner />
         ) : (
@@ -55,26 +54,25 @@ const Weather = () => {
             unoptimized
           />
         )}
-          <div>
-            <div className="text-3xl font-bold text-gray-900 dark:text-white">
-              {weather.temp ?? "..."}°C
-            </div>
-            <div className="text-gray-600 dark:text-gray-300 capitalize">
-              {weather.description}
-            </div>
+        <div>
+          <div className="text-3xl font-bold text-gray-900 dark:text-white">
+            {weather.temp ?? "..."}°C
           </div>
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{city}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              {new Date().toLocaleDateString(undefined, {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
+          <div className="text-gray-600 dark:text-gray-300 capitalize">
+            {weather.description}
           </div>
-        </>
+        </div>
+        <div>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{city}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+        </div>
       </div>
       {isError ? (
         <p className="text-xs m-4 text-gray-500 dark:text-gray-400">

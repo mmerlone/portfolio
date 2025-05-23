@@ -8,7 +8,7 @@ import QueryProvider from "@/components/QueryProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
+  title: siteConfig.name + ' - ' + siteConfig.title,
   description: siteConfig.description,
 };
 
@@ -17,23 +17,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Hardcode the lang attribute to "en-US" to ensure SSR and hydration align
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
-        />
-      </head>
-      <body className={inter.className} suppressHydrationWarning>
-        <Navbar />
-        <QueryProvider>{children}</QueryProvider>
+    <html lang="en-US">
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <QueryProvider>
+          <Navbar />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

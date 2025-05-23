@@ -16,20 +16,39 @@ export async function fetchQuote(): Promise<QuoteResponse[]> {
 }
 
 export async function fetchWeather(): Promise<WeatherResponse> {
+  // Check if the API key is defined
   const WEATHER_API_KEY = process.env.WEATHER_API_KEY as string;
-  const city = siteConfig.city;
-  if (!city) {
-    throw new Error("City is not defined in the config");
-  }
   if (!WEATHER_API_KEY) {
+    console.error("WEATHER_API_KEY is not defined");
     throw new Error("Weather API key is not defined");
   }
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`
-  );
-  if (!response.ok) {
-    console.log("Error fetching weather data:", response.statusText);
-    throw new Error("Failed to fetch weather data");
+  const city = siteConfig.city;
+  if (!city) {
+    console.error("City is not defined in the config");
+    throw new Error("City is not defined in the config");
   }
-  return response.json();
+
+  // Construct URL ensuring proper encoding and correct parameters
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+    city
+  )}&appid=${WEATHER_API_KEY}&units=metric`;
+  console.log("Fetching weather from:", url);
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.error(
+        "Error fetching weather data:",
+        response.status,
+        response.statusText
+      );
+      throw new Error(`Failed to fetch weather data: ${response.statusText}`);
+    }
+    const data: WeatherResponse = await response.json();
+    console.log("Fetched weather data:", data);
+    return data;
+  } catch (error) {
+    console.error("fetchWeather encountered an error:", error);
+    throw error;
+  }
 }

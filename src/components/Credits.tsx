@@ -34,7 +34,7 @@ const Credits = ({ className = "" }: { className?: string }) => {
           companies and technologies, made possible by the contributions of many
           talented individuals.
         </p>
-        <div className="max-w-6xl mx-auto my-4">
+        <div className="max-w-6xl mx-auto my-4 overflow-hidden">
           <Slider className="slick-slider" {...sliderSettings}>
             {siteConfig.credits.map((credit) => (
               <CardCredit key={credit.name} credit={credit} />
