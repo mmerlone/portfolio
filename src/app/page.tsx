@@ -16,14 +16,14 @@ export const dynamic = "force-dynamic";
 
 async function getGtmId(): Promise<string> {
   let baseUrl = "";
-  if (process.env.VERCEL_URL) {
-    // Use VERCEL_URL in production if available
-    baseUrl = `https://${process.env.VERCEL_URL}`;
-  } else {
-    // Fallback: get the host from request headers
-    const host = (await headers()).get("host") || "localhost:3000";
-    baseUrl = host.includes("localhost") ? `http://${host}` : `https://${host}`;
-  }
+  // if (process.env.VERCEL_URL) {
+  //   // Use VERCEL_URL in production if available
+  //   baseUrl = `https://${process.env.VERCEL_URL}`;
+  // } else {
+  //   // Fallback: get the host from request headers
+  // }
+  const host = (await headers()).get("host") || "localhost:3000";
+  baseUrl = host.includes("3000") ? `http://${host}` : `https://${host}`;
 
   // Construct the absolute URL.
   const url = `${baseUrl}/api/gtm`;
