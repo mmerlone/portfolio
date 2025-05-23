@@ -6,7 +6,7 @@ import { LoadingSpinner } from "./ui/LoadingSpinner";
 const Quote = () => {
   const { data, isLoading, isError, refetch } = useQuote();
 
-  // If there's an error, fallback to default quote.
+  // Default quote fallback when error
   const defaultQuote = {
     q: "640 k ought to be enough for anybody.",
     a: "Bill Gates",
@@ -30,7 +30,7 @@ const Quote = () => {
         onClick={handleClick}
       >
         {isLoading ? (
-          <LoadingSpinner />
+          <LoadingSpinner className="w-full" />
         ) : (
           <div className="flex-1">
             <blockquote className="italic text-gray-600 dark:text-gray-300">
