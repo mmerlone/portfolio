@@ -19,7 +19,6 @@ const NextArrow = (
       style={{
         ...style,
         display: "block",
-        right: "-15px",
         zIndex: 2,
       }}
       onClick={onClick}
@@ -38,7 +37,6 @@ const PrevArrow = (
       style={{
         ...style,
         display: "block",
-        left: "-30px",
         zIndex: 2,
       }}
       onClick={onClick}
@@ -63,7 +61,7 @@ const Credits = ({ className = "" }: { className?: string }) => {
         },
       },
     ],
-    autoplay: true,
+    // autoplay: true,
   };
 
   return (

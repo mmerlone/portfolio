@@ -30,3 +30,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.slick-slide > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slick-prev,
+.slick-next {
+  height: 50px !important;
+  width: 50px !important;
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 50px !important;
+}

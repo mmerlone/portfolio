@@ -1,15 +1,14 @@
-import {
-  FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt,
-} from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 import { siteConfig } from "@/config/site";
 import { ContactProps } from "@/types/components";
 import { renderSocialLinks } from "@/components/renderSocialLinks";
 
 const Contact = ({ className = "" }: ContactProps) => {
   return (
-    <section id="contact" className={`py-20 relative contact-background ${className}`}>
+    <section
+      id="contact"
+      className={`py-20 relative contact-background ${className}`}
+    >
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Contact Info */}
@@ -55,30 +54,16 @@ const Contact = ({ className = "" }: ContactProps) => {
               Quick Links
             </h3>
             <ul className="space-y-2">
-              <li>
-                <a
-                  href="#about"
-                  className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#skills"
-                  className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
-                >
-                  Skills
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#experience"
-                  className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
-                >
-                  Experience
-                </a>
-              </li>
+              {siteConfig.navigation.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
