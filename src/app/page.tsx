@@ -7,11 +7,13 @@ import Credits from '@/components/Credits';
 import ScrollToTop from '@/components/ScrollToTop';
 import Footer from '@/components/Footer';
 import { GoogleTagManager } from "@next/third-parties/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function Home() {
   const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID as string;
   return (
     <main>
+      <SpeedInsights />
       <GoogleTagManager gtmId={GOOGLE_TAG_MANAGER_ID} />
       <Hero />
       <About />
