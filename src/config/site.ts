@@ -7,7 +7,7 @@ export const siteConfig = {
   headline:
     "Remote Software Engineer | Full-Stack Development | Cloud Technologies | Problem Solver",
   // New title for meta tags, etc.
-  title: "Software Engeneer",
+  title: "Software Engineer",
   description:
     "A creative and results-oriented Software Engineer with a strong track record of 20+ years in solving complex technical challenges. Expertise in React, TypeScript, Node.js, and cloud technologies. Passionate about building scalable, maintainable, and user-friendly applications.",
   url: "https://your-domain.com",
