@@ -1,20 +1,22 @@
-'use client';
+"use client";
 
-import { siteConfig } from '@/config/site';
-import { AboutProps } from '@/types/components';
+import { siteConfig } from "@/config/site";
+import { AboutProps } from "@/types/components";
+import { SectionTitle } from "./ui/SectionTitle";
 
-const About = ({ className = '' }: AboutProps) => {
+const About = ({ className = "" }: AboutProps) => {
   return (
-    <section id="about" className={`py-20 relative ${className}`}>
+    <section
+      id="about"
+      className={`py-20 relative section-background-primary ${className}`}
+    >
       {/* Background with texture */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-8 text-center">
-            {siteConfig.about.title}
-          </h2>
+          <SectionTitle>{siteConfig.about.title}</SectionTitle>
           <div className="prose prose-lg dark:prose-invert mx-auto">
             {siteConfig.about.paragraphs.map((paragraph, index) => (
-              <p 
+              <p
                 key={index}
                 className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4 first:mt-0"
               >
@@ -28,4 +30,4 @@ const About = ({ className = '' }: AboutProps) => {
   );
 };
 
-export default About; 
+export default About;

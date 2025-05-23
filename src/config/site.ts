@@ -2,11 +2,12 @@ import { type SiteConfig } from '@/types/site';
 
 export const siteConfig = {
   // Site metadata
-  name: "Marcio Merlone - Software Engineer Portfolio",
+  name: "Marcio Merlone - Software Engineer",
   title: "Remote Software Engineer | Full-Stack Development | Cloud Technologies | Problem Solver",
   description: "A creative and results-oriented Software Engineer with a strong track record of 20+ years in solving complex technical challenges. Expertise in React, TypeScript, Node.js, and cloud technologies. Passionate about building scalable, maintainable, and user-friendly applications.",
   url: "https://your-domain.com",
   ogImage: "https://your-domain.com/og.jpg",
+  city: "Araucária, PR, Brazil",
 
   // Contact information
   contact: {
@@ -16,11 +17,12 @@ export const siteConfig = {
   },
 
   // Social media links
-  social: {
-    github: "https://github.com/mmerlone",
-    linkedin: "https://linkedin.com/in/mmerlone",
-    twitter: "https://twitter.com/mmerlone",
-  },
+  social: [
+    { name: 'LinkedIn', url: 'https://linkedin.com/in/mmerlone', icon: 'linkedin' },
+    { name: 'GitHub', url: 'https://github.com/mmerlone', icon: 'github' },
+    // { name: 'Twitter', url: 'https://twitter.com/mmerlone', icon: 'twitter' },
+    { name: 'Instagram', url: 'https://instagram.com/mmerlone', icon: 'instagram' }
+  ],
 
   // External links
   links: {
@@ -35,9 +37,11 @@ export const siteConfig = {
 
   // Navigation
   navigation: [
+    { name: "Home", href: "#top" },
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
     { name: "Experience", href: "#experience" },
+    { name: "Credits", href: "#credits" },
     { name: "Contact", href: "#contact" },
   ],
 
@@ -46,23 +50,6 @@ export const siteConfig = {
     copyright: {
       text: "All rights reserved.",
     },
-    social: [
-      {
-        name: "GitHub",
-        href: "https://github.com/mmerlone",
-        icon: "FaGithub",
-      },
-      {
-        name: "LinkedIn",
-        href: "https://linkedin.com/in/mmerlone",
-        icon: "FaLinkedin",
-      },
-      {
-        name: "Twitter",
-        href: "https://twitter.com/mmerlone",
-        icon: "FaTwitter",
-      },
-    ],
   },
 
   // About section
@@ -74,5 +61,53 @@ export const siteConfig = {
       "In recent years, I've pivoted to focus on modern software development, specializing in front-end technologies like React and TypeScript. This shift allows me to combine my extensive technical background with a passion for crafting user-centric and **accessible** web applications. My full-stack perspective, informed by years of infrastructure and backend work, provides a valuable edge in building well-rounded solutions. I am now eager to leverage this combined expertise to contribute to innovative projects within dynamic, remote teams across the world."
     ],
   },
+
+  // Credits: Vercel, OpenWeatherMap, Tailwind CSS, Heroicons, FontAwesome, Zenquotes
+  // Weather data provided by OpenWeatherMap
+  // Icons provided by Heroicons
+  // Vercel for hosting
+  // Zenquotes API for inspirational quotes
+  // FontAwesome for icons
+  // Vercel for hosting
+
+  // Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a>
+  credits: [
+    {
+      name: "OpenWeatherMap",
+      description: "Weather data provided by OpenWeatherMap.",
+      url: "https://openweathermap.org/",
+      icon: "openweathermap.png",
+    },
+    {
+      name: "Heroicons",
+      description: "Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.",
+      url: "https://heroicons.com/",
+      icon: "heroicons.svg",
+    },
+    {
+      name: "Tailwind CSS",
+      description: "A utility-first CSS framework for creating custom designs.",
+      url: "https://tailwindcss.com/",
+      icon: "tailwindcss.svg",
+    },
+    {
+      name: "FontAwesome",
+      description: "The iconic font and CSS toolkit.",
+      url: "https://fontawesome.com/",
+      icon: "fontawesome.svg",
+    },
+    {
+      name: "ZenQuotes API",
+      description: "Inspirational quotes provided by ZenQuotes API.",
+      url: "https://zenquotes.io/",
+      icon: "zenquotes.png",
+    },
+    {
+      name: "Vercel",
+      description: "The platform for frontend developers, providing the best developer experience and performance.",
+      url: "https://vercel.com/",
+      icon: "vercel.svg",
+    },
+  ],
+
 } as const satisfies SiteConfig;
- 

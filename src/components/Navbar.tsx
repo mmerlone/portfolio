@@ -18,6 +18,16 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -43,6 +53,7 @@ const Navbar = () => {
                 key={item.href}
                 href={item.href}
                 className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.name}
               </Link>
@@ -76,7 +87,10 @@ const Navbar = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  handleNavClick(e, item.href);
+                  setIsOpen(false);
+                }}
                 className="block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
               >
                 {item.name}
@@ -89,4 +103,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;

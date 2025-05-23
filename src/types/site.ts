@@ -4,16 +4,17 @@ export interface SiteConfig {
   description: string;
   url: string;
   ogImage: string;
+  city: string;
   contact: {
     email: string;
     phone: string;
     location: string;
   };
-  social: {
-    linkedin: string;
-    github: string;
-    twitter: string;
-  };
+  social: Array<{
+    name: string;
+    url: string;
+    icon?: string;
+  }>;
   images: {
     profile: string;
   };
@@ -29,14 +30,16 @@ export interface SiteConfig {
     copyright: {
       text: string;
     };
-    social: Array<{
-      name: string;
-      href: string;
-      icon: string;
-    }>;
   };
   about: {
     title: string;
     paragraphs: string[];
   };
+  credits: Array<{
+    name: string;
+    description: string;
+    url: string;
+    icon: string;
+  }>;
+
 } 

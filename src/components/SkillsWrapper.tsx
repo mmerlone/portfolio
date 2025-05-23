@@ -2,9 +2,13 @@
 
 import dynamic from 'next/dynamic';
 import { SkillsWrapperProps } from '@/types/components';
+import { LoadingSpinner } from './ui/LoadingSpinner';
 
 const SkillsClient = dynamic(() => import('./SkillsClient'), {
-  ssr: false
+  ssr: false,
+  loading: () => (
+    <LoadingSpinner />
+  ),
 });
 
 const SkillsWrapper = ({ categories, categoryIcons }: SkillsWrapperProps) => {
