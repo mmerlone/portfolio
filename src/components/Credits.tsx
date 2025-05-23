@@ -29,10 +29,10 @@ const Credits = ({ className = "" }: { className?: string }) => {
     >
       <div className="container mx-auto px-4 relative z-10">
         <SectionTitle>Credits</SectionTitle>
-        <p>
-          This portfolio showcases my recent experience with the following companies
-          and technologies, made possible by the contributions of many talented
-          individuals.
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4 first:mt-0 sm:text-center sm:text-balance">
+          This portfolio showcases my recent experience with the following
+          companies and technologies, made possible by the contributions of many
+          talented individuals.
         </p>
         <div className="max-w-6xl mx-auto my-4">
           <Slider className="slick-slider" {...sliderSettings}>

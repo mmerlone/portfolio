@@ -21,7 +21,11 @@ const Experience = ({ className = "" }: ExperienceProps) => {
         <SectionTitle>Professional Experience</SectionTitle>
 
         <div className="max-w-4xl mx-auto">
-          <div className={`space-y-12 ${expanded ? "h-auto" : "max-h-96 more-to-show"} overflow-hidden transition-all duration-500`}>
+          <div
+            className={`relative space-y-12 ${
+              expanded ? "h-auto" : "max-h-96 more-to-show"
+            } overflow-hidden transition-all duration-500`}
+          >
             {experiences.map((job: ExperienceType, index: number) => (
               <div key={index} className="relative pl-8 sm:pl-32 py-6 group">
                 {/* Timeline line */}
@@ -32,22 +36,22 @@ const Experience = ({ className = "" }: ExperienceProps) => {
 
                 {/* Company logo */}
                 <div className="absolute left-0 sm:left-0 top-6 w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-md">
-                    {job.logo ? (
-                      <Image
-                        src={job.logo}
-                        alt={`${job.company} logo`}
-                        width={64}
-                        height={64}
-                        className="w-full h-full object-cover"
-                        style={{ objectFit: "cover" }}
-                        unoptimized={false}
-                      />
-                    ) : (
-                      <div className="w-8 h-8 flex items-center justify-center">
-                        <FaBriefcase className="w-6 h-6 text-gray-400 dark:text-gray-500" />
-                      </div>
-                    )}
-                  </div>
+                  {job.logo ? (
+                    <Image
+                      src={job.logo}
+                      alt={`${job.company} logo`}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover"
+                      style={{ objectFit: "cover" }}
+                      unoptimized={false}
+                    />
+                  ) : (
+                    <div className="w-8 h-8 flex items-center justify-center">
+                      <FaBriefcase className="w-6 h-6 text-gray-400 dark:text-gray-500" />
+                    </div>
+                  )}
+                </div>
 
                 {/* Content */}
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transform transition-transform hover:scale-[1.02]">
