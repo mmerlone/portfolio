@@ -4,6 +4,15 @@ import Image from "next/image";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { FC } from "react";
 
+// Helper function to build the proper icon URL
+const getIconSrc = (icon: string) => {
+  if (/^https?:\/\//i.test(icon)) {
+    return icon;
+  }
+  // Otherwise assume it's a relative path under /images/icons/
+  return `/images/icons/${icon}`;
+};
+
 interface CardCreditProps {
   credit: {
     name: string;
@@ -25,7 +34,7 @@ const CardCredit: FC<CardCreditProps> = ({ credit }) => {
         {/* Container with fixed size */}
         <div className="relative w-20 h-20">
           <Image
-            src={`/images/icons/${credit.icon}`}
+            src={getIconSrc(credit.icon)}
             alt={credit.name}
             fill
             sizes="80px"

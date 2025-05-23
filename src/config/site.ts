@@ -130,30 +130,30 @@ export const siteConfig = {
     },
     {
       name: "React Slick",
-      description: "A carousel component for React.",
+      description: "The Last React Carousel You'll Ever Need!",
       url: "https://react-slick.neostack.com/",
-      icon: "react-slick.svg",
+      icon: "react.svg",
     },
     {
       name: "Google Analytics",
       description:
         "Google Analytics is a web analytics service offered by Google that tracks and reports website traffic.",
       url: "https://analytics.google.com/",
-      icon: "google-analytics.svg",
+      icon: "https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg",
     },
     {
       name: "Google Tag Manager",
       description:
         "Google Tag Manager is a tag management system for conversion tracking, site analytics, remarketing, and more.",
       url: "https://tagmanager.google.com/",
-      icon: "google-tag-manager.svg",
+      icon: "gtm.jpeg",
     },
     {
       name: "Vercel Speed Insights",
       description:
         "Vercel Speed Insights provides performance insights for your website.",
       url: "https://vercel.com/speed",
-      icon: "vercel-speed-insights.svg",
+      icon: "vercel.svg",
     },
   ],
 } as const satisfies SiteConfig;
