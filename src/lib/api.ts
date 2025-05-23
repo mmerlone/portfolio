@@ -17,7 +17,6 @@ export async function fetchQuote(): Promise<QuoteResponse[]> {
 
 export async function fetchWeather(): Promise<WeatherResponse> {
   const WEATHER_API_KEY = process.env.WEATHER_API_KEY as string;
-  // get city from config
   const city = siteConfig.city;
   if (!city) {
     throw new Error("City is not defined in the config");
@@ -29,6 +28,7 @@ export async function fetchWeather(): Promise<WeatherResponse> {
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_API_KEY}&units=metric`
   );
   if (!response.ok) {
+    console.log("Error fetching weather data:", response.statusText);
     throw new Error("Failed to fetch weather data");
   }
   return response.json();
