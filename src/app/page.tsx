@@ -14,8 +14,14 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const dynamic = "force-dynamic";
 
 async function getGtmId(): Promise<string> {
-  // Use a relative URL and disable caching
-  const res = await fetch("/api/gtm", { cache: "no-store" });
+  // Determine base URL: if VERCEL_URL is available (in production), use it; otherwise fallback to localhost.
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
+  // Construct the absolute URL.
+  const url = `${baseUrl}/api/gtm`;
+
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Failed to fetch Google Tag Manager ID");
   }
