@@ -1,16 +1,60 @@
 "use client";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import { siteConfig } from "@/config/site";
 import { SectionTitle } from "./ui/SectionTitle";
 import Slider from "react-slick";
 import CardCredit from "./CardCredit";
 
+// Custom Next Arrow component
+const NextArrow = (
+  props: React.ComponentPropsWithoutRef<"div"> & { onClick?: () => void }
+) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} !block`}
+      style={{
+        ...style,
+        display: "block",
+        right: "-15px",
+        zIndex: 2,
+      }}
+      onClick={onClick}
+    />
+  );
+};
+
+// Custom Prev Arrow component
+const PrevArrow = (
+  props: React.ComponentPropsWithoutRef<"div"> & { onClick?: () => void }
+) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} !block`}
+      style={{
+        ...style,
+        display: "block",
+        left: "-30px",
+        zIndex: 2,
+      }}
+      onClick={onClick}
+    />
+  );
+};
+
 const Credits = ({ className = "" }: { className?: string }) => {
   const sliderSettings = {
     dots: true,
+    arrows: true,
     infinite: true,
     speed: 500,
     slidesToShow: 2,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1080,
@@ -19,7 +63,7 @@ const Credits = ({ className = "" }: { className?: string }) => {
         },
       },
     ],
-    // autoplay: true,
+    autoplay: true,
   };
 
   return (
@@ -34,8 +78,9 @@ const Credits = ({ className = "" }: { className?: string }) => {
           companies and technologies, made possible by the contributions of many
           talented individuals.
         </p>
-        <div className="max-w-6xl mx-auto my-4 overflow-hidden">
-          <Slider className="slick-slider" {...sliderSettings}>
+        {/* Remove overflow-hidden to prevent clipping of arrows */}
+        <div className="max-w-6xl mx-auto my-4">
+          <Slider {...sliderSettings}>
             {siteConfig.credits.map((credit) => (
               <CardCredit key={credit.name} credit={credit} />
             ))}
