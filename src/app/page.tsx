@@ -10,9 +10,12 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+// Force dynamic rendering to avoid prerendering issues
+export const dynamic = "force-dynamic";
+
 async function getGtmId(): Promise<string> {
-  // Fetch GTM ID from the API route
-  const res = await fetch("http://localhost:3000/api/gtm"); // adjust domain if needed
+  // Use a relative URL and disable caching
+  const res = await fetch("/api/gtm", { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Failed to fetch Google Tag Manager ID");
   }
