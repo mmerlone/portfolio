@@ -18,7 +18,7 @@ const About = ({ className = "" }: AboutProps) => {
             {siteConfig.about.paragraphs.map((paragraph, index) => (
               <p
                 key={index}
-                className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4 first:mt-0"
+                className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4 first:mt-0 text-balance"
               >
                 {paragraph}
               </p>
