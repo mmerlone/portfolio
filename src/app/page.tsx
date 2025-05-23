@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
@@ -14,13 +15,17 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export const dynamic = "force-dynamic";
 
 async function getGtmId(): Promise<string> {
-  // Determine base URL: if VERCEL_URL is available (in production), use it; otherwise fallback to localhost.
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
+  let baseUrl = "";
+  if (process.env.VERCEL_URL) {
+    // Use VERCEL_URL in production if available
+    baseUrl = `https://${process.env.VERCEL_URL}`;
+  } else {
+    // Fallback: get the host from request headers
+    const host = (await headers()).get("host") || "localhost:3000";
+    baseUrl = `https://${host}`;
+  }
   // Construct the absolute URL.
   const url = `${baseUrl}/api/gtm`;
-
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Failed to fetch Google Tag Manager ID");
@@ -31,7 +36,6 @@ async function getGtmId(): Promise<string> {
 
 export default async function Home() {
   const GOOGLE_TAG_MANAGER_ID = await getGtmId();
-
   return (
     <main>
       <Analytics />
