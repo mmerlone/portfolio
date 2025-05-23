@@ -1,6 +1,7 @@
 export interface SiteConfig {
   name: string;
   title: string;
+  headline: string;
   description: string;
   url: string;
   ogImage: string;
@@ -41,5 +42,4 @@ export interface SiteConfig {
     url: string;
     icon: string;
   }>;
-
-} 
+}
