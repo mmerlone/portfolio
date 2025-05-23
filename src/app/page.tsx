@@ -22,10 +22,13 @@ async function getGtmId(): Promise<string> {
   } else {
     // Fallback: get the host from request headers
     const host = (await headers()).get("host") || "localhost:3000";
-    baseUrl = `https://${host}`;
+    // Use http for localhost and https otherwise
+    baseUrl = host.includes("localhost") ? `http://${host}` : `https://${host}`;
   }
+
   // Construct the absolute URL.
   const url = `${baseUrl}/api/gtm`;
+  console.log("Fetching GTM ID from:", url);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Failed to fetch Google Tag Manager ID");
