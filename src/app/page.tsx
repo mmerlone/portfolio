@@ -11,7 +11,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function Home() {
-  const GOOGLE_TAG_MANAGER_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID as string;
+  const GOOGLE_TAG_MANAGER_ID = process.env.GOOGLE_TAG_MANAGER_ID as string;
   return (
     <main>
       <Analytics />

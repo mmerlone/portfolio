@@ -16,7 +16,7 @@ export async function fetchQuote(): Promise<QuoteResponse[]> {
 }
 
 export async function fetchWeather(): Promise<WeatherResponse> {
-  const WEATHER_API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY as string;
+  const WEATHER_API_KEY = process.env.WEATHER_API_KEY as string;
   // get city from config
   const city = siteConfig.city;
   if (!city) {
