@@ -16,9 +16,12 @@ const Layout = ({
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        
+
         {/* Open Graph / Social Media Meta Tags */}
-        <meta property="og:title" content={title} />
+        <meta
+          property="og:title"
+          content={`${siteConfig.name} - ${siteConfig.title}`}
+        />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={siteConfig.url} />
         <meta property="og:image" content={siteConfig.ogImage} />
@@ -28,9 +31,7 @@ const Layout = ({
       <div className="min-h-screen flex flex-col">
         {/* Main Content */}
         <div className="flex-1 pt-16">
-          <main className="min-h-screen">
-            {children}
-          </main>
+          <main className="min-h-screen">{children}</main>
 
           <Footer />
         </div>

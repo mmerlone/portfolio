@@ -4,19 +4,17 @@ import "./globals.css";
 import { siteConfig } from "@/config/site";
 import Navbar from "@/components/Navbar";
 import QueryProvider from "@/components/QueryProvider";
+import { ReactNode } from "react";
+import TermsOfServiceToast from "@/components/TermsOfServiceToast";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: siteConfig.name + ' - ' + siteConfig.title,
+  title: siteConfig.name + " - " + siteConfig.title,
   description: siteConfig.description,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   // Hardcode the lang attribute to "en-US" to ensure SSR and hydration align
   return (
     <html lang="en-US">
@@ -24,6 +22,7 @@ export default function RootLayout({
         <QueryProvider>
           <Navbar />
           {children}
+          <TermsOfServiceToast />
         </QueryProvider>
       </body>
     </html>

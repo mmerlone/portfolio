@@ -1,12 +1,14 @@
-import { headers } from "next/headers";
-
 /**
  * Fetches the Google Tag Manager ID from the internal API.
  * Throws a descriptive error if the fetch fails or the result is invalid.
  */
 export async function fetchGtmId(): Promise<string> {
   try {
-    const host = (await headers()).get("host") || "localhost:3000";
+    // Use window.location if available (client-side), fallback to localhost for SSR
+    const host =
+      typeof window !== "undefined" && window.location.host
+        ? window.location.host
+        : "localhost:3000";
     const baseUrl = host.includes("3000")
       ? `http://${host}`
       : `https://${host}`;

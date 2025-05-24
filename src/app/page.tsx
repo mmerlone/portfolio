@@ -6,31 +6,16 @@ import Contact from "@/components/Contact";
 import Credits from "@/components/Credits";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
-import { GoogleTagManager } from "@next/third-parties/google";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { fetchGtmId } from "@/lib/gtm";
+import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
 
-// Force dynamic rendering to avoid prerendering issues
+// Force dynamic rendering to avoid prerendering issues,
+// ensuring cookies are re-read on every request.
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
-  let GOOGLE_TAG_MANAGER_ID = "";
-  try {
-    GOOGLE_TAG_MANAGER_ID = await fetchGtmId();
-  } catch (error: unknown) {
-    // handle or log the error accordingly
-    // For production, you might show fallback UI or simply omit GTM
-    console.error("Error fetching GTM ID:", error);
-  }
-
+export default function Home() {
   return (
     <main>
-      <Analytics />
-      <SpeedInsights />
-      {GOOGLE_TAG_MANAGER_ID && (
-        <GoogleTagManager gtmId={GOOGLE_TAG_MANAGER_ID} />
-      )}
+      <ClientAnalyticsWrapper />
       <Hero />
       <About />
       <Skills />

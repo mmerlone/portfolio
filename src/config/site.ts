@@ -9,7 +9,7 @@ export const siteConfig = {
   description:
     "A creative and results-oriented Software Engineer with a strong track record of 20+ years in solving complex technical challenges. Expertise in React, TypeScript, Node.js, and cloud technologies. Passionate about building scalable, maintainable, and user-friendly applications.",
   url: "https://your-domain.com",
-  ogImage: "https://your-domain.com/og.jpg",
+  ogImage: "https://mmerlone.dev.br/images/og/og.jpg",
   city: "Araucária, PR, Brazil",
 
   // Contact information

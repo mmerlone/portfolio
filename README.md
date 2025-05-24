@@ -142,3 +142,22 @@ For further documentation on Next.js and additional resources, please visit:
 ## License
 
 This project is licensed under the terms specified in the repository.
+
+---
+
+## Terms of Service and Cookie Consent
+
+This project includes a Terms of Service (TOS) component with cookie handling. When a user first visits the site, a consent banner (displayed as a toast at the bottom of the screen) asks if they agree to the use of cookies for tracking interactions and enhancing their experience.
+
+### How It Works
+
+- **Display:**  
+  The consent banner appears only if the user has not previously accepted the terms (i.e. if a specific cookie is not found).
+
+- **User Interaction:**  
+  When the user clicks the **Accept** button, a cookie named `portfolioTosAccepted` is set (with a validity of one year), which prevents the banner from reappearing on subsequent visits.
+
+- **Implementation:**  
+  The component is implemented in `/src/components/TermsOfServiceToast.tsx` and is included site-wide via the layout file (`/src/app/layout.tsx`).
+
+No further action is needed by visitors—the banner will automatically disappear once the consent is given.
