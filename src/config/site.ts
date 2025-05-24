@@ -1,6 +1,6 @@
 import { type SiteConfig } from "@/types/site";
 
-export const siteConfig = {
+export const siteConfig: SiteConfig = {
   // Site metadata
   name: "Marcio Merlone",
   headline:
@@ -61,4 +61,10 @@ export const siteConfig = {
       text: "All rights reserved.",
     },
   },
-} as const satisfies SiteConfig;
+
+  // New cookie configuration:
+  cookie: {
+    name: "portfolioTosAccepted",
+    expiryDays: 365,
+  },
+};

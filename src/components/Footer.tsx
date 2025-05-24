@@ -11,6 +11,10 @@ const Footer = () => {
   );
   const [policyOpen, setPolicyOpen] = useState(false);
 
+  // Retrieve cookie name and expiry from site config
+  const COOKIE_NAME = siteConfig.cookie.name;
+  const COOKIE_EXPIRY_DAYS = siteConfig.cookie.expiryDays;
+
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
   }, []);
@@ -23,15 +27,13 @@ const Footer = () => {
     setPolicyOpen(false);
   };
 
-  // Now the Accept action saves the cookie as "true"
   const handlePolicyAccept = () => {
-    setCookie("portfolioTosAccepted", "true", 365);
+    setCookie(COOKIE_NAME, "true", COOKIE_EXPIRY_DAYS);
     setPolicyOpen(false);
   };
 
-  // And the Refuse action saves the cookie as "false"
   const handlePolicyRefuse = () => {
-    setCookie("portfolioTosAccepted", "false", 365);
+    setCookie(COOKIE_NAME, "false", COOKIE_EXPIRY_DAYS);
     setPolicyOpen(false);
   };
 

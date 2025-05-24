@@ -32,4 +32,8 @@ export interface SiteConfig {
       text: string;
     };
   };
+  cookie: {
+    name: string;
+    expiryDays: number;
+  };
 }

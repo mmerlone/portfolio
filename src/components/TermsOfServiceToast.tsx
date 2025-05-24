@@ -3,20 +3,22 @@
 import { useState, useEffect } from "react";
 import TermsOfServicePolicy from "./TermsOfServicePolicy";
 import { setCookie, getCookie } from "@/lib/cookies";
-
-const COOKIE_NAME = "portfolioTosAccepted";
-const COOKIE_EXPIRY_DAYS = 365;
+import { siteConfig } from "@/config/site";
 
 const TermsOfServiceToast = () => {
   const [visible, setVisible] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
+
+  // Retrieve cookie name and expiry from site config
+  const COOKIE_NAME = siteConfig.cookie.name;
+  const COOKIE_EXPIRY_DAYS = siteConfig.cookie.expiryDays;
 
   useEffect(() => {
     const accepted = getCookie(COOKIE_NAME);
     if (!accepted) {
       setVisible(true);
     }
-  }, []);
+  }, [COOKIE_NAME]);
 
   // Handler for the toast's Accept button.
   const handleAccept = () => {
