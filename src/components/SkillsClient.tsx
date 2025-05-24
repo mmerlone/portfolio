@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { skillIconMap } from './skillIconMap';
-import { SkillsClientProps } from '@/types/components';
+import React from "react";
+import Image from "next/image";
+import { skillIconMap } from "./skillIconMap";
+import { SkillsWrapperProps } from "@/types/components";
 
-const SkillsClient = ({ categories, categoryIcons }: SkillsClientProps) => {
+const SkillsClient = ({ categories, categoryIcons }: SkillsWrapperProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {Object.entries(categories).map(([category, skills]) => (
-        <div 
+        <div
           key={category}
           className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 transform transition-transform hover:scale-105"
         >
@@ -21,10 +21,10 @@ const SkillsClient = ({ categories, categoryIcons }: SkillsClientProps) => {
               {category}
             </h3>
           </div>
-          
+
           <ul className="space-y-2">
             {skills.map((skill) => (
-              <li 
+              <li
                 key={skill.name} // Assuming skill.name is unique within its category
                 className="flex items-center gap-2 text-gray-600 dark:text-gray-300"
               >
@@ -37,12 +37,20 @@ const SkillsClient = ({ categories, categoryIcons }: SkillsClientProps) => {
                   // Fallback to Image component if iconUrl is a URL
                   <div className="w-6 h-6 relative">
                     <Image
-                      src={skill.iconUrl} // Assumes this is a valid URL
+                      src={(() => {
+                        // Helper function to ensure a relative path starts with "/" or is absolute
+                        if (/^https?:\/\//i.test(skill.iconUrl)) {
+                          return skill.iconUrl;
+                        }
+                        return skill.iconUrl.startsWith("/")
+                          ? skill.iconUrl
+                          : `/${skill.iconUrl}`;
+                      })()}
                       alt={`${skill.name} icon`}
                       width={24}
                       height={24}
                       className="w-full h-full object-contain"
-                      unoptimized // Retained from original, remove if not needed
+                      unoptimized
                     />
                   </div>
                 )}
@@ -56,4 +64,4 @@ const SkillsClient = ({ categories, categoryIcons }: SkillsClientProps) => {
   );
 };
 
-export default SkillsClient; 
+export default SkillsClient;

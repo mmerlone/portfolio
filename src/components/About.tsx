@@ -1,7 +1,7 @@
 "use client";
 
 import { aboutData } from "@/data/about";
-import { AboutProps } from "@/types/components"; // Updated import
+import { AboutProps } from "@/types/components";
 import { SectionTitle } from "./ui/SectionTitle";
 
 const About = ({ className = "" }: AboutProps) => {

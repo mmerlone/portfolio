@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { experiences, Experience as ExperienceType } from "@/data/experience";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { ExperienceProps } from "@/types/components"; // Updated import
+import { ExperienceProps } from "@/types/components";
 import { SectionTitle } from "./ui/SectionTitle";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";

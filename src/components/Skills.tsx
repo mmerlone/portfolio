@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import SkillsWrapper from "./SkillsWrapper";
 import { skillsData } from "@/data/skills";
-import { SkillsProps } from "@/types/components"; // Updated import
+import { SkillsProps } from "@/types/components";
 import { SectionTitle } from "./ui/SectionTitle";
 
 const categoryIcons = {
