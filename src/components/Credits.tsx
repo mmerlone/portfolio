@@ -3,7 +3,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { siteConfig } from "@/config/site";
+import { creditsData } from "@/data/credits";
 import { SectionTitle } from "./ui/SectionTitle";
 import Slider from "react-slick";
 import CardCredit from "./CardCredit";
@@ -53,6 +53,19 @@ const Credits = ({ className = "" }: { className?: string }) => {
     slidesToShow: 2,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    dotsClass: "slick-dots slick-dots-custom",
+    appendDots: (dots: React.ReactNode) => (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "1rem",
+        }}
+      >
+        {dots}
+      </div>
+    ),
+
     responsive: [
       {
         breakpoint: 1080,
@@ -76,10 +89,9 @@ const Credits = ({ className = "" }: { className?: string }) => {
           companies and technologies, made possible by the contributions of many
           talented individuals.
         </p>
-        {/* Remove overflow-hidden to prevent clipping of arrows */}
         <div className="max-w-6xl mx-auto my-4">
           <Slider {...sliderSettings}>
-            {siteConfig.credits.map((credit) => (
+            {creditsData.map((credit) => (
               <CardCredit key={credit.name} credit={credit} />
             ))}
           </Slider>

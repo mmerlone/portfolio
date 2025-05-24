@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import SkillsWrapper from "./SkillsWrapper";
 import { skillsData } from "@/data/skills";
-import { SkillsProps } from "@/types/components";
+import { SkillsProps } from "@/types/components"; // Updated import
 import { SectionTitle } from "./ui/SectionTitle";
 
 const categoryIcons = {
@@ -38,9 +38,6 @@ const Skills = ({ className = "" }: SkillsProps) => {
     >
       <div className="container mx-auto px-4 relative z-10">
         <SectionTitle>{skillsData.title}</SectionTitle>
-        {/* 
-          The container is set to relative so that an absolute gradient overlay can be positioned at the bottom when not expanded.
-        */}
         <div
           className={`relative overflow-hidden transition-[max-height] duration-500 ease-in-out ${
             expanded ? "h-auto" : "max-h-72 more-to-show"
@@ -50,10 +47,6 @@ const Skills = ({ className = "" }: SkillsProps) => {
             categories={skillsData.categories}
             categoryIcons={categoryIcons}
           />
-          {/* 
-            Fading gradient overlay. Adjust the height and colors as needed.
-            The overlay is only rendered when the skills are not expanded.
-          */}
           {!expanded && (
             <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-t from-white to-transparent dark:from-gray-800 dark:to-transparent" />
           )}

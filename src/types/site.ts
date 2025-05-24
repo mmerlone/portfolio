@@ -32,14 +32,4 @@ export interface SiteConfig {
       text: string;
     };
   };
-  about: {
-    title: string;
-    paragraphs: string[];
-  };
-  credits: Array<{
-    name: string;
-    description: string;
-    url: string;
-    icon: string;
-  }>;
 }

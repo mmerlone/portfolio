@@ -31,6 +31,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+/* React Slick */
 .slick-slide > div {
   display: flex;
   justify-content: center;
@@ -46,3 +48,58 @@ body {
 .slick-prev:before, .slick-next:before {
   font-size: 50px !important;
 }
+
+.slick-dots li {
+  background-color: var(--background);
+  /* outline: 3px solid var(--background); */
+  border-radius: 50%;
+  opacity: 0.25;
+  outline-offset: -3px;
+  transition: all 0.2s ease-in-out;
+}
+
+.slick-active {
+  opacity: 1;
+}
+.slick-dots li.slick-active {
+  background-color: var(--background);
+  outline: 3px solid rgba(var(--foreground), 0.5);
+  outline-offset: -3px;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+.slick-dots li:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+.slick-dots li:focus {
+  outline: 3px solid var(--foreground);
+  outline-offset: -3px;
+}
+.slick-dots li:focus:hover {
+  transform: scale(1.2);
+}
+.slick-dots li:focus:not(.slick-active) {
+  opacity: 1;
+  transform: scale(1.2);
+}
+.slick-dots li:focus:not(.slick-active):hover {
+  transform: scale(1.2);
+}
+.slick-dots li:focus:not(.slick-active):hover {
+  outline: 3px solid var(--foreground);
+  outline-offset: -3px;
+}
+.slick-dots li:focus:not(.slick-active):hover {
+  transform: scale(1.2);
+}
+.slick-dots li:focus:not(.slick-active):hover {
+  outline: 3px solid var(--foreground);
+  outline-offset: -3px;
+}
+.slick-dots-custom {
+  /* margin-top: 3rem !important; */
+  bottom: auto !important;
+}
+
+/* React Toastify */

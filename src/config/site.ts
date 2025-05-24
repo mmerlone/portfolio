@@ -3,10 +3,8 @@ import { type SiteConfig } from "@/types/site";
 export const siteConfig = {
   // Site metadata
   name: "Marcio Merlone",
-  // Refactor old "title" to "headline"
   headline:
     "Remote Software Engineer | Full-Stack Development | Cloud Technologies | Problem Solver",
-  // New title for meta tags, etc.
   title: "Software Engineer",
   description:
     "A creative and results-oriented Software Engineer with a strong track record of 20+ years in solving complex technical challenges. Expertise in React, TypeScript, Node.js, and cloud technologies. Passionate about building scalable, maintainable, and user-friendly applications.",
@@ -63,97 +61,4 @@ export const siteConfig = {
       text: "All rights reserved.",
     },
   },
-
-  // About section
-  about: {
-    title: "About Me",
-    paragraphs: [
-      "With over two decades in the IT field, I've cultivated a deep and diverse professional foundation. My career has spanned critical areas from the foundational days of dial-up internet infrastructure and system administration across various platforms (Linux, Windows, Solaris, FreeBSD) to hands-on software development and team leadership. This breadth of experience has equipped me with a holistic understanding of technology landscapes, fostering a unique ability to bridge gaps between different technical domains and adapt quickly to evolving challenges.",
-      "My core expertise lies in building and managing robust, high-performance IT environments. This includes significant experience in network architecture, server administration, virtualization, and implementing critical security measures that have ensured business continuity and supported substantial organizational growth, such as scaling infrastructure to enable over 400% company expansion under heavy engineering data and processing. I excel at troubleshooting complex issues, optimizing systems for efficiency, and leading initiatives that deliver tangible results, always aiming for stability, reliability, and performance.",
-      "In recent years, I've pivoted to focus on modern software development, specializing in front-end technologies like React and TypeScript. This shift allows me to combine my extensive technical background with a passion for crafting user-centric and accessible web applications. My full-stack perspective, informed by years of infrastructure and backend work, provides a valuable edge in building well-rounded solutions. I am now eager to leverage this combined expertise to contribute to innovative projects within dynamic, remote teams across the world.",
-    ],
-  },
-
-  // Credits: Vercel, OpenWeatherMap, Tailwind CSS, Heroicons, FontAwesome, Zenquotes
-  // Weather data provided by OpenWeatherMap
-  // Icons provided by Heroicons
-  // Vercel for hosting
-  // Zenquotes API for inspirational quotes
-  // FontAwesome for icons
-  // Vercel for hosting
-  // React Slick for the Slider component
-  // Google Analytics for tracking
-  // Google Tag Manager for tracking
-  // Vercel Speed Insights for performance insights
-  // Tailwind CSS for styling
-  // And many more...
-
-  // Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a>
-  credits: [
-    {
-      name: "OpenWeatherMap",
-      description: "Weather data provided by OpenWeatherMap.",
-      url: "https://openweathermap.org/",
-      icon: "openweathermap.png",
-    },
-    {
-      name: "Heroicons",
-      description:
-        "Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.",
-      url: "https://heroicons.com/",
-      icon: "heroicons.svg",
-    },
-    {
-      name: "Tailwind CSS",
-      description: "A utility-first CSS framework for creating custom designs.",
-      url: "https://tailwindcss.com/",
-      icon: "tailwindcss.svg",
-    },
-    {
-      name: "FontAwesome",
-      description: "The iconic font and CSS toolkit.",
-      url: "https://fontawesome.com/",
-      icon: "fontawesome.svg",
-    },
-    {
-      name: "ZenQuotes API",
-      description: "Inspirational quotes provided by ZenQuotes API.",
-      url: "https://zenquotes.io/",
-      icon: "zenquotes.png",
-    },
-    {
-      name: "Vercel",
-      description:
-        "The platform for frontend developers, providing the best developer experience and performance.",
-      url: "https://vercel.com/",
-      icon: "vercel.svg",
-    },
-    {
-      name: "React Slick",
-      description: "The Last React Carousel You'll Ever Need!",
-      url: "https://react-slick.neostack.com/",
-      icon: "react.svg",
-    },
-    {
-      name: "Google Analytics",
-      description:
-        "Google Analytics is a web analytics service offered by Google that tracks and reports website traffic.",
-      url: "https://analytics.google.com/",
-      icon: "https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg",
-    },
-    {
-      name: "Google Tag Manager",
-      description:
-        "Google Tag Manager is a tag management system for conversion tracking, site analytics, remarketing, and more.",
-      url: "https://tagmanager.google.com/",
-      icon: "gtm.jpeg",
-    },
-    {
-      name: "Vercel Speed Insights",
-      description:
-        "Vercel Speed Insights provides performance insights for your website.",
-      url: "https://vercel.com/speed",
-      icon: "vercel.svg",
-    },
-  ],
 } as const satisfies SiteConfig;

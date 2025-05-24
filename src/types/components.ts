@@ -1,3 +1,5 @@
+import type { Skill } from "@/types/skills";
+
 export interface AboutProps {
   className?: string;
 }
@@ -32,14 +34,3 @@ export interface SkillsWrapperProps {
   categories: Record<string, readonly Skill[]>;
   categoryIcons: Record<string, React.ReactNode>;
 }
-
-export interface Skill {
-  name: string;
-  level: number;
-  iconUrl: string;
-}
-
-export interface SkillsClientProps {
-  categories: Record<string, readonly Skill[]>;
-  categoryIcons: Record<string, React.ReactNode>;
-} 

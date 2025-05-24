@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
@@ -10,41 +9,28 @@ import Footer from "@/components/Footer";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { fetchGtmId } from "@/lib/gtm";
 
 // Force dynamic rendering to avoid prerendering issues
 export const dynamic = "force-dynamic";
 
-async function getGtmId(): Promise<string> {
-  let baseUrl = "";
-  // if (process.env.VERCEL_URL) {
-  //   // Use VERCEL_URL in production if available
-  //   baseUrl = `https://${process.env.VERCEL_URL}`;
-  // } else {
-  //   // Fallback: get the host from request headers
-  // }
-  const host = (await headers()).get("host") || "localhost:3000";
-  baseUrl = host.includes("3000") ? `http://${host}` : `https://${host}`;
-
-  // Construct the absolute URL.
-  const url = `${baseUrl}/api/gtm`;
-  console.log("Fetching GTM ID from:", url);
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) {
-    const errorDetail = await res.text();
-    console.error("Error response from /api/gtm:", errorDetail);
-    throw new Error("Failed to fetch Google Tag Manager ID");
-  }
-  const { gtmId } = await res.json();
-  return gtmId;
-}
-
 export default async function Home() {
-  const GOOGLE_TAG_MANAGER_ID = await getGtmId();
+  let GOOGLE_TAG_MANAGER_ID = "";
+  try {
+    GOOGLE_TAG_MANAGER_ID = await fetchGtmId();
+  } catch (error: unknown) {
+    // handle or log the error accordingly
+    // For production, you might show fallback UI or simply omit GTM
+    console.error("Error fetching GTM ID:", error);
+  }
+
   return (
     <main>
       <Analytics />
       <SpeedInsights />
-      <GoogleTagManager gtmId={GOOGLE_TAG_MANAGER_ID} />
+      {GOOGLE_TAG_MANAGER_ID && (
+        <GoogleTagManager gtmId={GOOGLE_TAG_MANAGER_ID} />
+      )}
       <Hero />
       <About />
       <Skills />

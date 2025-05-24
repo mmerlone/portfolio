@@ -1,7 +1,7 @@
 export interface QuoteResponse {
-    q: string; // quote text
-    a: string; // author
-    h: string; // pre-formatted HTML quote
+  q: string; // quote text
+  a: string; // author
+  h: string; // pre-formatted HTML quote
 }
 
 export interface WeatherResponse {
@@ -25,9 +25,9 @@ export type ApiWeatherData = {
   data: WeatherResponse | null;
   isLoading: boolean;
   isError: boolean;
-}
+};
 
 export type QuoteCache = {
-  data: Array<QuoteResponse>;
+  data: QuoteResponse[];
   timestamp: number;
 };
