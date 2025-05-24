@@ -15,7 +15,14 @@ export default function AnalyticsWrapper({}: AnalyticsWrapperProps) {
   useEffect(() => {
     setHasMounted(true);
     const cookie = getCookie("portfolioTosAccepted");
-    if (cookie === "true") {
+    const userAgent = navigator.userAgent || "";
+
+    // If consent given OR if user agent indicates a known bot/management tool.
+    const isBot =
+      /Googlebot|AdsBot|Mediapartners-Google|Google Tag Manager/i.test(
+        userAgent
+      );
+    if (cookie === "true" || isBot) {
       setIsAnalyticsAllowed(true);
     }
   }, []);
