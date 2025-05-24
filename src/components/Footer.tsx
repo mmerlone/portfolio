@@ -8,26 +8,63 @@ const Footer = () => {
   const [currentYear, setCurrentYear] = useState<number>(
     new Date().getFullYear()
   );
+  const [policyOpen, setPolicyOpen] = useState(false);
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
   }, []);
 
+  const handlePolicyOpen = () => {
+    setPolicyOpen(true);
+  };
+
+  const handlePolicyClose = () => {
+    setPolicyOpen(false);
+  };
+
+  // Optional: implement cookie acceptance/refusal actions.
+  const handlePolicyAccept = () => {
+    // Example: set cookie here and close modal.
+    setPolicyOpen(false);
+  };
+
+  const handlePolicyRefuse = () => {
+    // Example: possibly clear any cookies or prevent future tracking.
+    setPolicyOpen(false);
+  };
+
   return (
-    <footer className="footer-background">
-      <div className="container mx-auto p-2 relative z-10">
-        <div className="flex flex-col space-y-4 mr-16">
+    <>
+      <footer className="footer-background">
+        <div className="container mx-auto p-2 relative z-10">
+          <div className="flex flex-col space-y-4 mr-16">
             <div className="flex flex-col sm:flex-row sm:justify-between items-center">
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              &copy; {currentYear} {siteConfig.name}.{" "}
-              {siteConfig.footer.copyright.text}
-            </p>
-            {/* Terms of Service link */}
-            <TermsOfServicePolicy />
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                &copy; {currentYear} {siteConfig.name}.{" "}
+                {siteConfig.footer.copyright.text}
+              </p>
+              {/* Terms of Service link */}
+              <a
+                href="#"
+                className="text-sm text-gray-600 dark:text-gray-300 hover:underline"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePolicyOpen();
+                }}
+              >
+                Terms of Service & Cookie Policy
+              </a>
             </div>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+      <TermsOfServicePolicy
+        visible={policyOpen}
+        onAccept={handlePolicyAccept}
+        onRefuse={handlePolicyRefuse}
+        onClose={handlePolicyClose}
+      />
+    </>
   );
 };
 

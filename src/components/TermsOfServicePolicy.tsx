@@ -24,8 +24,8 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           Terms of Service & Cookie Policy
         </h2>
         <p className="mb-4 text-gray-700 dark:text-gray-300">
-          We use cookies to enhance your browsing experience, analyze site
-          traffic, and tailor our marketing efforts. The following data is
+          I use cookies to enhance your browsing experience, analyze site
+          traffic, and tailor my marketing efforts. The following data is
           collected:
         </p>
         <ul className="list-disc ml-5 mb-4 text-gray-700 dark:text-gray-300">
@@ -39,7 +39,7 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           don’t ask again.
         </p>
         <p className="mb-4 text-gray-700 dark:text-gray-300">
-          For more details, please review our full Privacy Policy on our
+          For more details, please review the full Privacy Policy on my
           website.
         </p>
         <div className="flex justify-end space-x-2 mt-4">
