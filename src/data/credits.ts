@@ -64,4 +64,10 @@ export const creditsData = [
     url: "https://vercel.com/speed",
     icon: "vercel.svg",
   },
+  {
+    name: "improvmx.com",
+    description: "The leading email forwarding provider in Mexico.",
+    url: "https://improvmx.com/",
+    icon: "improvmx.svg",
+  },
 ];
