@@ -161,3 +161,40 @@ This project includes a Terms of Service (TOS) component with cookie handling. W
   The component is implemented in `/src/components/TermsOfServiceToast.tsx` and is included site-wide via the layout file (`/src/app/layout.tsx`).
 
 No further action is needed by visitors—the banner will automatically disappear once the consent is given.
+
+---
+
+## Analytics Configuration
+
+The project supports multiple analytics providers that can be configured through environment variables:
+
+### Google Analytics
+To enable Google Analytics, set the following environment variable:
+```bash
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-XXXXXXXX"
+```
+
+### Google Tag Manager
+To enable Google Tag Manager, set:
+```bash
+NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID="GTM-XXXXXX"
+```
+
+If these variables are not set, the respective features will be disabled automatically.
+
+### Cookie Consent
+Analytics will only be loaded after the user accepts the cookie consent notice. This behavior complies with GDPR and similar privacy regulations.
+
+---
+
+## Weather Widget Configuration
+
+The weather widget is optional and will only be displayed if configured. To enable it:
+
+1. Get an API key from [OpenWeatherMap](https://openweathermap.org/api)
+2. Add it to your environment variables:
+```bash
+WEATHER_API_KEY="your-api-key"
+```
+
+If the WEATHER_API_KEY is not set, the weather widget will not be rendered.

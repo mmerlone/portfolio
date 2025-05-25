@@ -36,4 +36,15 @@ export interface SiteConfig {
     name: string;
     expiryDays: number;
   };
+  analytics: {
+    googleAnalytics: {
+      id: string | null;
+    };
+    googleTagManager: {
+      id: string | null;
+    };
+  };
+  weather: {
+    apiKey: string | null;
+  };
 }

@@ -29,6 +29,9 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           collected:
         </p>
         <ul className="list-disc ml-5 mb-4 text-gray-700 dark:text-gray-300">
+          <li>Google Analytics for visitor statistics</li>
+          <li>Google Tag Manager for managing tracking scripts</li>
+          <li>Vercel Analytics for performance monitoring</li>
           <li>Interaction events (clicks, scrolls, and navigation)</li>
           <li>Session and usage statistics</li>
           <li>Device and browser information</li>
@@ -39,8 +42,7 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           don’t ask again.
         </p>
         <p className="mb-4 text-gray-700 dark:text-gray-300">
-          For more details, please review the full Privacy Policy on my
-          website.
+          For more details, please review the full Privacy Policy on my website.
         </p>
         <div className="flex justify-end space-x-2 mt-4">
           <button

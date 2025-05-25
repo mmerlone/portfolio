@@ -52,7 +52,7 @@ const TermsOfServiceToast = () => {
   return (
     <>
       <div className="fixed bottom-4 left-4 right-4 bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col md:flex-row justify-between items-center z-50">
-        <p className="text-sm mb-2 md:mb-0">
+        <p className="text-sm mb-2 md:mb-0 mx-4">
           We use cookies to enhance your experience and track interactions. By
           clicking <strong>Accept</strong> or <strong>Refuse</strong> you agree
           to our{" "}

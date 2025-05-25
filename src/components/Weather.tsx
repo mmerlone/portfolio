@@ -26,7 +26,7 @@ const Weather = () => {
   const [weather, setWeather] = useState<Weather>(defaultWeather);
 
   // useWeather provides data, isLoading and isError from the API
-  const { data, isLoading, isError } = useWeather();
+  const { data, isLoading, isError, isEnabled } = useWeather();
 
   useEffect(() => {
     // When data is available, transform it to our Weather interface
@@ -38,6 +38,9 @@ const Weather = () => {
       });
     }
   }, [data]);
+
+  // If weather is not enabled, don't render anything
+  if (!isEnabled) return null;
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto my-8">

@@ -3,11 +3,11 @@ import { siteConfig } from "@/config/site";
 import { WeatherResponse } from "@/types/api";
 
 export async function GET() {
-  const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
-  if (!WEATHER_API_KEY) {
+  // If weather API is not configured, return 404
+  if (!siteConfig.weather.apiKey) {
     return NextResponse.json(
-      { error: "Weather API key is not defined" },
-      { status: 500 }
+      { error: "Weather functionality is not configured" },
+      { status: 404 }
     );
   }
 
@@ -18,7 +18,7 @@ export async function GET() {
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
     city
-  )}&appid=${WEATHER_API_KEY}&units=metric`;
+  )}&appid=${siteConfig.weather.apiKey}&units=metric`;
   console.log("Fetching weather from:", url);
 
   try {

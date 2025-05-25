@@ -64,7 +64,23 @@ export const siteConfig: SiteConfig = {
 
   // New cookie configuration:
   cookie: {
-    name: "portfolioTosAccepted",
+    name: "mmerlone-analytics-consent",
     expiryDays: 365,
+  },
+
+  // Weather API key
+  weather: {
+    apiKey: process.env.WEATHER_API_KEY || null,
+  },
+
+  // Analytics configuration
+  // Google Analytics and Google Tag Manager IDs
+  analytics: {
+    googleAnalytics: {
+      id: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || null,
+    },
+    googleTagManager: {
+      id: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || null,
+    },
   },
 };

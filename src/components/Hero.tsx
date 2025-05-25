@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { HeroProps } from "@/types/components";
@@ -7,6 +8,12 @@ import Weather from "@/components/Weather";
 import Quote from "@/components/Quote";
 
 const Hero = ({ className = "" }: HeroProps) => {
+  const [isWeatherEnabled, setIsWeatherEnabled] = useState(false);
+
+  useEffect(() => {
+    setIsWeatherEnabled(!!siteConfig.weather?.apiKey);
+  }, []);
+
   return (
     <section
       id="top"
@@ -47,7 +54,7 @@ const Hero = ({ className = "" }: HeroProps) => {
             </div>
             <div className="mt-8">
               <Quote />
-              <Weather />
+              {isWeatherEnabled && <Weather />}
             </div>
           </div>
 
@@ -57,7 +64,7 @@ const Hero = ({ className = "" }: HeroProps) => {
               <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-indigo-500/20 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 group-hover:from-orange-500/40 group-hover:to-indigo-500/40 transition-all duration-500" />
               <div className="relative transform transition-all duration-500">
                 <Image
-                  src="/images/profile/profile.png"
+                  src={siteConfig.images.profile}
                   alt={siteConfig.name}
                   width={500}
                   height={500}
