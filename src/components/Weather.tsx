@@ -22,8 +22,8 @@ const defaultWeather: Weather = {
 
 const Weather = () => {
   const [weather, setWeather] = useState<Weather>(defaultWeather);
-  const { data, isLoading, isError } = useWeather();
   const [hasMounted, setHasMounted] = useState(false);
+  const { data, isLoading, isError } = useWeather();
 
   useEffect(() => {
     setHasMounted(true);
@@ -77,9 +77,13 @@ const Weather = () => {
           </p>
         </div>
       </div>
-      {isError && (
+      {isError ? (
         <p className="text-xs m-4 text-gray-500 dark:text-gray-400">
           Weather unavailable.
+        </p>
+      ) : (
+        <p className="text-xs m-4 text-gray-500 dark:text-gray-400">
+          Weather data on my location kindly provided by OpenWeatherMap.
         </p>
       )}
     </div>
