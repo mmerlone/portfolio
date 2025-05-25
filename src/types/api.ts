@@ -31,3 +31,10 @@ export type QuoteCache = {
   data: QuoteResponse[];
   timestamp: number;
 };
+
+export interface RepoStats {
+  stargazers_count: number;
+  forks_count: number;
+  watchers_count: number;
+  html_url: string;
+}

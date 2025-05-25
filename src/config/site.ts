@@ -8,7 +8,7 @@ export const siteConfig: SiteConfig = {
   title: "Software Engineer",
   description:
     "A creative and results-oriented Software Engineer with a strong track record of 20+ years in solving complex technical challenges. Expertise in React, TypeScript, Node.js, and cloud technologies. Passionate about building scalable, maintainable, and user-friendly applications.",
-  url: "https://your-domain.com",
+  url: "https://mmerlone.dev.br",
   ogImage: "https://mmerlone.dev.br/images/og/og.jpg",
   city: "Araucária, PR, Brazil",
 
@@ -82,5 +82,10 @@ export const siteConfig: SiteConfig = {
     googleTagManager: {
       id: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || null,
     },
+  },
+
+  // GitHub repository info
+  github: {
+    repoUrl: "https://github.com/mmerlone/portfolio",
   },
 };

@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/site";
 import { HeroProps } from "@/types/components";
 import Weather from "@/components/Weather";
 import Quote from "@/components/Quote";
+import GitHubRepoStats from "@/components/GitHubRepoStats";
 
 const Hero = ({ className = "", weatherEnabled }: HeroProps) => {
   return (
@@ -48,6 +49,7 @@ const Hero = ({ className = "", weatherEnabled }: HeroProps) => {
             <div className="mt-8">
               <Quote />
               {weatherEnabled && <Weather />}
+              <GitHubRepoStats />
             </div>
           </div>
 
