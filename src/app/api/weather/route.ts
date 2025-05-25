@@ -3,11 +3,10 @@ import { siteConfig } from "@/config/site";
 import { WeatherResponse } from "@/types/api";
 
 export async function GET() {
-  // If weather API is not configured, return 404
   if (!siteConfig.weather.apiKey) {
     return NextResponse.json(
-      { error: "Weather functionality is not configured" },
-      { status: 404 }
+      { apiKey: null, error: "Weather API key not configured" },
+      { status: 200 }
     );
   }
 

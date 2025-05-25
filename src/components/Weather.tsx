@@ -14,7 +14,6 @@ interface Weather {
   icon: string;
 }
 
-// A reasonable default weather value
 const defaultWeather: Weather = {
   temp: null,
   description: "Unknown",
@@ -22,14 +21,15 @@ const defaultWeather: Weather = {
 };
 
 const Weather = () => {
-  // Initialize weather state with a default value
   const [weather, setWeather] = useState<Weather>(defaultWeather);
-
-  // useWeather provides data, isLoading and isError from the API
-  const { data, isLoading, isError, isEnabled } = useWeather();
+  const { data, isLoading, isError } = useWeather();
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    // When data is available, transform it to our Weather interface
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
     if (data && data.main && data.weather && data.weather[0]) {
       setWeather({
         temp: data.main.temp ? Math.round(data.main.temp) : null,
@@ -39,8 +39,8 @@ const Weather = () => {
     }
   }, [data]);
 
-  // If weather is not enabled, don't render anything
-  if (!isEnabled) return null;
+  // Prevent hydration mismatch: only render on client
+  if (!hasMounted) return null;
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto my-8">
@@ -77,20 +77,9 @@ const Weather = () => {
           </p>
         </div>
       </div>
-      {isError ? (
+      {isError && (
         <p className="text-xs m-4 text-gray-500 dark:text-gray-400">
-          Unable to fetch weather data for my location. Please try again later.
-        </p>
-      ) : (
-        <p className="text-xs m-4 text-gray-500 dark:text-gray-400">
-          Weather data on my location kindly provided by{" "}
-          <a
-            href="https://openweathermap.org/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            OpenWeatherMap
-          </a>
+          Weather unavailable.
         </p>
       )}
     </div>

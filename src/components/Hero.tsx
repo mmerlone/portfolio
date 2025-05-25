@@ -1,19 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { HeroProps } from "@/types/components";
 import Weather from "@/components/Weather";
 import Quote from "@/components/Quote";
 
-const Hero = ({ className = "" }: HeroProps) => {
-  const [isWeatherEnabled, setIsWeatherEnabled] = useState(false);
-
-  useEffect(() => {
-    setIsWeatherEnabled(!!siteConfig.weather?.apiKey);
-  }, []);
-
+const Hero = ({ className = "", weatherEnabled }: HeroProps) => {
   return (
     <section
       id="top"
@@ -54,7 +47,7 @@ const Hero = ({ className = "" }: HeroProps) => {
             </div>
             <div className="mt-8">
               <Quote />
-              {isWeatherEnabled && <Weather />}
+              {weatherEnabled && <Weather />}
             </div>
           </div>
 

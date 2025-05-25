@@ -14,6 +14,7 @@ export interface ExperienceProps {
 
 export interface HeroProps {
   className?: string;
+  weatherEnabled: boolean;
 }
 
 export interface LayoutProps {
