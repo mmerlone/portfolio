@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchQuote } from "../lib/api";
-import { ApiQuoteData, QuoteResponse, QuoteCache } from "@/types/api";
+import { QuoteResponse, QuoteCache } from "@/types/api";
+import { siteConfig } from "@/config/site";
 
-const FirstQuote: QuoteResponse = {
-  q: "640 k ought to be enough for anybody.",
-  a: "Bill Gates",
+// DRY: Define defaultQuote once and reuse
+export const defaultQuote: QuoteResponse = siteConfig.quotes?.default || {
+  q: "No quote available.",
+  a: "System",
   h: "",
 };
 
+// DRY: Define quoteList based on config, fallback to defaultQuote
+export const quoteList: QuoteResponse[] =
+  siteConfig.quotes?.list && siteConfig.quotes.list.length > 0
+    ? siteConfig.quotes.list
+    : [defaultQuote];
+
 const cacheDuration = 60 * 60 * 24 * 7; // 7 days in seconds
-const quotesToCache = 6; // maximum quotes to cache
+const quotesToCache = quoteList.length;
 const cacheKey = "quotes";
 
 // Get cached data from localStorage (or null if missing/expired)
@@ -36,8 +44,8 @@ function setCachedData(data: Array<QuoteResponse>) {
 }
 
 function addToCache(newQuote: QuoteResponse) {
-  const currentCache = getCachedData() || [FirstQuote];
-  const updatedCache = [...currentCache, newQuote];
+  const currentCache = getCachedData() || quoteList;
+  const updatedCache = [...currentCache, newQuote].slice(-quotesToCache);
   setCachedData(updatedCache);
 }
 
@@ -47,10 +55,23 @@ function clearCache() {
   }
 }
 
-export function useQuote(): ApiQuoteData {
+export interface UseQuoteResult {
+  data: QuoteResponse;
+  isLoading: boolean;
+  isError: boolean;
+  isEnabled: boolean;
+  refetch: () => Promise<void>;
+}
+
+export function useQuote(): UseQuoteResult {
+  const queryClient = useQueryClient();
+
+  // Determine if the widget is enabled (quotes config exists)
+  const isEnabled = !!siteConfig.quotes;
+
   // Use state for the quotes stored in cache.
   const [quotes, setQuotes] = useState<QuoteResponse[]>(
-    () => getCachedData() || [FirstQuote]
+    () => getCachedData() || quoteList
   );
   // Pointer to cycle through quotes when cache is full.
   const [pointer, setPointer] = useState(0);
@@ -63,23 +84,34 @@ export function useQuote(): ApiQuoteData {
       return Array.isArray(result) ? result[0] : result;
     },
     enabled: false,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 5,
   });
+
+  // Prefetch a quote on first mount for instant load on first click
+  useEffect(() => {
+    if (isEnabled) {
+      queryClient.prefetchQuery({
+        queryKey: ["quote"],
+        queryFn: async () => {
+          const result = await fetchQuote();
+          return Array.isArray(result) ? result[0] : result;
+        },
+        staleTime: 1000 * 60 * 5,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEnabled]);
 
   // When a new quote is successfully fetched, add it to cache and update state.
   useEffect(() => {
     if (query.data) {
       addToCache(query.data);
-      const newQuotes = getCachedData() || [FirstQuote];
+      const newQuotes = getCachedData() || quoteList;
       setQuotes(newQuotes);
-      // Set pointer to the new (last) quote.
       setPointer(newQuotes.length - 1);
     }
   }, [query.data]);
 
-  // When refetch is requested:
-  // • If the cache has fewer than quotesToCache, fetch new quote from the API.
-  // • Otherwise, simply increase the pointer to cycle through cached quotes.
   const refetchHandler = async () => {
     if (quotes.length < quotesToCache) {
       await query.refetch();
@@ -89,9 +121,10 @@ export function useQuote(): ApiQuoteData {
   };
 
   return {
-    data: quotes[pointer] || FirstQuote,
+    data: quotes[pointer] || defaultQuote,
     isLoading: query.isLoading,
     isError: query.isError,
+    isEnabled,
     refetch: refetchHandler,
   };
 }

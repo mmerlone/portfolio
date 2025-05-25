@@ -47,6 +47,19 @@ export interface GitHubConfig {
   readonly repoUrl: string | null;
 }
 
+export interface QuoteConfig {
+  readonly default: {
+    readonly q: string;
+    readonly a: string;
+    readonly h: string;
+  };
+  readonly list?: Array<{
+    readonly q: string;
+    readonly a: string;
+    readonly h: string;
+  }>;
+}
+
 export interface SiteConfig {
   readonly name: string;
   readonly title: string;
@@ -68,4 +81,5 @@ export interface SiteConfig {
   readonly analytics?: AnalyticsConfig;
   readonly weather?: WeatherConfig;
   readonly github?: GitHubConfig;
+  readonly quotes?: QuoteConfig;
 }

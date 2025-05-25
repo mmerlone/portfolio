@@ -2,7 +2,7 @@ import { siteConfig } from "@/config/site";
 import { QuoteResponse, WeatherResponse } from "@/types/api";
 
 export async function fetchQuote(): Promise<QuoteResponse[]> {
-  const response = await fetch("https://zenquotes.io/api/random");
+  const response = await fetch("/api/quote");
   if (!response.ok) {
     return [
       {

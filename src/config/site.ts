@@ -88,4 +88,29 @@ export const siteConfig: SiteConfig = {
   github: {
     repoUrl: "https://github.com/mmerlone/portfolio",
   },
+
+  // Quotes configuration
+  // To disable:
+  // quotes: null,
+  // or just remove the quotes property entirely
+  quotes: {
+    default: {
+      q: "640 k ought to be enough for anybody.",
+      a: "Bill Gates",
+      h: "",
+    },
+    list: [
+      {
+        q: "640 k ought to be enough for anybody.",
+        a: "Bill Gates",
+        h: "",
+      },
+      {
+        q: "Talk is cheap. Show me the code.",
+        a: "Linus Torvalds",
+        h: "",
+      },
+      // Add more quotes as desired
+    ],
+  },
 };

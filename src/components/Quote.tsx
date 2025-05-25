@@ -1,17 +1,19 @@
 "use client";
 
-import { useQuote } from "@/hooks/useQuote";
+import { useEffect, useState } from "react";
+import { useQuote, defaultQuote } from "@/hooks/useQuote";
 import { LoadingSpinner } from "./ui/LoadingSpinner";
 
 const Quote = () => {
-  const { data, isLoading, isError, refetch } = useQuote();
+  const { data, isLoading, isError, isEnabled, refetch } = useQuote();
+  const [hasMounted, setHasMounted] = useState(false);
 
-  // Default quote fallback when error
-  const defaultQuote = {
-    q: "640 k ought to be enough for anybody.",
-    a: "Bill Gates",
-    h: "",
-  };
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!isEnabled || !hasMounted) return null; // Widget disabled or not mounted
+
   const quote = isError ? defaultQuote : data;
   const { q, a } = quote;
 
@@ -42,7 +44,7 @@ const Quote = () => {
           </div>
         )}
       </button>
-      {q && a !== "Bill Gates" && (
+      {q && a !== defaultQuote.a && (
         <p className="text-xs m-4 text-gray-500 dark:text-gray-400">
           Inspirational quotes kindly provided by{" "}
           <a
