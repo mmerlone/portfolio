@@ -74,7 +74,7 @@ const Credits = ({ className = "" }: { className?: string }) => {
         },
       },
     ],
-    // autoplay: true,
+    autoplay: true,
   };
 
   return (
