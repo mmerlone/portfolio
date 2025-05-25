@@ -11,11 +11,13 @@ This is a Next.js portfolio project showcasing my experience as a Remote Softwar
 - [Getting Started](#getting-started)
 - [About the Project](#about-the-project)
 - [Credits](#credits)
-- [Site Configuration and Environment Variables](#site-configuration-and-environment-variables)
-  - [Site Config](#1-site-config)
-  - [Environment Variables](#2-environment-variables)
-  - [Site Data](#3-site-data)
-  - [Environment Variables Details](#environment-variables-details)
+- [Site Configuration and Content](#site-configuration-and-content)
+  - [Site Config](#site-config)
+  - [Site Data](#site-data)
+- [Environment Variables & Features](#environment-variables--features)
+  - [Managing Environment Variables](#managing-environment-variables)
+  - [Analytics & Cookie Consent](#analytics--cookie-consent)
+  - [Weather Widget](#weather-widget)
 - [Learn More](#learn-more)
 - [License](#license)
 
@@ -54,36 +56,25 @@ This portfolio was built with Next.js and showcases:
 
 This project leverages the following tools, services, and resources:
 
-- **OpenWeatherMap:** Weather data provided by OpenWeatherMap.  
-  [Visit OpenWeatherMap](https://openweathermap.org/)
-- **Heroicons:** Beautiful hand-crafted SVG icons created by the makers of Tailwind CSS.  
-  [Visit Heroicons](https://heroicons.com/)
-- **Tailwind CSS:** A utility-first CSS framework for custom designs.  
-  [Visit Tailwind CSS](https://tailwindcss.com/)
-- **FontAwesome:** The iconic font and CSS toolkit.  
-  [Visit FontAwesome](https://fontawesome.com/)
-- **ZenQuotes API:** Inspirational quotes provided by ZenQuotes API.  
-  [Visit ZenQuotes](https://zenquotes.io/)
-- **Vercel:** The platform for frontend developers that powers this deployment.  
-  [Visit Vercel](https://vercel.com/)
-- **React Slick:** Carousel component used for Credits and other sliders.  
-  [Visit React Slick](https://react-slick.neostack.com/)
-- **Google Analytics:** Tracks website usage and performance.  
-  [Visit Google Analytics](https://analytics.google.com/)
-- **Google Tag Manager:** Manages tags for analytics and remarketing.  
-  [Visit Google Tag Manager](https://tagmanager.google.com/)
-- **Vercel Speed Insights:** Provides performance insights for this website.  
-  [Visit Vercel Speed Insights](https://vercel.com/speed)
+- **OpenWeatherMap:** Weather data provided by [OpenWeatherMap](https://openweathermap.org/).
+- **Heroicons:** Beautiful hand-crafted SVG icons by the makers of [Tailwind CSS](https://heroicons.com/).
+- **Tailwind CSS:** A utility-first CSS framework for creating custom designs ([tailwindcss.com](https://tailwindcss.com/)).
+- **FontAwesome:** The iconic font and CSS toolkit ([fontawesome.com](https://fontawesome.com/)).
+- **ZenQuotes API:** Inspirational quotes provided by [ZenQuotes API](https://zenquotes.io/).
+- **Vercel:** The platform for frontend developers, providing the best developer experience and performance ([vercel.com](https://vercel.com/)).
+- **React Slick:** The Last React Carousel You'll Ever Need! ([react-slick.neostack.com](https://react-slick.neostack.com/)).
+- **Google Analytics:** Google Analytics is a web analytics service offered by Google that tracks and reports website traffic ([analytics.google.com](https://analytics.google.com/)).
+- **Google Tag Manager:** Google Tag Manager is a tag management system for conversion tracking, site analytics, remarketing, and more ([tagmanager.google.com](https://tagmanager.google.com/)).
+- **Vercel Speed Insights:** Vercel Speed Insights provides performance insights for your website ([vercel.com/speed](https://vercel.com/speed)).
+- **improvmx.com:** The leading email forwarding provider in Mexico ([improvmx.com](https://improvmx.com/)).
 
-*... and many more. Kudos to everyone involved!*
+*...and many more. Kudos to everyone involved!*
 
 ---
 
-## Site Configuration and Environment Variables
+## Site Configuration and Content
 
-This project relies on both public configuration and sensitive environment variables to operate correctly. The site config (non-sensitive data) is public, while sensitive keys are stored in the `.env` file (which is git‑ignored).
-
-### 1. Site Config
+### Site Config
 
 Update the site-wide configuration in `/src/config/site.ts` with your details:
 
@@ -92,18 +83,7 @@ Update the site-wide configuration in `/src/config/site.ts` with your details:
 - **Social Links:** URLs and icons for social profiles.
 - **Navigation & Footer:** Menu items and footer copyright.
 
-### 2. Environment Variables
-
-Sensitive information—such as keys for Google Tag Manager—is stored in the `.env` file at the project root. A sample of these keys is provided via `.env.sample`.
-
-To set up:
-1. Copy the sample file to create a new `.env` file:
-   ```bash
-   cp .env.sample .env
-   ```
-2. Edit the `.env` file and insert your production or development values.
-
-### 3. Site Data
+### Site Data
 
 Content for various sections is maintained in `/src/data/`:
 - **About:** `/src/data/about.ts`
@@ -114,19 +94,63 @@ Content for various sections is maintained in `/src/data/`:
 
 Ensure these files reflect your updated portfolio content.
 
-### Environment Variables Details
+---
 
-All sensitive keys must be managed in the `.env` file. For example:
+## Environment Variables & Features
 
-#### GOOGLE_TAG_MANAGER_ID
-- **Purpose:** Integrates Google Tag Manager to deploy marketing tags without modifying code.
-- **Origin:** Provided by Google Tag Manager when you create a new container.
-- **How to Obtain:**
-  1. Visit [Google Tag Manager](https://tagmanager.google.com/) and sign in.
-  2. Create a new container for your site.
-  3. Copy the provided container ID (usually starting with "GTM-") into your `.env` file as `GOOGLE_TAG_MANAGER_ID`.
+### Managing Environment Variables
 
-For any additional external services (e.g., API keys for weather data or analytics tools), follow similar steps: check the provider’s documentation, sign up, and add your key to the `.env` file.
+Sensitive information—such as API keys for analytics and weather—is stored in the `.env` file at the project root.  
+A sample of these keys is provided via `.env.sample`.
+
+To set up:
+1. Copy the sample file to create a new `.env` file:
+   ```bash
+   cp .env.sample .env
+   ```
+2. Edit the `.env` file and insert your production or development values.
+
+---
+
+### Analytics & Cookie Consent
+
+This project includes a Terms of Service (TOS) component with cookie handling and analytics integration.
+
+#### Cookie Consent
+
+- **Display:**  
+  The consent banner appears only if the user has not previously accepted the terms (i.e. if a specific cookie is not found).
+- **User Interaction:**  
+  When the user clicks **Accept**, a cookie (default: `mmerlone-analytics-consent`) is set for one year, preventing the banner from reappearing.
+- **Implementation:**  
+  The component is implemented in `/src/components/TermsOfServiceToast.tsx` and included site-wide via `/src/app/layout.tsx`.
+
+#### Analytics Configuration
+
+Analytics will only be loaded after the user accepts the cookie consent notice (GDPR compliant).
+
+- **Google Analytics:**  
+  Set `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-XXXXXXXX"` in your `.env` to enable.
+- **Google Tag Manager:**  
+  Set `NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID="GTM-XXXXXX"` in your `.env` to enable.
+
+If these variables are not set, the respective features will be disabled automatically.
+
+---
+
+### Weather Widget
+
+The weather widget is optional and will only be displayed if configured.
+
+1. Get an API key from [OpenWeatherMap](https://openweathermap.org/api)
+2. Add it to your environment variables:
+   ```bash
+   WEATHER_API_KEY="your-api-key"
+   ```
+- **Security:**  
+  The weather API key is never exposed to the client. The widget is only rendered if the key is present on the server.
+
+If the `WEATHER_API_KEY` is not set, the weather widget will not be rendered.
 
 ---
 
@@ -142,59 +166,3 @@ For further documentation on Next.js and additional resources, please visit:
 ## License
 
 This project is licensed under the terms specified in the repository.
-
----
-
-## Terms of Service and Cookie Consent
-
-This project includes a Terms of Service (TOS) component with cookie handling. When a user first visits the site, a consent banner (displayed as a toast at the bottom of the screen) asks if they agree to the use of cookies for tracking interactions and enhancing their experience.
-
-### How It Works
-
-- **Display:**  
-  The consent banner appears only if the user has not previously accepted the terms (i.e. if a specific cookie is not found).
-
-- **User Interaction:**  
-  When the user clicks the **Accept** button, a cookie named `portfolioTosAccepted` is set (with a validity of one year), which prevents the banner from reappearing on subsequent visits.
-
-- **Implementation:**  
-  The component is implemented in `/src/components/TermsOfServiceToast.tsx` and is included site-wide via the layout file (`/src/app/layout.tsx`).
-
-No further action is needed by visitors—the banner will automatically disappear once the consent is given.
-
----
-
-## Analytics Configuration
-
-The project supports multiple analytics providers that can be configured through environment variables:
-
-### Google Analytics
-To enable Google Analytics, set the following environment variable:
-```bash
-NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-XXXXXXXX"
-```
-
-### Google Tag Manager
-To enable Google Tag Manager, set:
-```bash
-NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID="GTM-XXXXXX"
-```
-
-If these variables are not set, the respective features will be disabled automatically.
-
-### Cookie Consent
-Analytics will only be loaded after the user accepts the cookie consent notice. This behavior complies with GDPR and similar privacy regulations.
-
----
-
-## Weather Widget Configuration
-
-The weather widget is optional and will only be displayed if configured. To enable it:
-
-1. Get an API key from [OpenWeatherMap](https://openweathermap.org/api)
-2. Add it to your environment variables:
-```bash
-WEATHER_API_KEY="your-api-key"
-```
-
-If the WEATHER_API_KEY is not set, the weather widget will not be rendered.
