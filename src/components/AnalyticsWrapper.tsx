@@ -14,8 +14,8 @@ export default function AnalyticsWrapper({}: AnalyticsWrapperProps) {
   const [hasMounted, setHasMounted] = useState(false);
   const [isAnalyticsAllowed, setIsAnalyticsAllowed] = useState(false);
 
-  const gtmId = siteConfig.analytics.googleTagManager.id;
-  const gaId = siteConfig.analytics.googleAnalytics.id;
+  const gtmId = siteConfig.analytics?.googleTagManager.id ?? null;
+  const gaId = siteConfig.analytics?.googleAnalytics.id ?? null;
 
   useEffect(() => {
     setHasMounted(true);

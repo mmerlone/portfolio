@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
   // This runs on the server, so it's safe to check the key here
-  const weatherEnabled = !!siteConfig.weather.apiKey;
+  const weatherEnabled = !!siteConfig.weather?.apiKey;
 
   return (
     <main>

@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 import { WeatherResponse } from "@/types/api";
 
 export async function GET() {
-  if (!siteConfig.weather.apiKey) {
+  if (!siteConfig.weather?.apiKey) {
     return NextResponse.json(
       { apiKey: null, error: "Weather API key not configured" },
       { status: 200 }
@@ -17,7 +17,7 @@ export async function GET() {
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
     city
-  )}&appid=${siteConfig.weather.apiKey}&units=metric`;
+  )}&appid=${siteConfig.weather!.apiKey}&units=metric`; // Non-null assertion since we've checked above
   console.log("Fetching weather from:", url);
 
   try {

@@ -42,7 +42,7 @@ export default function GitHubRepoStats() {
         setLoading(false);
       })
       .catch(() => {
-        setError("Could not load GitHub statistics.");
+        setError("Could not load GitHub statistics, maybe soon...");
         setLoading(false);
       });
   }, [repoUrl]);
