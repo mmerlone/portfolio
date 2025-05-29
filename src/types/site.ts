@@ -67,7 +67,6 @@ export interface SiteConfig {
   readonly description: string;
   readonly url: string;
   readonly ogImage: string;
-  readonly city: string;
   readonly contact: ContactInfo;
   readonly social: readonly SocialLink[];
   readonly images: ImagePaths;
@@ -79,7 +78,6 @@ export interface SiteConfig {
   readonly footer: FooterConfig;
   readonly cookie: CookieConfig;
   readonly analytics?: AnalyticsConfig;
-  readonly weather?: WeatherConfig;
   readonly github?: GitHubConfig;
   readonly quotes?: QuoteConfig;
 }

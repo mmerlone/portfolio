@@ -1,23 +1,23 @@
 import { NextResponse } from "next/server";
-import { siteConfig } from "@/config/site";
+import { apiConfig } from "@/config/api";
 import { WeatherResponse } from "@/types/api";
 
 export async function GET() {
-  if (!siteConfig.weather?.apiKey) {
+  if (!apiConfig.openWeather.apiKey) {
     return NextResponse.json(
       { apiKey: null, error: "Weather API key not configured" },
       { status: 200 }
     );
   }
 
-  const city = siteConfig.city;
+  const city = apiConfig.city;
   if (!city) {
     return NextResponse.json({ error: "City is not defined" }, { status: 500 });
   }
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+  const url = `${apiConfig.openWeather.url}?q=${encodeURIComponent(
     city
-  )}&appid=${siteConfig.weather!.apiKey}&units=metric`; // Non-null assertion since we've checked above
+  )}&appid=${apiConfig.openWeather.apiKey}&units=metric`; // Non-null assertion since we've checked above
   console.log("Fetching weather from:", url);
 
   try {

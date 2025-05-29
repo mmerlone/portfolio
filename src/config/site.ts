@@ -10,8 +10,6 @@ export const siteConfig: SiteConfig = {
     "A creative and results-oriented Software Engineer with a strong track record of 20+ years in solving complex technical challenges. Expertise in React, TypeScript, Node.js, and cloud technologies. Passionate about building scalable, maintainable, and user-friendly applications.",
   url: "https://mmerlone.dev.br",
   ogImage: "https://mmerlone.dev.br/images/og/og.jpg",
-  city: "Araucária, PR, Brazil",
-
   // Contact information
   contact: {
     email: "mmerlone@gmail.com",
@@ -67,11 +65,6 @@ export const siteConfig: SiteConfig = {
   cookie: {
     name: "mmerlone-analytics-consent",
     expiryDays: 365,
-  },
-
-  // Weather API key
-  weather: {
-    apiKey: process.env.WEATHER_API_KEY || null,
   },
 
   // Analytics configuration
