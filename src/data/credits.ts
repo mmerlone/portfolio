@@ -3,7 +3,7 @@ export const creditsData = [
     name: "OpenWeatherMap",
     description: "Weather data provided by OpenWeatherMap.",
     url: "https://openweathermap.org/",
-    icon: "openweathermap.png",
+    icon: "openweather.svg",
   },
   {
     name: "Heroicons",
@@ -38,9 +38,17 @@ export const creditsData = [
     icon: "vercel.svg",
   },
   {
-    name: "React Slick",
-    description: "The Last React Carousel You'll Ever Need!",
-    url: "https://react-slick.neostack.com/",
+    name: "Vercel Speed Insights",
+    description:
+      "Vercel Speed Insights provides performance insights for your website.",
+    url: "https://vercel.com/docs/speed-insights",
+    icon: "vercel.svg",
+  },
+  {
+    name: "React Responsive Carousel",
+    description:
+      "Powerful, lightweight and fully customizable carousel component for React apps.",
+    url: "https://react-responsive-carousel.js.org/",
     icon: "react.svg",
   },
   {
@@ -56,13 +64,6 @@ export const creditsData = [
       "Google Tag Manager is a tag management system for conversion tracking, site analytics, remarketing, and more.",
     url: "https://tagmanager.google.com/",
     icon: "gtm.jpeg",
-  },
-  {
-    name: "Vercel Speed Insights",
-    description:
-      "Vercel Speed Insights provides performance insights for your website.",
-    url: "https://vercel.com/speed",
-    icon: "vercel.svg",
   },
   {
     name: "improvmx.com",

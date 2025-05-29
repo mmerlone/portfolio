@@ -7,10 +7,11 @@ const Contact = ({ className = "" }: ContactProps) => {
   return (
     <section
       id="contact"
-      className={`py-20 relative contact-background ${className}`}
+      className={`contact-background relative py-20 ${className}`}
     >
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <hr className="border-3 border-orange-600/10 dark:border-orange-400/10" />
+      <div className="relative z-10 container mx-auto mt-12 px-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Contact Info */}
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
@@ -19,20 +20,22 @@ const Contact = ({ className = "" }: ContactProps) => {
             <div className="space-y-2">
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
+                className="flex items-center space-x-2 text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
               >
-                <FaEnvelope className="w-5 h-5" />
+                <FaEnvelope className="h-5 w-5" />
                 <span>{siteConfig.contact.email}</span>
               </a>
-              <a
-                href={`tel:${siteConfig.contact.phone}`}
-                className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
-              >
-                <FaPhone className="w-5 h-5" />
-                <span>{siteConfig.contact.phone}</span>
-              </a>
+              {siteConfig.contact.phone && (
+                <a
+                  href={`tel:${siteConfig.contact.phone}`}
+                  className="flex items-center space-x-2 text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
+                >
+                  <FaPhone className="h-5 w-5" />
+                  <span>{siteConfig.contact.phone}</span>
+                </a>
+              )}
               <p className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
-                <FaMapMarkerAlt className="w-5 h-5" />
+                <FaMapMarkerAlt className="h-5 w-5" />
                 <span>{siteConfig.contact.location}</span>
               </p>
             </div>
@@ -58,7 +61,7 @@ const Contact = ({ className = "" }: ContactProps) => {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
+                    className="text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
                   >
                     {item.name}
                   </a>

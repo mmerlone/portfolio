@@ -6,7 +6,7 @@ export async function fetchQuote(): Promise<QuoteResponse[]> {
   if (!response.ok) {
     return [
       {
-        q: `Unable fetching quote, status: ${response.status}`,
+        q: `Unable to fetch a quote, status: ${response.status}`,
         a: "TanStack Query",
         h: "",
       },
@@ -32,7 +32,6 @@ export async function fetchWeather(): Promise<WeatherResponse> {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
     city
   )}&appid=${WEATHER_API_KEY}&units=metric`;
-  console.log("Fetching weather from:", url);
 
   try {
     const response = await fetch(url);

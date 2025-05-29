@@ -1,100 +1,42 @@
 "use client";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 import { creditsData } from "@/data/credits";
 import { SectionTitle } from "./ui/SectionTitle";
-import Slider from "react-slick";
 import CardCredit from "./CardCredit";
-
-// Custom Next Arrow component
-const NextArrow = (
-  props: React.ComponentPropsWithoutRef<"div"> & { onClick?: () => void }
-) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} !block`}
-      style={{
-        ...style,
-        display: "block",
-        zIndex: 2,
-      }}
-      onClick={onClick}
-    />
-  );
-};
-
-// Custom Prev Arrow component
-const PrevArrow = (
-  props: React.ComponentPropsWithoutRef<"div"> & { onClick?: () => void }
-) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} !block`}
-      style={{
-        ...style,
-        display: "block",
-        zIndex: 2,
-      }}
-      onClick={onClick}
-    />
-  );
-};
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import { useWindowSize } from "../hooks/useWindowSize";
 
 const Credits = ({ className = "" }: { className?: string }) => {
-  const sliderSettings = {
-    dots: true,
-    arrows: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    dotsClass: "slick-dots slick-dots-custom",
-    appendDots: (dots: React.ReactNode) => (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "1rem",
-        }}
-      >
-        {dots}
-      </div>
-    ),
 
-    responsive: [
-      {
-        breakpoint: 1080,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-    autoplay: true,
-  };
+  // const windowSize = useWindowSize();
+  // const carouselWidht = windowSize.width < 600 ? '380px' : '650px';
 
   return (
     <section
       id="credits"
-      className={`py-20 relative section-background-secondary ${className}`}
+      className={`relative flex items-center justify-center ${className}`}
     >
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="relative z-10 container flex flex-col items-center justify-center">
         <SectionTitle>Credits</SectionTitle>
-        <p className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4 first:mt-0 sm:text-center sm:text-balance">
+        <p className="mx-5 leading-relaxed text-gray-600 first:mt-0 sm:mx-12 sm:text-center sm:text-balance dark:text-gray-300">
           This portfolio showcases my recent experience with the following
           companies and technologies, made possible by the contributions of many
           talented individuals.
         </p>
-        <div className="max-w-6xl mx-auto my-4">
-          <Slider {...sliderSettings}>
+        <div className="mx-auto my-8 py-8 w-full">
+          <Carousel
+            autoPlay={false}
+            infiniteLoop={true}
+            // width={carouselWidht}
+            showStatus={false}
+            showThumbs={false}
+            showArrows={true}
+          >
             {creditsData.map((credit) => (
               <CardCredit key={credit.name} credit={credit} />
             ))}
-          </Slider>
+          </Carousel>
         </div>
       </div>
     </section>

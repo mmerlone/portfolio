@@ -18,7 +18,7 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/80">
+    <div role="alert" aria-live="assertive" aria-atomic="true" className="fixed inset-0 z-60 flex items-center justify-center bg-black/80">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-xl w-full mx-4 p-6 relative overflow-y-auto max-h-screen">
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           Terms of Service & Cookie Policy
