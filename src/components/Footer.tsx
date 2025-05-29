@@ -39,17 +39,17 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="footer-background">
+      <footer className="footer-background text-gray-900 dark:text-gray-200">
         <div className="container mx-auto p-2 relative z-10">
           <div className="flex flex-col sm:flex-row sm:justify-between items-center">
-            <p className="text-sm text-gray-600 dark:text-gray-300">
+            <p className="text-sm">
               &copy; {currentYear} {siteConfig.name}.{" "}
               {siteConfig.footer.copyright.text}
             </p>
             {/* Terms of Service & Cookie Policy link */}
             <a
               href="#"
-              className="text-sm text-gray-600 dark:text-gray-300 hover:underline"
+              className="text-sm hover:underline"
               onClick={(e) => {
                 e.preventDefault();
                 handlePolicyOpen();

@@ -15,7 +15,7 @@ export const siteConfig: SiteConfig = {
   // Contact information
   contact: {
     email: "mmerlone@gmail.com",
-    phone: "+55 41 99536-8488",
+    phone: "",
     location: "Remote",
   },
 

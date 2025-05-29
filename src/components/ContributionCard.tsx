@@ -17,11 +17,34 @@ const ContributionCard = ({ contribution }: ContributionCardProps) => (
         </span>
       )}
     </div>
-    <ul className="list-disc ml-6 mb-2 text-gray-700 dark:text-gray-300">
-      {contribution.description.map((item, i) => (
-        <li key={i}>{item}</li>
-      ))}
-    </ul>
+    <div className="mb-2">
+      <span className="font-semibold text-gray-800 dark:text-gray-200">
+        Challenge:
+      </span>
+      <span className="ml-1 text-gray-700 dark:text-gray-300">
+        {contribution.challenge}
+      </span>
+    </div>
+    <div className="mb-2">
+      <span className="font-semibold text-gray-800 dark:text-gray-200">
+        Action:
+      </span>
+      <ul className="list-disc ml-6 text-gray-700 dark:text-gray-300">
+        {contribution.action.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
+    </div>
+    <div className="mb-2">
+      <span className="font-semibold text-gray-800 dark:text-gray-200">
+        Result:
+      </span>
+      <ul className="list-disc ml-6 text-gray-700 dark:text-gray-300">
+        {contribution.result.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
+    </div>
     <div className="flex flex-wrap gap-2 mt-2">
       {contribution.technologies.map((tech) => (
         <span

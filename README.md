@@ -57,6 +57,7 @@ This portfolio was built with [Next.js](https://nextjs.org/) and showcases:
 - A **Skills** breakdown organized by category, displaying proficiency via icons and descriptions.
 - A timeline of **Professional Experience** demonstrating leadership and project contributions.
 - A **Projects** section highlighting selected works with images, detailed descriptions, and the technologies used.
+- A **Contributions** section showcasing selected contributions on private projects.
 
 ---
 
@@ -81,6 +82,7 @@ Content for various sections is maintained in `/src/data/`:
 - **Skills:** `/src/data/skills.ts`
 - **Experience:** `/src/data/experience.ts`
 - **Projects:** `/src/data/projects.ts`
+- **Contributions:** `/src/data/contributions.ts`
 
 Ensure these files reflect your updated portfolio content.
 

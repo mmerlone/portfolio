@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { FaBars, FaTimes } from "react-icons/fa";
+import ThemeToggle from "./ui/ThemeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    href: string,
   ) => {
     if (href.startsWith("#")) {
       e.preventDefault();
@@ -36,64 +37,63 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+          ? "bg-white/90 shadow-lg backdrop-blur-md dark:bg-gray-900/90"
+          : isOpen ? "bg-gray-200 dark:bg-gray-800  shadow sm:bg-transparent" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
-        {/* Change flex justification depending on isScrolled */}
         <div
-          className={`flex items-center h-16 ${
+          className={`flex h-16 items-center ${
             isScrolled ? "justify-between" : "justify-end"
           }`}
         >
-          {/* Conditionally render the Logo/Name only if isScrolled */}
           {isScrolled && (
             <Link
               href="/"
-              className="text-xl font-bold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+              className="text-xl font-bold text-gray-900 transition-colors hover:text-indigo-600 dark:text-white dark:hover:text-indigo-400"
             >
               {siteConfig.name}
             </Link>
           )}
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden items-center space-x-8 md:flex">
             {siteConfig.navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                className="text-gray-600 transition-colors hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
                 onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.name}
               </Link>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="rounded-lg p-2 text-gray-600 transition-colors hover:bg-gray-100 md:hidden dark:text-gray-300 dark:hover:bg-gray-800"
             aria-label="Toggle menu"
           >
             {isOpen ? (
-              <FaTimes className="w-6 h-6" />
+              <FaTimes className="h-6 w-6" />
             ) : (
-              <FaBars className="w-6 h-6" />
+              <FaBars className="h-6 w-6" />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         <div
-          className={`md:hidden transition-all duration-300 ease-in-out ${
-            isOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+          className={`transition-all duration-300 ease-in-out md:hidden ${
+            isOpen ? "opacity-100" : "max-h-0 opacity-0"
           } overflow-hidden`}
         >
-          <div className="py-4 space-y-4">
+          <div className="space-y-4 py-4">
             {siteConfig.navigation.map((item) => (
               <Link
                 key={item.href}
@@ -102,11 +102,12 @@ const Navbar = () => {
                   handleNavClick(e, item.href);
                   setIsOpen(false);
                 }}
-                className="block text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                className="block text-gray-600 transition-colors hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
               >
                 {item.name}
               </Link>
             ))}
+            <ThemeToggle />
           </div>
         </div>
       </div>

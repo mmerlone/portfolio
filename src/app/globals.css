@@ -1,28 +1,27 @@
-@import "tailwindcss";
 @import "../styles/patterns.css";
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #1a202c;
+  --primary: #4f46e5;
+  --primary-dark: #312e81;
+  --accent: rgb(255, 215, 199);
+  --accent-dark: #7c2d12;
+  --link: #1d4ed8;
+  --link-hover: #2563eb;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-  svg {
-    color: var(--foreground);
-    fill: var(--foreground);
-    stroke: var(--foreground);
-  }
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --primary: #818cf8;
+  --primary-dark: #312e81;
+  --accent: #fb923c;
+  --accent-dark: #f59e42;
+  --link: #60a5fa;
+  --link-hover: #3b82f6;
 }
 
 body {
@@ -31,75 +30,38 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-/* React Slick */
-.slick-slide > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.footer-background {
+  background: linear-gradient(to top, #e0e7ff 90%, #f8fafc 100%);
+  border-top: 2px solid #c2410c22;
+}
+.dark .footer-background {
+  background: linear-gradient(to top, #0a0a23 90%, #312e81 100%);
+  border-top: 2px solid #c2410c44;
 }
 
-.slick-prev,
-.slick-next {
-  height: 50px !important;
-  width: 50px !important;
+.more-to-show {
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
 
-.slick-prev:before, .slick-next:before {
-  font-size: 50px !important;
+/* Accessibility: focus rings */
+button:focus,
+a:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-.slick-dots li {
-  background-color: var(--background);
-  /* outline: 3px solid var(--background); */
-  border-radius: 50%;
-  opacity: 0.25;
-  outline-offset: -3px;
-  transition: all 0.2s ease-in-out;
+/* React Slick dots (carousel) */
+.carousel .control-next.control-arrow:before {
+  border-left: 16px solid #fff !important;
+}
+.carousel .control-prev.control-arrow:before {
+  border-right: 16px solid #fff !important;
 }
 
-.slick-active {
-  opacity: 1;
+.carousel .control-arrow:before,
+.carousel.carousel-slider .control-arrow:before {
+  margin: 0 16px !important;
+  border-top: 16px solid transparent !important;
+  border-bottom: 16px solid transparent !important;;
 }
-.slick-dots li.slick-active {
-  background-color: var(--background);
-  outline: 3px solid rgba(var(--foreground), 0.5);
-  outline-offset: -3px;
-  transition: all 0.2s ease-in-out;
-  opacity: 1;
-}
-.slick-dots li:hover {
-  opacity: 1;
-  transform: scale(1.2);
-}
-.slick-dots li:focus {
-  outline: 3px solid var(--foreground);
-  outline-offset: -3px;
-}
-.slick-dots li:focus:hover {
-  transform: scale(1.2);
-}
-.slick-dots li:focus:not(.slick-active) {
-  opacity: 1;
-  transform: scale(1.2);
-}
-.slick-dots li:focus:not(.slick-active):hover {
-  transform: scale(1.2);
-}
-.slick-dots li:focus:not(.slick-active):hover {
-  outline: 3px solid var(--foreground);
-  outline-offset: -3px;
-}
-.slick-dots li:focus:not(.slick-active):hover {
-  transform: scale(1.2);
-}
-.slick-dots li:focus:not(.slick-active):hover {
-  outline: 3px solid var(--foreground);
-  outline-offset: -3px;
-}
-.slick-dots-custom {
-  /* margin-top: 3rem !important; */
-  bottom: auto !important;
-}
-
-/* React Toastify */

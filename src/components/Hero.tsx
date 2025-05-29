@@ -3,67 +3,62 @@
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { HeroProps } from "@/types/components";
-import Weather from "@/components/Weather";
-import Quote from "@/components/Quote";
-import GitHubRepoStats from "@/components/GitHubRepoStats";
+import Weather from "@/components/widgets/Weather";
+import GitHubRepoStats from "@/components/widgets/GitHubRepoStats";
 
 const Hero = ({ className = "", weatherEnabled }: HeroProps) => {
   return (
     <section
       id="top"
-      className={`relative min-h-screen flex items-center justify-center overflow-hidden ${className}`}
+      className={`relative flex min-h-screen items-center justify-center overflow-hidden ${className}`}
     >
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/90 via-white to-orange-50/90 dark:from-gray-900/90 dark:via-gray-900 dark:to-orange-900/90">
-        <div className="absolute inset-0 opacity-10 dark:opacity-20 hero-background" />
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/90 via-gray-400 to-orange-300 dark:from-gray-900/90 dark:via-gray-900 dark:to-orange-900/90">
+        <div className="hero-background absolute inset-0 opacity-60 dark:opacity-20" />
       </div>
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          {/* Text content */}
+      <div className="relative z-10 container mx-auto px-4 py-10 sm:py-20">
+        <div className="flex flex-col items-center justify-between gap-12 lg:flex-row">
           <div className="flex-1 text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+            <h1 className="mb-6 text-3xl sm:text-4xl font-bold md:text-5xl lg:text-6xl">
               {siteConfig.name}
             </h1>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl text-gray-700 dark:text-gray-300 mb-4">
+            <h2 className="mb-4 text-xl sm:text-2xl text-gray-700 md:text-3xl lg:text-4xl dark:text-gray-300">
               {siteConfig.title}
             </h2>
-            {/* Use the new "headline" for the tagline */}
-            <p className="text-xl md:text-2xl text-orange-600 dark:text-orange-400 mb-8">
+            <p className="mb-8 text-lg sm:text-xl text-orange-700 md:text-2xl dark:text-orange-400">
               {siteConfig.headline}
             </p>
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+            <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
               <a
                 href="#contact"
-                className="px-8 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors shadow-lg hover:shadow-xl"
+                className="rounded-lg bg-orange-600 px-8 py-3 text-white shadow-lg transition-colors hover:bg-orange-700 hover:shadow-xl"
               >
                 Get in Touch
               </a>
               <a
                 href="#about"
-                className="px-8 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-lg hover:shadow-xl"
+                className="rounded-lg bg-white px-8 py-3 text-gray-900 shadow-lg transition-colors hover:bg-gray-100 hover:shadow-xl dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
               >
                 Learn More
               </a>
             </div>
             <div className="mt-8">
-              <Quote />
-              {weatherEnabled && <Weather />}
               <GitHubRepoStats />
+              {weatherEnabled && <Weather />}
             </div>
           </div>
 
           {/* Image */}
-          <div className="flex-1 relative">
-            <div className="relative w-full max-w-lg mx-auto group">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-indigo-500/20 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 group-hover:from-orange-500/40 group-hover:to-indigo-500/40 transition-all duration-500" />
+          <div className="relative flex-1">
+            <div className="group relative mx-auto w-full max-w-lg">
+              <div className="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-gradient-to-br from-lime-500/20 to-indigo-500/20 blur-3xl transition-all duration-500" />
               <div className="relative transform transition-all duration-500">
                 <Image
                   src={siteConfig.images.profile}
                   alt={siteConfig.name}
                   width={500}
                   height={500}
-                  className="rounded-full shadow-2xl group-hover:shadow-[0_0_50px_rgba(234,88,12,0.5)] transition-all duration-500"
+                  className="rounded-full shadow-2xl transition-all duration-500 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.5)]"
                   priority
                 />
               </div>

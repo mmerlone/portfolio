@@ -34,7 +34,7 @@ const Skills = ({ className = "" }: SkillsProps) => {
   return (
     <section
       id="skills"
-      className={`py-20 relative skills-background ${className}`}
+      className={`relative skills-background ${className}`}
     >
       <div className="container mx-auto px-4 relative z-10">
         <SectionTitle>{skillsData.title}</SectionTitle>
@@ -51,7 +51,7 @@ const Skills = ({ className = "" }: SkillsProps) => {
             <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none bg-gradient-to-t from-white to-transparent dark:from-gray-800 dark:to-transparent" />
           )}
         </div>
-        <div className="mt-4">
+        <div className="mt-4 text-center">
           <button
             onClick={handleToggle}
             aria-expanded={expanded}

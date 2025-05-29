@@ -9,6 +9,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
 import { siteConfig } from "@/config/site";
+import Quote from "@/components/widgets/Quote";
 
 // Force dynamic rendering to avoid prerendering issues,
 // ensuring cookies are re-read on every request.
@@ -23,6 +24,7 @@ export default function Home() {
       <ClientAnalyticsWrapper />
       <Hero weatherEnabled={weatherEnabled} />
       <About />
+      <Quote />
       <Contributions />
       <Skills />
       <Experience />

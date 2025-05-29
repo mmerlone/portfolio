@@ -51,14 +51,14 @@ const TermsOfServiceToast = () => {
 
   return (
     <>
-      <div className="fixed bottom-4 left-4 right-4 bg-gray-800 text-white p-4 rounded shadow-lg flex flex-col md:flex-row justify-between items-center z-50">
-        <p className="text-sm mb-2 md:mb-0 mx-4">
+      <div className="fixed right-4 bottom-4 left-4 z-50 flex flex-col items-center justify-between rounded bg-gray-200 p-4 text-gray-800 shadow-lg md:flex-row dark:bg-gray-800 dark:text-white shadow-gray-950">
+        <p className="mx-4 mb-2 text-sm md:mb-0">
           We use cookies to enhance your experience and track interactions. By
           clicking <strong>Accept</strong> or <strong>Refuse</strong> you agree
           to our{" "}
           <button
             onClick={() => setPolicyOpen(true)}
-            className="underline hover:text-gray-300 focus:outline-none"
+            className="bg-gray-200 underline hover:text-gray-300 focus:outline-none dark:bg-gray-800"
           >
             Terms of Service & Cookie Policy
           </button>
@@ -67,13 +67,13 @@ const TermsOfServiceToast = () => {
         <div className="flex space-x-2">
           <button
             onClick={handleAccept}
-            className="px-4 py-2 bg-green-500 hover:bg-green-600 rounded text-white text-sm"
+            className="rounded bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-600"
           >
             Accept
           </button>
           <button
             onClick={handleRefuse}
-            className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded text-white text-sm"
+            className="rounded bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-600"
           >
             Refuse
           </button>

@@ -8,16 +8,16 @@ const About = ({ className = "" }: AboutProps) => {
   return (
     <section
       id="about"
-      className={`py-20 relative section-background-primary ${className}`}
+      className={`py-10 sm:py-20 relative  ${className}`}
     >
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto">
+      <div className="container mx-auto px-6 sm:px-12 relative z-10">
+        <div className="mx-auto bg-gray-200 dark:bg-gray-800 rounded-xl p-5 sm:p-10">
           <SectionTitle>{aboutData.title}</SectionTitle>
           <div className="prose prose-lg dark:prose-invert mx-auto">
             {aboutData.paragraphs.map((paragraph, index) => (
               <p
                 key={index}
-                className="text-gray-600 dark:text-gray-300 leading-relaxed mt-4 first:mt-0 text-balance"
+                className="text-gray-900 dark:text-gray-300 leading-relaxed mt-4 first:mt-0 text-justify text-sm sm:text-base"
               >
                 {paragraph}
               </p>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { siteConfig } from "@/config/site";
-import { LoadingSpinner } from "./ui/LoadingSpinner";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useWeather } from "@/hooks/useWeather";
 import Image from "next/image";
 
@@ -39,12 +39,11 @@ const Weather = () => {
     }
   }, [data]);
 
-  // Prevent hydration mismatch: only render on client
   if (!hasMounted) return null;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto my-8">
-      <div className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+    <div className="bg-gray-200 dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto my-8">
+      <div className="flex items-center space-x-4 p-4 bg-white dark:bg-gray-700 rounded-lg">
         {isLoading ? (
           <LoadingSpinner />
         ) : (
