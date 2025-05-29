@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { siteConfig } from "@/config/site";
 import { HeroProps } from "@/types/components";
 import Weather from "@/components/widgets/Weather";

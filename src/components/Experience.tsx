@@ -5,7 +5,7 @@ import { experiences, Experience as ExperienceType } from "@/data/experience";
 import { FaExternalLinkAlt, FaBriefcase } from "react-icons/fa";
 import { ExperienceProps } from "@/types/components";
 import { SectionTitle } from "./ui/SectionTitle";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { siteConfig } from "@/config/site";
 
 const Experience = ({ className = "" }: ExperienceProps) => {
@@ -39,11 +39,11 @@ const Experience = ({ className = "" }: ExperienceProps) => {
                     />
                   ) : (
                     // Fall back image fa briefcase
-                    <FaBriefcase
+                    (<FaBriefcase
                       width={64}
                       height={64}
                       className="h-full w-full object-cover"
-                    />
+                    />)
                   )}
                 </div>
                 <div className="transform rounded-lg bg-white p-6 shadow-lg transition-transform hover:scale-[1.02] dark:bg-gray-800">

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { skillIconMap } from "./skillIconMap";
 import { SkillsWrapperProps } from "@/types/components";
 
@@ -30,12 +30,12 @@ const SkillsClient = ({ categories, categoryIcons }: SkillsWrapperProps) => {
               >
                 {skillIconMap[skill.iconUrl] ? (
                   // Render Font Awesome icon if mapped
-                  React.createElement(skillIconMap[skill.iconUrl], {
+                  (React.createElement(skillIconMap[skill.iconUrl], {
                     className: "w-6 h-6 text-slate-950 dark:text-slate-50",
-                  })
+                  }))
                 ) : (
                   // Fallback to Image component if iconUrl is a URL
-                  <div className="w-6 h-6 relative">
+                  (<div className="w-6 h-6 relative">
                     <Image
                       src={(() => {
                         // Helper function to ensure a relative path starts with "/" or is absolute
@@ -52,7 +52,7 @@ const SkillsClient = ({ categories, categoryIcons }: SkillsWrapperProps) => {
                       className="w-full h-full object-contain"
                       unoptimized
                     />
-                  </div>
+                  </div>)
                 )}
                 {skill.name}
               </li>

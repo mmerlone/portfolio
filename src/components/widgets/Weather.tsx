@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { siteConfig } from "@/config/site";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useWeather } from "@/hooks/useWeather";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const { city } = siteConfig;
 
