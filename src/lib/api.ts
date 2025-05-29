@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site";
+import { apiConfig } from "@/config/api";
 import { QuoteResponse, WeatherResponse } from "@/types/api";
 
 export async function fetchQuote(): Promise<QuoteResponse[]> {
@@ -22,7 +22,7 @@ export async function fetchWeather(): Promise<WeatherResponse> {
     console.error("WEATHER_API_KEY is not defined");
     throw new Error("Weather API key is not defined");
   }
-  const city = siteConfig.city;
+  const city = apiConfig.city;
   if (!city) {
     console.error("City is not defined in the config");
     throw new Error("City is not defined in the config");
