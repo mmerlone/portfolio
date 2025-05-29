@@ -3,7 +3,7 @@ export const creditsData = [
     name: "OpenWeatherMap",
     description: "Weather data provided by OpenWeatherMap.",
     url: "https://openweathermap.org/",
-    icon: "openweather.svg",
+    icon: "open-weather.svg",
   },
   {
     name: "Heroicons",
