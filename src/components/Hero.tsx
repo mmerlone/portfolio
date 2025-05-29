@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/legacy/image";
+import { apiConfig } from "@/config/api";
 import { siteConfig } from "@/config/site";
 import { HeroProps } from "@/types/components";
 import Weather from "@/components/widgets/Weather";
@@ -44,7 +45,7 @@ const Hero = ({ className = "", weatherEnabled }: HeroProps) => {
             </div>
             <div className="mt-8">
               <GitHubRepoStats />
-              {weatherEnabled && <Weather />}
+              {weatherEnabled && <Weather city={apiConfig.city} />}
             </div>
           </div>
 

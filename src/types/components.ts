@@ -17,6 +17,10 @@ export interface HeroProps {
   weatherEnabled: boolean;
 }
 
+export interface WeatherProps {
+  city: string;
+}
+
 export interface LayoutProps {
   children: React.ReactNode;
   title?: string;

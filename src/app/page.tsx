@@ -8,7 +8,7 @@ import Credits from "@/components/Credits";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
-import { siteConfig } from "@/config/site";
+import { apiConfig } from "@/config/api";
 import Quote from "@/components/widgets/Quote";
 
 // Force dynamic rendering to avoid prerendering issues,
@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
   // This runs on the server, so it's safe to check the key here
-  const weatherEnabled = !!siteConfig.weather?.apiKey;
+  const weatherEnabled = !!apiConfig.openWeather.apiKey;
 
   return (
     <main>

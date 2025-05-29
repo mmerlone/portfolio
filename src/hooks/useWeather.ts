@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { WeatherResponse } from "@/types/api";
 
-export function useWeather() {
+export function useWeather(city: string) {
   const { data, isLoading, error } = useQuery<WeatherResponse, Error>({
-    queryKey: ["weather"],
+    queryKey: ["weather", city],
     queryFn: async () => {
-      const res = await fetch("/api/weather");
+      const res = await fetch(`/api/weather?city=${city}`);
       if (!res.ok) {
         throw new Error("Failed to fetch weather data");
       }

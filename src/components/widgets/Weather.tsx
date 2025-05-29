@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { siteConfig } from "@/config/site";
+import { WeatherProps } from "@/types/components";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useWeather } from "@/hooks/useWeather";
 import Image from "next/legacy/image";
-
-const { city } = siteConfig;
 
 interface Weather {
   temp: number | null;
@@ -20,10 +18,10 @@ const defaultWeather: Weather = {
   icon: "01d",
 };
 
-const Weather = () => {
+const Weather = ({ city }: WeatherProps) => {
   const [weather, setWeather] = useState<Weather>(defaultWeather);
   const [hasMounted, setHasMounted] = useState(false);
-  const { data, isLoading, isError } = useWeather();
+  const { data, isLoading, isError } = useWeather(city);
 
   useEffect(() => {
     setHasMounted(true);
