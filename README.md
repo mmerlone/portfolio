@@ -185,7 +185,7 @@ For further documentation on Next.js and additional resources, please visit:
 
 ## License
 
-This project is licensed under the terms specified in the repository.
+This project is licensed under the terms specified in the [LICENSE](LICENSE) file.
 
 ---
 
@@ -199,6 +199,17 @@ Contributions are welcome! If you have suggestions for improvements, bug fixes, 
 4. Open a pull request describing your changes.
 
 ---
+
+## Technologies
+
+This project utilizes the following technologies:
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- ESLint
+- Prettier
+- Vercel
 
 ## Contact
 
