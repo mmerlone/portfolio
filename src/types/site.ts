@@ -15,7 +15,14 @@ export interface ImagePaths {
 }
 
 export interface NavigationItem {
-  readonly name: string;
+  readonly name?: string;
+  readonly label?: string;
+  readonly href: string;
+}
+
+export interface NavigationItemMobile {
+  readonly name?: string;
+  readonly label?: string;
   readonly href: string;
 }
 
@@ -75,6 +82,7 @@ export interface SiteConfig {
     readonly linktree: string;
   };
   readonly navigation: readonly NavigationItem[];
+  readonly navMenuItemsMobile: readonly NavigationItemMobile[];
   readonly footer: FooterConfig;
   readonly cookie: CookieConfig;
   readonly analytics?: AnalyticsConfig;
