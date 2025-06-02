@@ -5,6 +5,7 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { FaBars, FaTimes } from "react-icons/fa";
 import ThemeToggle from "./ui/ThemeToggle";
+import { NavigationItem } from "@/types/site";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +36,32 @@ const Navbar = () => {
     }
   };
 
+  const anchorLink = (item: NavigationItem) => {
+    return (
+      <Link
+        key={item.href}
+        href={item.href}
+        className="text-gray-600 transition-colors hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+        onClick={(e) => handleNavClick(e, item.href)}
+      >
+        {item.name}
+      </Link>
+    )
+  }
+
+  const labelLink = (item: NavigationItem) => {
+    return (
+      <Link
+        key={item.href}
+        href={item.href}
+        className="text-gray-600 transition-colors hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+        onClick={(e) => handleNavClick(e, item.href)}
+      >
+        {item.label}
+      </Link>
+    )
+  }
+
   return (
     <nav
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
@@ -61,14 +88,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden items-center space-x-8 md:flex">
             {siteConfig.navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-gray-600 transition-colors hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
-                onClick={(e) => handleNavClick(e, item.href)}
-              >
-                {item.name}
-              </Link>
+              item.label ? labelLink(item) : anchorLink(item)
             ))}
             <ThemeToggle />
           </div>
