@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   // Hardcode the lang attribute to "en-US" to ensure SSR and hydration align
   return (
     <html lang="en-US">
-      <body className={inter.className} suppressHydrationWarning={true}>
+      <body className={inter.className}>
         <QueryProvider>
           <Navbar />
           {children}

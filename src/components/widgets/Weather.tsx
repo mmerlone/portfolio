@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { WeatherProps } from "@/types/components";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useWeather } from "@/hooks/useWeather";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 interface Weather {
   temp: number | null;
