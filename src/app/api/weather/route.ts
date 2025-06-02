@@ -4,10 +4,8 @@ import { WeatherResponse } from "@/types/api";
 
 export async function GET(request: Request) {
   if (!apiConfig.openWeather.apiKey) {
-    return NextResponse.json(
-      { apiKey: null, error: "Weather API key not configured" },
-      { status: 200 }
-    );
+    // Return null with 200 status if API key is not configured
+    return NextResponse.json(null, { status: 200 });
   }
 
   const { searchParams } = new URL(request.url);
@@ -20,7 +18,6 @@ export async function GET(request: Request) {
   const url = `${apiConfig.openWeather.url}?q=${encodeURIComponent(
     city
   )}&appid=${apiConfig.openWeather.apiKey}&units=metric`;
-  console.log("Fetching weather from:", url);
 
   try {
     const response = await fetch(url);
