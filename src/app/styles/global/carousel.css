@@ -1,0 +1,18 @@
+/* Carousel */
+.carousel.carousel-slider {
+  padding-bottom: 36px;
+}
+
+.carousel .control-next.control-arrow:before {
+  border-left: 16px solid var(--blue-500) !important;
+}
+.carousel .control-prev.control-arrow:before {
+  border-right: 16px solid var(--blue-500) !important;
+}
+
+.carousel .control-arrow:before,
+.carousel.carousel-slider .control-arrow:before {
+  margin: 0 16px !important;
+  border-top: 16px solid transparent !important;
+  border-bottom: 16px solid transparent !important;
+}

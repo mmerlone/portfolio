@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json", // Assumes your main tsconfig is tsconfig.json
+  "compilerOptions": {
+    "jsx": "react-jsx" // Or "react" if you prefer the classic transform
+  },
+  "types": [
+    "jest"
+  ]
+}

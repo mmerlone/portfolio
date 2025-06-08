@@ -1,8 +1,4 @@
-export interface Skill {
-  readonly name: string;
-  readonly iconUrl: string;
-  readonly level: number;
-}
+import { Skill } from "@/types/skills";
 
 export interface SkillsData {
   readonly title: string;

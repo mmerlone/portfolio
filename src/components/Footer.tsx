@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 import TermsOfServicePolicy from "./TermsOfServicePolicy";
 import { setCookie } from "@/lib/cookies";
+import { BackgroundEffects } from "@components/ui/BackgroundEffects";
+import { EffectsEnum, BackgroundEffectsEnum } from "@/types/effects";
 
 const Footer = () => {
   const [currentYear, setCurrentYear] = useState<number>(
-    new Date().getFullYear()
+    new Date().getFullYear(),
   );
   const [policyOpen, setPolicyOpen] = useState(false);
 
@@ -38,10 +40,16 @@ const Footer = () => {
   };
 
   return (
-    <>
-      <footer className="footer-background text-gray-900 dark:text-gray-200">
-        <div className="container mx-auto p-2 relative z-10">
-          <div className="flex flex-col sm:flex-row sm:justify-between items-center">
+    <footer className="text-gray-900 dark:text-gray-200">
+      <BackgroundEffects
+        backgrounds={{
+          [EffectsEnum.OFF]: BackgroundEffectsEnum.FOOTER,
+          [EffectsEnum.EXPERIMENTAL]: BackgroundEffectsEnum.FOOTER,
+        }}
+        className="shadow"
+      >
+        <div className="relative z-10 container mx-auto p-2">
+          <div className="flex flex-col items-center sm:flex-row sm:justify-between">
             <p className="text-sm">
               &copy; {currentYear} {siteConfig.name}.{" "}
               {siteConfig.footer.copyright.text}
@@ -59,14 +67,14 @@ const Footer = () => {
             </a>
           </div>
         </div>
-      </footer>
+      </BackgroundEffects>
       <TermsOfServicePolicy
         visible={policyOpen}
         onAccept={handlePolicyAccept}
         onRefuse={handlePolicyRefuse}
         onClose={handlePolicyClose}
       />
-    </>
+    </footer>
   );
 };
 

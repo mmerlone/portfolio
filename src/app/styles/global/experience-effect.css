@@ -1,0 +1,27 @@
+/* For the grid pattern */
+.experience-effect-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: 40px 40px; /* Adjust size for subtlety */
+  animation: grid-pan 60s linear infinite; /* Slow animation */
+  opacity: 0.5; /* Very subtle */
+}
+
+/* Define grid colors for light and dark modes */
+:root {
+  --grid-color: rgba(0, 0, 0, 0.1); /* Light mode subtle dark grid */
+}
+
+.dark {
+  --grid-color: rgba(255, 255, 255, 0.05); /* Dark mode subtle light grid */
+}
+
+@keyframes grid-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}

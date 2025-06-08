@@ -2,43 +2,88 @@
 
 import { creditsData } from "@/data/credits";
 import { SectionTitle } from "./ui/SectionTitle";
-import CardCredit from "./CardCredit";
+import { CardCredit } from "./ui/CardCredit";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import { useWindowSize } from "../hooks/useWindowSize";
+import { useConfigEffects } from "@/context/ConfigEffectsContext";
+import { Carousel3D } from "./ui/Carousel3D";
+import type { Credit } from "@/types/credits";
+import { FC } from "react";
+import { cn } from "@/lib/cn";
+import { BackgroundEffects } from "@components/ui/BackgroundEffects";
+import { EffectsEnum } from "@/types/effects";
 
-const Credits = ({ className = "" }: { className?: string }) => {
+interface CreditsProps {
+  className?: string;
+}
 
-  // const windowSize = useWindowSize();
-  // const carouselWidht = windowSize.width < 600 ? '380px' : '650px';
+const Credits: FC<CreditsProps> = ({
+  className = "",
+}: {
+  className?: string;
+}) => {
+  const { effect, isMounted: configEffectsAreMounted } = useConfigEffects();
+  const isEffectEnabled = effect === EffectsEnum.EXPERIMENTAL;
 
   return (
     <section
       id="credits"
-      className={`relative flex items-center justify-center ${className}`}
+      className="relative flex items-center justify-center overflow-hidden"
     >
-      <div className="relative z-10 container flex flex-col items-center justify-center">
-        <SectionTitle>Credits</SectionTitle>
-        <p className="mx-5 leading-relaxed text-gray-600 first:mt-0 sm:mx-12 sm:text-center sm:text-balance dark:text-gray-300">
-          This portfolio showcases my recent experience with the following
-          companies and technologies, made possible by the contributions of many
-          talented individuals.
-        </p>
-        <div className="mx-auto my-8 py-8 w-full">
-          <Carousel
-            autoPlay={false}
-            infiniteLoop={true}
-            // width={carouselWidht}
-            showStatus={false}
-            showThumbs={false}
-            showArrows={true}
-          >
-            {creditsData.map((credit) => (
-              <CardCredit key={credit.name} credit={credit} />
-            ))}
-          </Carousel>
-        </div>
-      </div>
+      <BackgroundEffects
+        backgrounds={{}}
+        className={cn("bg-gray-200 dark:bg-gray-900", className)}
+      >
+        {configEffectsAreMounted ? (
+          <div className="relative z-10 container flex flex-col items-center justify-center">
+            <SectionTitle>Credits</SectionTitle>
+            <p className="mx-5 py-5 leading-relaxed text-gray-800 first:mt-0 sm:mx-12 sm:text-center sm:text-balance dark:text-gray-300">
+              This portfolio showcases my recent experience with the following
+              companies and technologies, made possible by the contributions of
+              many talented individuals.
+            </p>
+            <div className="mx-auto my-8 w-full py-2">
+              {isEffectEnabled ? (
+                <Carousel3D credits={creditsData as Credit[]} />
+              ) : (
+                <Carousel
+                  autoPlay={false}
+                  infiniteLoop={true}
+                  showStatus={false}
+                  showThumbs={false}
+                  showArrows={true}
+                >
+                  {creditsData.map((credit) => (
+                    <CardCredit key={credit.name} credit={credit} />
+                  ))}
+                </Carousel>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="relative z-10 container flex flex-col items-center justify-center">
+            <SectionTitle>Credits</SectionTitle>
+            <p className="mx-5 py-5 leading-relaxed text-gray-800 first:mt-0 sm:mx-12 sm:text-center sm:text-balance dark:text-gray-300">
+              This portfolio showcases my recent experience with the following
+              companies and technologies, made possible by the contributions of
+              many talented individuals.
+            </p>
+            <div className="mx-auto my-8 w-full py-2">
+              <Carousel
+                autoPlay={false}
+                infiniteLoop={true}
+                showStatus={false}
+                showThumbs={false}
+                showArrows={true}
+              >
+                {creditsData.map((credit) => (
+                  <CardCredit key={credit.name} credit={credit} />
+                ))}
+              </Carousel>
+            </div>
+          </div>
+        )}
+      </BackgroundEffects>
     </section>
   );
 };

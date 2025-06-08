@@ -3,6 +3,7 @@
 ![Build](https://img.shields.io/github/actions/workflow/status/mmerlone/portfolio/ci.yml?branch=main)
 ![License](https://img.shields.io/github/license/mmerlone/portfolio)
 ![Vercel](https://img.shields.io/badge/deployed%20on-vercel-000?logo=vercel)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
 
 This is a Next.js portfolio project showcasing my experience as a Remote Software Engineer. It highlights my skills, professional experience, and projects, while featuring the tools and technologies that contribute to a superior developer experience.
 
@@ -23,6 +24,7 @@ This is a Next.js portfolio project showcasing my experience as a Remote Softwar
   - [Weather Widget](#weather-widget)
   - [Quote Widget](#quote-widget)
   - [GitHub Repo Widget](#github-repo-widget)
+  - [Visual Effects](#visual-effects)
 - [Credits](#credits)
 - [Learn More](#learn-more)
 - [License](#license)
@@ -58,6 +60,7 @@ This portfolio was built with [Next.js](https://nextjs.org/) and showcases:
 - A timeline of **Professional Experience** demonstrating leadership and project contributions.
 - A **Projects** section highlighting selected works with images, detailed descriptions, and the technologies used.
 - A **Contributions** section showcasing selected contributions on private projects.
+- Interactive **Visual Effects** that enhance the user experience.
 
 ---
 
@@ -71,7 +74,8 @@ Update the site-wide configuration in `/src/config/site.ts` with your details:
 - **Contact:** Email, phone, and location.
 - **Social Links:** URLs and icons for social profiles.
 - **Navigation & Footer:** Menu items and copyright.
-- **Widgets:** Weather, GitHub, and Quotes widgets can now be enabled or disabled by setting their config to `null` or omitting them.
+- **Widgets:** Weather, GitHub, and Quotes widgets can be enabled or disabled by setting their config to `null` or omitting them.
+- **Effects:** Configure visual effects and animations.
 
 ### Site Data Files
 
@@ -110,7 +114,7 @@ Then edit the `.env` file and insert your production or development values.
 This project includes a Terms of Service (TOS) component with cookie handling and analytics integration.
 
 - **Cookie Consent:**  
-  The consent banner appears only if the user has not previously accepted the terms. When the user clicks **Accept**, a cookie (default: `mmerlone-analytics-consent`) is set for one year, preventing the banner from reappearing.
+  The consent banner appears only if the user has not previously accepted the terms. When the user clicks **Accept**, a cookie (default: `mmerlone-dev-br-analytics-consent`) is set for one year, preventing the banner from reappearing.
 - **Analytics:**  
   Analytics will only be loaded after the user accepts the cookie consent notice (GDPR compliant).
   - **Google Analytics:** Set `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-XXXXXXXX"` in your `.env` to enable.
@@ -154,6 +158,19 @@ The GitHub repository statistics widget is also **optional**.
 
 ---
 
+### Visual Effects
+
+The portfolio includes various visual effects that can be configured:
+
+- **3D Globe:** Interactive globe visualization with customizable points and arcs.
+- **Background Effects:** Dynamic background patterns and animations.
+- **UI Components:** Enhanced UI components with animations and transitions.
+- **Theme Support:** Dark and light mode with smooth transitions.
+
+Configure these effects in the site config file under the `effects` section.
+
+---
+
 ## Credits
 
 This project leverages the following tools, services, and resources:
@@ -169,6 +186,12 @@ This project leverages the following tools, services, and resources:
 - **Google Tag Manager:** Tag management ([tagmanager.google.com](https://tagmanager.google.com/)).
 - **Vercel Speed Insights:** Performance insights ([vercel.com/speed](https://vercel.com/speed)).
 - **improvmx.com:** Email forwarding ([improvmx.com](https://improvmx.com/)).
+- **Three.js:** 3D graphics library ([threejs.org](https://threejs.org/)).
+- **React Three Fiber:** React renderer for Three.js ([docs.pmnd.rs](https://docs.pmnd.rs/react-three-fiber/)).
+- **Framer Motion:** Animation library ([framer.com/motion](https://www.framer.com/motion/)).
+- **GSAP:** Animation library ([gsap.com](https://gsap.com/)).
+- **TanStack Query:** Data fetching and caching ([tanstack.com/query](https://tanstack.com/query/latest)).
+- **Aceternity UI:** Modern UI components ([ui.aceternity.com](https://ui.aceternity.com/)).
 
 *...and many more. Kudos to everyone involved!*
 
@@ -210,6 +233,11 @@ This project utilizes the following technologies:
 - ESLint
 - Prettier
 - Vercel
+- Three.js
+- React Three Fiber
+- Framer Motion
+- GSAP
+- TanStack Query
 
 ## Contact
 
@@ -226,3 +254,5 @@ Feel free to reach out!
 
 *Suggestions for further improvement:*
 - Add a "Screenshots" section with images of your portfolio.
+- Add more interactive demos and examples.
+- Implement more advanced visual effects.

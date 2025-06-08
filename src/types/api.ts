@@ -4,6 +4,24 @@ export interface QuoteResponse {
   h: string; // pre-formatted HTML quote
 }
 
+export interface QuoteInterface {
+  q: string; // quote
+  a: string; // author
+  h: string; // preformatted HTML quote
+}
+
+export interface UseQuoteOptions {
+  enabled?: boolean;
+}
+
+export type WeatherCondition =
+  | "Clear"
+  | "Clouds"
+  | "Rain"
+  | "Thunderstorm"
+  | "Snow"
+  | "Drizzle";
+
 export interface WeatherResponse {
   main: {
     temp: number;
@@ -11,6 +29,7 @@ export interface WeatherResponse {
   weather: Array<{
     description: string;
     icon: string;
+    main: WeatherCondition;
   }>;
 }
 
@@ -37,4 +56,19 @@ export interface RepoStats {
   forks_count: number;
   watchers_count: number;
   html_url: string;
+}
+
+export interface ZenquotesConfig {
+  url: string;
+}
+
+export interface OpenWeatherConfig {
+  url: string;
+  city?: string;
+  apiKey?: string;
+}
+
+export interface ApiConfig {
+  zenquotes: ZenquotesConfig;
+  openWeather: OpenWeatherConfig;
 }

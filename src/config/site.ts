@@ -1,5 +1,7 @@
 import { type SiteConfig } from "@/types/site";
 
+export const EFFECTS_KEY = "effects-preference";
+
 export const siteConfig: SiteConfig = {
   // Site metadata
   name: "Marcio Merlone",
@@ -45,22 +47,6 @@ export const siteConfig: SiteConfig = {
 
   // Navigation
   navigation: [
-    { name: "Home", href: "/#top" },
-    { name: "About", href: "/#about" },
-    { name: "Contributions", href: "/#contributions" }, // <-- Add this line
-    { name: "Skills", href: "/#skills" },
-    { name: "Experience", href: "/#experience" },
-    { name: "Credits", href: "/#credits" },
-    { name: "Contact", href: "/#contact" },
-    // Add a new link for Demos, or directly to the presentation
-    // Option 1: Link to a general Demos page (if you create one at app/demo/page.tsx)
-    // { label: "Demos", href: "/demo" }, 
-    // Option 2: Link directly to the Presentation demo
-    { label: "Presentation", href: "/demo/presentation" },
-  ],
-
-  navMenuItemsMobile: [ // Assuming you might have a separate mobile nav config
-    { label: "Home", href: "/#top" },
     { label: "About", href: "/#about" },
     { label: "Contributions", href: "/#contributions" },
     { label: "Skills", href: "/#skills" },
@@ -79,7 +65,7 @@ export const siteConfig: SiteConfig = {
 
   // New cookie configuration:
   cookie: {
-    name: "mmerlone-analytics-consent",
+    name: "mmerlone-dev-br-analytics-consent",
     expiryDays: 365,
   },
 
@@ -99,30 +85,8 @@ export const siteConfig: SiteConfig = {
     repoUrl: "https://github.com/mmerlone/portfolio",
   },
 
-  // Quotes configuration
-  // To disable:
-  // quotes: null,
-  // or just remove the quotes property entirely
-  quotes: {
-    default: {
-      q: "640 k ought to be enough for anybody.",
-      a: "Bill Gates",
-      h: "",
-    },
-    list: [
-      {
-        q: "640 k ought to be enough for anybody.",
-        a: "Bill Gates",
-        h: "",
-      },
-      {
-        q: "Talk is cheap. Show me the code.",
-        a: "Linus Torvalds",
-        h: "",
-      },
-      // Add more quotes as desired
-    ],
+  // Effects configuration
+  effects: {
+    default: "EXPERIMENTAL",
   },
 };
-
-

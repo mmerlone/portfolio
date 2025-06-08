@@ -1,5 +1,6 @@
 .bg-grid-pattern {
-  background-image: linear-gradient(to right, #000 1px, transparent 1px),
+  background-image:
+    linear-gradient(to right, #000 1px, transparent 1px),
     linear-gradient(to bottom, #000 1px, transparent 1px);
   background-size: 24px 24px;
 }
@@ -50,7 +51,8 @@
 
 @media (prefers-color-scheme: dark) {
   .bg-grid-pattern {
-    background-image: linear-gradient(to right, #fff 1px, transparent 1px),
+    background-image:
+      linear-gradient(to right, #fff 1px, transparent 1px),
       linear-gradient(to bottom, #fff 1px, transparent 1px);
     background-size: 24px 24px;
   }
@@ -71,9 +73,4 @@
     background-size: 420% 420%;
     animation: gradient-animation 18s ease infinite;
   }
-}
-
-.more-to-show {
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }

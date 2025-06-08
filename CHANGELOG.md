@@ -152,3 +152,52 @@
 
 *  initial commit (cd751b6e)
 
+#### 1.0.0 (2025-05-30)
+
+##### New Features
+
+*  add visual effects and animations (3d globe, background effects, etc)
+*  add TanStack Query for data fetching and caching
+*  add Framer Motion and GSAP for animations
+*  add Three.js and React Three Fiber for 3D graphics
+*  add Aceternity UI components
+*  add theme support with dark/light mode
+*  add expandable tabs component
+*  add tilt box and scroll effects
+*  add globe visualization component
+*  add background effects system
+*  add config bar for effects control
+*  add flowing menu component
+*  add quote section component
+*  add theme provider
+*  add intersection observer hook
+*  add local storage hook
+*  add GitHub repo stats hook
+*  add utility functions for class names and effects
+
+##### Bug Fixes
+
+*  fix weather widget styling and error handling
+*  fix quote widget styling and caching
+*  fix cookie consent naming
+*  fix navigation menu structure
+*  fix type definitions and interfaces
+*  fix API configuration and error handling
+*  fix build errors and type issues
+*  fix ESLint configuration
+*  fix Jest configuration
+*  fix TypeScript configuration
+
+##### Chores
+
+*  update dependencies
+*  update documentation
+*  update type definitions
+*  update configuration files
+*  update build scripts
+*  update test setup
+*  update code formatting
+*  update file structure
+*  update component organization
+*  update API structure
+

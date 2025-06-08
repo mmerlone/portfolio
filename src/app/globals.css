@@ -1,67 +1,16 @@
-@import "../styles/patterns.css";
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+/* Import theme variables and base styles */
+@import "./styles/global/variables.css";
+@import "./styles/global/base.css";
 
-:root {
-  --background: #f8fafc;
-  --foreground: #1a202c;
-  --primary: #4f46e5;
-  --primary-dark: #312e81;
-  --accent: rgb(255, 215, 199);
-  --accent-dark: #7c2d12;
-  --link: #1d4ed8;
-  --link-hover: #2563eb;
-}
+/* Import general patterns */
+@import "../styles/patterns.css";
 
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --primary: #818cf8;
-  --primary-dark: #312e81;
-  --accent: #fb923c;
-  --accent-dark: #f59e42;
-  --link: #60a5fa;
-  --link-hover: #3b82f6;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.footer-background {
-  background: linear-gradient(to top, #e0e7ff 90%, #f8fafc 100%);
-  border-top: 2px solid #c2410c22;
-}
-.dark .footer-background {
-  background: linear-gradient(to top, #0a0a23 90%, #312e81 100%);
-  border-top: 2px solid #c2410c44;
-}
-
-.more-to-show {
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-}
-
-/* Accessibility: focus rings */
-button:focus,
-a:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* React Slick dots (carousel) */
-.carousel .control-next.control-arrow:before {
-  border-left: 16px solid #fff !important;
-}
-.carousel .control-prev.control-arrow:before {
-  border-right: 16px solid #fff !important;
-}
-
-.carousel .control-arrow:before,
-.carousel.carousel-slider .control-arrow:before {
-  margin: 0 16px !important;
-  border-top: 16px solid transparent !important;
-  border-bottom: 16px solid transparent !important;;
-}
+/* Import component/section specific styles */
+@import "./styles/global/carousel.css";
+@import "./styles/global/carousel-3d.css";
+@import "./styles/global/aurora.css";
+@import "./styles/global/isometric-backgrounds.css";
+@import "./styles/global/credits.css";
+@import "./styles/global/experience-effect.css";

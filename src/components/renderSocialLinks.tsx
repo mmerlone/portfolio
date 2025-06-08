@@ -5,8 +5,9 @@ import {
     FaInstagram,
   } from "react-icons/fa";
   import { siteConfig } from "@/config/site";
+  import { IconProps } from "@/types/components";
 
-const iconMap: { [key: string]: React.ElementType } = {
+const iconMap: { [key: string]: React.ComponentType<IconProps> } = {
   linkedin: FaLinkedin,
   github: FaGithub,
   twitter: FaTwitter,

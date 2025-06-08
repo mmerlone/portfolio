@@ -1,0 +1,73 @@
+.aurora-effect-element {
+  --aurora-gradient: repeating-linear-gradient(
+    100deg,
+    var(--blue-500) 10%,
+    var(--indigo-300) 15%,
+    var(--blue-300) 20%,
+    var(--violet-200) 25%,
+    var(--blue-400) 30%
+  );
+
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: var(--white-gradient), var(--aurora-gradient);
+  background-size: 300%, 200%;
+  background-position:
+    50% 50%,
+    50% 50%;
+  opacity: 0.5;
+  filter: blur(10px) invert(1);
+  will-change: transform;
+}
+
+.aurora-effect-element::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--white-gradient), var(--aurora-gradient);
+  background-size: 200%, 100%;
+  background-attachment: fixed;
+  mix-blend-mode: difference;
+  animation: aurora-scroll 20s linear infinite;
+}
+
+/* Dark mode styles */
+.dark .aurora-effect-element {
+  background-image:
+    var(--dark-gradient), var(--aurora-gradient);
+  filter: blur(10px) invert(0);
+}
+
+.dark .aurora-effect-element::after {
+  background-image:
+    var(--dark-gradient), var(--aurora-gradient);
+}
+
+/* Conditional radial mask */
+.aurora-effect-element.with-radial-mask {
+  mask-image: radial-gradient(
+    ellipse at 100% 0%,
+    black 10%,
+    var(--transparent) 70%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse at 100% 0%,
+    black 10%,
+    var(--transparent) 70%
+  ); /* For Safari compatibility */
+}
+
+/* Keyframes for the aurora animation */
+@keyframes aurora-scroll {
+  from {
+    background-position:
+      0% 50%,
+      0% 50%; /* Starting position for both layers of the ::after background */
+  }
+  to {
+    background-position:
+      200% 50%,
+      200% 50%; /* Ending position, creates a horizontal scroll. The 200% matches the first value of background-size for ::after. */
+  }
+}
