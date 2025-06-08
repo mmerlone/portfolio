@@ -7,9 +7,10 @@ export enum EffectsEnum {
 export type EffectsType = `${EffectsEnum}`;
 
 export enum BackgroundEffectsEnum {
-  AURORA = "aurora",
-  PATHS = "paths",
   HERO = "hero",
+  AURORA = "aurora",
+  SERVICES = "services",
+  PATHS = "paths",
   STATIC_COLOR = "static-color",
   FOOTER = "footer",
   EXPERIENCE = "experience",

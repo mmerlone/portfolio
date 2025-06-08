@@ -10,7 +10,8 @@ import { PathsEffect } from "./background-effects/PathsEffect";
 import { HeroEffect } from "./background-effects/HeroEffect";
 import { StaticColorEffect } from "./background-effects/StaticColorEffect";
 import { FooterEffect } from "./background-effects/FooterEffect";
-import { ExperienceEffect } from "./background-effects/ExperienceEffect"; // New import
+import { ExperienceEffect } from "./background-effects/ExperienceEffect";
+import { ServicesEffect } from "./background-effects/ServicesEffect";
 import { useConfigEffects } from "@/context/ConfigEffectsContext";
 import { cn } from "@/lib/cn";
 
@@ -27,7 +28,8 @@ const effectComponents = {
   [BackgroundEffectsEnum.HERO]: HeroEffect,
   [BackgroundEffectsEnum.STATIC_COLOR]: StaticColorEffect,
   [BackgroundEffectsEnum.FOOTER]: FooterEffect,
-  [BackgroundEffectsEnum.EXPERIENCE]: ExperienceEffect, // New entry
+  [BackgroundEffectsEnum.EXPERIENCE]: ExperienceEffect,
+  [BackgroundEffectsEnum.SERVICES]: ServicesEffect,
 };
 
 export const BackgroundEffects = ({
@@ -42,12 +44,7 @@ export const BackgroundEffects = ({
   const activeBackground =
     backgrounds[effect] || BackgroundEffectsEnum.STATIC_COLOR;
 
-  const EffectComponent = effectComponents[activeBackground];
-
-  if (!EffectComponent) {
-    console.warn(`Unknown background effect type: ${activeBackground}`);
-    return null;
-  }
+  const EffectComponent = effectComponents[activeBackground] || StaticColorEffect;
 
   // Props specific to the EffectComponent, not the outer container
   const effectSpecificProps =

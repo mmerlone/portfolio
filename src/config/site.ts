@@ -47,6 +47,7 @@ export const siteConfig: SiteConfig = {
   // Navigation
   navigation: [
     { label: "About", href: "/#about" },
+    { label: "Services", href: "/#services" },
     { label: "Contributions", href: "/#contributions" },
     { label: "Skills", href: "/#skills" },
     { label: "Experience", href: "/#experience" },
