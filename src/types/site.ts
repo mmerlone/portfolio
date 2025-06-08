@@ -51,6 +51,12 @@ export interface EffectsConfig {
   readonly default: string;
 }
 
+export interface CTAConfig {
+  readonly text: string;
+  readonly linkText: string;
+  readonly link: string;
+}
+
 export interface SiteConfig {
   readonly name: string;
   readonly title: string;
@@ -71,4 +77,5 @@ export interface SiteConfig {
   readonly analytics?: AnalyticsConfig;
   readonly github?: GitHubConfig;
   readonly effects?: EffectsConfig;
+  readonly cta?: CTAConfig;
 }

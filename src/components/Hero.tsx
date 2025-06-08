@@ -9,6 +9,7 @@ import { cn } from "@lib/cn";
 import { apiConfig } from "@/config/api";
 import { BackgroundEffectsEnum, EffectsEnum } from "@/types/effects";
 import { BackgroundEffects } from "@components/ui/BackgroundEffects";
+import { CTA } from "@/components/ui/CTA";
 
 const Hero = ({ className = "" }: HeroProps) => {
   const weatherEnabled = !!apiConfig.openWeather?.city;
@@ -25,6 +26,7 @@ const Hero = ({ className = "" }: HeroProps) => {
         <p className="mb-8 text-lg text-orange-700 sm:text-xl md:text-2xl dark:text-orange-400">
           {siteConfig.headline}
         </p>
+        <CTA className="mb-8" />
         <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
           <a
             href="#contact"
