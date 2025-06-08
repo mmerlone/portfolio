@@ -107,10 +107,10 @@ export function ExpandableTabs({
             }}
             transition={transition}
             className={cn(
-              "relative z-10 m-1 flex h-7 cursor-pointer items-center rounded-full text-sm font-medium text-gray-600 transition-all duration-300 dark:text-gray-400",
+              "relative z-10 m-1 flex h-7 cursor-pointer items-center rounded-full text-sm font-medium transition-all duration-300",
               selected === index
                 ? cn("bg-muted", activeColor)
-                : "hover:bg-muted hover:text-foreground",
+                : "hover:bg-muted hover:text-foreground text-gray-600 dark:text-gray-400",
             )}
           >
             <Icon size={18} className="mx-2 rounded" />
@@ -125,7 +125,7 @@ export function ExpandableTabs({
                   onClick={(e: React.MouseEvent) => {
                     e.stopPropagation();
                   }}
-                  className="flex flex-1 flex-col overflow-hidden"
+                  className="inset-shadow-xl flex flex-1 flex-col overflow-hidden inset-shadow-black/50"
                 >
                   {tab.component ?? tab.title}
                 </motion.div>

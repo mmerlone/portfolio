@@ -41,6 +41,7 @@ const Footer = () => {
 
   return (
     <footer className="text-gray-900 dark:text-gray-200">
+      <hr className="border-2 border-orange-600/10 dark:border-orange-400/10" />
       <BackgroundEffects
         backgrounds={{
           [EffectsEnum.OFF]: BackgroundEffectsEnum.FOOTER,

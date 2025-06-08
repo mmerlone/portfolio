@@ -38,7 +38,7 @@ const Credits: FC<CreditsProps> = ({
           <div className="relative z-10 container flex flex-col items-center justify-center">
             <SectionTitle>Credits</SectionTitle>
             <p className="mx-5 py-5 leading-relaxed text-gray-800 first:mt-0 sm:mx-12 sm:text-center sm:text-balance dark:text-gray-300">
-              This portfolio showcases my recent experience with the following
+              This portfolio showcases my recent experience and gratitude to the following
               companies and technologies, made possible by the contributions of
               many talented individuals.
             </p>

@@ -78,7 +78,7 @@ const Contact = ({ className = "" }: ContactProps) => {
               <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
                 About
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600 dark:text-gray-300 mb-3">
                 {siteConfig.description}
               </p>
             </div>

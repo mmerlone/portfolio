@@ -1,14 +1,14 @@
 const colors = ["#002fff", "#00ff2f", "#ffff00"]; // ["#06b6d4", "#3b82f6", "#6366f1"]
 export const globeConfig = {
   pointSize: 10,
-  globeColor: "#dbe4ff",
+  globeColor: "#ffffff", // #dbe4ff
   showAtmosphere: true,
   atmosphereColor: "transparent",
   atmosphereAltitude: 0.1,
   emissive: "blue",
   emissiveIntensity: 0.1,
   shininess: 0.9,
-  polygonColor: "rgb(1, 0, 39)",
+  polygonColor: "rgb(27, 0, 0)",
   ambientLight: "#ffffff", // #38bdf8
   directionalLeftLight: "#ffffff",
   directionalTopLight: "#ffffff",

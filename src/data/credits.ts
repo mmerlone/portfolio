@@ -90,19 +90,19 @@ export const creditsData: readonly Credit[] = [
     name: "TanStack Query",
     description: "Powerful asynchronous state management for TS/JS, React, Solid, Vue, Svelte, and Angular.",
     url: "https://tanstack.com/query/latest",
-    icon: "https://tanstack.com/_build/logo-mini.svg",
+    icon: "https://tanstack.com/assets/splash-dark-8nwlc0Nt.png",
   },
   {
     name: "Framer Motion",
     description: "A production-ready motion library for React.",
     url: "https://www.framer.com/motion/",
-    icon: "https://www.framer.com/images/logo.svg",
+    icon: "motion.png",
   },
   {
     name: "GSAP",
     description: "A robust JavaScript animation library.",
     url: "https://gsap.com/",
-    icon: "https://gsap.com/uploads/logo-greensock.svg",
+    icon: "gsap.jpg",
   },
   {
     name: "Three.js",
@@ -144,7 +144,7 @@ export const creditsData: readonly Credit[] = [
     name: "usehooks-ts",
     description: "A collection of essential React hooks.",
     url: "https://usehooks-ts.com/",
-    icon: "https://usehooks-ts.com/logo.svg",
+    icon: "react.svg",
   },
   {
     name: "Aceternity UI",

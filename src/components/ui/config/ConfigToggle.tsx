@@ -1,16 +1,24 @@
 "use client";
 
 import React from "react";
+import { ConfigIconProps } from "@/types/components";
+import { cn } from "@/lib/cn";
 
 // Type Definitions
-export interface ConfigOption {
-  value: string;
+export interface ConfigOption<T extends string = string> {
+  value: T;
   label: string;
-  icon?: React.ComponentType<{ className?: string }>;
+  labelSelected?: string;
+  IconComponent?: React.ComponentType<ConfigIconProps<T>>;
+  getIconProps?: (value: T) => {
+    value: T;
+    iconMap: Partial<Record<T, React.ElementType>>;
+    defaultIconComponent?: React.ElementType;
+  };
 }
 
 interface ConfigToggleProps<T extends string> {
-  options: ConfigOption[];
+  options: ConfigOption<T>[];
   currentValue: T;
   onValueChange: (value: T) => void;
   ariaLabel: string;
@@ -23,18 +31,40 @@ export function ConfigToggle<T extends string>({
   ariaLabel,
 }: ConfigToggleProps<T>) {
   return (
-    <div className="config-toggle" role="radiogroup" aria-label={ariaLabel}>
+    <div
+      className="config-toggle m-1 flex flex-row gap-1 rounded-full inset-shadow-sm inset-shadow-black/30 dark:inset-shadow-black/70"
+      role="radiogroup"
+      aria-label={ariaLabel}
+    >
       {options.map((option) => (
-        <button
+        <label
           key={option.value}
-          role="radio"
-          aria-checked={option.value === currentValue}
-          onClick={() => onValueChange(option.value as T)}
-          className={`config-toggle-option ${option.value === currentValue ? "active" : ""}`}
+          className={cn(
+            "config-toggle-option m-1 rounded-full p-1 shadow-md shadow-black/50 outline-1 outline-gray-100 dark:outline-gray-300/30 cursor-pointer",
+            option.value === currentValue &&
+              "active bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700",
+          )}
         >
-          {option.icon && <option.icon className="config-toggle-icon" />}
-          <span className="config-toggle-label">{option.label}</span>
-        </button>
+          <input
+            type="radio"
+            name={ariaLabel}
+            value={option.value}
+            checked={option.value === currentValue}
+            onChange={() => onValueChange(option.value as T)}
+            className="sr-only"
+          />
+          {option.IconComponent && option.getIconProps && (
+            <option.IconComponent
+              {...option.getIconProps(option.value)}
+              className={cn(
+                "config-toggle-icon",
+                option.value === currentValue &&
+                  "text-orange-500 dark:text-orange-400",
+              )}
+              title={option.label}
+            />
+          )}
+        </label>
       ))}
     </div>
   );

@@ -1,50 +1,210 @@
 // https://ui.aceternity.com/components/github-globe
 "use client";
 
-import { useEffect, useRef } from "react";
-import * as THREE from "three";
+import { useEffect, useRef, useState } from "react";
+import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
+import ThreeGlobe from "three-globe";
 import { useThree, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { WorldProps } from "@/types/components";
+import countries from "@/data/globe.json";
+import "@styles/variables.css";
 
-import ThreeGlobe from "three-globe";
+declare module "@react-three/fiber" {
+  interface ThreeElements {
+    threeGlobe: ThreeElements["mesh"] & {
+      new (): ThreeGlobe;
+    };
+  }
+}
 
 extend({ ThreeGlobe: ThreeGlobe });
 
-export function Globe() {
-  const { gl, size } = useThree();
-  const globeRef = useRef<THREE.Mesh>(null);
+const RING_PROPAGATION_SPEED = 3;
+const aspect = 1.2;
+const cameraZ = 300;
 
+interface GlobeMaterial {
+  color: Color;
+  emissive: Color;
+  emissiveIntensity: number;
+  shininess: number;
+}
+
+interface ArcData {
+  startLat: number;
+  startLng: number;
+  endLat: number;
+  endLng: number;
+  color: string;
+  order: number;
+  arcAlt?: number;
+}
+
+export function Globe({ globeConfig, data }: WorldProps) {
+  const globeRef = useRef<ThreeGlobe | null>(null);
+  const groupRef = useRef<{ add: (object: ThreeGlobe) => void } | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  const defaultProps = {
+    pointSize: 1,
+    atmosphereColor: "#ffffff",
+    showAtmosphere: true,
+    atmosphereAltitude: 0.1,
+    polygonColor: "rgba(255,255,255,0.7)",
+    globeColor: "var(--background)",
+    emissive: "#000000",
+    emissiveIntensity: 0.1,
+    shininess: 0.9,
+    arcTime: 2000,
+    arcLength: 0.9,
+    rings: 1,
+    maxRings: 3,
+    ...globeConfig,
+  };
+
+  // Initialize globe only once
   useEffect(() => {
-    if (!gl || !size.width || !size.height) return;
-    
-    const ring = new THREE.RingGeometry(1, 1.1, 32);
-    const material = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      side: THREE.DoubleSide,
-      transparent: true,
-      opacity: 0.5
-    });
+    if (!globeRef.current && groupRef.current) {
+      globeRef.current = new ThreeGlobe();
+      groupRef.current.add(globeRef.current);
+      setIsInitialized(true);
+    }
+  }, []);
 
-    const mesh = new THREE.Mesh(ring, material);
-    const currentGlobe = globeRef.current;
-    if (currentGlobe) {
-      currentGlobe.add(mesh);
+  // Build material when globe is initialized or when relevant props change
+  useEffect(() => {
+    if (!globeRef.current || !isInitialized) return;
+
+    const globeMaterial = globeRef.current.globeMaterial() as unknown as GlobeMaterial;
+    globeMaterial.color = new Color(globeConfig.globeColor);
+    globeMaterial.emissive = new Color(globeConfig.emissive);
+    globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
+    globeMaterial.shininess = globeConfig.shininess || 0.9;
+  }, [
+    isInitialized,
+    globeConfig.globeColor,
+    globeConfig.emissive,
+    globeConfig.emissiveIntensity,
+    globeConfig.shininess,
+  ]);
+
+  // Build data when globe is initialized or when data changes
+  useEffect(() => {
+    if (!globeRef.current || !isInitialized || !data) return;
+
+    const arcs = data;
+    const points = [];
+    for (let i = 0; i < arcs.length; i++) {
+      const arc = arcs[i];
+      points.push({
+        size: defaultProps.pointSize,
+        order: arc.order,
+        color: arc.color,
+        lat: arc.startLat,
+        lng: arc.startLng,
+      });
+      points.push({
+        size: defaultProps.pointSize,
+        order: arc.order,
+        color: arc.color,
+        lat: arc.endLat,
+        lng: arc.endLng,
+      });
     }
 
-    return () => {
-      if (currentGlobe) {
-        currentGlobe.remove(mesh);
-      }
-    };
-  }, [gl, size.width, size.height]);
+    // remove duplicates for same lat and lng
+    const filteredPoints = points.filter(
+      (v, i, a) =>
+        a.findIndex((v2) =>
+          ["lat", "lng"].every(
+            (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"],
+          ),
+        ) === i,
+    );
 
-  return (
-    <mesh ref={globeRef}>
-      <sphereGeometry args={[100, 32, 32]} />
-      <meshBasicMaterial color="#1a1a1a" />
-    </mesh>
-  );
+    globeRef.current
+      .hexPolygonsData(countries.features)
+      .hexPolygonResolution(3)
+      .hexPolygonMargin(0.7)
+      .showAtmosphere(defaultProps.showAtmosphere)
+      .atmosphereColor(defaultProps.atmosphereColor)
+      .atmosphereAltitude(defaultProps.atmosphereAltitude)
+      .hexPolygonColor(() => defaultProps.polygonColor);
+
+    globeRef.current
+      .arcsData(data)
+      .arcStartLat((d) => (d as { startLat: number }).startLat * 1)
+      .arcStartLng((d) => (d as { startLng: number }).startLng * 1)
+      .arcEndLat((d) => (d as { endLat: number }).endLat * 1)
+      .arcEndLng((d) => (d as { endLng: number }).endLng * 1)
+      .arcColor((e: unknown) => (e as ArcData).color)
+      .arcAltitude((e: unknown) => ((e as ArcData).arcAlt || 0) * 1)
+      .arcStroke(() => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
+      .arcDashLength(defaultProps.arcLength)
+      .arcDashInitialGap((e) => (e as { order: number }).order * 1)
+      .arcDashGap(15)
+      .arcDashAnimateTime(() => defaultProps.arcTime);
+
+    globeRef.current
+      .pointsData(filteredPoints)
+      .pointColor((e) => (e as { color: string }).color)
+      .pointsMerge(true)
+      .pointAltitude(0.0)
+      .pointRadius(2);
+
+    globeRef.current
+      .ringsData([])
+      .ringColor(() => defaultProps.polygonColor)
+      .ringMaxRadius(defaultProps.maxRings)
+      .ringPropagationSpeed(RING_PROPAGATION_SPEED)
+      .ringRepeatPeriod(
+        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings,
+      );
+  }, [
+    isInitialized,
+    data,
+    defaultProps.pointSize,
+    defaultProps.showAtmosphere,
+    defaultProps.atmosphereColor,
+    defaultProps.atmosphereAltitude,
+    defaultProps.polygonColor,
+    defaultProps.arcLength,
+    defaultProps.arcTime,
+    defaultProps.rings,
+    defaultProps.maxRings,
+  ]);
+
+  // Handle rings animation with cleanup
+  useEffect(() => {
+    if (!globeRef.current || !isInitialized || !data) return;
+
+    const interval = setInterval(() => {
+      if (!globeRef.current) return;
+
+      const newNumbersOfRings = genRandomNumbers(
+        0,
+        data.length,
+        Math.floor((data.length * 4) / 5),
+      );
+
+      const ringsData = data
+        .filter((d, i) => newNumbersOfRings.includes(i))
+        .map((d) => ({
+          lat: d.startLat,
+          lng: d.startLng,
+          color: d.color,
+        }));
+
+      globeRef.current.ringsData(ringsData);
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isInitialized, data]);
+
+  return <group ref={groupRef} />;
 }
 
 export function WebGLRendererConfig() {
@@ -63,32 +223,32 @@ export function WebGLRendererConfig() {
 
 export function World(props: WorldProps) {
   const { globeConfig } = props;
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0xffffff, 400, 2000);
+  const scene = new Scene();
+  scene.fog = new Fog(0xffffff, 400, 2000);
 
   return (
-    <Canvas scene={scene} camera={new THREE.PerspectiveCamera(50, 1.2, 180, 1800)}>
+    <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
       <WebGLRendererConfig />
       <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
       <directionalLight
         color={globeConfig.directionalLeftLight}
-        position={new THREE.Vector3(-400, 100, 400)}
+        position={new Vector3(-400, 100, 400)}
       />
       <directionalLight
         color={globeConfig.directionalTopLight}
-        position={new THREE.Vector3(-200, 500, 200)}
+        position={new Vector3(-200, 500, 200)}
       />
       <pointLight
         color={globeConfig.pointLight}
-        position={new THREE.Vector3(-200, 500, 200)}
+        position={new Vector3(-200, 500, 200)}
         intensity={0.8}
       />
-      <Globe />
+      <Globe {...props} />
       <OrbitControls
         enablePan={false}
         enableZoom={false}
-        minDistance={300}
-        maxDistance={300}
+        minDistance={cameraZ}
+        maxDistance={cameraZ}
         autoRotateSpeed={1}
         autoRotate={true}
         minPolarAngle={Math.PI / 3.5}

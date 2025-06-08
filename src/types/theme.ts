@@ -4,5 +4,5 @@ export enum ThemeEnum {
   DARK = "dark",
 }
 
-export type Theme = `${ThemeEnum}`;
-export const themes: Theme[] = Object.values(ThemeEnum);
+export type ThemeType = `${ThemeEnum}`;
+export const themes: ThemeType[] = Object.values(ThemeEnum);

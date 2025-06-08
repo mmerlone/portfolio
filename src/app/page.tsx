@@ -21,8 +21,6 @@ export default function Home() {
   return (
     <main>
       <ClientAnalyticsWrapper />
-      {/*
-       */}
       <Hero />
       <About />
       <QuoteSection />
@@ -32,8 +30,6 @@ export default function Home() {
       <Credits />
       <Contact />
       <ScrollToTop />
-      {/*
-       */}
       <Footer />
     </main>
   );
