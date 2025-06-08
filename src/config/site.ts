@@ -5,8 +5,7 @@ export const EFFECTS_KEY = "effects-preference";
 export const siteConfig: SiteConfig = {
   // Site metadata
   name: "Marcio Merlone",
-  headline:
-    "Remote Software Engineer | Full-Stack Development | Cloud Technologies | Problem Solver",
+  headline: "Solving Complex Technical Challenges for Growing Businesses",
   title: "Software Engineer",
   description:
     "A creative and results-oriented Software Engineer with a strong track record of 20+ years in solving complex technical challenges. Expertise in React, TypeScript, Node.js, and cloud technologies. Passionate about building scalable, maintainable, and user-friendly applications.",
@@ -88,5 +87,12 @@ export const siteConfig: SiteConfig = {
   // Effects configuration
   effects: {
     default: "EXPERIMENTAL",
+  },
+
+  // CTA configuration
+  cta: {
+    text: "Facing an urgent migration or security challenge?",
+    linkText: "Schedule a Free Consultation",
+    link: "https://calendly.com/mmerlone",
   },
 };
