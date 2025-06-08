@@ -30,9 +30,7 @@
   width: 480px;
   height: 60px;
   bottom: 0;
-  border-radius: var(
-    --radius-lg
-  );
+  border-radius: var(--radius-lg);
   transition:
     transform 500ms ease 0s,
     opacity 500ms ease 0s,
@@ -42,7 +40,7 @@
 .sliderContent {
   display: flex;
   flex-direction: column;
-  color: white;
+  color: var(--foreground);
   padding: 30px;
   align-items: flex-start;
   font-family:
