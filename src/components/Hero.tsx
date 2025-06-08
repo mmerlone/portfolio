@@ -16,7 +16,7 @@ const Hero = ({ className = "" }: HeroProps) => {
 
   const renderContent = (
     <div className="hero-content flex min-h-screen flex-col items-center justify-between gap-12 lg:flex-row">
-      <div className="flex-1 text-center lg:text-left">
+      <div className="flex-1 text-center lg:text-left pt-24 lg:pt-0">
         <h1 className="mb-6 text-3xl font-bold text-gray-700 sm:text-4xl md:text-5xl lg:text-6xl dark:text-gray-300">
           {siteConfig.name}
         </h1>
