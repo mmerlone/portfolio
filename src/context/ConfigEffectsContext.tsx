@@ -14,15 +14,9 @@ import {
 } from "@/types/effects";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-const defaultContextValue: ConfigEffectsContextType = {
-  effect: EffectsEnum.EXPERIMENTAL,
-  setEffect: (_effect: EffectsEnum) => {},
-  isMounted: false,
-};
-
 const ConfigEffectsContext = createContext<
   ConfigEffectsContextType | undefined
->(defaultContextValue);
+>(undefined);
 
 export const ConfigEffectsProvider = ({
   children,
@@ -38,15 +32,16 @@ export const ConfigEffectsProvider = ({
   useEffect(() => {
     setIsMounted(true);
   }, []);
+  const isValidEffect = (effect: unknown): effect is EffectsEnum => {
+    return Object.values(EffectsEnum).includes(effect as EffectsEnum);
+  };
 
-  const currentEffect = Object.values(EffectsEnum).includes(
-    storedEffect as EffectsEnum,
-  )
+  const currentEffect = isValidEffect(storedEffect)
     ? storedEffect
     : EffectsEnum.EXPERIMENTAL;
 
   const setEffectValue = (newEffect: EffectsEnum) => {
-    if (Object.values(EffectsEnum).includes(newEffect as EffectsEnum)) {
+    if (isValidEffect(newEffect)) {
       setStoredEffect(newEffect);
     } else {
       setStoredEffect(EffectsEnum.EXPERIMENTAL);
