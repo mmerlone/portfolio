@@ -11,7 +11,11 @@ export default function ConfigIcon<TValue extends string>({
   className,
   ...rest
 }: ConfigIconProps<TValue>): JSX.Element | null {
-  const IconToRender = ((value && iconMap[value]) || defaultIconComponent) as React.ComponentType<{ size?: number | string; className?: string; }>;
-  if (!IconToRender || typeof IconToRender === 'string') return null;
+  const IconToRender = ((value && iconMap[value]) ||
+    defaultIconComponent) as React.ComponentType<{
+    size?: number | string;
+    className?: string;
+  }>;
+  if (!IconToRender || typeof IconToRender !== "function") return null;
   return <IconToRender size={size} className={className} {...rest} />;
 }

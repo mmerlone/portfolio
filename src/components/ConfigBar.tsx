@@ -2,7 +2,8 @@
 
 import { ExpandableTabs, type TabItem } from "@/components/ui/ExpandableTabs";
 import ConfigIcon from "@/components/ui/config/ConfigIcon";
-import { ConfigToggle,
+import {
+  ConfigToggle,
   type ConfigOption,
 } from "@/components/ui/config/ConfigToggle";
 import { useTheme } from "next-themes";
@@ -10,13 +11,7 @@ import { useConfigEffects } from "@/context/ConfigEffectsContext";
 import { ThemeType, ThemeEnum } from "@/types/theme";
 import { EffectsEnum, EffectsType } from "@/types/effects";
 import { useEffect, useState } from "react";
-import {
-  FaSun,
-  FaMoon,
-  FaDesktop,
-  FaToggleOff,
-  FaMagic,
-} from "react-icons/fa";
+import { FaSun, FaMoon, FaDesktop, FaToggleOff, FaMagic } from "react-icons/fa";
 
 export default function ConfigBar() {
   const { theme: currentTheme, setTheme } = useTheme();
@@ -31,8 +26,8 @@ export default function ConfigBar() {
     setThemesAreMounted(true);
   }, []);
 
-  const handleEffectsChange = (eff: EffectsType) => {
-    setEffect(eff as unknown as EffectsEnum);
+  const handleEffectsChange = (eff: unknown) => {
+    setEffect(eff as EffectsEnum);
   };
 
   const typedCurrentTheme = currentTheme as ThemeType | undefined;
@@ -62,29 +57,30 @@ export default function ConfigBar() {
     }),
   );
 
-  const effectOptions: ConfigOption<EffectsType>[] = Object.values(EffectsEnum).map(
-    (e) => ({
-      value: e,
-      label: `Switch to ${e.charAt(0).toUpperCase() + e.slice(1)} effects`,
-      labelSelected:
-        e === EffectsEnum.OFF
-          ? "Showing a simpler version with less effects."
-          : "Experimental effects selected! Handle with care and please report bugs.",
-      IconComponent: ConfigIcon,
-      getIconProps: (value: EffectsType) => ({
-        value,
-        iconMap: effectsIconMap,
-        defaultIconComponent: FaMagic,
-      }),
+  const effectOptions: ConfigOption<EffectsType>[] = Object.values(
+    EffectsEnum,
+  ).map((e) => ({
+    value: e,
+    label: `Switch to ${e.charAt(0).toUpperCase() + e.slice(1)} effects`,
+    labelSelected:
+      e === EffectsEnum.OFF
+        ? "Showing a simpler version with less effects."
+        : "Experimental effects selected! Handle with care and please report bugs.",
+    IconComponent: ConfigIcon,
+    getIconProps: (value: EffectsType) => ({
+      value,
+      iconMap: effectsIconMap,
+      defaultIconComponent: FaMagic,
     }),
-  );
+  }));
 
   const configTabs: TabItem[] = [
     {
       title: "Theme",
-      label: themesAreMounted && typedCurrentTheme
-        ? `${typedCurrentTheme.charAt(0).toUpperCase() + typedCurrentTheme.slice(1)} Theme selected`
-        : "Select Theme", // Or "" if you prefer no text before mount
+      label:
+        themesAreMounted && typedCurrentTheme
+          ? `${typedCurrentTheme.charAt(0).toUpperCase() + typedCurrentTheme.slice(1)} Theme selected`
+          : "Select Theme", // Or "" if you prefer no text before mount
       icon: (props) => (
         <ConfigIcon
           {...props}
@@ -104,9 +100,10 @@ export default function ConfigBar() {
     },
     {
       title: "Effects",
-      label: effectsAreMounted && currentEffect
-        ? `${currentEffect.charAt(0).toUpperCase() + currentEffect.slice(1)} Effects selected`
-        : "Select Effects", // Or ""
+      label:
+        effectsAreMounted && currentEffect
+          ? `${currentEffect.charAt(0).toUpperCase() + currentEffect.slice(1)} Effects selected`
+          : "Select Effects", // Or ""
       icon: (props) => (
         <ConfigIcon
           {...props}
@@ -119,7 +116,6 @@ export default function ConfigBar() {
         <ConfigToggle<EffectsType>
           options={effectOptions}
           currentValue={currentEffect}
-          // onValueChange={setEffect}
           ariaLabel="Select visual effect intensity"
           onValueChange={handleEffectsChange}
         />

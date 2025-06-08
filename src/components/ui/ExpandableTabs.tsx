@@ -63,8 +63,9 @@ export function ExpandableTabs({
 
   const handleSelect = (index: number, e?: React.MouseEvent) => {
     e?.stopPropagation();
-    setSelected(selected === index ? null : index);
-    onChange?.(index);
+    const newSelected = selected === index ? null : index;
+    setSelected(newSelected);
+    onChange?.(newSelected);
   };
 
   const Separator = () => (
