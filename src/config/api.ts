@@ -8,7 +8,7 @@ export const apiConfig: ApiConfig = {
   },
   openWeather: {
     url: "https://api.openweathermap.org/data/2.5/weather",
-    // city: "Araucária, PR, Brazil",
+    city: "Araucária, PR, Brazil",
     apiKey: process.env.WEATHER_API_KEY,
   },
 };
