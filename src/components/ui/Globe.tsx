@@ -1,8 +1,8 @@
 // https://ui.aceternity.com/components/github-globe
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Color, Scene, Fog, PerspectiveCamera, Vector3, Object3D } from "three";
 import ThreeGlobe from "three-globe";
 import { useThree, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -43,40 +43,63 @@ interface ArcData {
 
 export function Globe({ globeConfig, data }: WorldProps) {
   const globeRef = useRef<ThreeGlobe | null>(null);
-  const groupRef = useRef<{ add: (object: ThreeGlobe) => void } | null>(null);
+  const groupRef = useRef<{
+    add: (object: ThreeGlobe) => void;
+    remove: (object: Object3D) => void;
+  } | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  const defaultProps = {
-    pointSize: 1,
-    atmosphereColor: "#ffffff",
-    showAtmosphere: true,
-    atmosphereAltitude: 0.1,
-    polygonColor: "rgba(255,255,255,0.7)",
-    globeColor: "var(--background)",
-    emissive: "#000000",
-    emissiveIntensity: 0.1,
-    shininess: 0.9,
-    arcTime: 2000,
-    arcLength: 0.9,
-    rings: 1,
-    maxRings: 3,
-    ...globeConfig,
-  };
+  const defaultProps = useMemo(
+    () => ({
+      pointSize: 1,
+      atmosphereColor: "#ffffff",
+      showAtmosphere: true,
+      atmosphereAltitude: 0.1,
+      polygonColor: "rgba(255,255,255,0.7)",
+      globeColor: "var(--background)",
+      emissive: "#000000",
+      emissiveIntensity: 0.1,
+      shininess: 0.9,
+      arcTime: 2000,
+      arcLength: 0.9,
+      rings: 1,
+      maxRings: 3,
+      ...globeConfig,
+    }),
+    [globeConfig],
+  );
 
   // Initialize globe only once
   useEffect(() => {
-    if (!globeRef.current && groupRef.current) {
+    // Capture ref values inside the effect
+    const currentGlobeRef = globeRef.current;
+    const currentGroupRef = groupRef.current;
+
+    if (!currentGlobeRef && currentGroupRef) {
       globeRef.current = new ThreeGlobe();
-      groupRef.current.add(globeRef.current);
+      currentGroupRef.add(globeRef.current);
       setIsInitialized(true);
     }
+
+    // Capture the current value of globeRef.current after initialization
+    const globeInstance = globeRef.current;
+
+    return () => {
+      // Use captured ref values in cleanup
+      if (currentGroupRef && globeInstance) {
+        currentGroupRef.remove(globeInstance as unknown as Object3D);
+        // @ts-expect-error – dispose() isn't in the typings
+        globeInstance.dispose?.();
+      }
+    };
   }, []);
 
   // Build material when globe is initialized or when relevant props change
   useEffect(() => {
     if (!globeRef.current || !isInitialized) return;
 
-    const globeMaterial = globeRef.current.globeMaterial() as unknown as GlobeMaterial;
+    const globeMaterial =
+      globeRef.current.globeMaterial() as unknown as GlobeMaterial;
     globeMaterial.color = new Color(globeConfig.globeColor);
     globeMaterial.emissive = new Color(globeConfig.emissive);
     globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
@@ -114,14 +137,11 @@ export function Globe({ globeConfig, data }: WorldProps) {
     }
 
     // remove duplicates for same lat and lng
-    const filteredPoints = points.filter(
-      (v, i, a) =>
-        a.findIndex((v2) =>
-          ["lat", "lng"].every(
-            (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"],
-          ),
-        ) === i,
-    );
+    const seen = new Set<string>();
+    const filteredPoints = points.filter((p) => {
+      const key = `${p.lat}:${p.lng}`;
+      return seen.has(key) ? false : (seen.add(key), true);
+    });
 
     globeRef.current
       .hexPolygonsData(countries.features)
@@ -276,6 +296,9 @@ export function hexToRgb(hex: string) {
 
 export function genRandomNumbers(min: number, max: number, count: number) {
   const arr = [];
+  if (count > max - min) {
+    throw new RangeError("count exceeds available range");
+  }
   while (arr.length < count) {
     const r = Math.floor(Math.random() * (max - min)) + min;
     if (arr.indexOf(r) === -1) arr.push(r);
