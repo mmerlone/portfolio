@@ -1,130 +1,84 @@
+import { useQuery } from "@tanstack/react-query";
+import { apiConfig, QUOTES_STALE_TIME } from "@/config/api";
 import { useState, useEffect } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchQuote } from "../lib/api";
-import { QuoteResponse, QuoteCache } from "@/types/api";
-import { siteConfig } from "@/config/site";
+import { QuoteInterface, UseQuoteOptions } from "@/types/api";
+import { errorQuote } from "@/lib/api";
 
-// DRY: Define defaultQuote once and reuse
-export const defaultQuote: QuoteResponse = siteConfig.quotes?.default || {
-  q: "No quote available.",
-  a: "System",
-  h: "",
+export const firstQuote: QuoteInterface = {
+  q: "640 k ought to be enough for anybody.",
+  a: "Bill Gates",
+  h: "<blockquote>&ldquo;640 k ought to be enough for anybody.&rdquo; &mdash; <footer>Bill Gates</footer></blockquote>",
 };
 
-// DRY: Define quoteList based on config, fallback to defaultQuote
-export const quoteList: QuoteResponse[] =
-  siteConfig.quotes?.list && siteConfig.quotes.list.length > 0
-    ? siteConfig.quotes.list
-    : [defaultQuote];
-
-const cacheDuration = 60 * 60 * 24 * 7; // 7 days in seconds
-const quotesToCache = quoteList.length;
-const cacheKey = "quotes";
-
-// Get cached data from localStorage (or null if missing/expired)
-function getCachedData(): Array<QuoteResponse> | null {
-  if (typeof window === "undefined") return null;
-  const storedData = localStorage.getItem(cacheKey);
-  if (!storedData || storedData === "undefined") return null;
-  const cachedData: QuoteCache = JSON.parse(storedData);
-  const { data, timestamp } = cachedData;
-  if (Date.now() - timestamp < cacheDuration * 1000) {
-    return data;
+const fetchAllQuotes = async (): Promise<QuoteInterface[]> => {
+  try {
+    const quotesApiUrl = apiConfig.zenquotes.url;
+    const response = await fetch(quotesApiUrl);
+    if (!response.ok) {
+      console.warn("Network response was not ok when fetching all quotes:", response.statusText);
+      return [errorQuote(response.status)];
+    }
+    const data: QuoteInterface[] = await response.json();
+    if (data.length === 0) {
+      return [firstQuote];
+    }
+    // Include firstQuote in the array for simpler cycling
+    return [firstQuote, ...data];
+  } catch (error) {
+    console.warn("Failed to fetch all quotes:", error);
+    return [errorQuote(500)];
   }
-  clearCache();
-  return null;
-}
+};
 
-function setCachedData(data: Array<QuoteResponse>) {
-  if (typeof window !== "undefined") {
-    const timestamp = Date.now();
-    const cachedData: QuoteCache = { data, timestamp };
-    localStorage.setItem(cacheKey, JSON.stringify(cachedData));
-  }
-}
+export const useQuote = (options?: UseQuoteOptions) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-function addToCache(newQuote: QuoteResponse) {
-  const currentCache = getCachedData() || quoteList;
-  const updatedCache = [...currentCache, newQuote].slice(-quotesToCache);
-  setCachedData(updatedCache);
-}
-
-function clearCache() {
-  if (typeof window !== "undefined") {
-    localStorage.removeItem(cacheKey);
-  }
-}
-
-export interface UseQuoteResult {
-  data: QuoteResponse;
-  isLoading: boolean;
-  isError: boolean;
-  isEnabled: boolean;
-  refetch: () => Promise<void>;
-}
-
-export function useQuote(): UseQuoteResult {
-  const queryClient = useQueryClient();
-
-  // Determine if the widget is enabled (quotes config exists)
-  const isEnabled = !!siteConfig.quotes;
-
-  // Use state for the quotes stored in cache.
-  const [quotes, setQuotes] = useState<QuoteResponse[]>(
-    () => getCachedData() || quoteList
-  );
-  // Pointer to cycle through quotes when cache is full.
-  const [pointer, setPointer] = useState(0);
-
-  // Query is set to not auto-run.
-  const query = useQuery<QuoteResponse, Error>({
-    queryKey: ["quote"],
-    queryFn: async () => {
-      const result = await fetchQuote();
-      return Array.isArray(result) ? result[0] : result;
-    },
-    enabled: false,
-    staleTime: 1000 * 60 * 5,
+  const {
+    data: quotesArray,
+    isLoading,
+    isError,
+  } = useQuery<QuoteInterface[], Error>({
+    queryKey: ["quotesBatch"],
+    queryFn: fetchAllQuotes,
+    staleTime: QUOTES_STALE_TIME,
+    refetchOnWindowFocus: false,
+    retry: 1,
+    enabled: options?.enabled,
   });
 
-  // Prefetch a quote on first mount for instant load on first click
+  // Reset index when quotes array changes
   useEffect(() => {
-    if (isEnabled) {
-      queryClient.prefetchQuery({
-        queryKey: ["quote"],
-        queryFn: async () => {
-          const result = await fetchQuote();
-          return Array.isArray(result) ? result[0] : result;
-        },
-        staleTime: 1000 * 60 * 5,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEnabled]);
+    setCurrentIndex(0);
+  }, [quotesArray]);
 
-  // When a new quote is successfully fetched, add it to cache and update state.
-  useEffect(() => {
-    if (query.data) {
-      addToCache(query.data);
-      const newQuotes = getCachedData() || quoteList;
-      setQuotes(newQuotes);
-      setPointer(newQuotes.length - 1);
+  const getNextQuote = () => {
+    if (!quotesArray || quotesArray.length === 0) {
+      return;
     }
-  }, [query.data]);
-
-  const refetchHandler = async () => {
-    if (quotes.length < quotesToCache) {
-      await query.refetch();
-    } else {
-      setPointer((prev) => (prev + 1) % quotesToCache);
-    }
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % quotesArray.length);
   };
+
+  let displayData: QuoteInterface | undefined;
+  let isLoadingDisplay = isLoading;
+  let isErrorDisplay = isError;
+
+  if (options?.enabled === false) {
+    displayData = firstQuote;
+    isLoadingDisplay = false;
+    isErrorDisplay = false;
+  } else if (isLoading) {
+    displayData = undefined;
+  } else if (quotesArray && quotesArray.length > 0) {
+    displayData = quotesArray[currentIndex];
+  } else {
+    displayData = errorQuote(500);
+    isErrorDisplay = true;
+  }
 
   return {
-    data: quotes[pointer] || defaultQuote,
-    isLoading: query.isLoading,
-    isError: query.isError,
-    isEnabled,
-    refetch: refetchHandler,
+    data: displayData,
+    isLoading: isLoadingDisplay,
+    isError: isErrorDisplay,
+    refetch: getNextQuote,
   };
-}
+};

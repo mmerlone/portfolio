@@ -1,0 +1,57 @@
+/* 3D Carousel */
+.slideC {
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  width: 480px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.slide {
+  width: 480px;
+  height: 144px;
+  transition:
+    transform 500ms ease 0s,
+    opacity 500ms ease 0s,
+    visibility 500ms ease 0s;
+  position: absolute;
+  top: 0;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 3D reflection effect */
+.reflection {
+  box-sizing: border-box;
+  position: absolute;
+  width: 480px;
+  height: 60px;
+  bottom: 0;
+  border-radius: var(--radius-lg);
+  transition:
+    transform 500ms ease 0s,
+    opacity 500ms ease 0s,
+    visibility 500ms ease 0s;
+}
+
+.sliderContent {
+  display: flex;
+  flex-direction: column;
+  color: var(--foreground);
+  padding: 30px;
+  align-items: flex-start;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.sliderContent h2 {
+  margin: 16px 0;
+}
+.sliderContent p {
+  margin: 0;
+  margin-bottom: 16px;
+}

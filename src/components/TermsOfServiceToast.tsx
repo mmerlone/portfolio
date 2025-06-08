@@ -53,9 +53,9 @@ const TermsOfServiceToast = () => {
     <>
       <div className="fixed right-4 bottom-4 left-4 z-50 flex flex-col items-center justify-between rounded bg-gray-200 p-4 text-gray-800 shadow-lg md:flex-row dark:bg-gray-800 dark:text-white shadow-gray-950">
         <p className="mx-4 mb-2 text-sm md:mb-0">
-          We use cookies to enhance your experience and track interactions. By
+          I use cookies to enhance your experience and track interactions. By
           clicking <strong>Accept</strong> or <strong>Refuse</strong> you agree
-          to our{" "}
+          to my{" "}
           <button
             onClick={() => setPolicyOpen(true)}
             className="bg-gray-200 underline hover:text-gray-300 focus:outline-none dark:bg-gray-800"

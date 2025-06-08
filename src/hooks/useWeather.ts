@@ -1,30 +1,52 @@
-import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 import { WeatherResponse } from "@/types/api";
 
-export function useWeather(city: string) {
-  const { data, isLoading, isError, error } = useQuery<WeatherResponse | null, Error>({
-    queryKey: ["weather", city],
-    queryFn: async () => {
-      const res = await fetch(`/api/weather?city=${city}`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch weather data");
-      }
-      // The response might be null if the API key is not configured server-side
-      // Need to check content-type or res.text() before res.json() if null is not valid JSON
-      // However, NextResponse.json(null) should produce valid 'null' JSON.
-      const responseData = await res.json();
-      return responseData;
-    },
-    staleTime: 1000 * 60 * 5, // 5 minutes
-  });
-
-  // isEnabled is true if data is present (not null) and there's no error
-  const isEnabled = !!data && !isError;
-
-  return {
-    data: data ?? null, // Ensure it's null if undefined (though useQuery should give null for no data with this setup)
-    isLoading,
-    isError, // Directly use isError from useQuery
-    isEnabled,
-  };
+function isErrorWithName(error: unknown): error is { name: string } {
+  return typeof error === "object" && error !== null && "name" in error;
 }
+
+export const useWeather = (city?: string | null) => {
+  const [data, setData] = useState<WeatherResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(Boolean(city));
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    const fetchWeather = async () => {
+      if (!city) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        setIsError(false);
+        const res = await fetch(`/api/weather?city=${city}`, {
+          signal: abortController.signal,
+        });
+        if (!res.ok) {
+          setIsError(true);
+          return;
+        }
+        const weatherData = await res.json();
+        setData(weatherData);
+      } catch (err: unknown) {
+        if (isErrorWithName(err) && err.name === "AbortError") {
+          return; // Request was cancelled
+        }
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchWeather();
+
+    return () => {
+      abortController.abort();
+    };
+  }, [city]);
+
+  return { data, isLoading, isError };
+};

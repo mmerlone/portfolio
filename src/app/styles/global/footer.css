@@ -1,0 +1,8 @@
+.footer-background {
+  background: linear-gradient(to top, #e0e7ff 90%, #f8fafc 100%);
+  border-top: 2px solid #c2410c22;
+}
+.dark .footer-background {
+  background: linear-gradient(to top, #0a0a23 90%, #312e81 100%);
+  border-top: 2px solid #c2410c44;
+}

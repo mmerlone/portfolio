@@ -1,0 +1,74 @@
+.bg-iso-dark {
+  background-color: #0d0d28;
+  opacity: 0.8;
+  background-image: linear-gradient(
+    -45deg,
+    #0d0d28,
+    #0d0d28 50%,
+    #050724 50%,
+    #050724
+  );
+  background-size: 10px 10px;
+}
+
+.bg-iso-light {
+  background-color: #e0e0f0;
+  opacity: 0.8;
+  background-image:
+    linear-gradient(
+      30deg,
+      #d0d0e8 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #d0d0e8 87.5%,
+      #d0d0e8
+    ),
+    linear-gradient(
+      150deg,
+      #d0d0e8 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #d0d0e8 87.5%,
+      #d0d0e8
+    ),
+    linear-gradient(
+      30deg,
+      #d0d0e8 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #d0d0e8 87.5%,
+      #d0d0e8
+    ),
+    linear-gradient(
+      150deg,
+      #d0d0e8 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #d0d0e8 87.5%,
+      #d0d0e8
+    ),
+    linear-gradient(
+      60deg,
+      #d0d0e877 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #d0d0e877 75%,
+      #d0d0e877
+    ),
+    linear-gradient(
+      60deg,
+      #d0d0e877 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #d0d0e877 75%,
+      #d0d0e877
+    );
+  background-size: 20px 35px;
+  background-position:
+    0 0,
+    0 0,
+    10px 18px,
+    10px 18px,
+    0 0,
+    10px 18px;
+}

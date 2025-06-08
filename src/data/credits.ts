@@ -1,4 +1,7 @@
-export const creditsData = [
+import type { Credit } from "@/types/credits";
+
+
+export const creditsData: readonly Credit[] = [
   {
     name: "OpenWeatherMap",
     description: "Weather data provided by OpenWeatherMap.",
@@ -70,5 +73,89 @@ export const creditsData = [
     description: "The leading email forwarding provider in Mexico.",
     url: "https://improvmx.com/",
     icon: "improvmx.svg",
+  },
+  {
+    name: "Next.js",
+    description: "The React framework for production.",
+    url: "https://nextjs.org/",
+    icon: "vercel.svg",
+  },
+  {
+    name: "React",
+    description: "The JavaScript library for building user interfaces.",
+    url: "https://react.dev/",
+    icon: "react.svg",
+  },
+  {
+    name: "TanStack Query",
+    description: "Powerful asynchronous state management for TS/JS, React, Solid, Vue, Svelte, and Angular.",
+    url: "https://tanstack.com/query/latest",
+    icon: "https://tanstack.com/assets/splash-dark-8nwlc0Nt.png",
+  },
+  {
+    name: "Framer Motion",
+    description: "A production-ready motion library for React.",
+    url: "https://www.framer.com/motion/",
+    icon: "motion.png",
+  },
+  {
+    name: "GSAP",
+    description: "A robust JavaScript animation library.",
+    url: "https://gsap.com/",
+    icon: "gsap.jpg",
+  },
+  {
+    name: "Three.js",
+    description: "A JavaScript 3D library used for rendering interactive computer graphics in a web browser.",
+    url: "https://threejs.org/",
+    icon: "https://threejs.org/files/icon.svg",
+  },
+  {
+    name: "React Three Fiber",
+    description: "A React renderer for Three.js.",
+    url: "https://docs.pmnd.rs/react-three-fiber/getting-started/introduction",
+    icon: "react.svg",
+  },
+  {
+    name: "Drei",
+    description: "A collection of useful helpers and abstractions for React Three Fiber.",
+    url: "https://docs.pmnd.rs/drei/introduction",
+    icon: "react.svg",
+  },
+  {
+    name: "Three Globe",
+    description: "A Globe data visualization library using Three.js.",
+    url: "https://github.com/vasturiano/three-globe",
+    icon: "https://threejs.org/files/icon.svg",
+  },
+  {
+    name: "Lucide React",
+    description: "A beautiful, customizable icon library.",
+    url: "https://lucide.dev/",
+    icon: "https://lucide.dev/logo.svg",
+  },
+  {
+    name: "React Icons",
+    description: "Popular icon packs as React components.",
+    url: "https://react-icons.github.io/react-icons/",
+    icon: "react.svg",
+  },
+  {
+    name: "usehooks-ts",
+    description: "A collection of essential React hooks.",
+    url: "https://usehooks-ts.com/",
+    icon: "react.svg",
+  },
+  {
+    name: "Aceternity UI",
+    description: "Beautiful and modern UI components for React.",
+    url: "https://ui.aceternity.com/",
+    icon: "https://ui.aceternity.com/logo.png",
+  },
+  {
+    name: "Kokonutd",
+    description: "Creative and modern UI components.",
+    url: "https://21st.dev/",
+    icon: "https://21st.dev/favicon.ico",
   },
 ];

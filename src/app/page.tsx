@@ -1,3 +1,5 @@
+"use client";
+
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Contributions from "@/components/Contributions";
@@ -8,23 +10,20 @@ import Credits from "@/components/Credits";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
-import { apiConfig } from "@/config/api";
-import Quote from "@/components/widgets/Quote";
+// import { apiConfig } from "@/config/api";
+import QuoteSection from "@/components/QuoteSection";
 
 // Force dynamic rendering to avoid prerendering issues,
 // ensuring cookies are re-read on every request.
 export const dynamic = "force-dynamic";
 
 export default function Home() {
-  // This runs on the server, so it's safe to check the key here
-  const weatherEnabled = !!apiConfig.openWeather.apiKey;
-
   return (
     <main>
       <ClientAnalyticsWrapper />
-      <Hero weatherEnabled={weatherEnabled} />
+      <Hero />
       <About />
-      <Quote />
+      <QuoteSection />
       <Contributions />
       <Skills />
       <Experience />

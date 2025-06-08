@@ -1,6 +1,6 @@
-import type { NextConfig } from "next";
+import { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const config: NextConfig = {
   images: {
     remotePatterns: [
       {
@@ -26,21 +26,79 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "raw.githubusercontent.com",
-        pathname: "/devicons/devicon/**",
+        pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "raw.githubusercontent.com",
-        pathname: "/cypress-io/cypress-icons/**",
+        hostname: "images.unsplash.com",
       },
       {
         protocol: "https",
         hostname: "www.gstatic.com",
-        pathname:
-          "/analytics-suite/**",
+        pathname: "/analytics-suite/**",
+      },
+      {
+        protocol: "https",
+        hostname: "21st.dev",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "ui.aceternity.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "tanstack.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.framer.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "gsap.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "threejs.org",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "lucide.dev",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "usehooks-ts.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "tailwindcss.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "nextjs.org",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "vercel.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "github.com",
+        pathname: "/**",
       },
     ],
   },
 };
 
-export default nextConfig;
+export default config;

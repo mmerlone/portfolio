@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { selectedContributions } from "@/data/contributions";
 import { SectionTitle } from "./ui/SectionTitle";
-import ContributionCard from "./ContributionCard";
+import ContributionCard from "./ui/ContributionCard";
+import { BackgroundEffects } from "@components/ui/BackgroundEffects";
+import { BackgroundEffectsEnum, EffectsEnum } from "@/types/effects";
+import { cn } from "@/lib/cn";
 
-const INITIAL_VISIBLE = 2; // Number of contributions to show initially
+const INITIAL_VISIBLE = 2;
 
 const Contributions = ({ className = "" }: { className?: string }) => {
   const [expanded, setExpanded] = useState(false);
@@ -16,8 +19,13 @@ const Contributions = ({ className = "" }: { className?: string }) => {
     : selectedContributions.slice(0, INITIAL_VISIBLE);
 
   return (
-    <section id="contributions" className={`relative py-20 ${className}`}>
-      <div className="relative z-10 container mx-auto px-4">
+    <section id="contributions" className="relative my-4">
+      <BackgroundEffects
+        backgrounds={{
+          [EffectsEnum.EXPERIMENTAL]: BackgroundEffectsEnum.PATHS,
+        }}
+        className={className}
+      >
         <SectionTitle>Selected Contributions</SectionTitle>
         <p className="mb-8 text-gray-600 dark:text-gray-300">
           The contributions detailed below primarily represent work undertaken
@@ -30,9 +38,10 @@ const Contributions = ({ className = "" }: { className?: string }) => {
           information are paramount.
         </p>
         <div
-          className={`relative overflow-hidden transition-[max-height] duration-500 ease-in-out ${
+          className={cn(
+            "relative overflow-hidden transition-[max-height] duration-500 ease-in-out",
             expanded ? "h-auto" : "more-to-show max-h-[120rem]"
-          }`}
+          )}
         >
           <div className="mx-auto max-w-4xl space-y-8">
             {visibleContributions.map((contrib, idx) => (
@@ -57,7 +66,7 @@ const Contributions = ({ className = "" }: { className?: string }) => {
             </button>
           </div>
         )}
-      </div>
+      </BackgroundEffects>
     </section>
   );
 };

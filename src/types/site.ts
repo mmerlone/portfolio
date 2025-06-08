@@ -15,14 +15,7 @@ export interface ImagePaths {
 }
 
 export interface NavigationItem {
-  readonly name?: string;
-  readonly label?: string;
-  readonly href: string;
-}
-
-export interface NavigationItemMobile {
-  readonly name?: string;
-  readonly label?: string;
+  readonly label: string;
   readonly href: string;
 }
 
@@ -54,17 +47,8 @@ export interface GitHubConfig {
   readonly repoUrl: string | null;
 }
 
-export interface QuoteConfig {
-  readonly default: {
-    readonly q: string;
-    readonly a: string;
-    readonly h: string;
-  };
-  readonly list?: Array<{
-    readonly q: string;
-    readonly a: string;
-    readonly h: string;
-  }>;
+export interface EffectsConfig {
+  readonly default: string;
 }
 
 export interface SiteConfig {
@@ -82,10 +66,9 @@ export interface SiteConfig {
     readonly linktree: string;
   };
   readonly navigation: readonly NavigationItem[];
-  readonly navMenuItemsMobile: readonly NavigationItemMobile[];
   readonly footer: FooterConfig;
   readonly cookie: CookieConfig;
   readonly analytics?: AnalyticsConfig;
   readonly github?: GitHubConfig;
-  readonly quotes?: QuoteConfig;
+  readonly effects?: EffectsConfig;
 }
