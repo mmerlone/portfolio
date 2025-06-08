@@ -26,12 +26,7 @@ const config: NextConfig = {
       {
         protocol: "https",
         hostname: "raw.githubusercontent.com",
-        pathname: "/devicons/devicon/**",
-      },
-      {
-        protocol: "https",
-        hostname: "raw.githubusercontent.com",
-        pathname: "/cypress-io/cypress-icons/**",
+        pathname: "/**",
       },
       {
         protocol: "https",
