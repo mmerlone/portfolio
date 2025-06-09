@@ -1,3 +1,72 @@
+#### 1.0.1 (2025-06-09)
+
+##### Chores
+
+*  enhance next.config.ts (43780e38)
+*  added ideas for demos (8abb34d6)
+*  code cleanup (7fb9276d)
+*  using img as image breaks layout (38bc0660)
+*  code cleanup, lint (5d180b33)
+*  code cleanup, lint (37c81780)
+*  update readme (56428b60)
+*  update readme (ffbb0b13)
+*  update credits data (cb62df36)
+*  code cleanup (ee8292e5)
+*  add license file under mit license terms (672c049a)
+*  update readme (69473d7e)
+*  update readme (9a0e314e)
+* **release:**  bump version to 1.0.1 (8e5fa03b)
+
+##### New Features
+
+*  added headline to about component (e70a421e)
+*  added services section (91d4ac89)
+*  added cta pointing to calendly (53a8a38a)
+*  release version 1.0.0 (d14f4394)
+*  Identify and address technical debt (57048abc)
+*  added gamma presentation as the first demo page (04704bda)
+*  add support for pages (84dce7e3)
+*  add support for pages (9c8808a0)
+*  icons name normalization, minor fixes (bf089334)
+*  added dark mode toggle, lots os improvements and fixes (65c9645b)
+*  added contributions section (e82edbc7)
+*  added github stats widget (3fbe0e86)
+*  made all api keys optional (d15e41f7)
+*  allow cookies to robots and tools (e04b56ad)
+*  added tos and cookies (324b8501)
+* **weather:**  enhance weather hook with better error handling (b49714e8)
+* **config:**  enhance image configuration and styling (f89d3ff6)
+
+##### Bug Fixes
+
+*  hero responsiveness (c8cf4437)
+*  several fixes and iprovements (32ac0228)
+*  imports (9135ec85)
+*  typo (8792b8bd)
+*  hero hover shadow (b9f90d67)
+*  read city from apiconfig instead of siteconfig on api.ts (97f17989)
+*  api code organization (977fe9e5)
+*  wrong shadow on card credit (9cc2c934)
+*  refactor quote widget (eff26382)
+*  build error (a5e820c5)
+*  re-adds weather creadit at the widget (d5ba9b18)
+*  re-enable carousel autplay (12357b1b)
+*  made all api keys optional (c4c60daa)
+*  cookie handling on tos (c8fec036)
+*  make NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID public (0401cebc)
+*  build error (43a39a4a)
+*  general refactor (5f0e5f37)
+
+##### Refactors
+
+* **context:**  improve effects context and data (53bb510c)
+* **components:**  improve TypeScript types and code quality (5388f5f0)
+* **Globe:**  improve performance and memory management (8773a5b2)
+
+##### Code Style Changes
+
+* **carousel:**  improve theme compatibility and code formatting (6b67bf39)
+
 #### 1.0.1 (2025-06-08)
 
 ##### Refactors
