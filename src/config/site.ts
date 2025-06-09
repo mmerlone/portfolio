@@ -96,4 +96,17 @@ export const siteConfig: SiteConfig = {
     linkText: "Schedule a Free Consultation",
     link: "https://calendly.com/mmerlone",
   },
+
+  // Quote configuration
+  quote: {
+    firstQuote: {
+      q: "640 k ought to be enough for anybody.",
+      a: "Bill Gates",
+      h: "<blockquote>&ldquo;640 k ought to be enough for anybody.&rdquo; &mdash; <footer>Bill Gates</footer></blockquote>",
+      s: {
+        anchor: "Popular Wisdom",
+        title: "A famous quote often attributed to Bill Gates"
+      }
+    }
+  },
 };

@@ -1,13 +1,16 @@
 import { apiConfig } from "@/config/api";
-import { QuoteResponse, WeatherResponse } from "@/types/api";
+import { QuoteResponse, WeatherResponse, QuoteInterface } from "@/types/api";
 
-export const errorQuote = (status: number) => ({
-  q: `Unable to fetch a quote, status: ${status}`,
-  a: "TanStack Query",
-  h: "",
+export const errorQuote = (status?: number): QuoteInterface => ({
+  q: `Error ${status || "unknown"}: Failed to fetch quote.`,
+  a: "System",
+  h: `<blockquote>&ldquo;Error ${status}: Failed to fetch quote.&rdquo; &mdash; <footer>System</footer></blockquote>`,
+  s: {
+    anchor: "some bug",
+  }
 });
 
-export async function fetchQuote(): Promise<QuoteResponse[]> {
+export async function fetchQuote(): Promise<QuoteResponse[] | QuoteInterface[]> {
   const response = await fetch("/api/quote");
   if (!response.ok) {
     return [errorQuote(response.status)];

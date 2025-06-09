@@ -1,41 +1,42 @@
 "use client";
 
-import { useQuote, firstQuote } from "@/hooks/useQuote";
+import { useQuote } from "@/hooks/useQuote";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { errorQuote } from "@/lib/api";
+import { useState } from "react";
 
 const Quote = () => {
-  const { data, isLoading, refetch } = useQuote({ enabled: false });
-  const displayQuote = !data ? firstQuote : data;
-  const { q, a } = displayQuote;
+  const [isFetchEnabled, setIsFetchEnabled] = useState(false);
 
-  const handleClick = async () => {
-    try {
-      await refetch();
-    } catch (error) {
-      console.warn("Error refetching quote:", error);
-    }
+  const { data, isLoading, refetch } = useQuote({ enabled: isFetchEnabled });
+  
+  const { q, a, s } = data || errorQuote();
+
+  const handleClick = () => {
+    setIsFetchEnabled(true);
+    refetch();
   };
 
-  const getQuoteSource = (a: string) => {
-    switch (a) {
-      case "System":
-        return "some bug";
-      case "Bill Gates":
-        return "Popular Wisdom";
-      default:
-        return (
-          <a
-            href="https://zenquotes.io/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center"
-          >
-            ZenQuotes API
-            <FaExternalLinkAlt className="ml-1 h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
-          </a>
-        );
+  const renderSource = () => {
+    if (s?.href) {
+      return (
+        <a
+          href={s.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center"
+          title={s?.title}
+        >
+          {s.anchor}
+          <FaExternalLinkAlt className="ml-1 h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
+        </a>
+      );
     }
+    if (s?.title) {
+      return <span title={s.title}>{s.anchor}</span>;
+    }
+    return s.anchor;
   };
 
   return (
@@ -58,7 +59,7 @@ const Quote = () => {
         )}
       </button>
       <p className="m-4 text-xs text-gray-500 dark:text-gray-400">
-        Inspirational quote kindly provided by {getQuoteSource(a)}
+        Inspirational quote kindly provided by {renderSource()}
       </p>
     </div>
   );

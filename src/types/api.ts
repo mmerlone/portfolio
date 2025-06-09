@@ -4,10 +4,17 @@ export interface QuoteResponse {
   h: string; // pre-formatted HTML quote
 }
 
+export interface QuoteSource {
+  anchor: string;
+  href?: string;
+  title?: string;
+}
+
 export interface QuoteInterface {
   q: string; // quote
   a: string; // author
   h: string; // preformatted HTML quote
+  s: QuoteSource; // source
 }
 
 export interface UseQuoteOptions {

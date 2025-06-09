@@ -1,3 +1,5 @@
+import { QuoteInterface } from "./api";
+
 export interface ContactInfo {
   readonly email: string;
   readonly phone: string;
@@ -57,6 +59,10 @@ export interface CTAConfig {
   readonly link: string;
 }
 
+export interface QuoteConfig {
+  readonly firstQuote: QuoteInterface;
+}
+
 export interface SiteConfig {
   readonly name: string;
   readonly title: string;
@@ -78,4 +84,5 @@ export interface SiteConfig {
   readonly github?: GitHubConfig;
   readonly effects?: EffectsConfig;
   readonly cta?: CTAConfig;
+  readonly quote?: QuoteConfig;
 }
