@@ -1,13 +1,29 @@
 import { renderHook, act } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useQuote, firstQuote } from "../useQuote";
-import { QuoteInterface, QuoteResponse } from "@/types/api";
+import { useQuote } from "../useQuote";
+import { QuoteInterface } from "@/types/api";
 import * as api from "../../lib/api";
+import { siteConfig } from "@/config/site";
 import '@jest/globals';
 import { jest, describe, it, expect, beforeEach, afterEach } from '@jest/globals';
 
 // Mocks
 jest.mock("../../lib/api");
+jest.mock("@/config/site", () => ({
+  siteConfig: {
+    quote: {
+      firstQuote: {
+        q: "Test first quote",
+        a: "Test author",
+        h: "<blockquote>Test first quote</blockquote>",
+        s: {
+          anchor: "Test source",
+          title: "Test source title"
+        }
+      }
+    }
+  }
+}));
 
 const mockFetchQuote = api.fetchQuote as jest.Mock;
 
@@ -76,7 +92,12 @@ describe("useQuote", () => {
       q: "Default API Quote",
       a: "API Author",
       h: "",
-    }] as QuoteResponse[]));
+      s: {
+        anchor: "ZenQuotes API",
+        href: "https://zenquotes.io/",
+        title: "Visit ZenQuotes"
+      }
+    }] as QuoteInterface[]));
     setupUseQueryMock([]); // Setup with empty array initially
 
     const mockResponse: MockResponse = {
@@ -104,10 +125,10 @@ describe("useQuote", () => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 
-  it("should return firstQuote when disabled", () => {
+  it("should return firstQuote from config when disabled", () => {
     const { result } = renderHook(() => useQuote({ enabled: false }), { wrapper: TestWrapper });
 
-    expect(result.current.data).toEqual(firstQuote);
+    expect(result.current.data).toEqual(siteConfig.quote?.firstQuote);
     expect(result.current.isLoading).toBe(false);
     expect(result.current.isError).toBe(false);
   });
@@ -123,34 +144,47 @@ describe("useQuote", () => {
     expect(result.current.isError).toBe(true);
   });
 
-  it("should cycle through quotes including firstQuote", () => {
-    const q1: QuoteInterface = { q: "Q1", a: "A1", h: "" };
-    const q2: QuoteInterface = { q: "Q2", a: "A2", h: "" };
-    setupUseQueryMock([firstQuote, q1, q2]);
+  it("should cycle through quotes", () => {
+    const q1: QuoteInterface = { 
+      q: "Q1", 
+      a: "A1", 
+      h: "",
+      s: {
+        anchor: "ZenQuotes API",
+        href: "https://zenquotes.io/",
+        title: "Visit ZenQuotes"
+      }
+    };
+    const q2: QuoteInterface = { 
+      q: "Q2", 
+      a: "A2", 
+      h: "",
+      s: {
+        anchor: "ZenQuotes API",
+        href: "https://zenquotes.io/",
+        title: "Visit ZenQuotes"
+      }
+    };
+    setupUseQueryMock([q1, q2]);
 
     const { result } = renderHook(() => useQuote({ enabled: true }), {
       wrapper: TestWrapper,
     });
 
-    // Should start with firstQuote
-    expect(result.current.data).toEqual(firstQuote);
+    // Should start with first quote
+    expect(result.current.data).toEqual(q1);
 
     // Cycle through quotes
     act(() => {
       result.current.refetch();
     });
-    expect(result.current.data).toEqual(q1);
-
-    act(() => {
-      result.current.refetch();
-    });
     expect(result.current.data).toEqual(q2);
 
-    // Should cycle back to firstQuote
+    // Should cycle back to first quote
     act(() => {
       result.current.refetch();
     });
-    expect(result.current.data).toEqual(firstQuote);
+    expect(result.current.data).toEqual(q1);
   });
 
   it("should reflect useQuery isLoading state", () => {
@@ -177,10 +211,15 @@ describe("useQuote", () => {
   });
 
   it('should fetch and return quote data', async () => {
-    const mockQuote = {
+    const mockQuote: QuoteInterface = {
       q: "Default API Quote",
       a: "API Author",
-      h: ""
+      h: "",
+      s: {
+        anchor: "ZenQuotes API",
+        href: "https://zenquotes.io/",
+        title: "Visit ZenQuotes"
+      }
     };
     setupUseQueryMock([mockQuote]);
 
