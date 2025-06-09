@@ -2,6 +2,7 @@
 
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Services from "@/components/Services";
 import Contributions from "@/components/Contributions";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
@@ -20,9 +21,12 @@ export const dynamic = "force-dynamic";
 export default function Home() {
   return (
     <main>
+      {/* 
+      */}
       <ClientAnalyticsWrapper />
       <Hero />
       <About />
+      <Services />
       <QuoteSection />
       <Contributions />
       <Skills />
@@ -31,6 +35,8 @@ export default function Home() {
       <Contact />
       <ScrollToTop />
       <Footer />
+      {/* 
+       */}
     </main>
   );
 }
