@@ -7,8 +7,7 @@ import { siteConfig } from "@/config/site";
 
 const fetchAllQuotes = async (): Promise<QuoteInterface[]> => {
   try {
-    const quotesApiUrl = apiConfig.zenquotes.url;
-    const response = await fetch(quotesApiUrl);
+    const response = await fetch("/api/quote");
     if (!response.ok) {
       console.warn(
         "Network response was not ok when fetching all quotes:",
