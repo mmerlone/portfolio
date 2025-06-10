@@ -38,7 +38,6 @@ export const CardCredit: FC<CardCreditProps> = ({ credit, className = "" }) => {
                 src={getIconSrc(credit.icon)}
                 alt={credit.name}
                 fill
-                objectFit="contain"
                 className="rounded-md object-contain p-2"
               />
             </div>
