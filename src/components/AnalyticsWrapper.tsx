@@ -16,6 +16,7 @@ export default function AnalyticsWrapper({}: AnalyticsWrapperProps) {
 
   const gtmId = siteConfig.analytics?.googleTagManager.id ?? null;
   const gaId = siteConfig.analytics?.googleAnalytics.id ?? null;
+  const domain = new URL(siteConfig.url).hostname;
 
   useEffect(() => {
     setHasMounted(true);
@@ -38,8 +39,18 @@ export default function AnalyticsWrapper({}: AnalyticsWrapperProps) {
     <>
       <Analytics />
       <SpeedInsights />
-      {gtmId && <GoogleTagManager gtmId={gtmId} />}
-      {gaId && <GoogleAnalytics gaId={gaId} />}
+      {gtmId && (
+        <GoogleTagManager
+          gtmId={gtmId}
+          dataLayerName="dataLayer"
+        />
+      )}
+      {gaId && (
+        <GoogleAnalytics
+          gaId={gaId}
+          dataLayerName="dataLayer"
+        />
+      )}
     </>
   );
 }
