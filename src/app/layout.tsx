@@ -10,7 +10,12 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { ConfigEffectsProvider } from "@/context/ConfigEffectsContext";
 import TermsOfServiceToast from "@/components/TermsOfServiceToast";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  fallback: ["system-ui", "arial"],
+});
 
 export const metadata: Metadata = {
   title: siteConfig.name + " - " + siteConfig.title,
