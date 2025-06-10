@@ -79,7 +79,7 @@ export const Carousel3D: FC<Carousel3DProps> = ({ credits }) => {
               <CardCredit credit={item} />
             </div>
             <div
-              className="reflection bg-[linear-gradient(to_bottom,white_5%,_transparent)] dark:bg-[linear-gradient(to_bottom,rgb(21,_29,_41)_5%,_transparent)]"
+              className="reflection bg-[linear-gradient(to_bottom,white_15%,_transparent)] dark:bg-[linear-gradient(to_bottom,rgb(23,_34,_56)_15%,_transparent)]"
               style={{
                 ...getStyles(i),
               }}
