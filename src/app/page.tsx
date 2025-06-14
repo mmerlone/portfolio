@@ -11,8 +11,8 @@ import Credits from "@/components/Credits";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
-// import { apiConfig } from "@/config/api";
 import QuoteSection from "@/components/QuoteSection";
+import WidgetsSection from "@/components/WidgetsSection";
 
 // Force dynamic rendering to avoid prerendering issues,
 // ensuring cookies are re-read on every request.
@@ -25,6 +25,7 @@ export default function Home() {
       */}
       <ClientAnalyticsWrapper />
       <Hero />
+      <WidgetsSection />
       <About />
       <Services />
       <QuoteSection />
