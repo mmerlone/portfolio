@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiConfig, QUOTES_STALE_TIME } from "@/config/api";
+import { QUOTES_STALE_TIME } from "@/config/api";
 import { useState, useEffect } from "react";
 import { QuoteInterface, UseQuoteOptions } from "@/types/api";
 import { errorQuote } from "@/lib/api";

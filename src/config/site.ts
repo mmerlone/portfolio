@@ -92,7 +92,7 @@ export const siteConfig: SiteConfig = {
 
   // CTA configuration
   cta: {
-    text: "Facing an urgent migration or security challenge?",
+    text: "Facing an urgent migration or challenge?",
     linkText: "Schedule a Free Consultation",
     link: "https://calendly.com/mmerlone",
   },

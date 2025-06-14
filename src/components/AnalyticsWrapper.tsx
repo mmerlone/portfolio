@@ -16,7 +16,6 @@ export default function AnalyticsWrapper({}: AnalyticsWrapperProps) {
 
   const gtmId = siteConfig.analytics?.googleTagManager.id ?? null;
   const gaId = siteConfig.analytics?.googleAnalytics.id ?? null;
-  const domain = new URL(siteConfig.url).hostname;
 
   useEffect(() => {
     setHasMounted(true);
@@ -25,7 +24,7 @@ export default function AnalyticsWrapper({}: AnalyticsWrapperProps) {
 
     const isBot =
       /Googlebot|AdsBot|Mediapartners-Google|Google Tag Manager/i.test(
-        userAgent
+        userAgent,
       );
     if (cookie === "true" || isBot) {
       setIsAnalyticsAllowed(true);
@@ -39,18 +38,8 @@ export default function AnalyticsWrapper({}: AnalyticsWrapperProps) {
     <>
       <Analytics />
       <SpeedInsights />
-      {gtmId && (
-        <GoogleTagManager
-          gtmId={gtmId}
-          dataLayerName="dataLayer"
-        />
-      )}
-      {gaId && (
-        <GoogleAnalytics
-          gaId={gaId}
-          dataLayerName="dataLayer"
-        />
-      )}
+      {gtmId && <GoogleTagManager gtmId={gtmId} dataLayerName="dataLayer" />}
+      {gaId && <GoogleAnalytics gaId={gaId} dataLayerName="dataLayer" />}
     </>
   );
 }
