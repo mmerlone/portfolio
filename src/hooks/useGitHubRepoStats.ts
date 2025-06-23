@@ -6,33 +6,17 @@ const fetchGitHubRepoStats = async (repoUrl: string): Promise<RepoStats> => {
     throw new Error("Repository URL is not defined.");
   }
 
-  const match = repoUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
-  if (!match) {
-    throw new Error("Invalid GitHub repository URL.");
-  }
-  const [, owner, repo] = match;
-
-  const headers: Record<string, string> = {
-    Accept: "application/vnd.github.v3+json",
-  };
-  if (process.env.NEXT_PUBLIC_GITHUB_TOKEN) {
-    headers["Authorization"] = `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`;
-  }
-
   const response = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}`,
-    {
-      headers,
-    },
+    `/api/github?repoUrl=${encodeURIComponent(repoUrl)}`,
   );
 
   if (!response.ok) {
-    const errorData = await response
-      .json()
-      .catch(() => ({
-        message: "Failed to fetch GitHub stats. Unknown error.",
-      }));
-    throw new Error(errorData.message || "Failed to fetch GitHub stats");
+    const errorData = await response.json().catch(() => ({
+      message: "Failed to fetch GitHub stats. Unknown error.",
+    }));
+    throw new Error(
+      errorData.error || errorData.message || "Failed to fetch GitHub stats",
+    );
   }
   return response.json();
 };
@@ -46,6 +30,6 @@ export const useGitHubRepoStats = (repoUrl?: string) => {
       }
       return fetchGitHubRepoStats(repoUrl);
     },
-    enabled: !!repoUrl, // Only run the query if repoUrl is defined
+    enabled: !!repoUrl,
   });
 };
