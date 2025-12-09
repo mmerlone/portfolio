@@ -1,5 +1,6 @@
 "use client";
 
+import Section from "@/components/Section";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services";
@@ -21,22 +22,40 @@ export const dynamic = "force-dynamic";
 export default function Home() {
   return (
     <main>
-      {/* 
-      */}
+      {/*
+       */}
       <ClientAnalyticsWrapper />
-      <Hero />
-      <WidgetsSection />
-      <About />
-      <Services />
-      <QuoteSection />
-      <Contributions />
-      <Skills />
-      <Experience />
-      <Credits />
+      <Section>
+        <Hero />
+      </Section>
+      <Section>
+        <WidgetsSection />
+      </Section>
+      <Section>
+        <About />
+      </Section>
+      <Section>
+        <Services />
+      </Section>
+      <Section>
+        <QuoteSection />
+      </Section>
+      <Section>
+        <Contributions />
+      </Section>
+      <Section>
+        <Skills />
+      </Section>
+      <Section>
+        <Experience />
+      </Section>
+      <Section>
+        <Credits />
+      </Section>
       <Contact />
-      <ScrollToTop />
       <Footer />
-      {/* 
+      <ScrollToTop />
+      {/*
        */}
     </main>
   );
