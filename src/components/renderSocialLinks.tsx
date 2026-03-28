@@ -4,8 +4,8 @@ import {
     FaTwitter,
     FaInstagram,
   } from "react-icons/fa";
-  import { siteConfig } from "@/config/site";
-  import { IconProps } from "@/types/components";
+  import { type siteConfig } from "@/config/site";
+  import { type IconProps } from "@/types/components";
 
 const iconMap: { [key: string]: React.ComponentType<IconProps> } = {
   linkedin: FaLinkedin,
@@ -14,7 +14,7 @@ const iconMap: { [key: string]: React.ComponentType<IconProps> } = {
   instagram: FaInstagram,
 };
 
-export const renderSocialLinks = (socialLinks: typeof siteConfig.social) => {
+export const renderSocialLinks = (socialLinks: typeof siteConfig.social): React.ReactElement[] => {
   return socialLinks.map((social) => { // Removed index from map
     const Icon = social.icon && iconMap[social.icon.toLowerCase()];
 

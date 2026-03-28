@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
+import { type ComponentType, type ReactElement } from "react";
 import type { ConfigOption } from "./ConfigToggle";
 import { cn } from "@/lib/cn";
 
 export interface ConfigItemButtonProps<TValue extends string> {
   option: ConfigOption & {
     labelSelected?: string;
-    IconComponent?: React.ComponentType<{ size?: number; className?: string }>;
+    IconComponent?: ComponentType<{ size?: number; className?: string }>;
     getIconProps?: (value: TValue) => Record<string, unknown>;
     iconSelectedClassName?: string;
     iconDefaultClassName?: string;
@@ -22,9 +22,12 @@ export default function ConfigItemButton<TValue extends string>({
   selected,
   onItemClick,
   iconSize = 12,
-}: ConfigItemButtonProps<TValue>) {
+}: ConfigItemButtonProps<TValue>): ReactElement {
   const { value, label, labelSelected, getIconProps } = option;
-  const IconComponent = option.IconComponent as React.ComponentType<{ size?: number; className?: string }>;
+  const IconComponent = option.IconComponent as ComponentType<{
+    size?: number;
+    className?: string;
+  }>;
 
   const specificIconProps = getIconProps?.(value as TValue) ?? {};
   const iconEffectiveClassName = selected
@@ -52,7 +55,7 @@ export default function ConfigItemButton<TValue extends string>({
         }
       }}
     >
-      {IconComponent && typeof IconComponent === 'function' && (
+      {IconComponent && typeof IconComponent === "function" && (
         <IconComponent
           {...specificIconProps}
           size={iconSize}

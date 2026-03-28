@@ -1,12 +1,54 @@
 "use client";
 // https://21st.dev/aceternity/container-scroll-animation/default
 
-import React, { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
+import {
+  type ReactElement,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  type MotionValue,
+} from "framer-motion";
 import { useConfigEffects } from "@/context/ConfigEffectsContext";
 import { EffectsEnum } from "@/types/effects";
 
-export const TiltScroll = ({ children }: { children: React.ReactNode }) => {
+interface TiltScrollCardProps {
+  rotate: MotionValue<number>;
+  scale: MotionValue<number>;
+  translate: MotionValue<number>;
+  children: ReactNode;
+}
+
+export const TiltScrollCard = ({
+  rotate,
+  scale,
+  children,
+}: TiltScrollCardProps): ReactElement => {
+  return (
+    <motion.div
+      style={{
+        rotateX: rotate,
+        scale,
+        boxShadow:
+          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
+      }}
+      className="mx-auto mb-16 w-full max-w-5xl rounded-[30px] border-4 border-[#6C6C6C] bg-[#222222] p-3 shadow-2xl md:p-6"
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+export const TiltScroll = ({
+  children,
+}: {
+  children: ReactNode;
+}): ReactElement => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -18,17 +60,17 @@ export const TiltScroll = ({ children }: { children: React.ReactNode }) => {
   const isEnabled = effect === EffectsEnum.EXPERIMENTAL;
 
   useEffect(() => {
-    const checkMobile = () => {
+    const checkMobile = (): void => {
       setIsMobile(window.innerWidth <= 768);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    return () => {
+    return (): void => {
       window.removeEventListener("resize", checkMobile);
     };
   }, []);
 
-  const scaleDimensions = () => {
+  const scaleDimensions = (): [number, number] => {
     return isMobile ? [0.7, 0.9] : [1.05, 1];
   };
 
@@ -58,30 +100,5 @@ export const TiltScroll = ({ children }: { children: React.ReactNode }) => {
         )}
       </div>
     </div>
-  );
-};
-
-export const TiltScrollCard = ({
-  rotate,
-  scale,
-  children,
-}: {
-  rotate: MotionValue<number>;
-  scale: MotionValue<number>;
-  translate: MotionValue<number>;
-  children: React.ReactNode;
-}) => {
-  return (
-    <motion.div
-      style={{
-        rotateX: rotate,
-        scale,
-        boxShadow:
-          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
-      }}
-      className="mx-auto mb-16 w-full max-w-5xl rounded-[30px] border-4 border-[#6C6C6C] bg-[#222222] p-3 shadow-2xl md:p-6"
-    >
-      {children}
-    </motion.div>
   );
 };

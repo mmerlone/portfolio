@@ -1,24 +1,34 @@
 "use client";
 
-import { useQuote } from "@/hooks/useQuote";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { errorQuote } from "@/lib/api";
-import { useState } from "react";
+import { siteConfig } from "@/config/site";
+import { startTransition, use, useState } from "react";
+import { type QuoteProps } from "@/types/components";
 
-const Quote = () => {
+const Quote = ({ quotesPromise }: QuoteProps): React.ReactElement => {
   const [isFetchEnabled, setIsFetchEnabled] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const initialQuote = siteConfig.quote?.firstQuote ?? errorQuote(500);
+  const fetchedQuotes = isFetchEnabled ? use(quotesPromise) : null;
+  const quotes = fetchedQuotes ?? [initialQuote];
+  const activeQuote = quotes[currentIndex] ?? errorQuote(500);
 
-  const { data, isLoading, refetch } = useQuote({ enabled: isFetchEnabled });
-  
-  const { q, a, s } = data || errorQuote();
+  const { q, a, s } = activeQuote;
 
-  const handleClick = () => {
-    setIsFetchEnabled(true);
-    refetch();
+  const handleClick = (): void => {
+    if (!isFetchEnabled) {
+      startTransition(() => {
+        setIsFetchEnabled(true);
+      });
+      return;
+    }
+
+    setCurrentIndex((previousIndex) => (previousIndex + 1) % quotes.length);
   };
 
-  const renderSource = () => {
+  const renderSource = (): React.ReactNode => {
     if (s?.href) {
       return (
         <a
@@ -45,21 +55,30 @@ const Quote = () => {
         className="z-20 flex w-full cursor-pointer items-center space-x-4 rounded-lg bg-gray-50 p-4 text-left drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] dark:bg-gray-800"
         onClick={handleClick}
       >
-        {isLoading ? (
-          <LoadingSpinner className="w-full" />
-        ) : (
-          <div className="flex-1">
-            <blockquote className="text-gray-800 italic dark:text-gray-200">
-              &quot;{q}&quot;
-            </blockquote>
-            <cite className="mt-2 block text-right text-gray-600 dark:text-gray-300">
-              — {a}
-            </cite>
-          </div>
-        )}
+        <div className="flex-1">
+          <blockquote className="text-gray-800 italic dark:text-gray-200">
+            &quot;{q}&quot;
+          </blockquote>
+          <cite className="mt-2 block text-right text-gray-600 dark:text-gray-300">
+            — {a}
+          </cite>
+        </div>
       </button>
       <p className="m-4 text-xs text-gray-500 dark:text-gray-400">
         Inspirational quote kindly provided by {renderSource()}
+      </p>
+    </div>
+  );
+};
+
+export const QuoteFallback = (): React.ReactElement => {
+  return (
+    <div className="animated-background m-8 mx-8 max-h-fit max-w-fit flex-1 items-center rounded-lg p-3 shadow-lg outline-2 outline-gray-300 outline-solid md:flex-none dark:outline-gray-700">
+      <div className="z-20 flex w-full items-center space-x-4 rounded-lg bg-gray-50 p-4 text-left drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] dark:bg-gray-800">
+        <LoadingSpinner className="w-full" />
+      </div>
+      <p className="m-4 text-xs text-gray-500 dark:text-gray-400">
+        Loading a fresh quote...
       </p>
     </div>
   );

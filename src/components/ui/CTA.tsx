@@ -7,8 +7,10 @@ interface CTAProps {
   className?: string;
 }
 
-export function CTA({ className }: CTAProps) {
-  if (!siteConfig.cta) return null;
+export function CTA({ className }: CTAProps): React.ReactElement | null {
+  if (!siteConfig.cta) {
+    return null;
+  }
 
   const { text, linkText, link } = siteConfig.cta;
 

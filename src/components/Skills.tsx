@@ -12,9 +12,8 @@ import {
 } from "react-icons/fa";
 import SkillsWrapper from "./SkillsWrapper";
 import { skillsData } from "@/data/skills";
-import { SkillsProps } from "@/types/components";
+import { type SkillsProps } from "@/types/components";
 import { SectionTitle } from "./ui/SectionTitle";
-import { BackgroundEffects } from "@components/ui/BackgroundEffects";
 import { cn } from "@/lib/cn";
 
 const categoryIcons = {
@@ -27,24 +26,21 @@ const categoryIcons = {
   "Leadership & Soft Skills": <FaUsers className="h-6 w-6" />,
 } as const;
 
-const Skills = ({ className = "" }: SkillsProps) => {
+const Skills = ({ className = "" }: SkillsProps): React.ReactElement => {
   const [expanded, setExpanded] = useState(false);
-  const handleToggle = () => {
+  const handleToggle = (): void => {
     setExpanded((prev) => !prev);
   };
 
   return (
     <section id="skills" className="relative">
-      <BackgroundEffects
-        backgrounds={{}}
-        className={cn(className, "bg-gray-100/50 dark:bg-gray-950/50")}
-      >
+      <div className={cn(className, "bg-gray-100/50 dark:bg-gray-950/50")}>
         <div className="relative z-10 container mx-auto px-4">
           <SectionTitle>{skillsData.title}</SectionTitle>
           <div
             className={cn(
               "relative overflow-hidden transition-[max-height] duration-500 ease-in-out",
-              expanded ? "h-auto" : "more-to-show max-h-72"
+              expanded ? "h-auto" : "more-to-show max-h-72",
             )}
           >
             <SkillsWrapper
@@ -65,7 +61,7 @@ const Skills = ({ className = "" }: SkillsProps) => {
             </button>
           </div>
         </div>
-      </BackgroundEffects>
+      </div>
     </section>
   );
 };

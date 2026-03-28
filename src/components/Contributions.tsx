@@ -4,15 +4,17 @@ import { useState } from "react";
 import { selectedContributions } from "@/data/contributions";
 import { SectionTitle } from "./ui/SectionTitle";
 import ContributionCard from "./ui/ContributionCard";
-import { BackgroundEffects } from "@components/ui/BackgroundEffects";
-import { BackgroundEffectsEnum, EffectsEnum } from "@/types/effects";
 import { cn } from "@/lib/cn";
 
 const INITIAL_VISIBLE = 2;
 
-const Contributions = ({ className = "" }: { className?: string }) => {
+const Contributions = ({
+  className = "",
+}: {
+  className?: string;
+}): React.ReactElement => {
   const [expanded, setExpanded] = useState(false);
-  const handleToggle = () => setExpanded((prev) => !prev);
+  const handleToggle = (): void => setExpanded((prev) => !prev);
 
   const visibleContributions = expanded
     ? selectedContributions
@@ -20,12 +22,7 @@ const Contributions = ({ className = "" }: { className?: string }) => {
 
   return (
     <section id="contributions" className="relative my-4">
-      <BackgroundEffects
-        backgrounds={{
-          [EffectsEnum.EXPERIMENTAL]: BackgroundEffectsEnum.PATHS,
-        }}
-        className={className}
-      >
+      <div className={className}>
         <SectionTitle>Selected Contributions</SectionTitle>
         <p className="mb-8 text-gray-600 dark:text-gray-300">
           The contributions detailed below primarily represent work undertaken
@@ -40,7 +37,7 @@ const Contributions = ({ className = "" }: { className?: string }) => {
         <div
           className={cn(
             "relative overflow-hidden transition-[max-height] duration-500 ease-in-out",
-            expanded ? "h-auto" : "more-to-show max-h-[120rem]"
+            expanded ? "h-auto" : "more-to-show max-h-[120rem]",
           )}
         >
           <div className="mx-auto max-w-4xl space-y-8">
@@ -66,7 +63,7 @@ const Contributions = ({ className = "" }: { className?: string }) => {
             </button>
           </div>
         )}
-      </BackgroundEffects>
+      </div>
     </section>
   );
 };

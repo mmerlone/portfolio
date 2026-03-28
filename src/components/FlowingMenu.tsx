@@ -1,5 +1,5 @@
 // https://21st.dev/react-bits/flowing-menu/default
-import React from "react";
+import { type FC, type MouseEvent, Fragment, useMemo, useRef } from "react";
 import { gsap } from "gsap";
 
 interface MenuItemProps {
@@ -12,10 +12,10 @@ interface FlowingMenuProps {
   items?: MenuItemProps[];
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
-  const itemRef = React.useRef<HTMLDivElement>(null);
-  const marqueeRef = React.useRef<HTMLDivElement>(null);
-  const marqueeInnerRef = React.useRef<HTMLDivElement>(null);
+const MenuItem: FC<MenuItemProps> = ({ link, text, image }) => {
+  const itemRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const marqueeInnerRef = useRef<HTMLDivElement>(null);
 
   const animationDefaults = { duration: 0.6, ease: "expo" };
 
@@ -31,9 +31,10 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
     return topEdgeDist < bottomEdgeDist ? "top" : "bottom";
   };
 
-  const handleMouseEnter = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
+  const handleMouseEnter = (ev: MouseEvent<HTMLAnchorElement>): void => {
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) {
       return;
+    }
     gsap.killTweensOf([marqueeRef.current, marqueeInnerRef.current]);
     const rect = itemRef.current.getBoundingClientRect();
     const edge = findClosestEdge(
@@ -48,9 +49,10 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
       .to([marqueeRef.current, marqueeInnerRef.current], { y: "0%" });
   };
 
-  const handleMouseLeave = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
+  const handleMouseLeave = (ev: MouseEvent<HTMLAnchorElement>): void => {
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) {
       return;
+    }
     gsap.killTweensOf([marqueeRef.current, marqueeInnerRef.current]);
     const rect = itemRef.current.getBoundingClientRect();
     const edge = findClosestEdge(
@@ -67,9 +69,9 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
     );
   };
 
-  const singleMarqueeSet = React.useMemo(() => {
+  const singleMarqueeSet = useMemo(() => {
     return Array.from({ length: 4 }).map((_, idx) => (
-      <React.Fragment key={idx}>
+      <Fragment key={idx}>
         <span className="p-[1vh_1vw_0] text-[4vh] leading-[1.2] font-normal whitespace-nowrap text-neutral-900 uppercase dark:text-white">
           {text}
         </span>
@@ -77,7 +79,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
           className="mx-[2vw] my-[1em] h-[7vh] w-[200px] shrink-0 rounded-[50px] bg-cover bg-center p-[1em_0]"
           style={{ backgroundImage: `url(${image})` }}
         />
-      </React.Fragment>
+      </Fragment>
     ));
   }, [text, image]);
 
@@ -109,7 +111,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
   );
 };
 
-export const FlowingMenu: React.FC<FlowingMenuProps> = ({ items = [] }) => {
+export const FlowingMenu: FC<FlowingMenuProps> = ({ items = [] }) => {
   return (
     <div className="h-full w-full overflow-hidden bg-neutral-900 transition-colors duration-300 dark:bg-white">
       <nav className="m-0 flex h-full flex-col p-0">

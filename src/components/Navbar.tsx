@@ -6,9 +6,9 @@ import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { FaBars, FaTimes } from "react-icons/fa";
 import ConfigBar from "@/components/ConfigBar";
-import { cn } from "@/lib/cn"
+import { cn } from "@/lib/cn";
 
-const Navbar = () => {
+const Navbar = (): React.ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -17,7 +17,7 @@ const Navbar = () => {
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent): void => {
       if (
         mobileMenuRef.current &&
         !mobileMenuRef.current.contains(event.target as Node) &&
@@ -29,24 +29,24 @@ const Navbar = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
+    return (): void => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [mobileMenuRef, mobileMenuButtonRef]);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       setIsScrolled(window.scrollY > 20);
     };
     handleScroll();
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return (): void => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
+      (entries): void => {
         const visibleEntries = entries.filter((entry) => entry.isIntersecting);
 
         if (visibleEntries.length > 0) {
@@ -74,7 +74,7 @@ const Navbar = () => {
       }
     });
 
-    return () => {
+    return (): void => {
       siteConfig.navigation.forEach((item) => {
         if (item.href.startsWith("/#")) {
           const id = item.href.substring(2);
@@ -90,7 +90,7 @@ const Navbar = () => {
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
-  ) => {
+  ): void => {
     if (href.startsWith("/#")) {
       // Only prevent default and scroll if we are already on the main page
       if (pathname === "/") {
@@ -152,7 +152,7 @@ const Navbar = () => {
                       ? "text-orange-600 dark:text-orange-400"
                       : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
                 )}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={(e): void => handleNavClick(e, item.href)}
               >
                 {item.label}
               </Link>
@@ -163,7 +163,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             ref={mobileMenuButtonRef} // Attach ref to button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={(): void => setIsOpen(!isOpen)}
             className="rounded-lg p-2 text-gray-600 transition-colors hover:bg-gray-100 md:hidden dark:text-gray-300 dark:hover:bg-gray-800"
             aria-label="Toggle menu"
           >
@@ -188,7 +188,7 @@ const Navbar = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={(e) => {
+                onClick={(e): void => {
                   handleNavClick(e, item.href);
                   setIsOpen(false);
                 }}

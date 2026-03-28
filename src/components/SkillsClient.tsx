@@ -1,19 +1,22 @@
 "use client";
 
-import React from "react";
+import { type ReactElement, createElement } from "react";
 import Image from "next/image";
 import { skillIconMap } from "./skillIconMap";
-import { SkillsWrapperProps } from "@/types/components";
+import { type SkillsWrapperProps } from "@/types/components";
 
-const SkillsClient = ({ categories, categoryIcons }: SkillsWrapperProps) => {
+const SkillsClient = ({
+  categories,
+  categoryIcons,
+}: SkillsWrapperProps): ReactElement => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {Object.entries(categories).map(([category, skills]) => (
         <div
           key={category}
-          className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 transform transition-transform hover:scale-105"
+          className="transform rounded-lg bg-white p-6 shadow transition-transform hover:scale-105 dark:bg-gray-800"
         >
-          <div className="flex items-center gap-3 mb-4">
+          <div className="mb-4 flex items-center gap-3">
             <div className="text-gray-900 dark:text-white">
               {categoryIcons[category]}
             </div>
@@ -30,14 +33,14 @@ const SkillsClient = ({ categories, categoryIcons }: SkillsWrapperProps) => {
               >
                 {skillIconMap[skill.iconUrl] ? (
                   // Render Font Awesome icon if mapped
-                  (React.createElement(skillIconMap[skill.iconUrl], {
+                  createElement(skillIconMap[skill.iconUrl], {
                     className: "w-6 h-6 text-slate-950 dark:text-slate-50",
-                  }))
+                  })
                 ) : (
                   // Fallback to Image component if iconUrl is a URL
-                  (<div className="w-6 h-6 relative">
+                  <div className="relative h-6 w-6">
                     <Image
-                      src={(() => {
+                      src={((): string => {
                         // Helper function to ensure a relative path starts with "/" or is absolute
                         if (/^https?:\/\//i.test(skill.iconUrl)) {
                           return skill.iconUrl;
@@ -49,10 +52,10 @@ const SkillsClient = ({ categories, categoryIcons }: SkillsWrapperProps) => {
                       alt={`${skill.name} icon`}
                       width={24}
                       height={24}
-                      className="w-full h-full object-contain"
+                      className="h-full w-full object-contain"
                       unoptimized
                     />
-                  </div>)
+                  </div>
                 )}
                 {skill.name}
               </li>

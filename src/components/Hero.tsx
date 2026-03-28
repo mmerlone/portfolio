@@ -1,19 +1,17 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { type ReactElement } from "react";
 import { siteConfig } from "@/config/site";
-import { HeroProps } from "@/types/components";
+import { type HeroProps } from "@/types/components";
 import { cn } from "@lib/cn";
-import { BackgroundEffectsEnum, EffectsEnum } from "@/types/effects";
-import { BackgroundEffects } from "@components/ui/BackgroundEffects";
 import { CTA } from "@/components/ui/CTA";
 
-const Hero = ({ className = "" }: HeroProps) => {
+const Hero = ({ className = "" }: HeroProps): ReactElement => {
   const renderContent = (
-    <div className="hero-content m-1 flex min-h-screen flex-col items-center justify-between gap-12 lg:m-2 lg:flex-row w-full">
+    <div className="hero-content m-1 flex min-h-screen w-full flex-col items-center justify-between gap-12 lg:m-2 lg:flex-row">
       <div className="flex-1 pt-12 text-center md:pt-18 lg:pt-18 lg:text-left">
-        <div className="p-8 outline-1 outline-white dark:outline-black outline-offset-2 rounded-xl bg-gray-900/5 dark:bg-white/5 shadow-lg shadow-xl dark:shadow-black/5 shadow-gray-500/20">
-          <h1 className="mb-6 text-3xl font-bold text-gray-700 sm:text-4xl md:text-5xl lg:text-6xl dark:text-gray-300 text-nowrap">
+        <div className="rounded-xl bg-gray-900/5 p-8 shadow-lg shadow-xl shadow-gray-500/20 outline-1 outline-offset-2 outline-white dark:bg-white/5 dark:shadow-black/5 dark:outline-black">
+          <h1 className="mb-6 text-3xl font-bold text-nowrap text-gray-700 sm:text-4xl md:text-5xl lg:text-6xl dark:text-gray-300">
             {siteConfig.name}
           </h1>
           <h2 className="mb-4 text-xl text-gray-700 sm:text-2xl md:text-3xl lg:text-4xl dark:text-gray-300">
@@ -66,14 +64,7 @@ const Hero = ({ className = "" }: HeroProps) => {
         className,
       )}
     >
-      <BackgroundEffects
-        backgrounds={{
-          [EffectsEnum.OFF]: BackgroundEffectsEnum.HERO,
-          [EffectsEnum.EXPERIMENTAL]: BackgroundEffectsEnum.AURORA,
-        }}
-      >
-        {renderContent}
-      </BackgroundEffects>
+      {renderContent}
     </section>
   );
 };

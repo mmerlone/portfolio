@@ -8,12 +8,13 @@ import {
 } from "@/components/ui/config/ConfigToggle";
 import { useTheme } from "next-themes";
 import { useConfigEffects } from "@/context/ConfigEffectsContext";
-import { ThemeType, ThemeEnum } from "@/types/theme";
-import { EffectsEnum, EffectsType } from "@/types/effects";
+import { type ThemeType, ThemeEnum } from "@/types/theme";
+import { EffectsEnum, type EffectsType } from "@/types/effects";
+import { type IconProps } from "@/types/components";
 import { useEffect, useState } from "react";
 import { FaSun, FaMoon, FaDesktop, FaToggleOff, FaMagic } from "react-icons/fa";
 
-export default function ConfigBar() {
+export default function ConfigBar(): React.ReactElement {
   const { theme: currentTheme, setTheme } = useTheme();
   const {
     effect: currentEffect,
@@ -26,7 +27,7 @@ export default function ConfigBar() {
     setThemesAreMounted(true);
   }, []);
 
-  const handleEffectsChange = (eff: unknown) => {
+  const handleEffectsChange = (eff: EffectsType): void => {
     setEffect(eff as EffectsEnum);
   };
 
@@ -81,7 +82,7 @@ export default function ConfigBar() {
         themesAreMounted && typedCurrentTheme
           ? `${typedCurrentTheme.charAt(0).toUpperCase() + typedCurrentTheme.slice(1)} Theme selected`
           : "Select Theme", // Or "" if you prefer no text before mount
-      icon: (props) => (
+      icon: (props: IconProps) => (
         <ConfigIcon
           {...props}
           value={themesAreMounted ? typedCurrentTheme : undefined}
@@ -104,7 +105,7 @@ export default function ConfigBar() {
         effectsAreMounted && currentEffect
           ? `${currentEffect.charAt(0).toUpperCase() + currentEffect.slice(1)} Effects selected`
           : "Select Effects", // Or ""
-      icon: (props) => (
+      icon: (props: IconProps) => (
         <ConfigIcon
           {...props}
           value={effectsAreMounted ? currentEffect : undefined}

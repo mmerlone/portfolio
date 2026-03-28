@@ -1,17 +1,13 @@
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 import { siteConfig } from "@/config/site";
-import { ContactProps } from "@/types/components";
+import { type ContactProps } from "@/types/components";
 import { renderSocialLinks } from "@/components/renderSocialLinks";
-import { BackgroundEffects } from "@components/ui/BackgroundEffects";
 import { cn } from "@/lib/cn";
 
-const Contact = ({ className = "" }: ContactProps) => {
+const Contact = ({ className = "" }: ContactProps): React.ReactElement => {
   return (
     <section id="contact" className="relative">
-      <BackgroundEffects
-        backgrounds={{}}
-        className={cn(className, "bg-gray-100/50 dark:bg-gray-950")}
-      >
+      <div className={cn(className, "bg-gray-100/50 dark:bg-gray-950")}>
         <hr className="border-3 border-orange-600/10 dark:border-orange-400/10" />
         <div className="relative z-10 container mx-auto mt-12 px-4">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -78,13 +74,13 @@ const Contact = ({ className = "" }: ContactProps) => {
               <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
                 About
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-3">
+              <p className="mb-3 text-gray-600 dark:text-gray-300">
                 {siteConfig.description}
               </p>
             </div>
           </div>
         </div>
-      </BackgroundEffects>
+      </div>
     </section>
   );
 };

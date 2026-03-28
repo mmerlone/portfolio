@@ -5,7 +5,7 @@ import TermsOfServicePolicy from "./TermsOfServicePolicy";
 import { setCookie, getCookie } from "@/lib/cookies";
 import { siteConfig } from "@/config/site";
 
-const TermsOfServiceToast = () => {
+const TermsOfServiceToast = (): React.ReactElement | null => {
   const [visible, setVisible] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
 
@@ -21,33 +21,35 @@ const TermsOfServiceToast = () => {
   }, [COOKIE_NAME]);
 
   // Handler for the toast's Accept button.
-  const handleAccept = () => {
+  const handleAccept = (): void => {
     setCookie(COOKIE_NAME, "true", COOKIE_EXPIRY_DAYS);
     setVisible(false);
   };
 
   // Handler for the toast's Refuse button.
-  const handleRefuse = () => {
+  const handleRefuse = (): void => {
     setCookie(COOKIE_NAME, "false", COOKIE_EXPIRY_DAYS);
     setVisible(false);
     // Optionally, add logic here to disable tracking.
   };
 
   // Handlers for the policy modal.
-  const handlePolicyAccept = () => {
+  const handlePolicyAccept = (): void => {
     setCookie(COOKIE_NAME, "true", COOKIE_EXPIRY_DAYS);
     setPolicyOpen(false);
     setVisible(false);
   };
 
-  const handlePolicyRefuse = () => {
+  const handlePolicyRefuse = (): void => {
     setCookie(COOKIE_NAME, "false", COOKIE_EXPIRY_DAYS);
     setPolicyOpen(false);
     setVisible(false);
     // Optionally, add logic here to disable tracking.
   };
 
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
 
   return (
     <>

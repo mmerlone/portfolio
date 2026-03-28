@@ -4,7 +4,7 @@ interface ContributionCardProps {
   contribution: Contribution;
 }
 
-const ContributionCard = ({ contribution }: ContributionCardProps) => (
+const ContributionCard = ({ contribution }: ContributionCardProps): React.ReactElement => (
   <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
     <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400 mb-1">
       {contribution.title}

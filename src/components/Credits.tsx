@@ -8,9 +8,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useConfigEffects } from "@/context/ConfigEffectsContext";
 import { Carousel3D } from "./ui/Carousel3D";
 import type { Credit } from "@/types/credits";
-import { FC } from "react";
+import { type FC } from "react";
 import { cn } from "@/lib/cn";
-import { BackgroundEffects } from "@components/ui/BackgroundEffects";
 import { EffectsEnum } from "@/types/effects";
 
 interface CreditsProps {
@@ -30,17 +29,14 @@ const Credits: FC<CreditsProps> = ({
       id="credits"
       className="relative flex items-center justify-center overflow-hidden"
     >
-      <BackgroundEffects
-        backgrounds={{}}
-        className={cn("bg-gray-200 dark:bg-gray-900", className)}
-      >
+      <div className={cn("bg-gray-200 dark:bg-gray-900", className)}>
         {configEffectsAreMounted ? (
           <div className="relative z-10 container flex flex-col items-center justify-center">
             <SectionTitle>Credits</SectionTitle>
             <p className="mx-5 py-5 leading-relaxed text-gray-800 first:mt-0 sm:mx-12 sm:text-center sm:text-balance dark:text-gray-300">
-              This portfolio showcases my recent experience and gratitude to the following
-              companies and technologies, made possible by the contributions of
-              many talented individuals.
+              This portfolio showcases my recent experience and gratitude to the
+              following companies and technologies, made possible by the
+              contributions of many talented individuals.
             </p>
             <div className="mx-auto my-8 w-full py-2">
               {isEffectEnabled ? (
@@ -83,7 +79,7 @@ const Credits: FC<CreditsProps> = ({
             </div>
           </div>
         )}
-      </BackgroundEffects>
+      </div>
     </section>
   );
 };

@@ -1,12 +1,20 @@
 "use client";
 // https://21st.dev/victorwelander/expandable-tabs/default
 
-import * as React from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  createElement,
+  type ElementType,
+  type MouseEvent,
+  type ReactElement,
+  type ReactNode,
+  type RefObject,
+  useRef,
+  useState,
+} from "react";
+import { AnimatePresence, motion, type Transition } from "framer-motion";
 import { useOnClickOutside } from "usehooks-ts";
 import { cn } from "@/lib/cn";
-import { useRef, ElementType } from "react";
-import { IconProps } from "@/types/components";
+import { type IconProps } from "@/types/components";
 
 export interface Tab {
   title: string;
@@ -14,7 +22,7 @@ export interface Tab {
   labelSelected?: string;
   icon: ElementType<IconProps>; // Changed from JSX.Element to a component type
   type?: never;
-  component?: React.ReactNode;
+  component?: ReactNode;
 }
 
 export interface Separator {
@@ -24,6 +32,10 @@ export interface Separator {
 }
 
 export type TabItem = Tab | Separator;
+
+function isTab(item: TabItem): item is Tab {
+  return item.type !== "separator";
+}
 
 interface ExpandableTabsProps {
   tabs: TabItem[];
@@ -38,37 +50,42 @@ const spanVariants = {
   exit: { width: 0, opacity: 0 },
 };
 
-const transition = { delay: 0.1, type: "spring", bounce: 0, duration: 0.6 };
+const transition: Transition = {
+  delay: 0.1,
+  type: "spring",
+  bounce: 0,
+  duration: 0.6,
+};
 
 export function ExpandableTabs({
   tabs,
   className = "",
   activeColor = "",
   onChange,
-}: ExpandableTabsProps) {
-  const [selected, setSelected] = React.useState<number | null>(null);
+}: ExpandableTabsProps): ReactElement {
+  const [selected, setSelected] = useState<number | null>(null);
   const outsideClickRef = useRef<HTMLDivElement>(null);
 
+  const handleClickOutside = (): void => {
+    setSelected(null);
+    onChange?.(null);
+  };
+
   useOnClickOutside<HTMLDivElement>(
-    outsideClickRef as React.RefObject<HTMLDivElement>,
+    outsideClickRef as RefObject<HTMLDivElement>,
     () => {
       handleClickOutside();
     },
   );
 
-  const handleClickOutside = () => {
-    setSelected(null);
-    onChange?.(null);
-  };
-
-  const handleSelect = (index: number, e?: React.MouseEvent) => {
+  const handleSelect = (index: number, e?: MouseEvent): void => {
     e?.stopPropagation();
     const newSelected = selected === index ? null : index;
     setSelected(newSelected);
     onChange?.(newSelected);
   };
 
-  const Separator = () => (
+  const Separator = (): ReactElement => (
     <div className="bg-border mx-1 h-[24px] w-[1.2px]" aria-hidden="true" />
   );
 
@@ -81,11 +98,10 @@ export function ExpandableTabs({
       )}
     >
       {tabs.map((tab, index) => {
-        if (tab.type === "separator") {
+        if (!isTab(tab)) {
           return <Separator key={`separator-${index}`} />;
         }
 
-        const Icon = tab.icon;
         return (
           <motion.button
             key={tab.title}
@@ -102,7 +118,7 @@ export function ExpandableTabs({
             initial={false}
             animate="animate"
             custom={selected === index}
-            onClick={(e: React.MouseEvent) => {
+            onClick={(e: MouseEvent) => {
               e.preventDefault();
               handleSelect(index);
             }}
@@ -114,7 +130,7 @@ export function ExpandableTabs({
                 : "hover:bg-muted hover:text-foreground text-gray-600 dark:text-gray-400",
             )}
           >
-            <Icon size={18} className="mx-2 rounded" />
+            {createElement(tab.icon, { size: 18, className: "mx-2 rounded" })}
             <AnimatePresence initial={false}>
               {selected === index && (
                 <motion.div
@@ -123,7 +139,7 @@ export function ExpandableTabs({
                   animate="animate"
                   exit="exit"
                   transition={transition}
-                  onClick={(e: React.MouseEvent) => {
+                  onClick={(e: MouseEvent) => {
                     e.stopPropagation();
                   }}
                   className="inset-shadow-xl flex flex-1 flex-col overflow-hidden inset-shadow-black/50"

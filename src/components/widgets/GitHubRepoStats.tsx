@@ -1,20 +1,24 @@
 "use client";
 
+import { use } from "react";
 import { siteConfig } from "@/config/site";
 import { FaStar, FaCodeBranch, FaEye, FaGithub } from "react-icons/fa";
-import { useGitHubRepoStats } from "@/hooks/useGitHubRepoStats";
 import { TiltBox } from "@/components/ui/TiltBox";
+import { type GitHubRepoStatsWidgetData } from "@/types/api";
 
-export default function GitHubRepoStats() {
-  const repoUrl = siteConfig.github?.repoUrl || "";
-  const {
-    data: stats,
-    isLoading,
-    isError,
-    error,
-  } = useGitHubRepoStats(repoUrl);
+interface GitHubRepoStatsProps {
+  repoStatsPromise: Promise<GitHubRepoStatsWidgetData>;
+}
 
-  if (!repoUrl) return null;
+export default function GitHubRepoStats({
+  repoStatsPromise,
+}: GitHubRepoStatsProps): React.ReactElement | null {
+  const repoUrl = siteConfig.github?.repoUrl ?? "";
+  const { stats, errorMessage } = use(repoStatsPromise);
+
+  if (!repoUrl) {
+    return null;
+  }
 
   return (
     <TiltBox>
@@ -29,15 +33,9 @@ export default function GitHubRepoStats() {
             <FaGithub className="h-6 w-6" />
             View this project on GitHub
           </a>
-          {isLoading ? (
-            <span className="text-sm text-gray-500 dark:text-gray-400">
-              Loading repository stats...
-            </span>
-          ) : isError ? (
+          {errorMessage ? (
             <span className="text-sm text-red-500">
-              {error instanceof Error
-                ? error.message
-                : "An unknown error occurred"}
+              {errorMessage}
             </span>
           ) : stats ? (
             <div className="mt-2 flex gap-8">
@@ -55,6 +53,20 @@ export default function GitHubRepoStats() {
               </div>
             </div>
           ) : null}
+        </div>
+      </div>
+    </TiltBox>
+  );
+}
+
+export function GitHubRepoStatsFallback(): React.ReactElement {
+  return (
+    <TiltBox>
+      <div className="z-30 mx-auto my-8 max-w-2xl rounded-lg bg-gray-200 p-6 shadow-lg dark:bg-gray-800">
+        <div className="w-full items-center space-x-4 rounded-lg bg-white p-4 dark:bg-gray-700">
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Loading repository stats...
+          </span>
         </div>
       </div>
     </TiltBox>

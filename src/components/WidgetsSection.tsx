@@ -1,15 +1,18 @@
 "use client";
 
+import { Suspense } from "react";
 import { cn } from "@/lib/cn";
-import Weather from "@/components/widgets/Weather";
-import GitHubRepoStats from "@/components/widgets/GitHubRepoStats";
-import { apiConfig } from "@/config/api";
-import { BackgroundEffectsEnum, EffectsEnum } from "@/types/effects";
-import { BackgroundEffects } from "@components/ui/BackgroundEffects";
+import Weather, { WeatherFallback } from "@/components/widgets/Weather";
+import GitHubRepoStats, {
+  GitHubRepoStatsFallback,
+} from "@/components/widgets/GitHubRepoStats";
+import { type WidgetsSectionProps } from "@/types/components";
 
-const WidgetsSection = ({ className = "" }) => {
-  const weatherEnabled = !!apiConfig.openWeather?.city;
-
+const WidgetsSection = ({
+  className = "",
+  repoStatsPromise,
+  weatherPromise,
+}: WidgetsSectionProps): React.ReactElement => {
   return (
     <section
       id="widgets"
@@ -18,19 +21,20 @@ const WidgetsSection = ({ className = "" }) => {
         className,
       )}
     >
-      <BackgroundEffects
-        backgrounds={{
-          [EffectsEnum.OFF]: BackgroundEffectsEnum.HERO,
-          [EffectsEnum.EXPERIMENTAL]: BackgroundEffectsEnum.AURORA,
-        }}
-      >
-        <div className="container mx-auto flex flex-wrap items-center justify-center gap-8 px-4">
-          <GitHubRepoStats />
-          {weatherEnabled && <Weather />}
-        </div>
-      </BackgroundEffects>
+      <div className="container mx-auto flex flex-wrap items-center justify-center gap-8 px-4">
+        {repoStatsPromise ? (
+          <Suspense fallback={<GitHubRepoStatsFallback />}>
+            <GitHubRepoStats repoStatsPromise={repoStatsPromise} />
+          </Suspense>
+        ) : null}
+        {weatherPromise ? (
+          <Suspense fallback={<WeatherFallback />}>
+            <Weather weatherPromise={weatherPromise} />
+          </Suspense>
+        ) : null}
+      </div>
     </section>
   );
 };
 
-export default WidgetsSection; 
+export default WidgetsSection;

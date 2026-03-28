@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { FC } from "react";
+import { type FC } from "react";
 import { cn } from "@/lib/cn";
 
 // Helper function to build the proper icon URL
-const getIconSrc = (icon: string) => {
+const getIconSrc = (icon: string): string => {
   if (/^https?:\/\//i.test(icon)) {
     return icon;
   }

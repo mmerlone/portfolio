@@ -1,16 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { type ReactElement, useEffect, useState } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { GoogleTagManager } from "@next/third-parties/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { getCookie } from "@/lib/cookies";
 import { siteConfig } from "@/config/site";
 
-type AnalyticsWrapperProps = object;
-
-export default function AnalyticsWrapper({}: AnalyticsWrapperProps) {
+export default function AnalyticsWrapper(): ReactElement | null {
   const [hasMounted, setHasMounted] = useState(false);
   const [isAnalyticsAllowed, setIsAnalyticsAllowed] = useState(false);
 
@@ -31,8 +28,13 @@ export default function AnalyticsWrapper({}: AnalyticsWrapperProps) {
     }
   }, []);
 
-  if (!hasMounted) return null;
-  if (!isAnalyticsAllowed) return null;
+  if (!hasMounted) {
+    return null;
+  }
+
+  if (!isAnalyticsAllowed) {
+    return null;
+  }
 
   return (
     <>

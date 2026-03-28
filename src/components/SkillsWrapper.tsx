@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { SkillsWrapperProps } from '@/types/components';
+import { type SkillsWrapperProps } from '@/types/components';
 import { LoadingSpinner } from './ui/LoadingSpinner';
 
 const SkillsClient = dynamic(() => import('./SkillsClient'), {
@@ -11,7 +11,10 @@ const SkillsClient = dynamic(() => import('./SkillsClient'), {
   ),
 });
 
-const SkillsWrapper = ({ categories, categoryIcons }: SkillsWrapperProps) => {
+const SkillsWrapper = ({
+  categories,
+  categoryIcons,
+}: SkillsWrapperProps): React.ReactElement => {
   return <SkillsClient categories={categories} categoryIcons={categoryIcons} />;
 };
 

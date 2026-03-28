@@ -2,14 +2,14 @@
 
 import { FaArrowUp } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import { ScrollToTopProps } from '@/types/components';
+import { type ScrollToTopProps } from '@/types/components';
 import { cn } from "@/lib/cn";
 
-const ScrollToTop = ({ className = '' }: ScrollToTopProps) => {
+const ScrollToTop = ({ className = '' }: ScrollToTopProps): React.ReactElement => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
+    const toggleVisibility = (): void => {
       if (window.scrollY > 300) {
         setIsVisible(true);
       } else {
@@ -19,12 +19,12 @@ const ScrollToTop = ({ className = '' }: ScrollToTopProps) => {
 
     window.addEventListener('scroll', toggleVisibility);
 
-    return () => {
+    return (): void => {
       window.removeEventListener('scroll', toggleVisibility);
     };
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = (): void => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',

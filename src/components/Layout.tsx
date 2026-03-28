@@ -2,13 +2,13 @@ import Head from "next/head";
 import { siteConfig } from "@/config/site";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
-import { LayoutProps } from "@/types/components";
+import { type LayoutProps } from "@/types/components";
 
 const Layout = ({
   children,
   title = siteConfig.title,
   description = siteConfig.description,
-}: LayoutProps) => {
+}: LayoutProps): React.ReactElement => {
   return (
     <>
       <Head>

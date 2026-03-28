@@ -1,38 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import { experiences, Experience as ExperienceType } from "@/data/experience";
+import {
+  experiences,
+  type Experience as ExperienceType,
+} from "@/data/experience";
 import { FaExternalLinkAlt, FaBriefcase } from "react-icons/fa";
-import { ExperienceProps } from "@/types/components";
+import { type ExperienceProps } from "@/types/components";
 import { SectionTitle } from "./ui/SectionTitle";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
-import { BackgroundEffects } from "@components/ui/BackgroundEffects";
-import { BackgroundEffectsEnum, EffectsEnum } from "@/types/effects"; // New import
 import { cn } from "@/lib/cn";
 
-const Experience = ({ className = "" }: ExperienceProps) => {
+const Experience = ({
+  className = "",
+}: ExperienceProps): React.ReactElement => {
   const [expanded, setExpanded] = useState(false);
-  const handleExpand = () => {
+  const handleExpand = (): void => {
     setExpanded(!expanded);
   };
 
   return (
     <section id="experience" className="relative py-8 sm:py-16">
-      <BackgroundEffects
-        backgrounds={{
-          [EffectsEnum.OFF]: BackgroundEffectsEnum.STATIC_COLOR,
-          [EffectsEnum.EXPERIMENTAL]: BackgroundEffectsEnum.EXPERIENCE,
-        }}
-        className={className}
-      >
+      <div className={className}>
         <div className="relative z-10 container mx-auto overflow-x-visible px-4">
           <SectionTitle>Professional Experience</SectionTitle>
           <div className="mx-auto">
             <div
               className={cn(
                 "relative space-y-12 overflow-hidden transition-all duration-500",
-                expanded ? "h-auto" : "more-to-show max-h-96 overflow-x-visible"
+                expanded
+                  ? "h-auto"
+                  : "more-to-show max-h-96 overflow-x-visible",
               )}
             >
               {experiences.map((job: ExperienceType, index: number) => (
@@ -102,7 +101,7 @@ const Experience = ({ className = "" }: ExperienceProps) => {
             </a>
           </div>
         </div>
-      </BackgroundEffects>
+      </div>
     </section>
   );
 };

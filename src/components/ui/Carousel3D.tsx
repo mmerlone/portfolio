@@ -1,5 +1,5 @@
 // https://codesandbox.io/p/sandbox/react-carousel-3d-9x3wt?file=%2Fsrc%2FSlider.js%3A1%2C1-118%2C1
-import React, { useState } from "react";
+import { type CSSProperties, type FC, Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
@@ -7,7 +7,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { CardCredit } from "./CardCredit";
 import type { Credit } from "@/types/credits";
-import { FC } from "react";
 
 interface Carousel3DProps {
   credits: Credit[];
@@ -16,60 +15,69 @@ interface Carousel3DProps {
 export const Carousel3D: FC<Carousel3DProps> = ({ credits }) => {
   const [activeSlide, setactiveSlide] = useState<number>(0);
 
-  const next = () =>
-    activeSlide < credits.length - 1 && setactiveSlide(activeSlide + 1);
-  const prev = () => activeSlide > 0 && setactiveSlide(activeSlide - 1);
+  const next = (): void => {
+    if (activeSlide < credits.length - 1) {
+      setactiveSlide(activeSlide + 1);
+    }
+  };
 
-  const getStyles = (index: number) => {
-    if (activeSlide === index)
+  const prev = (): void => {
+    if (activeSlide > 0) {
+      setactiveSlide(activeSlide - 1);
+    }
+  };
+
+  const getStyles = (index: number): CSSProperties | undefined => {
+    if (activeSlide === index) {
       return {
         opacity: 1,
         transform: "translateX(0px) translateZ(0px) rotateY(0deg)",
         zIndex: 10,
       };
-    else if (activeSlide - 1 === index)
+    } else if (activeSlide - 1 === index) {
       return {
         opacity: 1,
         transform: "translateX(-240px) translateZ(-400px) rotateY(35deg)",
         zIndex: 9,
       };
-    else if (activeSlide + 1 === index)
+    } else if (activeSlide + 1 === index) {
       return {
         opacity: 1,
         transform: "translateX(240px) translateZ(-400px) rotateY(-35deg)",
         zIndex: 9,
       };
-    else if (activeSlide - 2 === index)
+    } else if (activeSlide - 2 === index) {
       return {
         opacity: 1,
         transform: "translateX(-480px) translateZ(-500px) rotateY(35deg)",
         zIndex: 8,
       };
-    else if (activeSlide + 2 === index)
+    } else if (activeSlide + 2 === index) {
       return {
         opacity: 1,
         transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
         zIndex: 8,
       };
-    else if (index < activeSlide - 2)
+    } else if (index < activeSlide - 2) {
       return {
         opacity: 0,
         transform: "translateX(-480px) translateZ(-500px) rotateY(35deg)",
         zIndex: 7,
       };
-    else if (index > activeSlide + 2)
+    } else if (index > activeSlide + 2) {
       return {
         opacity: 0,
         transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
         zIndex: 7,
       };
+    }
   };
 
   return (
     <>
       <div className="slideC">
         {credits.map((item, i) => (
-          <React.Fragment key={item.name}>
+          <Fragment key={item.name}>
             <div
               className="slide"
               style={{
@@ -84,7 +92,7 @@ export const Carousel3D: FC<Carousel3DProps> = ({ credits }) => {
                 ...getStyles(i),
               }}
             />
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
 
