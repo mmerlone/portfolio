@@ -1,6 +1,5 @@
 import type { Credit } from "@/types/credits";
 
-
 export const creditsData: readonly Credit[] = [
   {
     name: "OpenWeatherMap",
@@ -87,12 +86,6 @@ export const creditsData: readonly Credit[] = [
     icon: "react.svg",
   },
   {
-    name: "TanStack Query",
-    description: "Powerful asynchronous state management for TS/JS, React, Solid, Vue, Svelte, and Angular.",
-    url: "https://tanstack.com/query/latest",
-    icon: "https://tanstack.com/assets/splash-dark-8nwlc0Nt.png",
-  },
-  {
     name: "Framer Motion",
     description: "A production-ready motion library for React.",
     url: "https://www.framer.com/motion/",
@@ -106,7 +99,8 @@ export const creditsData: readonly Credit[] = [
   },
   {
     name: "Three.js",
-    description: "A JavaScript 3D library used for rendering interactive computer graphics in a web browser.",
+    description:
+      "A JavaScript 3D library used for rendering interactive computer graphics in a web browser.",
     url: "https://threejs.org/",
     icon: "https://threejs.org/files/icon.svg",
   },
@@ -118,7 +112,8 @@ export const creditsData: readonly Credit[] = [
   },
   {
     name: "Drei",
-    description: "A collection of useful helpers and abstractions for React Three Fiber.",
+    description:
+      "A collection of useful helpers and abstractions for React Three Fiber.",
     url: "https://docs.pmnd.rs/drei/introduction",
     icon: "react.svg",
   },

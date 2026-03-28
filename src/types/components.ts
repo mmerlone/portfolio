@@ -1,3 +1,8 @@
+import type {
+  GitHubRepoStatsWidgetData,
+  QuoteInterface,
+  WeatherWidgetData,
+} from "@/types/api";
 import type { Skill } from "@/types/skills";
 
 export interface AboutProps {
@@ -18,6 +23,7 @@ export interface HeroProps {
 
 export interface QuoteProps {
   className?: string;
+  quotesPromise: Promise<QuoteInterface[]>;
 }
 
 export interface LayoutProps {
@@ -34,13 +40,15 @@ export interface SkillsProps {
   className?: string;
 }
 
+export interface WidgetsSectionProps {
+  className?: string;
+  repoStatsPromise: Promise<GitHubRepoStatsWidgetData> | null;
+  weatherPromise: Promise<WeatherWidgetData> | null;
+}
+
 export interface SkillsWrapperProps {
   categories: Record<string, readonly Skill[]>;
   categoryIcons: Record<string, React.ReactNode>;
-}
-
-export interface HeroEffectsWrapperProps {
-  children: React.ReactNode;
 }
 
 export interface EffectConditionalWrapperProps {
@@ -74,47 +82,6 @@ export interface ExpandableTabsProps {
   className?: string;
   activeColor?: string;
   onChange?: (index: number | null) => void;
-}
-
-export type Position = {
-  order: number;
-  startLat: number;
-  startLng: number;
-  endLat: number;
-  endLng: number;
-  arcAlt: number;
-  color: string;
-};
-
-export type GlobeConfig = {
-  pointSize?: number;
-  globeColor?: string;
-  showAtmosphere?: boolean;
-  atmosphereColor?: string;
-  atmosphereAltitude?: number;
-  emissive?: string;
-  emissiveIntensity?: number;
-  shininess?: number;
-  polygonColor?: string;
-  ambientLight?: string;
-  directionalLeftLight?: string;
-  directionalTopLight?: string;
-  pointLight?: string;
-  arcTime?: number;
-  arcLength?: number;
-  rings?: number;
-  maxRings?: number;
-  initialPosition?: {
-    lat: number;
-    lng: number;
-  };
-  autoRotate?: boolean;
-  autoRotateSpeed?: number;
-};
-
-export interface WorldProps {
-  globeConfig: GlobeConfig;
-  data: Position[];
 }
 
 export interface ConfigIconProps<TValue extends string> {

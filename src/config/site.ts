@@ -53,7 +53,6 @@ export const siteConfig: SiteConfig = {
     { label: "Experience", href: "/#experience" },
     { label: "Credits", href: "/#credits" },
     { label: "Contact", href: "/#contact" },
-    { label: "Presentation", href: "/demo/presentation" },
   ],
 
   // Footer configuration
@@ -73,10 +72,10 @@ export const siteConfig: SiteConfig = {
   // Google Analytics and Google Tag Manager IDs
   analytics: {
     googleAnalytics: {
-      id: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || null,
+      id: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? null,
     },
     googleTagManager: {
-      id: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || null,
+      id: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID ?? null,
     },
   },
 
@@ -105,8 +104,8 @@ export const siteConfig: SiteConfig = {
       h: "<blockquote>&ldquo;640 k ought to be enough for anybody.&rdquo; &mdash; <footer>Bill Gates</footer></blockquote>",
       s: {
         anchor: "Popular Wisdom",
-        title: "A famous quote often attributed to Bill Gates"
-      }
-    }
+        title: "A famous quote often attributed to Bill Gates",
+      },
+    },
   },
 };

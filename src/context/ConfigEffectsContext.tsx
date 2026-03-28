@@ -1,16 +1,17 @@
 "use client";
 
-import React, {
+import {
   createContext,
+  type ReactElement,
+  type ReactNode,
   useContext,
-  ReactNode,
   useEffect,
   useState,
 } from "react";
 import {
   EffectsEnum,
   EFFECTS_KEY,
-  ConfigEffectsContextType,
+  type ConfigEffectsContextType,
 } from "@/types/effects";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
@@ -18,14 +19,19 @@ const ConfigEffectsContext = createContext<
   ConfigEffectsContextType | undefined
 >(undefined);
 
+function isEffectsEnum(value: string): value is EffectsEnum {
+  return Object.values(EffectsEnum).includes(value as EffectsEnum);
+}
+
 export const ConfigEffectsProvider = ({
   children,
 }: {
   children: ReactNode;
-}) => {
+}): ReactElement => {
   const [storedEffect, setStoredEffect] = useLocalStorage<EffectsEnum>(
     EFFECTS_KEY,
     EffectsEnum.EXPERIMENTAL,
+    isEffectsEnum,
   );
   const [isMounted, setIsMounted] = useState(false);
 
@@ -40,7 +46,7 @@ export const ConfigEffectsProvider = ({
     ? storedEffect
     : EffectsEnum.EXPERIMENTAL;
 
-  const setEffectValue = (newEffect: EffectsEnum) => {
+  const setEffectValue = (newEffect: EffectsEnum): void => {
     if (isValidEffect(newEffect)) {
       setStoredEffect(newEffect);
     } else {

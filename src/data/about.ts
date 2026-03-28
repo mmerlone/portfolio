@@ -1,4 +1,4 @@
-import { AboutData } from "@/types/about";
+import { type AboutData } from "@/types/about";
 
 export const aboutData: AboutData = {
   title: "About Me",

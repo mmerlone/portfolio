@@ -1,4 +1,4 @@
-export const setCookie = (name: string, value: string, days: number) => {
+export const setCookie = (name: string, value: string, days: number): void => {
   const d = new Date();
   d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
   const expires = "expires=" + d.toUTCString();
@@ -8,7 +8,7 @@ export const setCookie = (name: string, value: string, days: number) => {
   }
 };
 
-export const getCookie = (name: string) => {
+export const getCookie = (name: string): string | null => {
   if (typeof document === "undefined") return null;
   const nameEQ = name + "=";
   const ca = document.cookie.split(";");

@@ -1,0 +1,61 @@
+{
+  "basics": {
+    "name": "Marcio Merlone",
+    "label": "Platform Architect & Full-Stack Reliability Engineer",
+    "email": "mmerlone@example.com",
+    "summary": "Bridging the gap between ambitious technical vision and reliable production systems through collaborative engineering and operational empathy. Specialist in building resilient, accessible platforms that scale from foundational infrastructure to pixel-perfect UIs for global brands like HP and Akqa.[1, 2]",
+    "location": { "city": "Florianópolis", "countryCode": "BR" },
+    "profiles": [
+      { "network": "LinkedIn", "url": "https://www.linkedin.com/in/mmerlone/" },
+      { "network": "GitHub", "url": "https://github.com/mmerlone" }
+    ]
+  },
+  "expertise_pillars": [
+    {
+      "description": "Architecting resilient 'Internal Developer Platforms' (IDPs) that reduce developer friction and ensure 99.9% uptime."
+    },
+    {
+      "name": "High-Performance UI Architecture",
+      "keywords": "",
+      "description": "Scaling global frontend systems for Fortune 500 brands with a focus on 'Accessibility as Architecture'."
+    },
+    {
+      "name": "Operational Stewardship",
+      "keywords": "",
+      "description": "A 14-year track record of 'living with decisions,' evolving mission-critical legacy ERPs into scalable cloud-ready environments."
+    }
+  ],
+  "work": [
+    {
+      "company": "ArcTouch",
+      "position": "Platform Architect & Full-Stack Reliability Engineer",
+      "startDate": "2022-04",
+      "highlights": [
+        "Developed high-performance component libraries using React and TypeScript, reducing p95 latency and improving SEO for global brand platforms.",
+        "Collaborated across cross-functional 'Agile' teams to translate complex UX requirements into production-ready interaction patterns."
+      ]
+    },
+    {
+      "company": "A1 Engenharia e Gerenciamento",
+      "position": "Director of Platform Infrastructure & ERP Stewardship",
+      "startDate": "2007-03",
+      "endDate": "2022-03",
+      "highlights": [
+        "Modernized a mission-critical PHP-based Project Management ERP through iterative refactoring, maintaining zero-downtime over a 14-year lifecycle.",
+        "Hardened global enterprise security via pfSense firewalls and zero-trust VLAN segmentation, effectively eliminating production threats."
+      ]
+    }
+  ],
+  "case_studies": [
+    {
+      "decision": "Leveraged ESXi virtualization and automated snapshots to create a self-healing private cloud environment.",
+      "outcome": "Achieved 99.99% infrastructure availability and enabled instant environment replication for dev/test teams."
+    },
+    {
+      "title": "Accessibility as Performance",
+      "context": "Scaling frontend UIs for HP required high-performance, inclusive design.[4]",
+      "decision": "Implemented 'Accessibility as Code' using semantic HTML and rigorous ARIA testing before it reached production.",
+      "outcome": "Reduced manual QA time by 30% and improved Lighthouse accessibility scores to 100/100 across client properties."
+    }
+  ]
+}

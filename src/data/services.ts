@@ -1,4 +1,4 @@
-import { ServicesConfig } from "@/types/services";
+import { type ServicesConfig } from "@/types/services";
 
 export const servicesConfig: ServicesConfig = {
   title: "How I Can Help",

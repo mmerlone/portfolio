@@ -1,5 +1,5 @@
-import React from "react";
-import { Metadata } from "next";
+import type { CSSProperties, ReactElement } from "react";
+import { type Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import MainPageLayout from "@/components/MainPageLayout";
 
@@ -31,17 +31,17 @@ export const metadata: Metadata = {
 };
 
 // iframeStyle optimized for absolute positioning within a relative flex container
-const iframeStyle: React.CSSProperties = {
+const iframeStyle: CSSProperties = {
   position: "absolute",
   top: 0,
   left: 0,
   width: "100%",
   height: "100%",
-    border: "none",
+  border: "none",
   backgroundColor: "transparent",
 };
 
-export default function PresentationPage() {
+export default function PresentationPage(): ReactElement {
   return (
     <MainPageLayout>
       <div className="flex flex-1 flex-col bg-(--background)">

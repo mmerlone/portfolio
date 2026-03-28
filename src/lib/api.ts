@@ -1,13 +1,14 @@
 import { apiConfig } from "@/config/api";
-import { QuoteResponse, WeatherResponse, QuoteInterface } from "@/types/api";
+import { parseQuoteResponses, parseWeatherResponse } from "@/lib/apiParsers";
+import { type QuoteResponse, type WeatherResponse, type QuoteInterface } from "@/types/api";
 
 export const errorQuote = (status?: number): QuoteInterface => ({
-  q: `Error ${status || "unknown"}: Failed to fetch quote.`,
+  q: `Error ${status ?? "unknown"}: Failed to fetch quote.`,
   a: "System",
   h: `<blockquote>&ldquo;Error ${status}: Failed to fetch quote.&rdquo; &mdash; <footer>System</footer></blockquote>`,
   s: {
     anchor: "some bug",
-  }
+  },
 });
 
 export async function fetchQuote(): Promise<QuoteResponse[] | QuoteInterface[]> {
@@ -15,25 +16,21 @@ export async function fetchQuote(): Promise<QuoteResponse[] | QuoteInterface[]> 
   if (!response.ok) {
     return [errorQuote(response.status)];
   }
-  return response.json();
+
+  const payload: unknown = await response.json();
+  return parseQuoteResponses(payload);
 }
 
 export async function fetchWeather(): Promise<WeatherResponse> {
-  // Check if the API key is defined
-  const WEATHER_API_KEY = process.env.WEATHER_API_KEY as string;
+  const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
   if (!WEATHER_API_KEY) {
-    // eslint-disable-next-line no-console
-    console.error("WEATHER_API_KEY is not defined");
     throw new Error("Weather API key is not defined");
   }
   const city = apiConfig.openWeather?.city;
   if (!city) {
-    // eslint-disable-next-line no-console
-    console.error("City is not defined in the config");
     throw new Error("City is not defined in the config");
   }
 
-  // Construct URL ensuring proper encoding and correct parameters
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
     city
   )}&appid=${WEATHER_API_KEY}&units=metric`;
@@ -41,33 +38,32 @@ export async function fetchWeather(): Promise<WeatherResponse> {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      // eslint-disable-next-line no-console
-      console.error(
-        "Error fetching weather data:",
-        response.status,
-        response.statusText
-      );
       throw new Error(`Failed to fetch weather data: ${response.statusText}`);
     }
-    const data: WeatherResponse = await response.json();
-    // eslint-disable-next-line no-console
-    console.log("Fetched weather data:", data);
-    return data;
+
+    const payload: unknown = await response.json();
+    return parseWeatherResponse(payload);
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("fetchWeather encountered an error:", error);
-    throw error;
+    throw new Error("Failed to fetch weather data", { cause: error });
   }
 }
 
-export const fetchData = async <T>(url: string): Promise<T> => {
+export async function fetchData<T>(
+  url: string,
+  validate: (payload: unknown) => T,
+): Promise<T> {
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+
+    const payload: unknown = await response.json();
+    return validate(payload);
   } catch (error) {
-    throw new Error(`Failed to fetch data: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    throw new Error(
+      `Failed to fetch data: ${error instanceof Error ? error.message : "Unknown error"}`,
+      { cause: error },
+    );
   }
-};
+}

@@ -1,5 +1,3 @@
-"use client";
-
 import Section from "@/components/Section";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -14,22 +12,38 @@ import Footer from "@/components/Footer";
 import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
 import QuoteSection from "@/components/QuoteSection";
 import WidgetsSection from "@/components/WidgetsSection";
+import { apiConfig } from "@/config/api";
+import { siteConfig } from "@/config/site";
+import {
+  getGitHubRepoStatsWidgetData,
+  getQuoteWidgetData,
+  getWeatherWidgetData,
+} from "@/lib/widgetData";
 
 // Force dynamic rendering to avoid prerendering issues,
 // ensuring cookies are re-read on every request.
 export const dynamic = "force-dynamic";
 
-export default function Home() {
+export default function Home(): React.ReactElement {
+  const repoUrl = siteConfig.github?.repoUrl ?? "";
+  const city = apiConfig.openWeather?.city ?? "";
+  const repoStatsPromise = repoUrl
+    ? getGitHubRepoStatsWidgetData(repoUrl)
+    : null;
+  const weatherPromise = city ? getWeatherWidgetData(city) : null;
+  const quotesPromise = getQuoteWidgetData();
+
   return (
     <main>
-      {/*
-       */}
       <ClientAnalyticsWrapper />
       <Section>
         <Hero />
       </Section>
       <Section>
-        <WidgetsSection />
+        <WidgetsSection
+          repoStatsPromise={repoStatsPromise}
+          weatherPromise={weatherPromise}
+        />
       </Section>
       <Section>
         <About />
@@ -38,7 +52,7 @@ export default function Home() {
         <Services />
       </Section>
       <Section>
-        <QuoteSection />
+        <QuoteSection quotesPromise={quotesPromise} />
       </Section>
       <Section>
         <Contributions />
@@ -55,8 +69,6 @@ export default function Home() {
       <Contact />
       <Footer />
       <ScrollToTop />
-      {/*
-       */}
     </main>
   );
 }

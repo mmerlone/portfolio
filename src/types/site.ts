@@ -1,4 +1,4 @@
-import { QuoteInterface } from "./api";
+import { type QuoteInterface } from "./api";
 
 export interface ContactInfo {
   readonly email: string;
