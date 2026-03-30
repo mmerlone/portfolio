@@ -4,7 +4,11 @@ import {
   getWeatherWidgetData,
 } from "@/lib/widgetData";
 import { errorQuote } from "@/lib/api";
-import { type QuoteInterface, type RepoStats, type WeatherResponse } from "@/types/api";
+import {
+  type QuoteInterface,
+  type RepoStats,
+  type WeatherResponse,
+} from "@/types/api";
 
 jest.mock("@/app/actions/getQuote", () => ({
   getQuote: jest.fn(),
@@ -18,9 +22,9 @@ jest.mock("@/app/actions/getGitHubRepoStats", () => ({
   getGitHubRepoStats: jest.fn(),
 }));
 
-import { getQuote } from "@/app/actions/getQuote";
-import { getWeather } from "@/app/actions/getWeather";
-import { getGitHubRepoStats } from "@/app/actions/getGitHubRepoStats";
+import { getQuote } from "@/lib/actions/getQuote";
+import { getWeather } from "@/lib/actions/getWeather";
+import { getGitHubRepoStats } from "@/lib/actions/getGitHubRepoStats";
 
 const mockedGetQuote = jest.mocked(getQuote);
 const mockedGetWeather = jest.mocked(getWeather);

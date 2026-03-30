@@ -1,19 +1,12 @@
-/**
- * Strict TypeScript + React rules with modern flat config
- */
 import js from "@eslint/js";
-import typescript from "@typescript-eslint/eslint-plugin";
-import typescriptParser from "@typescript-eslint/parser";
-import react from "eslint-plugin-react";
-
+import tseslint from "typescript-eslint";
+import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
+import nextPlugin from "@next/eslint-plugin-next";
 import prettier from "eslint-config-prettier/flat";
 import globals from "globals";
 
 export default [
-  js.configs.recommended,
-  prettier,
-
   {
     ignores: [
       "node_modules/**",
@@ -25,59 +18,44 @@ export default [
       "vite.config.*",
       "vitest.config.*",
       "tsconfig.tsbuildinfo",
+      "src/components/archive/**",
+      "src/data/archive/**",
+      "src/types/archive/**",
     ],
   },
 
-  /* Base JavaScript rules */
-  {
-    rules: {
-      // Disable base rules in favor of TypeScript equivalents
-      "no-unused-vars": "off",
-      "no-use-before-define": "off",
-      "no-shadow": "off",
-      "no-redeclare": "off",
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  reactPlugin.configs.flat.recommended,
 
-      // Code quality
-      "no-console": "error",
-      "no-debugger": "error",
-      "no-implicit-coercion": "error",
-      "no-duplicate-imports": "error",
-      "no-var": "error",
-      "prefer-const": "error",
-      eqeqeq: ["error", "always"],
-      curly: ["error", "multi-line"],
-    },
-  },
-
-  /* React + JSX files */
+  /* Next & React Configuration */
   {
-    files: ["**/*.tsx", "**/*.jsx"],
+    files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
     plugins: {
-      react,
       "react-hooks": reactHooks,
-    },
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-        ecmaFeatures: { jsx: true },
-      },
-      globals: {
-        ...globals.browser,
-        ...globals.es2024,
-        React: "readonly",
-      },
+      "@next/next": nextPlugin,
     },
     settings: {
       react: { version: "19" },
     },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.es2024,
+      },
+    },
     rules: {
-      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
+
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "error",
+
+      "react/react-in-jsx-scope": "off",
       "react/prop-types": "error",
       "react/no-deprecated": "error",
 
-      // Enforce exhaustive-deps for hook dependency correctness
-      "react-hooks/exhaustive-deps": "error",
       "no-restricted-imports": [
         "error",
         {
@@ -94,11 +72,24 @@ export default [
     },
   },
 
-  /* TypeScript files */
+  /* Base JavaScript / TypeScript Unified Quality Rules */
+  {
+    rules: {
+      "no-console": "error",
+      "no-debugger": "error",
+      "no-implicit-coercion": "error",
+      "no-duplicate-imports": "error",
+      "no-var": "error",
+      "prefer-const": "error",
+      eqeqeq: ["error", "always"],
+      curly: ["error", "multi-line"],
+    },
+  },
+
+  /* TypeScript Strict Rules */
   {
     files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
-      parser: typescriptParser,
       parserOptions: {
         project: "./tsconfig.json",
         tsconfigRootDir: import.meta.dirname,
@@ -107,16 +98,15 @@ export default [
         ...globals.browser,
         ...globals.node,
         ...globals.es2024,
-        React: "readonly",
       },
     },
-    plugins: {
-      "@typescript-eslint": typescript,
-    },
     rules: {
-      ...typescript.configs.recommended.rules,
+      // Disable base rules in favor of TypeScript equivalents
+      "no-unused-vars": "off",
+      "no-use-before-define": "off",
+      "no-shadow": "off",
+      "no-redeclare": "off",
 
-      // Strict TypeScript rules
       "@typescript-eslint/no-unused-vars": [
         "error",
         { ignoreRestSiblings: true },
@@ -244,4 +234,6 @@ export default [
       "no-restricted-syntax": "off",
     },
   },
+
+  prettier,
 ];

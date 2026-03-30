@@ -24,9 +24,10 @@ export function useLocalStorage<T extends string>(
   initialValue: T,
   isValid: (value: string) => value is T,
 ): [T, (value: T | ((val: T) => T)) => void] {
-  const [storedValue, setStoredValue] = useState<T>(() =>
-    getValueFromLocalStorage(key, initialValue, isValid),
-  );
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    if (typeof window === "undefined") return initialValue;
+    return getValueFromLocalStorage(key, initialValue, isValid);
+  });
 
   useEffect(() => {
     setStoredValue(getValueFromLocalStorage(key, initialValue, isValid));
@@ -34,14 +35,16 @@ export function useLocalStorage<T extends string>(
 
   const setValue = useCallback(
     (value: T | ((val: T) => T)): void => {
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      if (typeof window !== "undefined") {
-        window.localStorage.setItem(key, valueToStore);
-      }
+      setStoredValue((prevStoredValue) => {
+        const valueToStore =
+          value instanceof Function ? value(prevStoredValue) : value;
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem(key, valueToStore);
+        }
+        return valueToStore;
+      });
     },
-    [key, storedValue],
+    [key],
   );
 
   return [storedValue, setValue];
