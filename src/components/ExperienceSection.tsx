@@ -39,7 +39,7 @@ export default function ExperienceSection({
             )}
           >
             {visibleJobs.map((job: PortfolioExperienceItem) => (
-              <div
+              <article
                 key={`${job.company}-${job.start}`}
                 className="group relative pt-4 pr-4 pl-8 sm:pl-32"
               >
@@ -106,7 +106,7 @@ export default function ExperienceSection({
                     </div>
                   )}
                 </div>
-              </div>
+              </article>
             ))}
             {!expanded && jobs.length > INITIAL_VISIBLE && (
               <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-16 bg-gradient-to-t from-white to-transparent dark:from-gray-900 dark:to-transparent" />

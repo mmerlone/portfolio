@@ -17,7 +17,7 @@ export default function ProjectsSection({
         <SectionTitle>Open Source Projects</SectionTitle>
         <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 lg:grid-cols-3">
           {portfolio.openSourceProjects.map((project) => (
-            <div
+            <article
               key={project.name}
               className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
             >
@@ -61,7 +61,7 @@ export default function ProjectsSection({
                   </a>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

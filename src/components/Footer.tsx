@@ -38,10 +38,10 @@ const Footer = (): ReactElement => {
       <div className="shadow">
         <div className="relative z-10 container mx-auto p-2">
           <div className="flex flex-col items-center sm:flex-row sm:justify-between">
-            <p className="text-sm">
+            <small className="text-sm">
               &copy; <span>{currentYear}</span> {portfolio.basic.name}.{" "}
               {siteConfig.footer.copyright.text}
-            </p>
+            </small>
             {/* Terms of Service & Cookie Policy link */}
             <a
               href="#"

@@ -34,7 +34,7 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
                 {label}
               </p>
             )}
-            <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
+            <nav aria-label="Call to action" className="flex flex-wrap justify-center gap-4 lg:justify-start">
               <a
                 href="#contact"
                 className="rounded-lg bg-orange-600 px-8 py-3 text-white shadow-lg transition-colors hover:bg-orange-700 hover:shadow-xl"
@@ -47,7 +47,7 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
               >
                 Learn More
               </a>
-            </div>
+            </nav>
           </div>
           <div className="mt-16">
             <CTA className="m-8" />

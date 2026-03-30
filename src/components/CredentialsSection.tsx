@@ -17,7 +17,7 @@ export default function CredentialsSection({
         <SectionTitle>Languages &amp; Certifications</SectionTitle>
         <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
           {/* Languages */}
-          <div className="rounded-xl bg-white p-6 shadow-lg dark:bg-gray-800">
+          <article className="rounded-xl bg-white p-6 shadow-lg dark:bg-gray-800">
             <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white">
               <TranslateIcon
                 size={20}
@@ -41,10 +41,10 @@ export default function CredentialsSection({
                 </li>
               ))}
             </ul>
-          </div>
+          </article>
 
           {/* Certifications */}
-          <div className="rounded-xl bg-white p-6 shadow-lg dark:bg-gray-800">
+          <article className="rounded-xl bg-white p-6 shadow-lg dark:bg-gray-800">
             <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white">
               <CertificateIcon
                 size={20}
@@ -64,7 +64,7 @@ export default function CredentialsSection({
                 </li>
               ))}
             </ul>
-          </div>
+          </article>
         </div>
       </div>
     </section>

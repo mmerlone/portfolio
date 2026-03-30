@@ -41,7 +41,7 @@ const WeatherWidget = ({
       <div className="flex items-center space-x-4 rounded-lg bg-white p-4 dark:bg-gray-700">
         <Image
           src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-          alt={weather.description}
+          alt=""
           width={64}
           height={64}
           className="h-16 w-16"

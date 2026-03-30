@@ -18,7 +18,7 @@ export default function ExpertiseSection({
         <SectionTitle>Core Expertise</SectionTitle>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {expertise.map((area) => (
-            <div
+            <article
               key={area.name}
               className="group relative overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
             >
@@ -39,7 +39,7 @@ export default function ExpertiseSection({
                   </span>
                 ))}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
