@@ -33,9 +33,7 @@ export default function ExperienceSection({
           <div
             className={cn(
               "relative space-y-12 overflow-hidden transition-all duration-500",
-              expanded
-                ? "h-auto"
-                : "more-to-show max-h-[60rem] overflow-x-visible",
+              expanded ? "h-auto" : "more-to-show max-h-240 overflow-x-visible",
             )}
           >
             {visibleJobs.map((job: PortfolioExperienceItem) => (
@@ -127,13 +125,13 @@ export default function ExperienceSection({
         <div className="mt-12 text-center">
           <a
             href={portfolio.basic.resume}
+            type="application/pdf"
             download
-            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors duration-200 hover:bg-blue-700"
           >
-            View Full Resume
-            <ArrowSquareOutIcon size={16} weight="bold" />
+            Download Resume (PDF)
+            <ArrowSquareOutIcon size={16} weight="bold" aria-hidden="true" />
           </a>
         </div>
       </div>

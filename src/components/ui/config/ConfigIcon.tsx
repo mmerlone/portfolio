@@ -1,4 +1,4 @@
-import { type ComponentType, type ElementType, type JSX } from "react";
+import { createElement, type ElementType, type JSX } from "react";
 
 export interface ConfigIconProps<TValue extends string> {
   value?: TValue;
@@ -18,10 +18,13 @@ export default function ConfigIcon<TValue extends string>({
   ...rest
 }: ConfigIconProps<TValue>): JSX.Element | null {
   const selectedIcon = value ? iconMap[value] : undefined;
-  const IconToRender = (selectedIcon ?? defaultIconComponent) as ComponentType<{
-    size?: number | string;
-    className?: string;
-  }>;
-  if (!IconToRender || typeof IconToRender !== "function") return null;
-  return <IconToRender size={size} className={className} {...rest} />;
+  const IconToRender = selectedIcon ?? defaultIconComponent;
+
+  if (!IconToRender) return null;
+
+  return createElement(IconToRender, {
+    size,
+    className,
+    ...rest,
+  });
 }
