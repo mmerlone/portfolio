@@ -30,27 +30,25 @@ export const CardCredit: FC<CardCreditProps> = ({ credit, className = "" }) => {
         className,
       )}
     >
-      <div className="flex items-center rounded-lg bg-white shadow-lg dark:bg-gray-800">
+      <a
+        href={credit.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center rounded-lg bg-white shadow-lg dark:bg-gray-800"
+      >
         <div className="p-4">
-          <a href={credit.url} target="_blank" rel="noopener noreferrer">
-            <div className="relative h-24 w-24 rounded-md bg-white p-8 shadow">
-              <Image
-                src={getIconSrc(credit.icon)}
-                alt={credit.name}
-                fill
-                sizes="96px"
-                className="rounded-md object-contain p-2"
-              />
-            </div>
-          </a>
+          <div className="relative h-24 w-24 rounded-md bg-white p-8 shadow">
+            <Image
+              src={getIconSrc(credit.icon)}
+              alt={credit.name}
+              fill
+              sizes="96px"
+              className="rounded-md object-contain p-2"
+            />
+          </div>
         </div>
         <div className="flex w-full flex-col p-4">
-          <a
-            href={credit.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-left"
-          >
+          <div className="text-left">
             <h3 className="flex gap-2 text-lg font-semibold text-gray-900 dark:text-white">
               {credit.name}
               <ArrowSquareOutIcon
@@ -62,9 +60,9 @@ export const CardCredit: FC<CardCreditProps> = ({ credit, className = "" }) => {
             <p className="w-50 text-xs text-gray-600 sm:w-80 sm:text-sm dark:text-gray-300">
               {credit.description}
             </p>
-          </a>
+          </div>
         </div>
-      </div>
+      </a>
     </article>
   );
 };

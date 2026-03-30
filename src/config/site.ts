@@ -53,7 +53,7 @@ export const siteConfig: SiteConfig = {
   // CTA configuration
   cta: {
     text: "Let’s build a resilient architecture together.",
-    linkText: "Schedule a Free Consultation",
+    linkText: "Let's talk!",
     link: "https://calendly.com/mmerlone",
   },
 };

@@ -6,24 +6,23 @@ import {
   ConfigToggle,
   type ConfigOption,
 } from "@/components/ui/config/ConfigToggle";
+import { useIsHydrated } from "@/hooks/useIsHydrated";
 import { useTheme } from "next-themes";
 import { type ThemeType, ThemeEnum } from "@/types/theme";
 import { SunIcon, MoonIcon, DesktopIcon } from "@phosphor-icons/react";
 
 export default function ThemeToggleClient(): ReactElement {
-  const { theme: currentTheme, resolvedTheme, setTheme } = useTheme();
+  const { theme: currentTheme, setTheme } = useTheme();
+  const isHydrated = useIsHydrated();
 
   const typedCurrentTheme = currentTheme as ThemeType | undefined;
+  const currentValue =
+    isHydrated ? (typedCurrentTheme ?? ThemeEnum.SYSTEM) : ThemeEnum.SYSTEM;
 
   const themeIconMap: Partial<Record<ThemeType, ElementType>> = {
     [ThemeEnum.LIGHT]: SunIcon,
     [ThemeEnum.DARK]: MoonIcon,
-    [ThemeEnum.SYSTEM]:
-      resolvedTheme === ThemeEnum.DARK
-        ? MoonIcon
-        : resolvedTheme === ThemeEnum.LIGHT
-          ? SunIcon
-          : DesktopIcon,
+    [ThemeEnum.SYSTEM]: DesktopIcon,
   };
 
   const themeOptions: ConfigOption<ThemeType>[] = Object.values(ThemeEnum).map(
@@ -36,18 +35,17 @@ export default function ThemeToggleClient(): ReactElement {
         value,
         iconMap: themeIconMap,
         defaultIconComponent: SunIcon,
+        size: 18,
       }),
     }),
   );
 
   return (
-    <div>
-      <ConfigToggle<ThemeType>
-        options={themeOptions}
-        currentValue={typedCurrentTheme ?? ThemeEnum.SYSTEM}
-        onValueChange={setTheme}
-        ariaLabel="Select theme"
-      />
-    </div>
+    <ConfigToggle<ThemeType>
+      options={themeOptions}
+      currentValue={currentValue}
+      onValueChange={setTheme}
+      ariaLabel="Select theme"
+    />
   );
 }

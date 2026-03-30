@@ -5,7 +5,7 @@
 ![Vercel](https://img.shields.io/badge/deployed%20on-vercel-000?logo=vercel)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 
-This is a Next.js portfolio project showcasing my experience as a Remote Software Engineer. It highlights my skills, professional experience, and projects, while featuring the tools and technologies that contribute to a superior developer experience.
+This is a Next.js portfolio project showcasing a small part of my experience in Technology. It highlights my skills, professional experience, and projects, while featuring the tools and technologies that contribute to a superior developer experience.
 
 [Visit the live site](https://mmerlone.dev.br)
 
