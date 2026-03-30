@@ -3,11 +3,11 @@
  */
 export type PortfolioContact = {
   /** Primary email address */
-  email: string;
+  readonly email: string;
   /** Optional LinkedIn profile URL */
-  linkedin?: string;
+  readonly linkedin?: string;
   /** Optional personal website URL */
-  website?: string;
+  readonly website?: string;
 };
 
 /**
@@ -15,13 +15,13 @@ export type PortfolioContact = {
  */
 export type PortfolioExpertise = {
   /** Name of the expertise area */
-  name: string;
+  readonly name: string;
   /** Short list of core expertise areas */
-  core?: string[];
+  readonly core?: string[];
   /** Expertise description */
-  description: string;
+  readonly description: string;
   /** Optional keywords for search or filtering */
-  keywords: string[];
+  readonly keywords: string[];
 };
 
 /**
@@ -29,37 +29,47 @@ export type PortfolioExpertise = {
  */
 export type PortfolioExperienceItem = {
   /** Employer or project name */
-  company: string;
+  readonly company: string;
   /** Role or job title */
-  role: string;
+  readonly role: string;
   /** Start date or month/year */
-  start: string;
+  readonly start: string;
   /** End date or 'Present' */
-  end: string;
+  readonly end: string;
   /** Optional location */
-  location?: string;
+  readonly location?: string;
   /** Optional free-form description */
-  description?: string;
+  readonly description?: string;
   /** Notable achievements or responsibilities */
-  highlights: string[];
+  readonly highlights: string[];
+  /** Technologies used in the project */
+  readonly technologies?: string[];
+  /** Optional image URL for the company or project logo in the assets folder */
+  readonly logo?: string;
 };
 
 /**
  * Education entry.
  */
 export type PortfolioEducationItem = {
-  institution: string;
-  program: string;
-  years: string;
-  notes?: string;
+  /** Name of the educational institution */
+  readonly institution: string;
+  /** Name of the program, degree, or course */
+  readonly program: string;
+  /** Period of study or year of completion */
+  readonly years: string;
+  /** Optional additional notes or highlights */
+  readonly notes?: string;
 };
 
 /**
  * Language proficiency entry.
  */
 export type PortfolioLanguageItem = {
-  language: string;
-  level: string;
+  /** The language name */
+  readonly language: string;
+  /** Proficiency level (e.g., "Native", "Fluent", "Conversational") */
+  readonly level: string;
 };
 
 /**
@@ -67,81 +77,129 @@ export type PortfolioLanguageItem = {
  */
 export type PortfolioTechnical = {
   /** Programming languages, frameworks and libraries */
-  programming: string[];
+  readonly programming: string[];
   /** Operating systems */
-  operatingSystems: string[];
+  readonly operatingSystems: string[];
+  /** Hardware */
+  readonly hardware: string[];
   /** Servers, services and monitoring tools */
-  serversAndServices: string[];
+  readonly serversAndServices: string[];
   /** Database technologies */
-  databases: string[];
+  readonly databases: string[];
   /** Platforms and tooling */
-  platformsAndTools: string[];
+  readonly platformsAndTools: string[];
   /** Virtualization platforms */
-  virtualization: string[];
+  readonly virtualization: string[];
   /** Networking and security topics */
-  networkingAndSecurity: string[];
+  readonly networkingAndSecurity: string[];
   /** Backup and recovery tools/strategies */
-  backupAndRecovery: string[];
+  readonly backupAndRecovery: string[];
   /** Cloud platforms or migration experience */
-  cloud: string[];
+  readonly cloud: string[];
   /** Automation tooling and scripts */
-  automation: string[];
+  readonly automation: string[];
   /** Miscellaneous useful knowledge */
-  other: string[];
+  readonly other: string[];
 };
 
+/**
+ * Basic personal and professional information.
+ */
 export type PortfolioBasic = {
   /** Full name */
-  name: string;
+  readonly name: string;
   /** Professional title */
-  title: string;
+  readonly title: string;
   /** Optional label or tagline */
-  label?: string;
+  readonly label?: string;
   /** Human-readable location */
-  location: string;
+  readonly location: string;
   /** Contact details */
-  contact: PortfolioContact;
+  readonly contact: PortfolioContact;
   /** Short professional summary */
-  summary: string;
+  readonly summary: string;
   /** Optional profile / personality note */
-  profile?: string;
+  readonly profile?: string;
   /** Detailed technical expertise */
-  technical: PortfolioTechnical;
+  readonly technical: PortfolioTechnical;
   /** Expertise information */
-  expertise: PortfolioExpertise[];
+  readonly expertise: PortfolioExpertise[];
+  /** Optional relative link to resume */
+  readonly resume?: string;
+  /** Social media links */
+  readonly social?: PortfolioSocialLink[];
 };
 
+/**
+ * Open source or personal project entry.
+ */
 export type PortfolioProjectItem = {
   /** Project name */
-  name: string;
+  readonly name: string;
   /** Optional project description */
-  description?: string;
+  readonly description?: string;
   /** Technologies used in the project */
-  technologies: string[];
+  readonly technologies: string[];
   /** Link to project's demo */
-  demo: string;
+  readonly demo: string;
   /** Link to project's source code */
-  github: string;
+  readonly github: string;
   /** Optional free-form notes about the project */
-  otherLinks?: { label: string; url: string }[];
+  readonly otherLinks?: { label: string; url: string }[];
+  /** Optional image URL for the project in the assets folder */
+  readonly image?: string;
 };
+
+/**
+ * Social media or professional network link.
+ */
+export interface PortfolioSocialLink {
+  /** Name of the platform */
+  readonly name: string;
+  /** Profile URL */
+  readonly url: string;
+  /** Optional icon identifier or URL */
+  readonly icon?: string;
+}
+
+/**
+ * A professional challenge, describing a problem, actions taken, and results.
+ */
+export interface PortfolioChallenge {
+  /** Title of the challenge or problem */
+  readonly title: string;
+  /** Company where the challenge occurred */
+  readonly company: string;
+  /** Optional period when the project took place */
+  readonly period?: string;
+  /** Detailed description of the challenge */
+  readonly challenge: string;
+  /** List of actions taken to address the challenge */
+  readonly action: string[];
+  /** List of results or impact achieved */
+  readonly result: string[];
+  /** Technologies used during the resolution */
+  readonly technologies: string[];
+}
 
 /**
  * Complete portfolio data model used across the site.
  */
 export type Portfolio = {
   /** Basic personal and professional information */
-  basic: PortfolioBasic;
+  readonly basic: PortfolioBasic;
   /** Chronological professional experiences */
-  professionalExperience: PortfolioExperienceItem[];
+  readonly professionalExperience: PortfolioExperienceItem[];
+  /** Selected professional challenges and contributions */
+  readonly challenges?: PortfolioChallenge[];
   /** Open source projects */
-  openSourceProjects: PortfolioProjectItem[];
+  readonly openSourceProjects: PortfolioProjectItem[];
   /** Education history */
-  education: PortfolioEducationItem[];
+  readonly education: PortfolioEducationItem[];
   /** Languages and proficiency */
-  languages: PortfolioLanguageItem[];
+  readonly languages: PortfolioLanguageItem[];
   /** Certifications and training */
-  certifications: string[];
+  readonly certifications: string[];
   /** Any additional free-form information */
-  additionalInformation?: string;
+  readonly additionalInformation?: string;
 };
