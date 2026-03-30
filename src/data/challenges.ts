@@ -1,6 +1,6 @@
-import type { Contribution } from "@/types/contribution";
+import type { PortfolioChallenge } from "@/types/portfolio";
 
-export const selectedContributions: Contribution[] = [
+export const challenges: PortfolioChallenge[] = [
   {
     title:
       "Developing High-Impact and User-Centric Solutions for Global Brands",

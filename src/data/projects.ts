@@ -1,37 +1,37 @@
-export interface Project {
-  title: string;
-  description: string;
-  imageUrl: string;
-  technologies: string[];
-  liveLink?: string;
-  githubLink: string;
-  isPrivate?: boolean;
-}
+import { type PortfolioProjectItem } from "@/types/portfolio";
 
-export const projects: Project[] = [
+export const projects: PortfolioProjectItem[] = [
   {
-    title: "E-Commerce Platform",
-    description: "A full-featured e-commerce platform with product management, cart functionality, and secure checkout.",
-    imageUrl: "/images/projects/ecommerce.jpg",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-    githubLink: "https://github.com/username/ecommerce",
-    isPrivate: true
+    name: "YwyBase",
+    description:
+      "A Solid Ground to Scale. A comprehensive Next.js application with authentication, Material UI, and modern best practices.",
+    demo: "https://ywybase.vercel.app/",
+    github: "https://github.com/mmerlone/ywybase",
+    technologies: [
+      "Next.js 15+",
+      "React 19+",
+      "Supabase",
+      "TailwindCSS",
+      "TypeScript",
+      "Material UI",
+      "Sentry",
+      "Pino Logger",
+    ],
   },
   {
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates and team features.",
-    imageUrl: "/images/projects/taskmanager.jpg",
-    technologies: ["React", "Firebase", "Material-UI"],
-    githubLink: "https://github.com/username/taskmanager",
-    isPrivate: true
+    name: "mui7-phone-number",
+    description:
+      "A phone number input component for MUI v7+ with auto-formatting, country selection, and full TypeScript support.",
+    demo: "https://ywybase.vercel.app/demos/mui7-phone-number/",
+    github: "https://github.com/mmerlone/mui7-phone-number",
+    technologies: ["React 19+", "TypeScript", "Material UI v7+"],
   },
   {
-    title: "Weather Dashboard",
-    description: "A weather dashboard that displays current conditions and forecasts using multiple weather APIs.",
-    imageUrl: "/images/projects/weather.jpg",
-    technologies: ["React", "OpenWeather API", "Chart.js"],
-    liveLink: "https://weather-demo.com",
-    githubLink: "https://github.com/username/weather-dashboard",
-    isPrivate: false
-  }
+    name: "react-tz-globepicker",
+    description:
+      "Interactive globe picker for React applications that need timezone selection, timezone visualization, or a compact world-time UI.",
+    demo: "https://ywybase.vercel.app/demos/react-tz-globepicker/",
+    github: "https://github.com/mmerlone/react-tz-globepicker",
+    technologies: ["React 19+", "TypeScript"],
+  },
 ]; 
