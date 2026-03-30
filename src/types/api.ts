@@ -40,6 +40,13 @@ export interface WeatherResponse {
   }>;
 }
 
+export interface WeatherWidgetData {
+  city: string;
+  data: WeatherResponse | null;
+  dateLabel: string;
+  isError: boolean;
+}
+
 export type ApiQuoteData = {
   data: QuoteResponse;
   isLoading: boolean;
@@ -63,6 +70,11 @@ export interface RepoStats {
   forks_count: number;
   watchers_count: number;
   html_url: string;
+}
+
+export interface GitHubRepoStatsWidgetData {
+  stats: RepoStats | null;
+  errorMessage: string | null;
 }
 
 export interface ZenquotesConfig {

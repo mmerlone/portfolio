@@ -1,0 +1,240 @@
+import { type Portfolio } from "@/types/portfolio";
+import { experiences } from "@/data/experiences";
+import { projects } from "@/data/projects";
+import { education } from "@/data/education";
+import { challenges } from "@/data/challenges";
+
+/**
+ * Source-of-truth portfolio data.
+ *
+ * This exported `portfolio` object is typed as `Portfolio` and used by
+ * the application to render resume and profile sections. Keep this file
+ * in sync with `src/types/portfolio.ts` when fields change.
+ *
+ * @type {Portfolio}
+ * @readonly
+ */
+export const portfolio: Portfolio = {
+  basic: {
+    name: "Marcio Merlone",
+    title: "Software Engineer",
+    label: "Platform Architect & Full-Stack Reliability Engineer",
+    location: "Araucária, PR, Brazil — Curitiba Area, Brazil",
+    contact: {
+      email: "mmerlone@gmail.com",
+      linkedin: "https://www.linkedin.com/in/mmerlone",
+      website: "https://mmerlone.dev.br/",
+    },
+    summary:
+      "Bridging the gap between ambitious technical vision and reliable production systems through collaborative engineering and operational empathy. Specialist in building resilient, accessible platforms that scale from foundational infrastructure to pixel-perfect UIs for global brands like HP, Starbucks, Cirrus Aircraft and others",
+    technical: {
+      programming: [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "PHP",
+        "Perl",
+        "HTML",
+        "CSS",
+        "SQL",
+        "Bash",
+      ],
+      operatingSystems: ["Linux", "Unix", "Solaris", "FreeBSD", "Windows"],
+      hardware: [
+        "IBM",
+        "Dell",
+        "iDrac",
+        "tape libraries",
+        "UniFi",
+        "Ubiquiti",
+        "RAID",
+        "DAS",
+        "SAS",
+      ],
+      serversAndServices: [
+        "DNS",
+        "FTP",
+        "DHCP",
+        "LDAP",
+        "NFS",
+        "SNMP",
+        "GIT",
+        "SMTP",
+        "IMAP",
+        "POP3",
+        "Apache",
+        "nginx",
+        "IIS",
+        "Tomcat",
+        "sendmail",
+        "Postfix",
+        "Dovecot",
+        "OpenLDAP",
+        "Samba",
+        "AD",
+        "IAM",
+        "DRP",
+        "Squid",
+        "Zabbix",
+        "Netdisco",
+        "Graylog",
+        "Openfire RTC Server",
+        "IPAM",
+        "GitLab",
+        "Docker",
+      ],
+      databases: ["MySQL", "MariaDB", "PostgreSQL", "MS-SQL", "MongoDB"],
+      platformsAndTools: [
+        "Shopify",
+        "Discourse",
+        "Contentstack",
+        "WordPress",
+        "SOGo",
+      ],
+      virtualization: ["VMware ESXi", "vCenter", "VirtualBox"],
+      networkingAndSecurity: [
+        "pfSense/OPNSense",
+        "ACL",
+        "VLAN",
+        "IPsec VPN",
+        "OpenVPN",
+        "RLS",
+        "SSL",
+        "TLS",
+        "firewalls",
+        "IDS",
+        "network monitoring",
+        "routing",
+        "switching",
+        "wireless",
+        "network design",
+        "network security",
+      ],
+      backupAndRecovery: [
+        "Bacula",
+        "rsync",
+        "contingency & disaster recovery",
+        "storage",
+      ],
+      cloud: ["Azure", "Microsoft Cloud migrations"],
+      automation: ["bash", "node", "husky"],
+      other: ["design systems", "MVC", "WCAG accessibility"],
+    },
+    expertise: [
+      {
+        name: "Resilient Platform Architecture",
+        keywords: [
+          "Microsoft",
+          "Samba4",
+          "Postfix",
+          "Dovecot",
+          "OpenLDAP",
+          "DNS",
+          "DHCP",
+          "LDAP",
+          "AD",
+          "GIT",
+          "VMware ESXi",
+          "vCenter",
+          "Zabbix",
+          "Graylog",
+          "IPAM",
+          "Backup",
+        ],
+        description:
+          "Architecting resilient internal applications to ensuring reliability and performance with a 99.9% uptime.",
+      },
+      {
+        name: "High-Performance UI Architecture",
+        keywords: [
+          "React",
+          "TypeScript",
+          "Node.js",
+          "Docker",
+          "Tailwind",
+          "Agile",
+          "Scrum",
+          "jest",
+          "Cypress",
+          "Shopify theme",
+          "Discourse theme",
+          "WordPress theme",
+          "Accessibility",
+          "WCAG",
+          "Responsive Design",
+          "Scalable Applications",
+          "Inclusivity",
+        ],
+        description:
+          "Scaling global frontend systems for Fortune 500 brands with a focus on 'Accessibility as Architecture'.",
+      },
+      {
+        name: "Operational Stewardship",
+        keywords: [
+          "Hardware",
+          "Networking",
+          "Monitoring",
+          "Backups",
+          "Process",
+          "Planning",
+          "Self Hosted Email, DNS, MX, etc.",
+          "Virtualization",
+          "Networking",
+          "Security",
+          "Infrastructure",
+          "Project Management",
+          "Team Leadership",
+          "Cost Reduction",
+          "Reliability",
+          "Performance",
+          "Growth",
+          "Uptime",
+        ],
+        description:
+          "A 14-year track record of 'living with decisions,' evolving mission-critical legacy ERPs into scalable cloud-ready environments.",
+      },
+    ],
+    resume: "/documents/MarcioMerlone.pdf",
+    social: [
+      {
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/in/mmerlone",
+      },
+      {
+        name: "GitHub",
+        url: "https://github.com/mmerlone",
+      },
+      {
+        name: "Personal Website",
+        url: "https://mmerlone.dev.br/",
+      },
+      {
+        name: "Instagram",
+        url: "https://www.instagram.com/mmerlone/",
+      },
+      {
+        name: "Facebook",
+        url: "https://www.facebook.com/mmerlone",
+      },
+    ],
+  },
+  professionalExperience: experiences,
+  challenges: challenges,
+  openSourceProjects: projects,
+  education: education,
+  languages: [
+    { language: "Portuguese", level: "Native or Bilingual" },
+    { language: "English", level: "Full Professional / Fluent (C1)" },
+    { language: "Spanish", level: "Elementary / Basic" },
+  ],
+  certifications: [
+    "ISO 9001:2008 Internal Auditor",
+    "Microsoft Certified Professional (ID #2432097, 2003)",
+    "Various Microsoft courses (Windows 2000 support, networking, SQL Server 2000)",
+    "SQL database introduction",
+    "Introduction to Project Management (PMBOK)",
+    "React, ES6+, Agile, Scrum",
+  ],
+  additionalInformation:
+    "Hobbies include audio, acoustics, electronics, ecotourism, and everything else related to technology and the world. Interests include music, movies, TV shows, astronomy, and science.",
+};

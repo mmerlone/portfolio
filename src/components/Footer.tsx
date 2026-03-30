@@ -1,40 +1,33 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, type ReactElement } from "react";
 import { siteConfig } from "@/config/site";
+import { portfolio } from "@/data/portfolio";
 import TermsOfServicePolicy from "./TermsOfServicePolicy";
 import { setCookie } from "@/lib/cookies";
-import { BackgroundEffects } from "@components/ui/BackgroundEffects";
-import { EffectsEnum, BackgroundEffectsEnum } from "@/types/effects";
 
-const Footer = () => {
-  const [currentYear, setCurrentYear] = useState<number>(
-    new Date().getFullYear(),
-  );
+const Footer = (): ReactElement => {
+  const currentYear = new Date().getFullYear();
   const [policyOpen, setPolicyOpen] = useState(false);
 
   // Retrieve cookie name and expiry from site config
   const COOKIE_NAME = siteConfig.cookie.name;
   const COOKIE_EXPIRY_DAYS = siteConfig.cookie.expiryDays;
 
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
-
-  const handlePolicyOpen = () => {
+  const handlePolicyOpen = (): void => {
     setPolicyOpen(true);
   };
 
-  const handlePolicyClose = () => {
+  const handlePolicyClose = (): void => {
     setPolicyOpen(false);
   };
 
-  const handlePolicyAccept = () => {
+  const handlePolicyAccept = (): void => {
     setCookie(COOKIE_NAME, "true", COOKIE_EXPIRY_DAYS);
     setPolicyOpen(false);
   };
 
-  const handlePolicyRefuse = () => {
+  const handlePolicyRefuse = (): void => {
     setCookie(COOKIE_NAME, "false", COOKIE_EXPIRY_DAYS);
     setPolicyOpen(false);
   };
@@ -42,17 +35,11 @@ const Footer = () => {
   return (
     <footer className="text-gray-900 dark:text-gray-200">
       <hr className="border-2 border-orange-600/10 dark:border-orange-400/10" />
-      <BackgroundEffects
-        backgrounds={{
-          [EffectsEnum.OFF]: BackgroundEffectsEnum.FOOTER,
-          [EffectsEnum.EXPERIMENTAL]: BackgroundEffectsEnum.FOOTER,
-        }}
-        className="shadow"
-      >
+      <div className="shadow">
         <div className="relative z-10 container mx-auto p-2">
           <div className="flex flex-col items-center sm:flex-row sm:justify-between">
             <p className="text-sm">
-              &copy; {currentYear} {siteConfig.name}.{" "}
+              &copy; <span>{currentYear}</span> {portfolio.basic.name}.{" "}
               {siteConfig.footer.copyright.text}
             </p>
             {/* Terms of Service & Cookie Policy link */}
@@ -68,7 +55,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-      </BackgroundEffects>
+      </div>
       <TermsOfServicePolicy
         visible={policyOpen}
         onAccept={handlePolicyAccept}

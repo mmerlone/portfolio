@@ -1,12 +1,24 @@
 "use client";
 // https://21st.dev/victorwelander/expandable-tabs/default
 
-import * as React from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  createElement,
+  type ElementType,
+  type MouseEvent,
+  type ReactElement,
+  type ReactNode,
+  type RefObject,
+  useRef,
+  useState,
+} from "react";
+// framer-motion removed — replace with CSS transitions
 import { useOnClickOutside } from "usehooks-ts";
 import { cn } from "@/lib/cn";
-import { useRef, ElementType } from "react";
-import { IconProps } from "@/types/components";
+
+export interface IconProps {
+  size?: number | string;
+  className?: string;
+}
 
 export interface Tab {
   title: string;
@@ -14,7 +26,7 @@ export interface Tab {
   labelSelected?: string;
   icon: ElementType<IconProps>; // Changed from JSX.Element to a component type
   type?: never;
-  component?: React.ReactNode;
+  component?: ReactNode;
 }
 
 export interface Separator {
@@ -25,6 +37,10 @@ export interface Separator {
 
 export type TabItem = Tab | Separator;
 
+function isTab(item: TabItem): item is Tab {
+  return item.type !== "separator";
+}
+
 interface ExpandableTabsProps {
   tabs: TabItem[];
   className?: string;
@@ -32,43 +48,37 @@ interface ExpandableTabsProps {
   onChange?: (index: number | null) => void;
 }
 
-const spanVariants = {
-  initial: { width: 0, opacity: 0 },
-  animate: { width: "auto", opacity: 1 },
-  exit: { width: 0, opacity: 0 },
-};
-
-const transition = { delay: 0.1, type: "spring", bounce: 0, duration: 0.6 };
+// CSS-based transitions are used instead of framer-motion
 
 export function ExpandableTabs({
   tabs,
   className = "",
   activeColor = "",
   onChange,
-}: ExpandableTabsProps) {
-  const [selected, setSelected] = React.useState<number | null>(null);
+}: ExpandableTabsProps): ReactElement {
+  const [selected, setSelected] = useState<number | null>(null);
   const outsideClickRef = useRef<HTMLDivElement>(null);
 
+  const handleClickOutside = (): void => {
+    setSelected(null);
+    onChange?.(null);
+  };
+
   useOnClickOutside<HTMLDivElement>(
-    outsideClickRef as React.RefObject<HTMLDivElement>,
+    outsideClickRef as RefObject<HTMLDivElement>,
     () => {
       handleClickOutside();
     },
   );
 
-  const handleClickOutside = () => {
-    setSelected(null);
-    onChange?.(null);
-  };
-
-  const handleSelect = (index: number, e?: React.MouseEvent) => {
+  const handleSelect = (index: number, e?: MouseEvent): void => {
     e?.stopPropagation();
     const newSelected = selected === index ? null : index;
     setSelected(newSelected);
     onChange?.(newSelected);
   };
 
-  const Separator = () => (
+  const Separator = (): ReactElement => (
     <div className="bg-border mx-1 h-[24px] w-[1.2px]" aria-hidden="true" />
   );
 
@@ -81,13 +91,13 @@ export function ExpandableTabs({
       )}
     >
       {tabs.map((tab, index) => {
-        if (tab.type === "separator") {
+        if (!isTab(tab)) {
           return <Separator key={`separator-${index}`} />;
         }
 
-        const Icon = tab.icon;
         return (
-          <motion.button
+          <button
+            data-tab-key={tab.title}
             key={tab.title}
             title={
               selected === index && tab.labelSelected
@@ -99,40 +109,35 @@ export function ExpandableTabs({
                 ? tab.labelSelected
                 : tab.label
             }
-            initial={false}
-            animate="animate"
-            custom={selected === index}
-            onClick={(e: React.MouseEvent) => {
+            aria-expanded={selected === index}
+            onClick={(e: MouseEvent) => {
               e.preventDefault();
               handleSelect(index);
             }}
-            transition={transition}
             className={cn(
-              "relative z-10 m-1 flex h-7 cursor-pointer items-center rounded-full text-sm font-medium transition-all duration-300",
+              "relative z-10 m-1 flex h-7 cursor-pointer items-center rounded-full text-sm font-medium",
+              "transition-all duration-300",
               selected === index
                 ? cn("bg-muted", activeColor)
                 : "hover:bg-muted hover:text-foreground text-gray-600 dark:text-gray-400",
             )}
           >
-            <Icon size={18} className="mx-2 rounded" />
-            <AnimatePresence initial={false}>
-              {selected === index && (
-                <motion.div
-                  variants={spanVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  transition={transition}
-                  onClick={(e: React.MouseEvent) => {
-                    e.stopPropagation();
-                  }}
-                  className="inset-shadow-xl flex flex-1 flex-col overflow-hidden inset-shadow-black/50"
-                >
-                  {tab.component ?? tab.title}
-                </motion.div>
+            {createElement(tab.icon, { size: 18, className: "mx-2 rounded" })}
+            <div
+              onClick={(e: MouseEvent) => {
+                e.stopPropagation();
+              }}
+              className={cn(
+                "inset-shadow-xl flex flex-1 flex-col overflow-hidden inset-shadow-black/50",
+                "transition-all duration-300 ease-in-out",
+                selected === index
+                  ? "max-w-[420px] px-2 opacity-100"
+                  : "max-w-0 opacity-0",
               )}
-            </AnimatePresence>
-          </motion.button>
+            >
+              {tab.component ?? tab.title}
+            </div>
+          </button>
         );
       })}
     </div>

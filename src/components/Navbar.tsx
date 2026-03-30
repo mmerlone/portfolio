@@ -1,14 +1,21 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  type MouseEvent,
+  type ReactElement,
+} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { portfolio } from "@/data/portfolio";
+import { ListIcon, XIcon } from "@phosphor-icons/react";
 import ConfigBar from "@/components/ConfigBar";
-import { cn } from "@/lib/cn"
+import { cn } from "@/lib/cn";
 
-const Navbar = () => {
+const Navbar = (): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -17,7 +24,9 @@ const Navbar = () => {
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (event: globalThis.MouseEvent): void => {
       if (
         mobileMenuRef.current &&
         !mobileMenuRef.current.contains(event.target as Node) &&
@@ -29,70 +38,52 @@ const Navbar = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
+    return (): void => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [mobileMenuRef, mobileMenuButtonRef]);
+  }, [isOpen]);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       setIsScrolled(window.scrollY > 20);
     };
-    handleScroll();
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return (): void => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
+      (entries): void => {
         const visibleEntries = entries.filter((entry) => entry.isIntersecting);
 
         if (visibleEntries.length > 0) {
-          // Sort by boundingClientRect.top to find the topmost visible section
           visibleEntries.sort(
             (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
           );
           setActiveSection(visibleEntries[0].target.id);
         } else if (window.scrollY < 100) {
-          // If at the very top of the page
           setActiveSection("");
         }
-        // If no sections are intersecting and not at the top, activeSection retains its value
       },
-      { threshold: 0.1, rootMargin: "-30% 0px -30% 0px" }, // Adjusted threshold and rootMargin for better detection
+      { threshold: 0.1, rootMargin: "-30% 0px -30% 0px" },
     );
 
-    siteConfig.navigation.forEach((item) => {
-      if (item.href.startsWith("/#")) {
-        const id = item.href.substring(2);
-        const element = document.getElementById(id);
-        if (element) {
-          observer.observe(element);
-        }
-      }
-    });
+    const elements: HTMLElement[] = siteConfig.navigation
+      .filter((item) => item.href.startsWith("/#"))
+      .map((item) => document.getElementById(item.href.substring(2)))
+      .filter((el): el is HTMLElement => Boolean(el));
 
-    return () => {
-      siteConfig.navigation.forEach((item) => {
-        if (item.href.startsWith("/#")) {
-          const id = item.href.substring(2);
-          const element = document.getElementById(id);
-          if (element) {
-            observer.unobserve(element);
-          }
-        }
-      });
-    };
+    elements.forEach((el) => observer.observe(el));
+    return (): void => elements.forEach((el) => observer.unobserve(el));
   }, []);
 
   const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
+    e: MouseEvent<HTMLAnchorElement>,
     href: string,
-  ) => {
+  ): void => {
     if (href.startsWith("/#")) {
-      // Only prevent default and scroll if we are already on the main page
       if (pathname === "/") {
         e.preventDefault();
         const id = href.substring(2);
@@ -102,9 +93,7 @@ const Navbar = () => {
           setActiveSection(id);
         }
       } else {
-        // If navigating from a different page, allow Next.js Link to handle full page navigation
-        // The browser will then handle the anchor scroll after the page loads
-        setActiveSection(href.substring(2)); // Set active section immediately for visual feedback
+        setActiveSection(href.substring(2));
       }
     }
   };
@@ -118,13 +107,16 @@ const Navbar = () => {
 
   return (
     <nav
-      className={cn("fixed top-0 right-0 left-0 z-50 transition-all duration-300", navClasses)}
+      className={cn(
+        "fixed top-0 right-0 left-0 z-50 transition-all duration-300",
+        navClasses,
+      )}
     >
       <div className="container mx-auto px-4">
         <div
           className={cn(
             "flex h-16 items-center",
-            isScrolled ? "justify-between" : "justify-end"
+            isScrolled ? "justify-between" : "justify-end",
           )}
         >
           {isScrolled && (
@@ -132,7 +124,7 @@ const Navbar = () => {
               href="/#top"
               className="text-xl font-bold text-gray-900 transition-colors hover:text-indigo-600 dark:text-white dark:hover:text-indigo-400"
             >
-              {siteConfig.name}
+              {portfolio.basic.name}
             </Link>
           )}
 
@@ -150,9 +142,9 @@ const Navbar = () => {
                       : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
                     : pathname === item.href
                       ? "text-orange-600 dark:text-orange-400"
-                      : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
+                      : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400",
                 )}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={(e): void => handleNavClick(e, item.href)}
               >
                 {item.label}
               </Link>
@@ -162,52 +154,52 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            ref={mobileMenuButtonRef} // Attach ref to button
+            ref={mobileMenuButtonRef}
+            className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-orange-500 focus:outline-none focus:ring-inset md:hidden"
             onClick={() => setIsOpen(!isOpen)}
-            className="rounded-lg p-2 text-gray-600 transition-colors hover:bg-gray-100 md:hidden dark:text-gray-300 dark:hover:bg-gray-800"
-            aria-label="Toggle menu"
+            aria-label="Open main menu"
           >
             {isOpen ? (
-              <FaTimes className="h-6 w-6" />
+              <XIcon size={24} weight="bold" />
             ) : (
-              <FaBars className="h-6 w-6" />
+              <ListIcon size={24} weight="bold" />
             )}
           </button>
-        </div>
 
-        {/* Mobile Navigation */}
-        <div
-          ref={mobileMenuRef} // Attach ref to mobile menu div
-          className={cn(
-            "transition-all duration-300 ease-in-out md:hidden overflow-hidden",
-            isOpen ? "opacity-100" : "max-h-0 opacity-0"
-          )}
-        >
-          <div className="space-y-4 py-4">
-            {siteConfig.navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={(e) => {
-                  handleNavClick(e, item.href);
-                  setIsOpen(false);
-                }}
-                className={cn(
-                  "block transition-colors duration-500 ease-in-out",
-                  item.href.startsWith("/#")
-                    ? activeSection === item.href.substring(2)
-                      ? "text-orange-600 dark:text-orange-400"
-                      : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
-                    : pathname === item.href
-                      ? "text-orange-600 dark:text-orange-400"
-                      : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="m-1 max-w-fit flex-none">
-              <ConfigBar />
+          {/* Mobile menu content */}
+          <div
+            ref={mobileMenuRef}
+            className={cn(
+              "fixed top-16 right-0 left-0 z-40 mx-auto max-h-[80vh] w-full max-w-md overflow-y-auto rounded-b-xl bg-white shadow-lg transition-all duration-300 md:hidden dark:bg-gray-900",
+              isOpen ? "opacity-100" : "max-h-0 opacity-0",
+            )}
+          >
+            <div className="space-y-4 py-4">
+              {siteConfig.navigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e): void => {
+                    handleNavClick(e, item.href);
+                    setIsOpen(false);
+                  }}
+                  className={cn(
+                    "block transition-colors duration-500 ease-in-out",
+                    item.href.startsWith("/#")
+                      ? activeSection === item.href.substring(2)
+                        ? "text-orange-600 dark:text-orange-400"
+                        : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+                      : pathname === item.href
+                        ? "text-orange-600 dark:text-orange-400"
+                        : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <div className="m-1 max-w-fit flex-none">
+                <ConfigBar />
+              </div>
             </div>
           </div>
         </div>

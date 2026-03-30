@@ -1,7 +1,13 @@
-"use client";
+import { type ComponentType, type ElementType, type JSX } from "react";
 
-import React, { JSX } from "react";
-import { ConfigIconProps } from "@/types/components";
+export interface ConfigIconProps<TValue extends string> {
+  value?: TValue;
+  iconMap: Partial<Record<TValue, ElementType>>;
+  defaultIconComponent?: ElementType;
+  size?: number | string;
+  className?: string;
+  [key: string]: unknown;
+}
 
 export default function ConfigIcon<TValue extends string>({
   value,
@@ -11,8 +17,8 @@ export default function ConfigIcon<TValue extends string>({
   className,
   ...rest
 }: ConfigIconProps<TValue>): JSX.Element | null {
-  const IconToRender = ((value && iconMap[value]) ||
-    defaultIconComponent) as React.ComponentType<{
+  const selectedIcon = value ? iconMap[value] : undefined;
+  const IconToRender = (selectedIcon ?? defaultIconComponent) as ComponentType<{
     size?: number | string;
     className?: string;
   }>;

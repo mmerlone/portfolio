@@ -1,4 +1,4 @@
-import { ApiConfig } from "@/types/api";
+import { type ApiConfig } from "@/types/api";
 
 export const QUOTES_STALE_TIME = 15 * 60 * 1000; // 15 minutes
 
