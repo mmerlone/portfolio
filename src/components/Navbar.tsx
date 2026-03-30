@@ -129,28 +129,31 @@ const Navbar = (): ReactElement => {
           )}
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center space-x-4 md:flex">
+          <ul className="hidden items-center space-x-4 md:flex">
             {siteConfig.navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "transition-colors duration-500 ease-in-out",
-                  item.href.startsWith("/#")
-                    ? activeSection === item.href.substring(2)
-                      ? "text-orange-600 dark:text-orange-400"
-                      : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
-                    : pathname === item.href
-                      ? "text-orange-600 dark:text-orange-400"
-                      : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400",
-                )}
-                onClick={(e): void => handleNavClick(e, item.href)}
-              >
-                {item.label}
-              </Link>
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "transition-colors duration-500 ease-in-out",
+                    item.href.startsWith("/#")
+                      ? activeSection === item.href.substring(2)
+                        ? "text-orange-600 dark:text-orange-400"
+                        : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
+                      : pathname === item.href
+                        ? "text-orange-600 dark:text-orange-400"
+                        : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400",
+                  )}
+                  onClick={(e): void => handleNavClick(e, item.href)}
+                >
+                  {item.label}
+                </Link>
+              </li>
             ))}
-            <ConfigBar />
-          </div>
+            <li>
+              <ConfigBar />
+            </li>
+          </ul>
 
           {/* Mobile Menu Button */}
           <button
@@ -174,33 +177,34 @@ const Navbar = (): ReactElement => {
               isOpen ? "opacity-100" : "max-h-0 opacity-0",
             )}
           >
-            <div className="space-y-4 py-4">
+            <ul className="space-y-4 py-4">
               {siteConfig.navigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e): void => {
-                    handleNavClick(e, item.href);
-                    setIsOpen(false);
-                  }}
-                  className={cn(
-                    "block transition-colors duration-500 ease-in-out",
-                    item.href.startsWith("/#")
-                      ? activeSection === item.href.substring(2)
-                        ? "text-orange-600 dark:text-orange-400"
-                        : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
-                      : pathname === item.href
-                        ? "text-orange-600 dark:text-orange-400"
-                        : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400",
-                  )}
-                >
-                  {item.label}
-                </Link>
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={(e): void => {
+                      handleNavClick(e, item.href);
+                      setIsOpen(false);
+                    }}
+                    className={cn(
+                      "block transition-colors duration-500 ease-in-out",
+                      item.href.startsWith("/#")
+                        ? activeSection === item.href.substring(2)
+                          ? "text-orange-600 dark:text-orange-400"
+                          : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+                        : pathname === item.href
+                          ? "text-orange-600 dark:text-orange-400"
+                          : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
               ))}
-              <div className="m-1 max-w-fit flex-none">
+              <li className="m-1 max-w-fit flex-none">
                 <ConfigBar />
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

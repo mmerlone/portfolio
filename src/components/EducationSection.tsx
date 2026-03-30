@@ -17,7 +17,7 @@ export default function EducationSection({
         <SectionTitle>Education</SectionTitle>
         <div className="mx-auto max-w-3xl space-y-6">
           {portfolio.education.map((entry) => (
-            <div
+            <article
               key={`${entry.institution}-${entry.years}`}
               className="flex gap-4 rounded-lg bg-white p-6 shadow-md dark:bg-gray-800"
             >
@@ -40,7 +40,7 @@ export default function EducationSection({
                   </p>
                 )}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

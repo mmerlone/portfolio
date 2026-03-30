@@ -6,7 +6,7 @@ interface ChallengeCardProps {
 }
 
 const ChallengeCard = ({ challenge }: ChallengeCardProps): ReactElement => (
-  <div className="rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
+  <article className="rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800">
     <h3 className="mb-1 text-xl font-bold text-orange-600 dark:text-orange-400">
       {challenge.title}
     </h3>
@@ -56,7 +56,7 @@ const ChallengeCard = ({ challenge }: ChallengeCardProps): ReactElement => (
         </span>
       ))}
     </div>
-  </div>
+  </article>
 );
 
 export default ChallengeCard;

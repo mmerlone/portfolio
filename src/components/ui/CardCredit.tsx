@@ -24,7 +24,7 @@ interface CardCreditProps {
 
 export const CardCredit: FC<CardCreditProps> = ({ credit, className = "" }) => {
   return (
-    <div
+    <article
       className={cn(
         "group flex transform items-center justify-center space-x-4 transition-all duration-300 hover:-translate-y-1",
         className,
@@ -65,6 +65,6 @@ export const CardCredit: FC<CardCreditProps> = ({ credit, className = "" }) => {
           </a>
         </div>
       </div>
-    </div>
+    </article>
   );
 };

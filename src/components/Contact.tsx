@@ -21,7 +21,7 @@ export default function Contact({
         <div className="relative z-10 container mx-auto mt-12 px-4">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Contact Info */}
-            <div className="space-y-4">
+            <aside className="space-y-4">
               <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
                 Contact Info
               </h3>
@@ -38,20 +38,20 @@ export default function Contact({
                   <span>{portfolio.basic.location}</span>
                 </p>
               </div>
-            </div>
+            </aside>
 
             {/* Social Links */}
-            <div className="space-y-4">
+            <aside className="space-y-4">
               <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
                 Social Links
               </h3>
               <div className="flex space-x-4">
                 {social && renderSocialLinks(social)}
               </div>
-            </div>
+            </aside>
 
             {/* Quick Links */}
-            <div className="space-y-4">
+            <aside className="space-y-4">
               <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
                 Quick Links
               </h3>
@@ -67,17 +67,17 @@ export default function Contact({
                   </li>
                 ))}
               </ul>
-            </div>
+            </aside>
 
             {/* About */}
-            <div className="space-y-4">
+            <aside className="space-y-4">
               <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
                 About
               </h3>
               <p className="mb-3 text-gray-600 dark:text-gray-300">
                 {portfolio.basic.summary}
               </p>
-            </div>
+            </aside>
           </div>
         </div>
       </div>

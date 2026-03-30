@@ -10,5 +10,5 @@ export default function Section({
   children,
   className,
 }: SectionProps): ReactElement {
-  return <div className={clsx("mb-8", className)}>{children}</div>;
+  return <section className={clsx("mb-8", className)}>{children}</section>;
 }
