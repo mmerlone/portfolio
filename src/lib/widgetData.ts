@@ -1,6 +1,6 @@
-import { getGitHubRepoStats } from "@/app/actions/getGitHubRepoStats";
-import { getQuote } from "@/app/actions/getQuote";
-import { getWeather } from "@/app/actions/getWeather";
+import { getGitHubRepoStats } from "@/lib/actions/getGitHubRepoStats";
+import { getQuote } from "@/lib/actions/getQuote";
+import { getWeather } from "@/lib/actions/getWeather";
 import { errorQuote } from "@/lib/api";
 import {
   type GitHubRepoStatsWidgetData,

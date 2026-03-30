@@ -7,7 +7,9 @@ import { type RepoStats } from "@/types/api";
  * Server action to fetch GitHub repository stats.
  * This replaces the deprecated /api/github endpoint.
  */
-export async function getGitHubRepoStats(repoUrl: string): Promise<RepoStats> {
+export async function getGitHubRepoStats(
+  repoUrl: string,
+): Promise<RepoStats | null> {
   if (!repoUrl) {
     throw new Error("Repository URL is not defined.");
   }
@@ -37,7 +39,7 @@ export async function getGitHubRepoStats(repoUrl: string): Promise<RepoStats> {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch GitHub stats");
+    return null;
   }
 
   const payload: unknown = await response.json();

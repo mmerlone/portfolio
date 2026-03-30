@@ -16,7 +16,6 @@ export async function getWeather(
   }
 
   if (!apiConfig.openWeather.apiKey) {
-    // Return null if API key is not configured
     return null;
   }
 
@@ -28,12 +27,12 @@ export async function getWeather(
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch weather data: ${response.statusText}`);
+      return null;
     }
 
     const payload: unknown = await response.json();
     return parseWeatherResponse(payload);
-  } catch (error) {
-    throw new Error("Error fetching weather data", { cause: error });
+  } catch {
+    return null;
   }
 }
