@@ -1,18 +1,22 @@
-"use client";
-
-import { Suspense } from "react";
+import { Suspense, type ReactElement } from "react";
 import { cn } from "@/lib/cn";
 import Weather, { WeatherFallback } from "@/components/widgets/Weather";
 import GitHubRepoStats, {
   GitHubRepoStatsFallback,
 } from "@/components/widgets/GitHubRepoStats";
-import { type WidgetsSectionProps } from "@/types/components";
+import type { GitHubRepoStatsWidgetData, WeatherWidgetData } from "@/types/api";
 
-const WidgetsSection = ({
+interface WidgetsSectionProps {
+  className?: string;
+  repoStatsPromise: Promise<GitHubRepoStatsWidgetData> | null;
+  weatherPromise: Promise<WeatherWidgetData> | null;
+}
+
+export default function WidgetsSection({
   className = "",
   repoStatsPromise,
   weatherPromise,
-}: WidgetsSectionProps): React.ReactElement => {
+}: WidgetsSectionProps): ReactElement {
   return (
     <section
       id="widgets"
@@ -35,6 +39,4 @@ const WidgetsSection = ({
       </div>
     </section>
   );
-};
-
-export default WidgetsSection;
+}

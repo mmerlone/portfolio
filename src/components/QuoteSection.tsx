@@ -1,14 +1,14 @@
-"use client";
-
-import { Suspense } from "react";
-import Quote, { QuoteFallback } from "@/components/widgets/Quote";
+import { Suspense, type ReactElement } from "react";
+import Quote, {
+  QuoteFallback,
+  type QuoteProps,
+} from "@/components/widgets/Quote";
 import { cn } from "@/lib/cn";
-import { type QuoteProps } from "@/types/components";
 
 const QuoteSection = ({
   className = "",
   quotesPromise,
-}: QuoteProps): React.ReactElement => {
+}: QuoteProps): ReactElement => {
   return (
     <section
       id="quote"

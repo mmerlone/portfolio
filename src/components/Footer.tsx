@@ -1,23 +1,18 @@
 "use client";
 
-import { useEffect, useState, type ReactElement } from "react";
+import { useState, type ReactElement } from "react";
 import { siteConfig } from "@/config/site";
+import { portfolio } from "@/data/portfolio";
 import TermsOfServicePolicy from "./TermsOfServicePolicy";
 import { setCookie } from "@/lib/cookies";
 
 const Footer = (): ReactElement => {
-  const [currentYear, setCurrentYear] = useState<number>(
-    new Date().getFullYear(),
-  );
+  const currentYear = new Date().getFullYear();
   const [policyOpen, setPolicyOpen] = useState(false);
 
   // Retrieve cookie name and expiry from site config
   const COOKIE_NAME = siteConfig.cookie.name;
   const COOKIE_EXPIRY_DAYS = siteConfig.cookie.expiryDays;
-
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
 
   const handlePolicyOpen = (): void => {
     setPolicyOpen(true);
@@ -44,7 +39,7 @@ const Footer = (): ReactElement => {
         <div className="relative z-10 container mx-auto p-2">
           <div className="flex flex-col items-center sm:flex-row sm:justify-between">
             <p className="text-sm">
-              &copy; {currentYear} {siteConfig.name}.{" "}
+              &copy; <span>{currentYear}</span> {portfolio.basic.name}.{" "}
               {siteConfig.footer.copyright.text}
             </p>
             {/* Terms of Service & Cookie Policy link */}

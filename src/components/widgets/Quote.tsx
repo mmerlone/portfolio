@@ -1,16 +1,33 @@
 "use client";
 
+import {
+  startTransition,
+  use,
+  useState,
+  type ReactNode,
+  type ReactElement,
+} from "react";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { ArrowSquareOutIcon } from "@phosphor-icons/react";
 import { errorQuote } from "@/lib/api";
-import { siteConfig } from "@/config/site";
-import { startTransition, use, useState } from "react";
-import { type QuoteProps } from "@/types/components";
+import type { QuoteInterface } from "@/types/api";
 
-const Quote = ({ quotesPromise }: QuoteProps): React.ReactElement => {
+export interface QuoteProps {
+  quotesPromise: Promise<QuoteInterface[]>;
+}
+
+const Quote = ({ quotesPromise }: QuoteProps): ReactElement => {
   const [isFetchEnabled, setIsFetchEnabled] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const initialQuote = siteConfig.quote?.firstQuote ?? errorQuote(500);
+  const initialQuote: QuoteInterface = {
+    q: "640 k ought to be enough for anybody.",
+    a: "Bill Gates",
+    h: "\u003cblockquote\u003e\u0026ldquo;640 k ought to be enough for anybody.\u0026rdquo; \u0026mdash; \u003cfooter\u003eBill Gates\u003c/footer\u003e\u003c/blockquote\u003e",
+    s: {
+      anchor: "Popular Wisdom",
+      title: "A famous quote often attributed to Bill Gates",
+    },
+  };
   const fetchedQuotes = isFetchEnabled ? use(quotesPromise) : null;
   const quotes = fetchedQuotes ?? [initialQuote];
   const activeQuote = quotes[currentIndex] ?? errorQuote(500);
@@ -28,7 +45,7 @@ const Quote = ({ quotesPromise }: QuoteProps): React.ReactElement => {
     setCurrentIndex((previousIndex) => (previousIndex + 1) % quotes.length);
   };
 
-  const renderSource = (): React.ReactNode => {
+  const renderSource = (): ReactNode => {
     if (s?.href) {
       return (
         <a
@@ -39,7 +56,11 @@ const Quote = ({ quotesPromise }: QuoteProps): React.ReactElement => {
           title={s?.title}
         >
           {s.anchor}
-          <FaExternalLinkAlt className="ml-1 h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
+          <ArrowSquareOutIcon
+            size={12}
+            weight="bold"
+            className="ml-1 opacity-0 transition-opacity group-hover:opacity-100"
+          />
         </a>
       );
     }
@@ -71,7 +92,7 @@ const Quote = ({ quotesPromise }: QuoteProps): React.ReactElement => {
   );
 };
 
-export const QuoteFallback = (): React.ReactElement => {
+export const QuoteFallback = (): ReactElement => {
   return (
     <div className="animated-background m-8 mx-8 max-h-fit max-w-fit flex-1 items-center rounded-lg p-3 shadow-lg outline-2 outline-gray-300 outline-solid md:flex-none dark:outline-gray-700">
       <div className="z-20 flex w-full items-center space-x-4 rounded-lg bg-gray-50 p-4 text-left drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] dark:bg-gray-800">

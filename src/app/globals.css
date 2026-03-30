@@ -10,7 +10,6 @@
 /* Import component/section specific styles */
 @import "./styles/global/carousel.css";
 @import "./styles/global/carousel-3d.css";
-@import "./styles/global/aurora.css";
-@import "./styles/global/isometric-backgrounds.css";
+/* removed aurora and isometric backgrounds (leftovers) */
 @import "./styles/global/credits.css";
-@import "./styles/global/experience-effect.css";
+/* removed experience-effect (leftover) */

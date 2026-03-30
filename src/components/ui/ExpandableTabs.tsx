@@ -11,10 +11,14 @@ import {
   useRef,
   useState,
 } from "react";
-import { AnimatePresence, motion, type Transition } from "framer-motion";
+// framer-motion removed — replace with CSS transitions
 import { useOnClickOutside } from "usehooks-ts";
 import { cn } from "@/lib/cn";
-import { type IconProps } from "@/types/components";
+
+export interface IconProps {
+  size?: number | string;
+  className?: string;
+}
 
 export interface Tab {
   title: string;
@@ -44,18 +48,7 @@ interface ExpandableTabsProps {
   onChange?: (index: number | null) => void;
 }
 
-const spanVariants = {
-  initial: { width: 0, opacity: 0 },
-  animate: { width: "auto", opacity: 1 },
-  exit: { width: 0, opacity: 0 },
-};
-
-const transition: Transition = {
-  delay: 0.1,
-  type: "spring",
-  bounce: 0,
-  duration: 0.6,
-};
+// CSS-based transitions are used instead of framer-motion
 
 export function ExpandableTabs({
   tabs,
@@ -103,7 +96,8 @@ export function ExpandableTabs({
         }
 
         return (
-          <motion.button
+          <button
+            data-tab-key={tab.title}
             key={tab.title}
             title={
               selected === index && tab.labelSelected
@@ -115,40 +109,35 @@ export function ExpandableTabs({
                 ? tab.labelSelected
                 : tab.label
             }
-            initial={false}
-            animate="animate"
-            custom={selected === index}
+            aria-expanded={selected === index}
             onClick={(e: MouseEvent) => {
               e.preventDefault();
               handleSelect(index);
             }}
-            transition={transition}
             className={cn(
-              "relative z-10 m-1 flex h-7 cursor-pointer items-center rounded-full text-sm font-medium transition-all duration-300",
+              "relative z-10 m-1 flex h-7 cursor-pointer items-center rounded-full text-sm font-medium",
+              "transition-all duration-300",
               selected === index
                 ? cn("bg-muted", activeColor)
                 : "hover:bg-muted hover:text-foreground text-gray-600 dark:text-gray-400",
             )}
           >
             {createElement(tab.icon, { size: 18, className: "mx-2 rounded" })}
-            <AnimatePresence initial={false}>
-              {selected === index && (
-                <motion.div
-                  variants={spanVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  transition={transition}
-                  onClick={(e: MouseEvent) => {
-                    e.stopPropagation();
-                  }}
-                  className="inset-shadow-xl flex flex-1 flex-col overflow-hidden inset-shadow-black/50"
-                >
-                  {tab.component ?? tab.title}
-                </motion.div>
+            <div
+              onClick={(e: MouseEvent) => {
+                e.stopPropagation();
+              }}
+              className={cn(
+                "inset-shadow-xl flex flex-1 flex-col overflow-hidden inset-shadow-black/50",
+                "transition-all duration-300 ease-in-out",
+                selected === index
+                  ? "max-w-[420px] px-2 opacity-100"
+                  : "max-w-0 opacity-0",
               )}
-            </AnimatePresence>
-          </motion.button>
+            >
+              {tab.component ?? tab.title}
+            </div>
+          </button>
         );
       })}
     </div>

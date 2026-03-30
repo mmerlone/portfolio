@@ -1,13 +1,14 @@
+import type { ReactElement, ReactNode } from "react";
 import clsx from "clsx";
 
 interface SectionProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export default function Section({
   children,
   className,
-}: SectionProps): React.ReactElement {
+}: SectionProps): ReactElement {
   return <div className={clsx("mb-8", className)}>{children}</div>;
 }

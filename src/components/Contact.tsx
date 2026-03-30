@@ -1,10 +1,19 @@
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { type ReactElement } from "react";
+import { EnvelopeSimpleIcon, MapPinIcon } from "@phosphor-icons/react/ssr";
+import { portfolio } from "@/data/portfolio";
 import { siteConfig } from "@/config/site";
-import { type ContactProps } from "@/types/components";
 import { renderSocialLinks } from "@/components/renderSocialLinks";
 import { cn } from "@/lib/cn";
 
-const Contact = ({ className = "" }: ContactProps): React.ReactElement => {
+interface ContactProps {
+  className?: string;
+}
+
+export default function Contact({
+  className = "",
+}: ContactProps): ReactElement {
+  const { contact, social } = portfolio.basic;
+
   return (
     <section id="contact" className="relative">
       <div className={cn(className, "bg-gray-100/50 dark:bg-gray-950")}>
@@ -18,24 +27,15 @@ const Contact = ({ className = "" }: ContactProps): React.ReactElement => {
               </h3>
               <div className="space-y-2">
                 <a
-                  href={`mailto:${siteConfig.contact.email}`}
+                  href={`mailto:${contact.email}`}
                   className="flex items-center space-x-2 text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
                 >
-                  <FaEnvelope className="h-5 w-5" />
-                  <span>{siteConfig.contact.email}</span>
+                  <EnvelopeSimpleIcon size={20} weight="bold" />
+                  <span>{contact.email}</span>
                 </a>
-                {siteConfig.contact.phone && (
-                  <a
-                    href={`tel:${siteConfig.contact.phone}`}
-                    className="flex items-center space-x-2 text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
-                  >
-                    <FaPhone className="h-5 w-5" />
-                    <span>{siteConfig.contact.phone}</span>
-                  </a>
-                )}
                 <p className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
-                  <FaMapMarkerAlt className="h-5 w-5" />
-                  <span>{siteConfig.contact.location}</span>
+                  <MapPinIcon size={20} weight="bold" />
+                  <span>{portfolio.basic.location}</span>
                 </p>
               </div>
             </div>
@@ -46,7 +46,7 @@ const Contact = ({ className = "" }: ContactProps): React.ReactElement => {
                 Social Links
               </h3>
               <div className="flex space-x-4">
-                {renderSocialLinks(siteConfig.social)}
+                {social && renderSocialLinks(social)}
               </div>
             </div>
 
@@ -75,7 +75,7 @@ const Contact = ({ className = "" }: ContactProps): React.ReactElement => {
                 About
               </h3>
               <p className="mb-3 text-gray-600 dark:text-gray-300">
-                {siteConfig.description}
+                {portfolio.basic.summary}
               </p>
             </div>
           </div>
@@ -83,6 +83,4 @@ const Contact = ({ className = "" }: ContactProps): React.ReactElement => {
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

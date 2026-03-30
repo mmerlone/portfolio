@@ -1,33 +1,43 @@
+import type { ReactElement, ComponentType } from "react";
 import {
-    FaLinkedin,
-    FaGithub,
-    FaTwitter,
-    FaInstagram,
-  } from "react-icons/fa";
-  import { type siteConfig } from "@/config/site";
-  import { type IconProps } from "@/types/components";
+  LinkedinLogoIcon,
+  GithubLogoIcon,
+  TwitterLogoIcon,
+  InstagramLogoIcon,
+  FacebookLogoIcon,
+  GlobeIcon,
+} from "@phosphor-icons/react/ssr";
+import type { PortfolioSocialLink } from "@/types/portfolio";
+import { type IconProps } from "@/components/ui/ExpandableTabs";
 
-const iconMap: { [key: string]: React.ComponentType<IconProps> } = {
-  linkedin: FaLinkedin,
-  github: FaGithub,
-  twitter: FaTwitter,
-  instagram: FaInstagram,
+const iconMap: Record<string, ComponentType<IconProps>> = {
+  linkedin: LinkedinLogoIcon,
+  github: GithubLogoIcon,
+  twitter: TwitterLogoIcon,
+  instagram: InstagramLogoIcon,
+  facebook: FacebookLogoIcon,
 };
 
-export const renderSocialLinks = (socialLinks: typeof siteConfig.social): React.ReactElement[] => {
-  return socialLinks.map((social) => { // Removed index from map
-    const Icon = social.icon && iconMap[social.icon.toLowerCase()];
+/**
+ * Renders a list of social link icons from portfolio social data.
+ * Falls back to a globe icon when no icon mapping is found for a name.
+ */
+export const renderSocialLinks = (
+  socialLinks: readonly PortfolioSocialLink[],
+): ReactElement[] => {
+  return socialLinks.map((social) => {
+    const Icon = iconMap[social.name.toLowerCase()] ?? GlobeIcon;
 
     return (
       <a
-        key={social.url} // Changed key from index to social.url
+        key={social.url}
         href={social.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
+        className="text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
         aria-label={social.name}
       >
-        {Icon && <Icon className="w-6 h-6" />}
+        <Icon className="h-6 w-6" />
       </a>
     );
   });

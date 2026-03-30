@@ -1,7 +1,7 @@
 "use client";
 
 import { type ComponentType, type ElementType, type ReactElement } from "react";
-import { type ConfigIconProps } from "@/types/components";
+import { type ConfigIconProps } from "@/components/ui/config/ConfigIcon";
 import { cn } from "@/lib/cn";
 
 // Type Definitions
