@@ -71,9 +71,9 @@ const Quote = ({ quotesPromise }: QuoteProps): ReactElement => {
   };
 
   return (
-    <div className="animated-background m-8 mx-8 max-h-fit max-w-fit flex-1 items-center rounded-lg p-3 shadow-lg outline-2 outline-gray-300 outline-solid md:flex-none dark:outline-gray-700">
+    <div className="m-8 w-full flex-1 items-center p-8 md:flex-none">
       <button
-        className="z-20 flex w-full cursor-pointer items-center space-x-4 rounded-lg bg-gray-50 p-4 text-left drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] dark:bg-gray-800"
+        className="z-20 mx-auto flex w-fit cursor-pointer items-center space-x-4 p-4 text-left"
         onClick={handleClick}
       >
         <div className="flex-1">
@@ -85,7 +85,7 @@ const Quote = ({ quotesPromise }: QuoteProps): ReactElement => {
           </cite>
         </div>
       </button>
-      <p className="m-4 text-xs text-gray-500 dark:text-gray-400">
+      <p className="text-xs text-gray-500 dark:text-gray-400">
         Inspirational quote kindly provided by {renderSource()}
       </p>
     </div>
@@ -94,7 +94,7 @@ const Quote = ({ quotesPromise }: QuoteProps): ReactElement => {
 
 export const QuoteFallback = (): ReactElement => {
   return (
-    <div className="animated-background m-8 mx-8 max-h-fit max-w-fit flex-1 items-center rounded-lg p-3 shadow-lg outline-2 outline-gray-300 outline-solid md:flex-none dark:outline-gray-700">
+    <div className="m-8 mx-8 flex-1 items-center p-3 md:flex-none">
       <div className="z-20 flex w-full items-center space-x-4 rounded-lg bg-gray-50 p-4 text-left drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] dark:bg-gray-800">
         <LoadingSpinner className="w-full" />
       </div>
