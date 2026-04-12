@@ -2,31 +2,6 @@ import type { Credit } from "@/types/credits";
 
 export const creditsData: readonly Credit[] = [
   {
-    name: "OpenWeatherMap",
-    description: "Weather data provided by OpenWeatherMap.",
-    url: "https://openweathermap.org/",
-    icon: "open-weather.svg",
-  },
-  {
-    name: "Heroicons",
-    description:
-      "Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.",
-    url: "https://heroicons.com/",
-    icon: "heroicons.svg",
-  },
-  {
-    name: "Tailwind CSS",
-    description: "A utility-first CSS framework for creating custom designs.",
-    url: "https://tailwindcss.com/",
-    icon: "tailwindcss.svg",
-  },
-  {
-    name: "ZenQuotes API",
-    description: "Inspirational quotes provided by ZenQuotes API.",
-    url: "https://zenquotes.io/",
-    icon: "zenquotes.png",
-  },
-  {
     name: "Vercel",
     description:
       "The platform for frontend developers, providing the best developer experience and performance.",
@@ -39,6 +14,20 @@ export const creditsData: readonly Credit[] = [
       "Vercel Speed Insights provides performance insights for your website.",
     url: "https://vercel.com/docs/speed-insights",
     icon: "vercel.svg",
+  },
+  {
+    name: "Google Analytics",
+    description:
+      "Google Analytics provides audience insights and performance metrics.",
+    url: "https://analytics.google.com/",
+    icon: "google-analytics.svg",
+  },
+  {
+    name: "Cloudflare",
+    description:
+      "Cloudflare provides CDN, security, and performance optimization.",
+    url: "https://cloudflare.com/",
+    icon: "cloudflare.svg",
   },
   {
     name: "improvmx.com",
@@ -65,15 +54,21 @@ export const creditsData: readonly Credit[] = [
     icon: "react.svg",
   },
   {
-    name: "Aceternity UI",
-    description: "Beautiful and modern UI components for React.",
-    url: "https://ui.aceternity.com/",
-    icon: "https://ui.aceternity.com/logo.png",
+    name: "OpenWeatherMap",
+    description: "Weather data provided by OpenWeatherMap.",
+    url: "https://openweathermap.org/",
+    icon: "open-weather.svg",
   },
   {
-    name: "Kokonutd",
-    description: "Creative and modern UI components.",
-    url: "https://21st.dev/",
-    icon: "https://21st.dev/favicon.ico",
+    name: "Tailwind CSS",
+    description: "A utility-first CSS framework for creating custom designs.",
+    url: "https://tailwindcss.com/",
+    icon: "tailwindcss.svg",
+  },
+  {
+    name: "ZenQuotes API",
+    description: "Inspirational quotes provided by ZenQuotes API.",
+    url: "https://zenquotes.io/",
+    icon: "zenquotes.png",
   },
 ];
