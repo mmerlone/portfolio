@@ -7,7 +7,7 @@ import { portfolio } from "@/data/portfolio";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import TermsOfServiceToast from "@/components/TermsOfServiceToast";
-import { GoogleTagManager } from "@next/third-parties/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 interface LayoutProps {
   children: ReactNode;
@@ -54,9 +54,7 @@ export default function RootLayout({ children }: LayoutProps): ReactElement {
   // Hardcode the lang attribute to "en-US" to ensure SSR and hydration align
   return (
     <html lang="en-US" suppressHydrationWarning>
-      <GoogleTagManager
-        gtmId={siteConfig?.analytics?.googleTagManager.id ?? ""}
-      />
+      <GoogleAnalytics gaId={siteConfig?.analytics?.googleAnalytics.id ?? ""} />
       <body className={inter.className} suppressHydrationWarning={true}>
         <ThemeProvider
           attribute="class"
