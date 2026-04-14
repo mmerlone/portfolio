@@ -85,7 +85,7 @@ const Quote = ({ quotesPromise }: QuoteProps): ReactElement => {
           </cite>
         </div>
       </button>
-      <p className="text-xs text-gray-500 dark:text-gray-400">
+      <p className="text-center text-xs text-gray-500 dark:text-gray-400">
         Inspirational quote kindly provided by {renderSource()}
       </p>
     </div>

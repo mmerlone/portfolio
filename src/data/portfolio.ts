@@ -26,7 +26,7 @@ export const portfolio: Portfolio = {
       website: "https://mmerlone.dev.br/",
     },
     summary:
-      "Bridging the gap between ambitious technical vision and reliable production systems through collaborative engineering and operational empathy. Specialist in building resilient, accessible platforms that scale from foundational infrastructure to pixel-perfect UIs for global brands like HP, Starbucks, Cirrus Aircraft and others",
+      "Bridging the gap between ambitious technical vision and reliable production systems through collaborative engineering and operational empathy. Specialist in building resilient, accessible platforms that scale from foundational infrastructure to pixel-perfect UIs for global brands. With 20+ years of experience, I excel at 'living with decisions,' evolving legacy ERPs into scalable cloud-ready environments while maintaining a relentless focus on reliability, performance, and user experience.",
     technical: {
       programming: [
         "React",
@@ -122,29 +122,6 @@ export const portfolio: Portfolio = {
     },
     expertise: [
       {
-        name: "Resilient Platform Architecture",
-        keywords: [
-          "Microsoft",
-          "Samba4",
-          "Postfix",
-          "Dovecot",
-          "OpenLDAP",
-          "DNS",
-          "DHCP",
-          "LDAP",
-          "AD",
-          "GIT",
-          "VMware ESXi",
-          "vCenter",
-          "Zabbix",
-          "Graylog",
-          "IPAM",
-          "Backup",
-        ],
-        description:
-          "Architecting resilient internal applications to ensuring reliability and performance with a 99.9% uptime.",
-      },
-      {
         name: "High-Performance UI Architecture",
         keywords: [
           "React",
@@ -169,6 +146,29 @@ export const portfolio: Portfolio = {
           "Scaling global frontend systems for Fortune 500 brands with a focus on 'Accessibility as Architecture'.",
       },
       {
+        name: "Resilient Platform Architecture",
+        keywords: [
+          "Microsoft",
+          "Samba4",
+          "Postfix",
+          "Dovecot",
+          "OpenLDAP",
+          "DNS",
+          "DHCP",
+          "LDAP",
+          "AD",
+          "GIT",
+          "VMware ESXi",
+          "vCenter",
+          "Zabbix",
+          "Graylog",
+          "IPAM",
+          "Backup",
+        ],
+        description:
+          "Architecting resilient internal applications to ensuring reliability and performance with a 99.9% uptime.",
+      },
+      {
         name: "Operational Stewardship",
         keywords: [
           "Hardware",
@@ -191,7 +191,7 @@ export const portfolio: Portfolio = {
           "Uptime",
         ],
         description:
-          "A 14-year track record of 'living with decisions,' evolving mission-critical legacy ERPs into scalable cloud-ready environments.",
+          "A 20+ year track record of 'living with decisions,' evolving mission-critical legacy ERPs into scalable cloud-ready environments.",
       },
     ],
     resume: "/documents/MarcioMerlone.pdf",
