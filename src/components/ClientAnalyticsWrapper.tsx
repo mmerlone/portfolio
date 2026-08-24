@@ -5,7 +5,7 @@ import type { ReactElement } from "react";
 
 const DynamicAnalyticsWrapper = dynamic(
   () => import("@/components/AnalyticsWrapper"),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function ClientAnalyticsWrapper(): ReactElement {

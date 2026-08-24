@@ -12,7 +12,11 @@ const getSnapshot = (): boolean => true;
 const getServerSnapshot = (): boolean => false;
 
 export default function AnalyticsWrapper(): ReactElement | null {
-  const hasMounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
+  const hasMounted = useSyncExternalStore(
+    emptySubscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
 
   const gtmId = siteConfig.analytics?.googleTagManager.id ?? null;
   const gaId = siteConfig.analytics?.googleAnalytics.id ?? null;

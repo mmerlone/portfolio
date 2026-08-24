@@ -6,7 +6,7 @@
  * @module logger/utils
  */
 
-import type { Logger } from '@/types/logger.types'
+import type { Logger } from "@/types/logger.types";
 
 /**
  * Timed operation interface returned by timeOperation().
@@ -19,7 +19,7 @@ export interface TimedOperation {
    *
    * @param context - Additional context to log
    */
-  end: (context?: Record<string, unknown>) => void
+  end: (context?: Record<string, unknown>) => void;
 
   /**
    * Mark operation as failed.
@@ -28,7 +28,7 @@ export interface TimedOperation {
    * @param err - The error that caused the failure
    * @param context - Additional context to log
    */
-  fail: (err: Error, context?: Record<string, unknown>) => void
+  fail: (err: Error, context?: Record<string, unknown>) => void;
 }
 
 /**
@@ -73,20 +73,26 @@ export interface TimedOperation {
 export function timeOperation(
   logger: Logger,
   operation: string,
-  baseContext: Record<string, unknown> = {}
+  baseContext: Record<string, unknown> = {},
 ): TimedOperation {
-  const start = Date.now()
+  const start = Date.now();
 
   return {
     end: (context = {}): void => {
-      const duration = Date.now() - start
-      logger.info({ ...baseContext, ...context, duration }, `${operation} completed`)
+      const duration = Date.now() - start;
+      logger.info(
+        { ...baseContext, ...context, duration },
+        `${operation} completed`,
+      );
     },
     fail: (err: Error, context = {}): void => {
-      const duration = Date.now() - start
-      logger.error({ ...baseContext, ...context, err, duration }, `${operation} failed`)
+      const duration = Date.now() - start;
+      logger.error(
+        { ...baseContext, ...context, err, duration },
+        `${operation} failed`,
+      );
     },
-  }
+  };
 }
 
 /**
@@ -111,24 +117,24 @@ export function timeOperation(
  * ```
  */
 export const maskEmail = (email: string): string => {
-  if (!email || typeof email !== 'string' || !email.includes('@')) return email
+  if (!email || typeof email !== "string" || !email.includes("@")) return email;
 
-  const parts = email.split('@')
-  const localPart = parts[0]
-  const domain = parts[1]
+  const parts = email.split("@");
+  const localPart = parts[0];
+  const domain = parts[1];
 
-  if (!localPart || !domain) return '***'
+  if (!localPart || !domain) return "***";
 
-  const len = localPart.length
+  const len = localPart.length;
 
-  let masked: string
+  let masked: string;
   if (len <= 2) {
-    masked = '*'.repeat(len)
+    masked = "*".repeat(len);
   } else if (len <= 4) {
-    masked = localPart[0] + '*'.repeat(len - 1)
+    masked = localPart[0] + "*".repeat(len - 1);
   } else {
-    masked = localPart[0] + '*'.repeat(len - 2) + localPart[len - 1]
+    masked = localPart[0] + "*".repeat(len - 2) + localPart[len - 1];
   }
 
-  return `${masked}@${domain}`
-}
+  return `${masked}@${domain}`;
+};

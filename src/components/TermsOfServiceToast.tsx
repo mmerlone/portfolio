@@ -10,7 +10,11 @@ const getSnapshot = (): boolean => true;
 const getServerSnapshot = (): boolean => false;
 
 const TermsOfServiceToast = (): ReactElement | null => {
-  const isClient = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
+  const isClient = useSyncExternalStore(
+    emptySubscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
   const [closed, setClosed] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
 
@@ -56,12 +60,13 @@ const TermsOfServiceToast = (): ReactElement | null => {
 
   return (
     <>
-      <div className="fixed right-4 bottom-4 left-4 z-50 flex flex-col items-center justify-between rounded bg-gray-200 p-4 text-gray-800 shadow-lg md:flex-row dark:bg-gray-800 dark:text-white shadow-gray-950">
+      <div className="fixed right-4 bottom-4 left-4 z-50 flex flex-col items-center justify-between rounded border border-gray-300 bg-gray-200 p-4 text-gray-800 md:flex-row dark:border-gray-600 dark:bg-gray-800 dark:text-white">
         <p className="mx-4 mb-2 text-sm md:mb-0">
           I use cookies to enhance your experience and track interactions. By
           clicking <strong>Accept</strong> or <strong>Refuse</strong> you agree
           to my{" "}
           <button
+            type="button"
             onClick={() => setPolicyOpen(true)}
             className="bg-gray-200 underline hover:text-gray-300 focus:outline-none dark:bg-gray-800"
           >

@@ -34,4 +34,4 @@ export const projects: PortfolioProjectItem[] = [
     github: "https://github.com/mmerlone/react-tz-globepicker",
     technologies: ["React 19+", "TypeScript"],
   },
-]; 
+];

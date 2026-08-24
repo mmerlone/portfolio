@@ -57,7 +57,10 @@ export function buildIsomorphicLogger(moduleName: string): Logger {
 
   const handleLoggerError = (error: unknown, logLevel: string): void => {
     if (typeof window === "undefined") {
-      globalThis.console.error(`[${moduleName}] Logger initialization failed for ${logLevel}:`, error);
+      globalThis.console.error(
+        `[${moduleName}] Logger initialization failed for ${logLevel}:`,
+        error,
+      );
     }
   };
 

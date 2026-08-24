@@ -16,17 +16,19 @@ function serializeError(error: Error): SerializedError {
 }
 
 function normalizeContext(context: LoggerContext): LoggerContext {
-  const entries = Object.entries(context).map(([key, value]): [string, unknown] => {
-    if (key === "email" && typeof value === "string") {
-      return [key, maskEmail(value)];
-    }
+  const entries = Object.entries(context).map(
+    ([key, value]): [string, unknown] => {
+      if (key === "email" && typeof value === "string") {
+        return [key, maskEmail(value)];
+      }
 
-    if (key === "err" && value instanceof Error) {
-      return [key, serializeError(value)];
-    }
+      if (key === "err" && value instanceof Error) {
+        return [key, serializeError(value)];
+      }
 
-    return [key, value];
-  });
+      return [key, value];
+    },
+  );
 
   return Object.fromEntries(entries);
 }
@@ -70,7 +72,10 @@ function writeToConsole(level: LogLevel, message: string): void {
   }
 }
 
-export function createLogger(baseContext: LoggerContext = {}, isEnabled = true): Logger {
+export function createLogger(
+  baseContext: LoggerContext = {},
+  isEnabled = true,
+): Logger {
   function log(level: LogLevel, context: LoggerContext, message: string): void {
     if (!isEnabled) {
       return;
