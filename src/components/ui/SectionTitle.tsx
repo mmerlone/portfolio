@@ -6,7 +6,7 @@ type SectionTitleProps = {
 
 export const SectionTitle = ({ children }: SectionTitleProps): ReactElement => {
   return (
-    <h2 className="text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 pt-6 mb-6 text-center">
+    <h2 className="mb-6 pt-6 text-center text-3xl font-bold text-orange-600 md:text-4xl dark:text-orange-400">
       {children}
     </h2>
   );

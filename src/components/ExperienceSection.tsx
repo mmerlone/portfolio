@@ -30,12 +30,7 @@ export default function ExperienceSection({
       <div className="relative z-10 container mx-auto overflow-x-visible px-4">
         <SectionTitle>Professional Experience</SectionTitle>
         <div className="mx-auto">
-          <div
-            className={cn(
-              "relative space-y-12 overflow-hidden transition-all duration-500",
-              expanded ? "h-auto" : "more-to-show max-h-240 overflow-x-visible",
-            )}
-          >
+          <div className={cn("relative space-y-12")}>
             {visibleJobs.map((job: PortfolioExperienceItem) => (
               <article
                 key={`${job.company}-${job.start}`}
@@ -43,7 +38,7 @@ export default function ExperienceSection({
               >
                 <div className="absolute top-0 bottom-0 left-0 w-0.5 bg-gray-200 sm:left-16 dark:bg-gray-700" />
                 <div className="absolute top-8 left-0 h-4 w-4 -translate-x-1/2 transform rounded-full bg-orange-500 sm:left-16 dark:bg-orange-400" />
-                <div className="absolute top-6 left-0 h-12 w-12 overflow-hidden rounded-lg bg-white shadow-md sm:left-0 sm:h-16 sm:w-16 dark:bg-gray-800">
+                <div className="absolute top-6 left-0 h-12 w-12 overflow-hidden rounded-lg border border-gray-200 bg-white sm:left-0 sm:h-16 sm:w-16 dark:border-gray-700 dark:bg-gray-800">
                   {job.logo ? (
                     <Image
                       src={job.logo}
@@ -60,7 +55,7 @@ export default function ExperienceSection({
                     />
                   )}
                 </div>
-                <div className="transform rounded-lg bg-white p-6 shadow-lg transition-transform hover:scale-[1.02] dark:bg-gray-800">
+                <div className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
                   <div className="mb-4 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
                     <div>
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -106,9 +101,6 @@ export default function ExperienceSection({
                 </div>
               </article>
             ))}
-            {!expanded && jobs.length > INITIAL_VISIBLE && (
-              <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-16 bg-gradient-to-t from-white to-transparent dark:from-gray-900 dark:to-transparent" />
-            )}
           </div>
           {jobs.length > INITIAL_VISIBLE && (
             <div className="mt-4 text-center">
@@ -123,14 +115,19 @@ export default function ExperienceSection({
           )}
         </div>
         <div className="mt-12 text-center">
+          <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">
+            The résumé is available as a PDF document.
+          </p>
           <a
             href={portfolio.basic.resume}
             type="application/pdf"
             download
             rel="noopener noreferrer"
+            aria-label="Download the résumé as a PDF document"
+            title="Download the résumé as a PDF document"
             className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors duration-200 hover:bg-blue-700"
           >
-            Download Resume (PDF)
+            Download Résumé (PDF)
             <ArrowSquareOutIcon size={16} weight="bold" aria-hidden="true" />
           </a>
         </div>

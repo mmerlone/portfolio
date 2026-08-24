@@ -25,19 +25,16 @@ interface CardCreditProps {
 export const CardCredit: FC<CardCreditProps> = ({ credit, className = "" }) => {
   return (
     <article
-      className={cn(
-        "group flex transform items-center justify-center space-x-4 transition-all duration-300 hover:-translate-y-1",
-        className,
-      )}
+      className={cn("flex items-center justify-center space-x-4", className)}
     >
       <a
         href={credit.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center rounded-lg bg-white shadow-lg dark:bg-gray-800"
+        className="flex items-center rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
       >
         <div className="p-4">
-          <div className="relative h-24 w-24 rounded-md bg-white p-8 shadow">
+          <div className="relative h-24 w-24 rounded-md border border-gray-200 bg-white p-8 dark:border-gray-700">
             <Image
               src={getIconSrc(credit.icon)}
               alt={credit.name}
@@ -51,11 +48,7 @@ export const CardCredit: FC<CardCreditProps> = ({ credit, className = "" }) => {
           <div className="text-left">
             <h3 className="flex gap-2 text-lg font-semibold text-gray-900 dark:text-white">
               {credit.name}
-              <ArrowSquareOutIcon
-                size={12}
-                weight="bold"
-                className="opacity-0 transition-opacity group-hover:opacity-100"
-              />
+              <ArrowSquareOutIcon size={12} weight="bold" aria-hidden="true" />
             </h3>
             <p className="w-50 text-xs text-gray-600 sm:w-80 sm:text-sm dark:text-gray-300">
               {credit.description}

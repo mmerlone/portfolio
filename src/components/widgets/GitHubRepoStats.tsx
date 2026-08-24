@@ -23,8 +23,8 @@ export default function GitHubRepoStats({
   }
 
   return (
-    <div className="z-30 mx-auto my-8 max-w-2xl rounded-lg bg-gray-200 p-6 shadow-lg dark:bg-gray-800">
-      <div className="flex w-full flex-col items-start rounded-lg bg-white p-4 dark:bg-gray-700">
+    <div className="mx-auto max-w-2xl border border-gray-300 p-6 dark:border-gray-600">
+      <div className="flex w-full flex-col items-start p-4">
         <a
           href={repoUrl}
           target="_blank"
@@ -37,7 +37,7 @@ export default function GitHubRepoStats({
         {errorMessage ? (
           <span className="text-sm text-red-500">{errorMessage}</span>
         ) : stats ? (
-          <div className="mt-2 flex gap-8">
+          <div className="mt-2 flex max-w-full flex-wrap gap-x-8 gap-y-2">
             <div className="flex items-center gap-1 text-gray-700 dark:text-gray-200">
               <StarIcon size={20} weight="fill" className="text-yellow-400" />{" "}
               {stats.stargazers_count}{" "}
@@ -65,8 +65,8 @@ export default function GitHubRepoStats({
 
 export function GitHubRepoStatsFallback(): ReactElement {
   return (
-    <div className="z-30 mx-auto my-8 max-w-2xl rounded-lg bg-gray-200 p-6 shadow-lg dark:bg-gray-800">
-      <div className="w-full items-center space-x-4 rounded-lg bg-white p-4 dark:bg-gray-700">
+    <div className="mx-auto max-w-2xl border border-gray-300 p-6 dark:border-gray-600">
+      <div className="w-full items-center space-x-4 p-4">
         <span className="text-sm text-gray-500 dark:text-gray-400">
           Loading repository stats...
         </span>

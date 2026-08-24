@@ -4,7 +4,7 @@ interface ErrorMessageProps {
 }
 
 export const ErrorMessage = ({ message }: ErrorMessageProps): ReactElement => (
-  <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 my-4">
+  <div className="my-4 rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20">
     <p className="text-red-600 dark:text-red-400">{message}</p>
   </div>
 );

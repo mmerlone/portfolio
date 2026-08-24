@@ -19,7 +19,7 @@ export default function EducationSection({
           {portfolio.education.map((entry) => (
             <article
               key={`${entry.institution}-${entry.years}`}
-              className="flex gap-4 rounded-lg bg-white p-6 shadow-md dark:bg-gray-800"
+              className="flex gap-4 rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-600 dark:bg-orange-900/40 dark:text-orange-400">
                 <GraduationCapIcon size={20} weight="bold" />

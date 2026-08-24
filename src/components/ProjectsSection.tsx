@@ -19,7 +19,7 @@ export default function ProjectsSection({
           {portfolio.openSourceProjects.map((project) => (
             <article
               key={project.name}
-              className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
+              className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="flex flex-1 flex-col p-6">
                 <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">

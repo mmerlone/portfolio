@@ -32,12 +32,7 @@ export default function ChallengesSection({
           and intellectual property considerations, specific project details and
           source code are not publicly available.
         </p>
-        <div
-          className={cn(
-            "relative overflow-hidden transition-[max-height] duration-500 ease-in-out",
-            expanded ? "h-auto" : "more-to-show max-h-[120rem]",
-          )}
-        >
+        <div className={cn("relative")}>
           <div className="mx-auto max-w-4xl space-y-8">
             {visibleChallenges.map((challenge, idx) => (
               <ChallengeCard
@@ -46,9 +41,6 @@ export default function ChallengesSection({
               />
             ))}
           </div>
-          {!expanded && challenges.length > INITIAL_VISIBLE && (
-            <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-16 bg-gradient-to-t from-white to-transparent dark:from-gray-800 dark:to-transparent" />
-          )}
         </div>
         {challenges.length > INITIAL_VISIBLE && (
           <div className="mt-4 text-center">

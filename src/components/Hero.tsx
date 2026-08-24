@@ -16,12 +16,12 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
     <section
       id="hero"
       className={cn(
-        "m-1 mx-auto mt-10 flex w-full flex-col items-center justify-evenly gap-12 lg:m-2 lg:mt-20 lg:flex-row",
+        "m-1 mx-auto mt-10 flex flex-col items-center justify-evenly gap-12 lg:m-2 lg:mt-20 lg:flex-row",
         className,
       )}
     >
       <div className="max-w-3xl flex-1 pt-12 text-center md:pt-18 lg:pt-18 lg:text-left">
-        <div className="rounded-xl bg-gray-900/5 p-8 shadow-xl shadow-gray-500/20 outline-1 outline-offset-2 outline-white dark:bg-white/5 dark:shadow-black/5 dark:outline-black">
+        <div className="border border-gray-200 p-8 dark:border-gray-700">
           <h1 className="mb-6 text-3xl font-bold text-nowrap text-gray-700 sm:text-4xl md:text-5xl lg:text-6xl dark:text-gray-300">
             {name}
           </h1>
@@ -39,13 +39,13 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
           >
             <a
               href="#contact"
-              className="rounded-lg bg-orange-600 px-8 py-3 text-white shadow-lg transition-colors hover:bg-orange-700 hover:shadow-xl"
+              className="rounded-lg bg-orange-600 px-8 py-3 text-white hover:bg-orange-700"
             >
               Get in Touch
             </a>
             <a
               href="#about"
-              className="rounded-lg bg-white px-8 py-3 text-gray-900 shadow-lg transition-colors hover:bg-gray-100 hover:shadow-xl dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+              className="rounded-lg border border-gray-300 bg-white px-8 py-3 text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
             >
               Learn More
             </a>
@@ -58,14 +58,14 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
 
       <div className="relative max-w-3xl flex-1">
         <div className="group relative mx-auto w-full max-w-lg">
-          <div className="relative mr-3 transform rounded-full transition-all duration-500">
+          <div className="relative mr-3 rounded-full">
             <Image
               src={siteConfig.images.profile}
               alt={name}
               width={500}
               height={500}
               priority
-              className="rounded-full shadow-2xl transition-all duration-500 group-hover:shadow-[0_0_150px_rgba(245,74,0,0.4)] dark:group-hover:shadow-[0_0_150px_rgba(123,23,0,1)]"
+              className="rounded-full"
             />
           </div>
         </div>

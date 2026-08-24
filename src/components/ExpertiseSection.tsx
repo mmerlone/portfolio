@@ -20,16 +20,15 @@ export default function ExpertiseSection({
           {expertise.map((area) => (
             <article
               key={area.name}
-              className="group relative overflow-hidden rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
+              className="border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <h3 className="relative mb-3 text-xl font-semibold text-gray-900 dark:text-white">
+              <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
                 {area.name}
               </h3>
-              <p className="relative mb-4 text-gray-600 dark:text-gray-300">
+              <p className="mb-4 text-gray-600 dark:text-gray-300">
                 {area.description}
               </p>
-              <div className="relative flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2">
                 {area.keywords.map((keyword, idx) => (
                   <span
                     key={`${area.name}-${keyword}-${idx}`}
