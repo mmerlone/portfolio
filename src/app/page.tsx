@@ -4,13 +4,9 @@ import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
-// import { apiConfig } from "@/config/api";
-// import { siteConfig } from "@/config/site";
-import {
-  // getGitHubRepoStatsWidgetData,
-  getQuoteWidgetData,
-  // getWeatherWidgetData,
-} from "@/lib/widgetData";
+import GitHubWidgetSection from "@/components/GitHubWidgetSection";
+import { siteConfig } from "@/config/site";
+import { getGitHubRepoStatsWidgetData } from "@/lib/widgetData";
 
 // Lazy load complex sections below the fold
 const ExpertiseSection = NextDynamic(
@@ -37,11 +33,9 @@ const EducationSection = NextDynamic(
 const Credits = NextDynamic(() => import("@/components/Credits"));
 const Contact = NextDynamic(() => import("@/components/Contact"));
 const ScrollToTop = NextDynamic(() => import("@/components/ScrollToTop"));
-const QuoteSection = NextDynamic(() => import("@/components/QuoteSection"));
-// const WidgetsSection = NextDynamic(() => import("@/components/WidgetsSection"));
 
 const LoadingSection = (): ReactElement => (
-  <div className="h-48 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-gray-800/50" />
+  <div className="h-48 w-full border-y border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-800" />
 );
 
 // Force dynamic rendering to avoid prerendering issues,
@@ -49,30 +43,23 @@ const LoadingSection = (): ReactElement => (
 export const dynamic = "force-dynamic";
 
 export default function Home(): ReactElement {
-  // const repoUrl = siteConfig.github?.repoUrl ?? "";
-  // const city = apiConfig.openWeather?.city ?? "";
-  // const repoStatsPromise = repoUrl
-  //   ? getGitHubRepoStatsWidgetData(repoUrl)
-  //   : null;
-  // const weatherPromise = city ? getWeatherWidgetData(city) : null;
-  const quotesPromise = getQuoteWidgetData();
+  const repoUrl = siteConfig.github?.repoUrl ?? "";
+  const repoStatsPromise = repoUrl
+    ? getGitHubRepoStatsWidgetData(repoUrl)
+    : null;
 
   return (
-    <main>
+    <main id="top">
       <ClientAnalyticsWrapper />
       <Hero />
       <AboutSection />
-      {/* <Suspense fallback={<LoadingSection />}>
-        <WidgetsSection
-          repoStatsPromise={repoStatsPromise}
-          weatherPromise={weatherPromise}
-        />
-      </Suspense> */}
+      {repoStatsPromise ? (
+        <Suspense fallback={<LoadingSection />}>
+          <GitHubWidgetSection repoStatsPromise={repoStatsPromise} />
+        </Suspense>
+      ) : null}
       <Suspense fallback={<LoadingSection />}>
         <ExpertiseSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <QuoteSection quotesPromise={quotesPromise} />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
         <ExperienceSection />
