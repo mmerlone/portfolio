@@ -1,51 +1,37 @@
 "use client";
 
-import { type ElementType, type ReactElement } from "react";
-import ConfigIcon from "@/components/ui/config/ConfigIcon";
-import {
-  ConfigToggle,
-  type ConfigOption,
-} from "@/components/ui/config/ConfigToggle";
+import { type ChangeEvent, type ReactElement } from "react";
 import { useIsHydrated } from "@/hooks/useIsHydrated";
 import { useTheme } from "next-themes";
-import { type ThemeType, ThemeEnum } from "@/types/theme";
-import { SunIcon, MoonIcon, DesktopIcon } from "@phosphor-icons/react";
+import { themes, ThemeEnum } from "@/types/theme";
 
 export default function ThemeToggleClient(): ReactElement {
   const { theme: currentTheme, setTheme } = useTheme();
   const isHydrated = useIsHydrated();
 
-  const typedCurrentTheme = currentTheme as ThemeType | undefined;
-  const currentValue =
-    isHydrated ? (typedCurrentTheme ?? ThemeEnum.SYSTEM) : ThemeEnum.SYSTEM;
+  const currentValue = isHydrated
+    ? (themes.find((theme) => theme === currentTheme) ?? ThemeEnum.SYSTEM)
+    : ThemeEnum.SYSTEM;
 
-  const themeIconMap: Partial<Record<ThemeType, ElementType>> = {
-    [ThemeEnum.LIGHT]: SunIcon,
-    [ThemeEnum.DARK]: MoonIcon,
-    [ThemeEnum.SYSTEM]: DesktopIcon,
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+    const nextTheme = themes.find((theme) => theme === event.target.value);
+    if (nextTheme) setTheme(nextTheme);
   };
 
-  const themeOptions: ConfigOption<ThemeType>[] = Object.values(ThemeEnum).map(
-    (t): ConfigOption<ThemeType> => ({
-      value: t,
-      label: `Switch to ${t.charAt(0).toUpperCase() + t.slice(1)} theme`,
-      labelSelected: `${t.charAt(0).toUpperCase() + t.slice(1)} Theme selected`,
-      IconComponent: ConfigIcon,
-      getIconProps: (value: ThemeType) => ({
-        value,
-        iconMap: themeIconMap,
-        defaultIconComponent: SunIcon,
-        size: 18,
-      }),
-    }),
-  );
-
   return (
-    <ConfigToggle<ThemeType>
-      options={themeOptions}
-      currentValue={currentValue}
-      onValueChange={setTheme}
-      ariaLabel="Select theme"
-    />
+    <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+      <span>Theme</span>
+      <select
+        id="theme-selection"
+        name="theme"
+        value={currentValue}
+        onChange={handleChange}
+        className="rounded border border-gray-300 bg-white px-2 py-1 text-gray-900 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
+      >
+        <option value={ThemeEnum.SYSTEM}>System</option>
+        <option value={ThemeEnum.LIGHT}>Light</option>
+        <option value={ThemeEnum.DARK}>Dark</option>
+      </select>
+    </label>
   );
 }
