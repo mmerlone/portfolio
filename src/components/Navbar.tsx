@@ -22,6 +22,8 @@ const Navbar = (): ReactElement => {
   const pathname = usePathname();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileFirstLinkRef = useRef<HTMLAnchorElement>(null);
+  const wasMobileMenuOpenRef = useRef(false);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -41,6 +43,36 @@ const Navbar = (): ReactElement => {
     return (): void => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      wasMobileMenuOpenRef.current = true;
+      const frame = window.requestAnimationFrame(() => {
+        mobileFirstLinkRef.current?.focus();
+      });
+
+      return (): void => window.cancelAnimationFrame(frame);
+    }
+
+    if (wasMobileMenuOpenRef.current) {
+      wasMobileMenuOpenRef.current = false;
+      mobileMenuButtonRef.current?.focus();
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: globalThis.KeyboardEvent): void => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return (): void => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
   useEffect(() => {
@@ -89,7 +121,12 @@ const Navbar = (): ReactElement => {
         const id = href.substring(2);
         const el = document.getElementById(id);
         if (el) {
-          el.scrollIntoView({ behavior: "smooth" });
+          const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
+          el.scrollIntoView({
+            behavior: prefersReducedMotion ? "auto" : "smooth",
+          });
           setActiveSection(id);
         }
       } else {
@@ -100,13 +137,14 @@ const Navbar = (): ReactElement => {
 
   const navClasses =
     isScrolled || isOpen
-      ? "bg-gray-200 shadow dark:bg-gray-800"
+      ? "bg-gray-200 dark:bg-gray-800"
       : !isOpen
         ? "transparent"
-        : "bg-gray-200 shadow dark:bg-gray-800";
+        : "bg-gray-200 dark:bg-gray-800";
 
   return (
     <nav
+      aria-label="Primary navigation"
       className={cn(
         "fixed top-0 right-0 left-0 z-50 transition-all duration-300",
         navClasses,
@@ -158,9 +196,12 @@ const Navbar = (): ReactElement => {
           {/* Mobile Menu Button */}
           <button
             ref={mobileMenuButtonRef}
+            type="button"
             className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-orange-500 focus:outline-none focus:ring-inset md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Open main menu"
+            onClick={() => setIsOpen((open) => !open)}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            aria-label={isOpen ? "Close main menu" : "Open main menu"}
           >
             {isOpen ? (
               <XIcon size={24} weight="bold" />
@@ -172,15 +213,19 @@ const Navbar = (): ReactElement => {
           {/* Mobile menu content */}
           <div
             ref={mobileMenuRef}
+            id="mobile-navigation"
+            role="navigation"
+            aria-label="Mobile navigation"
+            hidden={!isOpen}
             className={cn(
-              "fixed top-16 right-0 left-0 z-40 mx-auto max-h-[80vh] w-full max-w-md overflow-y-auto rounded-b-xl bg-white shadow-lg transition-all duration-300 md:hidden dark:bg-gray-900",
-              isOpen ? "opacity-100" : "max-h-0 opacity-0",
+              "fixed top-16 right-0 left-0 z-40 mx-auto max-h-[80vh] w-full max-w-md overflow-y-auto rounded-b-xl border border-gray-200 bg-white md:hidden dark:border-gray-700 dark:bg-gray-900",
             )}
           >
             <ul className="space-y-4 py-4">
-              {siteConfig.navigation.map((item) => (
+              {siteConfig.navigation.map((item, index) => (
                 <li key={item.href}>
                   <Link
+                    ref={index === 0 ? mobileFirstLinkRef : undefined}
                     href={item.href}
                     onClick={(e): void => {
                       handleNavClick(e, item.href);

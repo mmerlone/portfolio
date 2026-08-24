@@ -8,7 +8,9 @@ interface ScrollToTopProps {
   className?: string;
 }
 
-const ScrollToTop = ({ className = "" }: ScrollToTopProps): ReactElement => {
+const ScrollToTop = ({
+  className = "",
+}: ScrollToTopProps): ReactElement | null => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -16,6 +18,7 @@ const ScrollToTop = ({ className = "" }: ScrollToTopProps): ReactElement => {
       setIsVisible(window.scrollY > 300);
     };
 
+    toggleVisibility();
     window.addEventListener("scroll", toggleVisibility, { passive: true });
 
     return (): void => {
@@ -24,18 +27,23 @@ const ScrollToTop = ({ className = "" }: ScrollToTopProps): ReactElement => {
   }, []);
 
   const scrollToTop = (): void => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: prefersReducedMotion ? "auto" : "smooth",
     });
   };
+
+  if (!isVisible) return null;
 
   return (
     <button
       onClick={scrollToTop}
       className={cn(
-        "fixed right-8 bottom-8 z-40 transform rounded-full bg-indigo-600 p-3 text-white shadow-lg transition-all duration-300 hover:scale-110 hover:bg-indigo-700 hover:shadow-xl",
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0",
+        "fixed right-8 bottom-8 z-40 rounded-full bg-indigo-600 p-3 text-white hover:bg-indigo-700",
         className,
       )}
       aria-label="Scroll to top"
