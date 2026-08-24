@@ -1,4 +1,8 @@
 /* 3D Carousel */
+#credits {
+  overflow: clip;
+}
+
 .slideC {
   position: relative;
   perspective: 1000px;
@@ -54,4 +58,27 @@
 .sliderContent p {
   margin: 0;
   margin-bottom: 16px;
+}
+
+#credits .btns {
+  padding-top: 28px;
+  color: var(--accent-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#credits .btns .btn {
+  cursor: pointer;
+}
+
+#credits .btns .btn:last-child {
+  margin-left: 40px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide,
+  .reflection {
+    transition: none;
+  }
 }

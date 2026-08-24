@@ -1,15 +1,10 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
-/* Import theme variables and base styles */
+@import "open-props/sizes.min.css";
+@import "open-props/borders.min.css";
+@import "open-props/fonts.min.css";
+@import "open-props/aspects.min.css";
+@import "open-props/durations.min.css";
 @import "./styles/global/variables.css";
 @import "./styles/global/base.css";
-
-/* Import general patterns */
-@import "../styles/patterns.css";
-
-/* Import component/section specific styles */
-@import "./styles/global/carousel.css";
 @import "./styles/global/carousel-3d.css";
-/* removed aurora and isometric backgrounds (leftovers) */
-@import "./styles/global/credits.css";
-/* removed experience-effect (leftover) */

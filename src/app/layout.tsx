@@ -16,8 +16,7 @@ interface LayoutProps {
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  preload: true,
-  fallback: ["system-ui", "arial"],
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -51,11 +50,10 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps): ReactElement {
-  // Hardcode the lang attribute to "en-US" to ensure SSR and hydration align
   return (
-    <html lang="en-US" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <GoogleAnalytics gaId={siteConfig?.analytics?.googleAnalytics.id ?? ""} />
-      <body className={inter.className} suppressHydrationWarning={true}>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
