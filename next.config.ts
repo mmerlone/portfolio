@@ -1,4 +1,4 @@
-import { NextConfig } from "next";
+import { type NextConfig } from "next";
 
 const config: NextConfig = {
   images: {
@@ -70,11 +70,6 @@ const config: NextConfig = {
       {
         protocol: "https",
         hostname: "lucide.dev",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "usehooks-ts.com",
         pathname: "/**",
       },
       {

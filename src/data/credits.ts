@@ -48,27 +48,22 @@ export const creditsData: readonly Credit[] = [
     icon: "react.svg",
   },
   {
-    name: "usehooks-ts",
-    description: "A collection of essential React hooks.",
-    url: "https://usehooks-ts.com/",
-    icon: "react.svg",
+    name: "Open Props",
+    description:
+      "A lightweight CSS token library for design system primitives.",
+    url: "https://open-props.style/",
+    icon: "open-props.svg",
   },
   {
-    name: "OpenWeatherMap",
-    description: "Weather data provided by OpenWeatherMap.",
-    url: "https://openweathermap.org/",
-    icon: "open-weather.svg",
+    name: "Phosphor Icons",
+    description: "A flexible icon family used throughout this interface.",
+    url: "https://phosphoricons.com/",
+    icon: "phosphor-icons.svg",
   },
   {
     name: "Tailwind CSS",
     description: "A utility-first CSS framework for creating custom designs.",
     url: "https://tailwindcss.com/",
     icon: "tailwindcss.svg",
-  },
-  {
-    name: "ZenQuotes API",
-    description: "Inspirational quotes provided by ZenQuotes API.",
-    url: "https://zenquotes.io/",
-    icon: "zenquotes.png",
   },
 ];
