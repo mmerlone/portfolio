@@ -97,20 +97,17 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
         tabIndex={-1}
-        className="relative mx-4 max-h-screen w-full max-w-xl overflow-y-auto rounded-lg border border-gray-300 bg-white p-6 dark:border-gray-600 dark:bg-gray-800"
+        className="border-border-strong bg-surface relative mx-4 max-h-screen w-full max-w-xl overflow-y-auto rounded-lg border p-6"
       >
-        <h2
-          id={titleId}
-          className="mb-4 text-2xl font-bold text-gray-900 dark:text-white"
-        >
+        <h2 id={titleId} className="text-foreground mb-4 text-2xl font-bold">
           Terms of Service & Cookie Policy
         </h2>
-        <p id={descriptionId} className="mb-4 text-gray-700 dark:text-gray-300">
+        <p id={descriptionId} className="text-muted-foreground mb-4">
           I use cookies to enhance your browsing experience, analyze site
           traffic, and tailor my marketing efforts. The following data is
           collected:
         </p>
-        <ul className="mb-4 ml-5 list-disc text-gray-700 dark:text-gray-300">
+        <ul className="text-muted-foreground mb-4 ml-5 list-disc">
           <li>Google Analytics for visitor statistics</li>
           <li>Google Tag Manager for managing tracking scripts</li>
           <li>Vercel Analytics for performance monitoring</li>
@@ -118,12 +115,12 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           <li>Session and usage statistics</li>
           <li>Device and browser information</li>
         </ul>
-        <p className="mb-4 text-gray-700 dark:text-gray-300">
+        <p className="text-muted-foreground mb-4">
           By accepting, you agree to our data usage in accordance with this
           policy. Your consent is stored as a cookie in your browser so that we
           don’t ask again.
         </p>
-        <p className="mb-4 text-gray-700 dark:text-gray-300">
+        <p className="text-muted-foreground mb-4">
           For more details, please review the full Privacy Policy on my website.
         </p>
         <div className="mt-4 flex justify-end space-x-2">
@@ -147,7 +144,7 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           type="button"
           onClick={onClose}
           aria-label="Close terms and cookie policy"
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          className="text-subtle-foreground hover:text-foreground absolute top-2 right-2"
         >
           <span aria-hidden="true">&#10005;</span>
         </button>

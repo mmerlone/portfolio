@@ -137,10 +137,10 @@ const Navbar = (): ReactElement => {
 
   const navClasses =
     isScrolled || isOpen
-      ? "bg-gray-200 dark:bg-gray-800"
+      ? "bg-surface-raised"
       : !isOpen
         ? "transparent"
-        : "bg-gray-200 dark:bg-gray-800";
+        : "bg-surface-raised";
 
   return (
     <nav
@@ -160,7 +160,7 @@ const Navbar = (): ReactElement => {
           {isScrolled && (
             <Link
               href="/#top"
-              className="text-xl font-bold text-gray-900 transition-colors hover:text-indigo-600 dark:text-white dark:hover:text-indigo-400"
+              className="text-foreground hover:text-accent text-xl font-bold transition-colors"
             >
               {portfolio.basic.name}
             </Link>
@@ -173,14 +173,14 @@ const Navbar = (): ReactElement => {
                 <Link
                   href={item.href}
                   className={cn(
-                    "transition-colors duration-500 ease-in-out",
+                    "nav-link transition-colors duration-500 ease-in-out",
                     item.href.startsWith("/#")
                       ? activeSection === item.href.substring(2)
-                        ? "text-orange-600 dark:text-orange-400"
-                        : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
+                        ? "nav-link--active text-accent"
+                        : "text-muted-foreground hover:text-accent"
                       : pathname === item.href
-                        ? "text-orange-600 dark:text-orange-400"
-                        : "text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400",
+                        ? "nav-link--active text-accent"
+                        : "text-muted-foreground hover:text-accent",
                   )}
                   onClick={(e): void => handleNavClick(e, item.href)}
                 >
@@ -197,7 +197,7 @@ const Navbar = (): ReactElement => {
           <button
             ref={mobileMenuButtonRef}
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-orange-500 focus:outline-none focus:ring-inset md:hidden"
+            className="text-muted-foreground hover:bg-surface-raised hover:text-accent focus:ring-accent inline-flex items-center justify-center rounded-md p-2 focus:ring-2 focus:outline-none focus:ring-inset md:hidden"
             onClick={() => setIsOpen((open) => !open)}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
@@ -218,7 +218,7 @@ const Navbar = (): ReactElement => {
             aria-label="Mobile navigation"
             hidden={!isOpen}
             className={cn(
-              "fixed top-16 right-0 left-0 z-40 mx-auto max-h-[80vh] w-full max-w-md overflow-y-auto rounded-b-xl border border-gray-200 bg-white md:hidden dark:border-gray-700 dark:bg-gray-900",
+              "border-border bg-surface fixed top-16 right-0 left-0 z-40 mx-auto max-h-[80vh] w-full max-w-md overflow-y-auto rounded-b-xl border md:hidden",
             )}
           >
             <ul className="space-y-4 py-4">
@@ -232,14 +232,14 @@ const Navbar = (): ReactElement => {
                       setIsOpen(false);
                     }}
                     className={cn(
-                      "block transition-colors duration-500 ease-in-out",
+                      "nav-link block transition-colors duration-500 ease-in-out",
                       item.href.startsWith("/#")
                         ? activeSection === item.href.substring(2)
-                          ? "text-orange-600 dark:text-orange-400"
-                          : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+                          ? "nav-link--active text-accent"
+                          : "text-muted-foreground hover:text-accent"
                         : pathname === item.href
-                          ? "text-orange-600 dark:text-orange-400"
-                          : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400",
+                          ? "nav-link--active text-accent"
+                          : "text-muted-foreground hover:text-accent",
                     )}
                   >
                     {item.label}

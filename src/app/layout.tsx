@@ -1,10 +1,11 @@
 import { type ReactElement, type ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 import { siteConfig } from "@/config/site";
 import { portfolio } from "@/data/portfolio";
 import Navbar from "@/components/Navbar";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import TermsOfServiceToast from "@/components/TermsOfServiceToast";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: LayoutProps): ReactElement {
           enableSystem
           disableTransitionOnChange
         >
+          <ScrollProgressBar />
           <Navbar />
           {children}
           <TermsOfServiceToast />

@@ -33,8 +33,8 @@ const Footer = (): ReactElement => {
   };
 
   return (
-    <footer className="text-gray-900 dark:text-gray-200">
-      <hr className="border-2 border-orange-600/10 dark:border-orange-400/10" />
+    <footer className="text-foreground">
+      <hr className="border-accent/10 border-2" />
       <div>
         <div className="relative z-10 container mx-auto p-2">
           <div className="flex flex-col items-center sm:flex-row sm:justify-between">

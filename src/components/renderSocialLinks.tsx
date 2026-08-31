@@ -38,7 +38,7 @@ export const renderSocialLinks = (
         href={social.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
+        className="text-muted-foreground hover:text-accent"
         aria-label={social.name}
       >
         <Icon className="h-6 w-6" />

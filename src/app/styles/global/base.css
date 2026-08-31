@@ -1,6 +1,115 @@
+:root {
+  color-scheme: light;
+  scroll-padding-block-start: var(--header-clearance);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
 body {
-  background: transparent;
+  background: var(--page-background);
   color: var(--foreground);
 }
 
-/* Sections use Tailwind utilities for layout and spacing. */
+:where(a, button, select, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+:target {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: var(--size-2);
+}
+
+:where(p, li, dd, figcaption) {
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(a, button, select, input, textarea, [tabindex]):focus-visible {
+    outline-color: Highlight;
+  }
+
+  :target {
+    outline-color: Highlight;
+  }
+}
+
+@supports (text-wrap: balance) {
+  .balanced-heading {
+    text-wrap: balance;
+  }
+}
+
+.editorial-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-3);
+}
+
+.editorial-section-title::after {
+  inline-size: min(4rem, 20vw);
+  block-size: var(--border-size-2);
+  background: var(--content-rule);
+  content: "";
+}
+
+.hero-label {
+  border-inline-start: var(--border-size-2) solid var(--content-rule);
+  padding-inline-start: var(--size-3);
+}
+
+.hero-portrait {
+  outline: var(--border-size-2) solid var(--content-rule);
+  outline-offset: var(--size-2);
+}
+
+.editorial-link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: var(--size-1);
+}
+
+.nav-link {
+  border-block-end: var(--border-size-2) solid transparent;
+  padding-block: var(--size-1);
+}
+
+.nav-link--active {
+  border-block-end-color: currentColor;
+}
+
+.project-article {
+  border-inline-start: var(--border-size-2) solid transparent;
+}
+
+.project-article:focus-within,
+.experience-entry:focus-within {
+  border-color: var(--elevated-border);
+  border-inline-start-color: var(--content-rule);
+  background: var(--interactive-surface);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-article:hover {
+    border-color: var(--elevated-border);
+    border-inline-start-color: var(--content-rule);
+  }
+
+  .editorial-link:hover {
+    text-decoration-thickness: 3px;
+  }
+}

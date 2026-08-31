@@ -19,10 +19,10 @@ const Credits: FC<CreditsProps> = ({
       id="credits"
       className="relative flex items-center justify-center overflow-hidden"
     >
-      <div className={cn("bg-gray-200 dark:bg-gray-900", className)}>
+      <div className={cn("bg-surface-muted", className)}>
         <div className="relative z-10 container flex flex-col items-center justify-center">
           <SectionTitle>Portfolio Credits</SectionTitle>
-          <p className="mx-5 py-5 leading-relaxed text-gray-800 first:mt-0 sm:mx-12 sm:text-center sm:text-balance dark:text-gray-300">
+          <p className="text-muted-foreground mx-5 py-5 leading-relaxed first:mt-0 sm:mx-12 sm:text-center sm:text-balance">
             This portfolio showcases my recent experience and gratitude to the
             following companies and technologies, made possible by the
             contributions of many talented individuals.

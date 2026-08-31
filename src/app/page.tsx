@@ -35,7 +35,7 @@ const Contact = NextDynamic(() => import("@/components/Contact"));
 const ScrollToTop = NextDynamic(() => import("@/components/ScrollToTop"));
 
 const LoadingSection = (): ReactElement => (
-  <div className="h-48 w-full border-y border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-800" />
+  <div className="border-border bg-surface-muted h-48 w-full border-y" />
 );
 
 // Force dynamic rendering to avoid prerendering issues,

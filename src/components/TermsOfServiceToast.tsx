@@ -60,7 +60,7 @@ const TermsOfServiceToast = (): ReactElement | null => {
 
   return (
     <>
-      <div className="fixed right-4 bottom-4 left-4 z-50 flex flex-col items-center justify-between rounded border border-gray-300 bg-gray-200 p-4 text-gray-800 md:flex-row dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+      <div className="border-border-strong bg-surface-raised text-foreground fixed right-4 bottom-4 left-4 z-50 flex flex-col items-center justify-between rounded border p-4 md:flex-row">
         <p className="mx-4 mb-2 text-sm md:mb-0">
           I use cookies to enhance your experience and track interactions. By
           clicking <strong>Accept</strong> or <strong>Refuse</strong> you agree
@@ -68,7 +68,7 @@ const TermsOfServiceToast = (): ReactElement | null => {
           <button
             type="button"
             onClick={() => setPolicyOpen(true)}
-            className="bg-gray-200 underline hover:text-gray-300 focus:outline-none dark:bg-gray-800"
+            className="bg-surface-raised hover:text-accent underline focus:outline-none"
           >
             Terms of Service & Cookie Policy
           </button>

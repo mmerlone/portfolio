@@ -15,12 +15,12 @@ export default function GitHubWidgetSection({
     <section
       id="github"
       aria-labelledby="github-heading"
-      className="border-y border-gray-200 py-12 dark:border-gray-700"
+      className="border-border border-y py-12"
     >
       <div className="container mx-auto px-4">
         <h2
           id="github-heading"
-          className="mb-6 text-center text-2xl font-bold text-orange-600 dark:text-orange-400"
+          className="text-accent mb-6 text-center text-2xl font-bold"
         >
           GitHub
         </h2>

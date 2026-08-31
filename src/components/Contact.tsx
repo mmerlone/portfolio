@@ -16,24 +16,22 @@ export default function Contact({
 
   return (
     <section id="contact" className="relative">
-      <div className={cn(className, "bg-gray-100/50 dark:bg-gray-950")}>
-        <hr className="border-3 border-orange-600/10 dark:border-orange-400/10" />
+      <div className={cn(className, "bg-surface-muted")}>
+        <hr className="border-accent/10 border-3" />
         <div className="relative z-10 container mx-auto mt-12 px-4">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Contact Info */}
             <aside className="space-y-4">
-              <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
-                Contact Info
-              </h3>
+              <h3 className="text-accent text-xl font-bold">Contact Info</h3>
               <div className="space-y-2">
                 <a
                   href={`mailto:${contact.email}`}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
+                  className="text-muted-foreground hover:text-accent flex items-center space-x-2"
                 >
                   <EnvelopeSimpleIcon size={20} weight="bold" />
                   <span>{contact.email}</span>
                 </a>
-                <p className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+                <p className="text-muted-foreground flex items-center space-x-2">
                   <MapPinIcon size={20} weight="bold" />
                   <span>{portfolio.basic.location}</span>
                 </p>
@@ -42,9 +40,7 @@ export default function Contact({
 
             {/* Social Links */}
             <aside className="space-y-4">
-              <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
-                Social Links
-              </h3>
+              <h3 className="text-accent text-xl font-bold">Social Links</h3>
               <div className="flex space-x-4">
                 {social && renderSocialLinks(social)}
               </div>
@@ -52,15 +48,13 @@ export default function Contact({
 
             {/* Quick Links */}
             <aside className="space-y-4">
-              <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
-                Quick Links
-              </h3>
+              <h3 className="text-accent text-xl font-bold">Quick Links</h3>
               <ul className="space-y-2">
                 {siteConfig.navigation.map((item) => (
                   <li key={item.href}>
                     <a
                       href={item.href}
-                      className="text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
+                      className="text-muted-foreground hover:text-accent"
                     >
                       {item.label}
                     </a>
@@ -71,10 +65,8 @@ export default function Contact({
 
             {/* About */}
             <aside className="space-y-4">
-              <h3 className="text-xl font-bold text-orange-600 dark:text-orange-400">
-                About
-              </h3>
-              <p className="mb-3 text-gray-600 dark:text-gray-300">
+              <h3 className="text-accent text-xl font-bold">About</h3>
+              <p className="text-muted-foreground mb-3">
                 {portfolio.basic.summary}
               </p>
             </aside>

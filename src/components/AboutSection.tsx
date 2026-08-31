@@ -19,14 +19,14 @@ export default function AboutSection({
         <SectionTitle>About</SectionTitle>
         <div className="mx-auto max-w-3xl">
           {label && (
-            <p className="mb-6 text-center text-xl font-semibold text-orange-600 dark:text-orange-400">
+            <p className="text-accent mb-6 text-center text-xl font-semibold">
               {label}
             </p>
           )}
-          <p className="mb-8 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+          <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
             {summary}
           </p>
-          <p className="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-subtle-foreground flex items-center justify-center gap-2 text-sm">
             <MapPinIcon size={16} weight="bold" />
             {location}
           </p>

@@ -17,13 +17,9 @@ export default function CredentialsSection({
         <SectionTitle>Languages &amp; Certifications</SectionTitle>
         <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
           {/* Languages */}
-          <article className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
-            <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white">
-              <TranslateIcon
-                size={20}
-                weight="bold"
-                className="text-orange-600 dark:text-orange-400"
-              />
+          <article className="border-border bg-surface rounded-xl border p-6">
+            <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
+              <TranslateIcon size={20} weight="bold" className="text-accent" />
               Languages
             </h3>
             <ul className="space-y-3">
@@ -32,10 +28,10 @@ export default function CredentialsSection({
                   key={lang.language}
                   className="flex items-center justify-between"
                 >
-                  <span className="font-medium text-gray-800 dark:text-gray-200">
+                  <span className="text-foreground font-medium">
                     {lang.language}
                   </span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                  <span className="text-subtle-foreground text-sm">
                     {lang.level}
                   </span>
                 </li>
@@ -44,12 +40,12 @@ export default function CredentialsSection({
           </article>
 
           {/* Certifications */}
-          <article className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
-            <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white">
+          <article className="border-border bg-surface rounded-xl border p-6">
+            <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
               <CertificateIcon
                 size={20}
                 weight="bold"
-                className="text-orange-600 dark:text-orange-400"
+                className="text-accent"
               />
               Certifications
             </h3>
@@ -57,9 +53,9 @@ export default function CredentialsSection({
               {portfolio.certifications.map((cert) => (
                 <li
                   key={cert}
-                  className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300"
+                  className="text-muted-foreground flex items-start gap-2 text-sm"
                 >
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-500" />
+                  <span className="bg-accent mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
                   {cert}
                 </li>
               ))}

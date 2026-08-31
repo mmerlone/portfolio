@@ -19,14 +19,14 @@ export default function ProjectsSection({
           {portfolio.openSourceProjects.map((project) => (
             <article
               key={project.name}
-              className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
+              className="project-article border-border bg-surface flex flex-col overflow-hidden rounded-xl border"
             >
               <div className="flex flex-1 flex-col p-6">
-                <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-foreground mb-2 text-xl font-semibold">
                   {project.name}
                 </h3>
                 {project.description && (
-                  <p className="mb-4 flex-1 text-sm text-gray-600 dark:text-gray-300">
+                  <p className="text-muted-foreground mb-4 flex-1 text-sm">
                     {project.description}
                   </p>
                 )}
@@ -34,7 +34,7 @@ export default function ProjectsSection({
                   {project.technologies.map((tech, idx) => (
                     <span
                       key={`${project.name}-${tech}-${idx}`}
-                      className="inline-block rounded bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                      className="bg-surface-raised text-muted-foreground inline-block rounded px-2 py-1 text-xs font-medium"
                     >
                       {tech}
                     </span>
@@ -45,7 +45,7 @@ export default function ProjectsSection({
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-orange-600 transition-colors hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
+                    className="editorial-link text-accent hover:text-accent-strong inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
                   >
                     <ArrowSquareOutIcon size={14} weight="bold" />
                     Demo
@@ -54,7 +54,7 @@ export default function ProjectsSection({
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 transition-colors hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+                    className="editorial-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
                   >
                     <GithubLogoIcon size={14} weight="bold" />
                     Source

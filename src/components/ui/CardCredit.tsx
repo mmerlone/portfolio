@@ -31,10 +31,10 @@ export const CardCredit: FC<CardCreditProps> = ({ credit, className = "" }) => {
         href={credit.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
+        className="border-border bg-surface flex items-center rounded-lg border"
       >
         <div className="p-4">
-          <div className="relative h-24 w-24 rounded-md border border-gray-200 bg-white p-8 dark:border-gray-700">
+          <div className="border-border relative h-24 w-24 rounded-md border bg-white p-8">
             <Image
               src={getIconSrc(credit.icon)}
               alt={credit.name}
@@ -46,11 +46,11 @@ export const CardCredit: FC<CardCreditProps> = ({ credit, className = "" }) => {
         </div>
         <div className="flex w-full flex-col p-4">
           <div className="text-left">
-            <h3 className="flex gap-2 text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="text-foreground flex gap-2 text-lg font-semibold">
               {credit.name}
               <ArrowSquareOutIcon size={12} weight="bold" aria-hidden="true" />
             </h3>
-            <p className="w-50 text-xs text-gray-600 sm:w-80 sm:text-sm dark:text-gray-300">
+            <p className="text-muted-foreground w-50 text-xs sm:w-80 sm:text-sm">
               {credit.description}
             </p>
           </div>
