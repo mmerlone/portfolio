@@ -1,6 +1,4 @@
-"use client";
-
-import { useState, type ReactElement } from "react";
+import { type ReactElement } from "react";
 import { portfolio } from "@/data/portfolio";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { cn } from "@/lib/cn";
@@ -28,32 +26,30 @@ const categoryLabels: Record<keyof PortfolioTechnical, string> = {
 export default function TechnicalSkillsSection({
   className,
 }: TechnicalSkillsSectionProps): ReactElement {
-  const [expanded, setExpanded] = useState(false);
   const { technical } = portfolio.basic;
 
   const categories = Object.entries(technical) as [
     keyof PortfolioTechnical,
     string[],
   ][];
-  const visibleCategories = expanded ? categories : categories.slice(0, 6);
 
   return (
     <section id="skills" className="relative">
-      <div className={cn("bg-gray-100 py-16 dark:bg-gray-950", className)}>
+      <div className={cn("bg-surface-muted py-16", className)}>
         <div className="relative z-10 container mx-auto px-4">
           <SectionTitle>Technical Skills</SectionTitle>
           <div className={cn("relative")}>
             <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {visibleCategories.map(([key, skills]) => (
+              {categories.map(([key, skills]) => (
                 <div key={key}>
-                  <h3 className="mb-2 text-sm font-semibold tracking-wide text-orange-600 uppercase dark:text-orange-400">
+                  <h3 className="text-accent mb-2 text-sm font-semibold tracking-wide uppercase">
                     {categoryLabels[key]}
                   </h3>
                   <div className="flex flex-wrap gap-1.5">
                     {skills.map((skill, idx) => (
                       <span
                         key={`${key}-${skill}-${idx}`}
-                        className="inline-block rounded border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                        className="border-border bg-surface text-muted-foreground inline-block rounded border px-2 py-1 text-xs"
                       >
                         {skill}
                       </span>
@@ -62,15 +58,6 @@ export default function TechnicalSkillsSection({
                 </div>
               ))}
             </div>
-          </div>
-          <div className="mt-4 text-center">
-            <button
-              onClick={(): void => setExpanded((prev) => !prev)}
-              aria-expanded={expanded}
-              className="rounded text-sm text-blue-600 hover:underline focus:ring-2 focus:ring-blue-400 focus:outline-none dark:text-blue-400"
-            >
-              {expanded ? "Show less" : "Show more"}
-            </button>
           </div>
         </div>
       </div>
