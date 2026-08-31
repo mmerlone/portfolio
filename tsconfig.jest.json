@@ -4,6 +4,7 @@
     "jsx": "react-jsx" // Or "react" if you prefer the classic transform
   },
   "types": [
-    "jest"
+    "jest",
+    "@testing-library/jest-dom"
   ]
 }

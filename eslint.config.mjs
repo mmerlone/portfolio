@@ -173,6 +173,12 @@ export default [
         },
         {
           selector:
+            "ImportDeclaration[source.value='@phosphor-icons/react'] ImportSpecifier[imported.name=/^(?!.*Icon$).+/]",
+          message:
+            "Use Icon-suffixed exports from @phosphor-icons/react; shorthand root exports are deprecated.",
+        },
+        {
+          selector:
             "CallExpression[callee.object.name='JSON'][callee.property.name='parse']",
           message: "Unsafe JSON.parse usage detected. Use a validation layer.",
         },
