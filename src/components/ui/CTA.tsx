@@ -23,7 +23,7 @@ export function CTA({ className }: CTAProps): ReactElement | null {
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-accent hover:bg-accent-strong focus:ring-accent inline-flex items-center justify-center rounded-lg px-6 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none"
+        className="cta-link bg-accent hover:bg-accent-strong focus:ring-accent inline-flex items-center justify-center rounded-lg px-6 py-2 text-sm font-medium text-white focus:ring-2 focus:ring-offset-2 focus:outline-none"
       >
         {linkText}
       </a>

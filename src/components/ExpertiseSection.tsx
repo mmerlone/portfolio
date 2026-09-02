@@ -20,7 +20,7 @@ export default function ExpertiseSection({
           {expertise.map((area) => (
             <article
               key={area.name}
-              className="border-border bg-surface border p-8"
+              className="border-border bg-surface rounded-lg border p-8"
             >
               <h3 className="text-foreground mb-3 text-xl font-semibold">
                 {area.name}

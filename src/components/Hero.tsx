@@ -21,7 +21,7 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
       )}
     >
       <div className="max-w-3xl flex-1 pt-12 text-center md:pt-18 lg:pt-18 lg:text-left">
-        <div className="border-border border p-8">
+        <div className="border-border rounded-lg border p-8">
           <h1 className="balanced-heading text-muted-foreground mb-6 text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl">
             {name}
           </h1>
@@ -39,13 +39,13 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
           >
             <a
               href="#contact"
-              className="bg-accent hover:bg-accent-strong rounded-lg px-8 py-3 text-white"
+              className="cta-link bg-accent hover:bg-accent-strong rounded-lg px-8 py-3 text-white"
             >
               Get in Touch
             </a>
             <a
               href="#about"
-              className="editorial-link border-border-strong bg-surface text-foreground hover:bg-surface-raised rounded-lg border px-8 py-3"
+              className="border-border-strong bg-surface text-foreground hover:bg-surface-raised cta-link rounded-lg border px-8 py-3"
             >
               Learn More
             </a>

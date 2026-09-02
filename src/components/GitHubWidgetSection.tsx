@@ -12,11 +12,7 @@ export default function GitHubWidgetSection({
   repoStatsPromise,
 }: GitHubWidgetSectionProps): ReactElement {
   return (
-    <section
-      id="github"
-      aria-labelledby="github-heading"
-      className="border-border border-y py-12"
-    >
+    <section id="github" aria-labelledby="github-heading" className="py-12">
       <div className="container mx-auto px-4">
         <h2
           id="github-heading"

@@ -45,7 +45,7 @@ export default function ProjectsSection({
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="editorial-link text-accent hover:text-accent-strong inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+                    className="content-action-link text-accent hover:text-accent-strong inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
                   >
                     <ArrowSquareOutIcon size={14} weight="bold" />
                     Demo
@@ -54,7 +54,7 @@ export default function ProjectsSection({
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="editorial-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+                    className="content-action-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
                   >
                     <GithubLogoIcon size={14} weight="bold" />
                     Source
