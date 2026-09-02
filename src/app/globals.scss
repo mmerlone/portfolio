@@ -1,12 +1,13 @@
-@import "tailwindcss";
+@use "./styles/global/variables.scss";
+@use "./styles/global/theme-toggle.scss";
+
+@import "tailwindcss/index.css";
 @custom-variant dark (&:where(.dark, .dark *));
 @import "open-props/sizes.min.css";
 @import "open-props/borders.min.css";
 @import "open-props/fonts.min.css";
 @import "open-props/aspects.min.css";
 @import "open-props/durations.min.css";
-@import "./styles/global/variables.scss";
 @import "./styles/global/base.css";
-@import "./styles/global/theme-toggle.scss";
 @import "./styles/global/carousel-3d.css";
 @import "./styles/global/scroll-progress.css";

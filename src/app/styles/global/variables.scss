@@ -20,19 +20,24 @@
   --elevated-border: #9ca3af;
   --content-rule: #fdba74;
 
-  --focus-ring: var(--accent-dark);
-  --focus-offset: var(--size-1);
-  --control-height: var(--size-7);
-  --header-clearance: calc(var(--control-height) + var(--size-5));
+  // Interaction and layout tokens
+  --focus-ring-color: var(--accent-dark);
+  --focus-ring-offset: var(--size-1);
+  --layout-control-height: var(--size-7);
+  --layout-header-clearance: calc(var(--layout-control-height) + var(--size-5));
 
-  --control-track-border: rgba(216, 221, 232, 0.9);
-  --control-knob: linear-gradient(180deg, #ffffff 0%, #eef2f5 100%);
-  --control-knob-border: rgba(134, 185, 255, 0.7);
-  --control-knob-highlight: rgb(255 255 255 / 0.98);
-  --control-knob-shadow:
+  // Theme toggle tokens
+  --toggle-track-padding: 0.1875rem;
+  --toggle-option-count: 3;
+  --toggle-knob-size: 1.875rem;
+  --toggle-knob-shift: 0%;
+  --toggle-track-border: rgba(216, 221, 232, 0.9);
+  --toggle-knob-background: linear-gradient(180deg, #ffffff 0%, #eef2f5 100%);
+  --toggle-knob-border: rgba(134, 185, 255, 0.7);
+  --toggle-knob-shadow:
     2px 2px 7px 0px rgba(0, 0, 0, 0.7),
     inset 2px 2px 7px -2px rgba(0, 0, 0, 0.7);
-  --control-shadow-inset:
+  --toggle-track-shadow:
     inset 2px 2px 13px -5px #000000b3, -1px -1px 7px -8px #0c0e14;
 
   --radius-none: 0;
@@ -68,14 +73,13 @@
   --elevated-border: #9ca3af;
   --content-rule: #fb923c;
 
-  --focus-ring: #fb923c;
-  --control-track-border: rgba(20, 27, 37, 0.9);
-  --control-knob: linear-gradient(180deg, #374151 0%, #1f2937 100%);
-  --control-knob-border: #2b4262b3;
-  --control-knob-highlight: rgb(255 255 255 / 0.12);
-  --control-knob-shadow:
+  --focus-ring-color: #fb923c;
+  --toggle-track-border: rgba(20, 27, 37, 0.9);
+  --toggle-knob-background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+  --toggle-knob-border: #2b4262b3;
+  --toggle-knob-shadow:
     2px 2px 3px 1px #000000de, inset 3px 3px 3px 0px #000000b3;
-  --control-shadow-inset:
+  --toggle-track-shadow:
     inset 2px 2px 13px -5px #000000d9, 2px 2px 2px -1px #e2e4eedf;
 }
 

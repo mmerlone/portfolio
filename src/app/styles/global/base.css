@@ -1,6 +1,6 @@
 :root {
   color-scheme: light;
-  scroll-padding-block-start: var(--header-clearance);
+  scroll-padding-block-start: var(--layout-header-clearance);
 }
 
 .dark {
@@ -13,12 +13,12 @@ body {
 }
 
 :where(a, button, select, input, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: var(--focus-offset);
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }
 
 :target {
-  outline: 2px solid var(--focus-ring);
+  outline: 2px solid var(--focus-ring-color);
   outline-offset: var(--size-2);
 }
 
@@ -72,15 +72,15 @@ body {
   padding-inline-start: var(--size-3);
 }
 
-.hero-portrait {
-  outline: var(--border-size-2) solid var(--content-rule);
-  outline-offset: var(--size-2);
-}
-
-.editorial-link {
+.content-action-link {
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: var(--size-1);
+}
+
+.nav-link,
+.cta-link {
+  text-decoration: none;
 }
 
 .nav-link {
@@ -109,7 +109,7 @@ body {
     border-inline-start-color: var(--content-rule);
   }
 
-  .editorial-link:hover {
+  .content-action-link:hover {
     text-decoration-thickness: 3px;
   }
 }
