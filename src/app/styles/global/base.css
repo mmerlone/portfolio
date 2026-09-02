@@ -72,6 +72,10 @@ body {
   padding-inline-start: var(--size-3);
 }
 
+.a3d-border {
+  box-shadow: 2px 2px 7px 0px rgba(0,0,0,0.7), inset 2px 2px 7px -2px rgba(0,0,0,0.7);
+}
+
 .content-action-link {
   text-decoration-line: underline;
   text-decoration-thickness: 2px;

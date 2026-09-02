@@ -20,8 +20,8 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
         className,
       )}
     >
-      <div className="max-w-3xl flex-1 pt-12 text-center md:pt-18 lg:pt-18 lg:text-left">
-        <div className="border-border rounded-lg border p-8">
+      <div className="max-w-3xl flex-1 px-6 pt-12 text-center md:pt-18 lg:pt-18 lg:text-left">
+        <div className="border-border rounded-lg border p-8 a3d-border">
           <h1 className="balanced-heading text-muted-foreground mb-6 text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl">
             {name}
           </h1>
@@ -58,7 +58,7 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
 
       <div className="relative max-w-3xl flex-1">
         <div className="group relative mx-auto w-full max-w-lg">
-          <div className="hero-portrait relative mr-3 rounded-full">
+          <div className="a3d-border relative mr-3 rounded-full">
             <Image
               src={siteConfig.images.profile}
               alt={name}
