@@ -37,6 +37,15 @@ export interface CTAConfig {
   readonly link: string;
 }
 
+export interface SeoConfig {
+  readonly title: string;
+  readonly description: string;
+  readonly verification?: {
+    readonly google?: string;
+    readonly bing?: string;
+  };
+}
+
 export interface SiteConfig {
   readonly url: string;
   readonly ogImage: string;
@@ -47,4 +56,5 @@ export interface SiteConfig {
   readonly analytics?: AnalyticsConfig;
   readonly github?: GitHubConfig;
   readonly cta?: CTAConfig;
+  readonly seo: SeoConfig;
 }

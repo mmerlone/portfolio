@@ -1,5 +1,8 @@
 import { type SiteConfig } from "@/types/site";
 
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
+const bingSiteVerification = process.env.BING_SITE_VERIFICATION;
+
 export const siteConfig: SiteConfig = {
   // Site metadata
   url: "https://mmerlone.dev.br",
@@ -55,5 +58,22 @@ export const siteConfig: SiteConfig = {
     text: "Let’s build a resilient architecture together.",
     linkText: "Let's talk!",
     link: "https://calendly.com/mmerlone",
+  },
+
+  // Search metadata
+  seo: {
+    title: "Marcio Merlone — Software Engineer & Platform Architect",
+    description:
+      "Software engineer with 20+ years of experience building resilient platforms, reliable infrastructure, and accessible web applications.",
+    ...(googleSiteVerification || bingSiteVerification
+      ? {
+          verification: {
+            ...(googleSiteVerification
+              ? { google: googleSiteVerification }
+              : {}),
+            ...(bingSiteVerification ? { bing: bingSiteVerification } : {}),
+          },
+        }
+      : {}),
   },
 };
