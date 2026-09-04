@@ -19,6 +19,7 @@ pnpm format                 # Format with Prettier
 # Other
 pnpm test                   # Run test suite
 pnpm format:check           # Check formatting without changes
+pnpm dead-code              # Run knip to detect unused files, exports, and dependencies
 
 ```
 
@@ -73,7 +74,12 @@ After completing any coding task:
 
 1. **Run lint**: `pnpm lint` - fix all issues
 2. **Run type-check**: `pnpm type-check` - fix all errors
-3. **Run build** (if config changed): `pnpm build`
+3. **Run dead-code**: `pnpm dead-code` - fix or justify all findings
+4. **Run build** (if config changed): `pnpm build`
+
+### Dead-code exceptions
+
+`knip` findings must be fixed by removing the unused code, not by disabling the check. The only accepted exception is a narrow, commented entry in `knip.ts` for code that is intentionally unused today (e.g. reserved infrastructure or an in-progress refactor target). Each entry must state why it is kept.
 
 ## Commit Guidelines
 
