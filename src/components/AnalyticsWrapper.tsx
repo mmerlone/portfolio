@@ -1,22 +1,15 @@
 "use client";
 
-import { type ReactElement, useSyncExternalStore } from "react";
+import { type ReactElement } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import { useIsHydrated } from "@/hooks/useIsHydrated";
 import { getCookie } from "@/lib/cookies";
 import { siteConfig } from "@/config/site";
 
-const emptySubscribe = (): (() => void) => () => {};
-const getSnapshot = (): boolean => true;
-const getServerSnapshot = (): boolean => false;
-
 export default function AnalyticsWrapper(): ReactElement | null {
-  const hasMounted = useSyncExternalStore(
-    emptySubscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+  const hasMounted = useIsHydrated();
 
   const gtmId = siteConfig.analytics?.googleTagManager.id ?? null;
   const gaId = siteConfig.analytics?.googleAnalytics.id ?? null;

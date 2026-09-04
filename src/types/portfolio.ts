@@ -1,19 +1,19 @@
 /**
  * Contact information for a portfolio owner.
  */
-export type PortfolioContact = {
+interface PortfolioContact {
   /** Primary email address */
   readonly email: string;
   /** Optional LinkedIn profile URL */
   readonly linkedin?: string;
   /** Optional personal website URL */
   readonly website?: string;
-};
+}
 
 /**
  * High level expertise summary.
  */
-export type PortfolioExpertise = {
+interface PortfolioExpertise {
   /** Name of the expertise area */
   readonly name: string;
   /** Short list of core expertise areas */
@@ -22,12 +22,12 @@ export type PortfolioExpertise = {
   readonly description: string;
   /** Optional keywords for search or filtering */
   readonly keywords: string[];
-};
+}
 
 /**
  * One professional experience entry.
  */
-export type PortfolioExperienceItem = {
+export interface PortfolioExperienceItem {
   /** Employer or project name */
   readonly company: string;
   /** Role or job title */
@@ -46,12 +46,12 @@ export type PortfolioExperienceItem = {
   readonly technologies?: string[];
   /** Optional image URL for the company or project logo in the assets folder */
   readonly logo?: string;
-};
+}
 
 /**
  * Education entry.
  */
-export type PortfolioEducationItem = {
+export interface PortfolioEducationItem {
   /** Name of the educational institution */
   readonly institution: string;
   /** Name of the program, degree, or course */
@@ -60,22 +60,22 @@ export type PortfolioEducationItem = {
   readonly years: string;
   /** Optional additional notes or highlights */
   readonly notes?: string;
-};
+}
 
 /**
  * Language proficiency entry.
  */
-export type PortfolioLanguageItem = {
+export interface PortfolioLanguageItem {
   /** The language name */
   readonly language: string;
   /** Proficiency level (e.g., "Native", "Fluent", "Conversational") */
   readonly level: string;
-};
+}
 
 /**
  * Detailed technical expertise grouped by area.
  */
-export type PortfolioTechnical = {
+export interface PortfolioTechnical {
   /** Programming languages, frameworks and libraries */
   readonly programming: string[];
   /** Operating systems */
@@ -100,12 +100,12 @@ export type PortfolioTechnical = {
   readonly automation: string[];
   /** Miscellaneous useful knowledge */
   readonly other: string[];
-};
+}
 
 /**
  * Basic personal and professional information.
  */
-export type PortfolioBasic = {
+export interface PortfolioBasic {
   /** Full name */
   readonly name: string;
   /** Professional title */
@@ -128,12 +128,12 @@ export type PortfolioBasic = {
   readonly resume?: string;
   /** Social media links */
   readonly social?: PortfolioSocialLink[];
-};
+}
 
 /**
  * Open source or personal project entry.
  */
-export type PortfolioProjectItem = {
+export interface PortfolioProjectItem {
   /** Project name */
   readonly name: string;
   /** Optional project description */
@@ -148,7 +148,7 @@ export type PortfolioProjectItem = {
   readonly otherLinks?: { label: string; url: string }[];
   /** Optional image URL for the project in the assets folder */
   readonly image?: string;
-};
+}
 
 /**
  * Social media or professional network link.
@@ -185,7 +185,7 @@ export interface PortfolioChallenge {
 /**
  * Complete portfolio data model used across the site.
  */
-export type Portfolio = {
+export interface Portfolio {
   /** Basic personal and professional information */
   readonly basic: PortfolioBasic;
   /** Chronological professional experiences */
@@ -202,4 +202,4 @@ export type Portfolio = {
   readonly certifications: string[];
   /** Any additional free-form information */
   readonly additionalInformation?: string;
-};
+}

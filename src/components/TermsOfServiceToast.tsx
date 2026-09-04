@@ -1,20 +1,13 @@
 "use client";
 
-import { useState, useSyncExternalStore, type ReactElement } from "react";
+import { useState, type ReactElement } from "react";
 import TermsOfServicePolicy from "./TermsOfServicePolicy";
+import { useIsHydrated } from "@/hooks/useIsHydrated";
 import { setCookie, getCookie } from "@/lib/cookies";
 import { siteConfig } from "@/config/site";
 
-const emptySubscribe = (): (() => void) => () => {};
-const getSnapshot = (): boolean => true;
-const getServerSnapshot = (): boolean => false;
-
 const TermsOfServiceToast = (): ReactElement | null => {
-  const isClient = useSyncExternalStore(
-    emptySubscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+  const isClient = useIsHydrated();
   const [closed, setClosed] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
 
@@ -67,7 +60,9 @@ const TermsOfServiceToast = (): ReactElement | null => {
           to my{" "}
           <button
             type="button"
-            onClick={() => setPolicyOpen(true)}
+            onClick={() => {
+              setPolicyOpen(true);
+            }}
             className="bg-surface-raised hover:text-accent underline focus:outline-none"
           >
             Terms of Service & Cookie Policy
@@ -93,7 +88,9 @@ const TermsOfServiceToast = (): ReactElement | null => {
         visible={policyOpen}
         onAccept={handlePolicyAccept}
         onRefuse={handlePolicyRefuse}
-        onClose={() => setPolicyOpen(false)}
+        onClose={() => {
+          setPolicyOpen(false);
+        }}
       />
     </>
   );

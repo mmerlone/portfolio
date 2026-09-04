@@ -4,14 +4,6 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
-export function readErrorMessage(payload: unknown): string | null {
-  if (!isRecord(payload) || typeof payload.message !== "string") {
-    return null;
-  }
-
-  return payload.message;
-}
-
 export function parseRepoStats(payload: unknown): RepoStats {
   if (
     !isRecord(payload) ||
