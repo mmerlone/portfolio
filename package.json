@@ -13,9 +13,10 @@
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "type-check": "tsc --noEmit",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" package.json next.config.ts middleware.ts postcss.config.mjs eslint.config.mjs",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"scripts/**/*.mjs\" package.json next.config.ts middleware.ts postcss.config.mjs eslint.config.mjs",
     "test": "jest",
-    "dead-code": "knip"
+    "dead-code": "knip",
+    "generate:og-image": "node scripts/generate-og-image.mjs"
   },
   "dependencies": {
     "@next/third-parties": "^16.3.4",
@@ -55,6 +56,7 @@
     "postcss": "^8.5.27",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.7.4",
+    "sharp": "0.35.4",
     "ts-jest": "^29.4.12",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.69.0"

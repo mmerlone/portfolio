@@ -97,12 +97,12 @@ Ensure these files reflect your updated portfolio content.
 ### Managing Environment Variables
 
 Sensitive information—such as API keys for analytics and weather—is stored in the `.env` file at the project root.  
-A sample of these keys is provided via `.env.sample`.
+A sample of these keys is provided via `.env.example`.
 
 To set up:
 
 ```bash
-cp .env.sample .env
+cp .env.example .env
 ```
 
 Then edit the `.env` file and insert your production or development values.
@@ -122,6 +122,13 @@ This project includes a Terms of Service (TOS) component with cookie handling an
 
 If these variables are not set, the respective features will be disabled automatically.
 
+### Search Engine Verification
+
+Search-console verification metadata is optional and omitted when unset:
+
+- **Google Search Console:** Set `GOOGLE_SITE_VERIFICATION` to the token from the `google-site-verification` meta tag.
+- **Bing Webmaster Tools:** Set `BING_SITE_VERIFICATION` to the token from the `msvalidate.01` meta tag.
+
 ---
 
 ### Weather Widget
@@ -133,6 +140,7 @@ The weather widget is **optional** and will only be displayed if configured.
    ```bash
    WEATHER_API_KEY="your-api-key"
    ```
+
 - **Security:**  
   The weather API key is never exposed to the client. The widget is only rendered if the key is present on the server.
 
@@ -193,7 +201,7 @@ This project leverages the following tools, services, and resources:
 - **TanStack Query:** Data fetching and caching ([tanstack.com/query](https://tanstack.com/query/latest)).
 - **Aceternity UI:** Modern UI components ([ui.aceternity.com](https://ui.aceternity.com/)).
 
-*...and many more. Kudos to everyone involved!*
+_...and many more. Kudos to everyone involved!_
 
 ---
 
@@ -252,7 +260,8 @@ Feel free to reach out!
 
 ---
 
-*Suggestions for further improvement:*
+_Suggestions for further improvement:_
+
 - Add a "Screenshots" section with images of your portfolio.
 - Add more interactive demos and examples.
 - Implement more advanced visual effects.
