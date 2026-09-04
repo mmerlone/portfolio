@@ -1,8 +1,8 @@
 import { type ReactElement, type ReactNode } from "react";
 
-type SectionTitleProps = {
+interface SectionTitleProps {
   children: ReactNode;
-};
+}
 
 export const SectionTitle = ({ children }: SectionTitleProps): ReactElement => {
   return (

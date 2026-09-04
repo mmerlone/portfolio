@@ -14,7 +14,7 @@ export async function getGitHubRepoStats(
     throw new Error("Repository URL is not defined.");
   }
 
-  const match = repoUrl.match(/github\.com\/([^/]+)\/([^/?#]+)/);
+  const match = /github\.com\/([^/]+)\/([^/?#]+)/.exec(repoUrl);
   if (!match) {
     throw new Error("Invalid GitHub repository URL.");
   }
@@ -27,7 +27,7 @@ export async function getGitHubRepoStats(
   };
 
   if (process.env.GITHUB_TOKEN) {
-    headers["Authorization"] = `Bearer ${process.env.GITHUB_TOKEN}`;
+    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   }
 
   const response = await fetch(

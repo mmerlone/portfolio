@@ -4,6 +4,8 @@ import { createLogger } from "./shared";
 const serverBaseContext: LoggerContext = {
   app: "ywybase",
   version: process.env.NEXT_PUBLIC_APP_VERSION ?? "1.0.0",
+  // @types/node types NODE_ENV as always-defined; default it defensively in case the runtime disagrees.
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   env: process.env.NODE_ENV ?? "development",
 };
 

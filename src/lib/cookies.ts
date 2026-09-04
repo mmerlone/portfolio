@@ -14,7 +14,7 @@ export const getCookie = (name: string): string | null => {
   const ca = document.cookie.split(";");
   for (let c of ca) {
     c = c.trim();
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+    if (c.startsWith(nameEQ)) return c.substring(nameEQ.length);
   }
   return null;
 };

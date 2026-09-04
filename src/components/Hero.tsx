@@ -21,7 +21,7 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
       )}
     >
       <div className="max-w-3xl flex-1 px-6 pt-12 text-center md:pt-18 lg:pt-18 lg:text-left">
-        <div className="border-border rounded-lg border p-8 a3d-border">
+        <div className="border-border a3d-border rounded-lg border p-8">
           <h1 className="balanced-heading text-muted-foreground mb-6 text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl">
             {name}
           </h1>

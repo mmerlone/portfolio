@@ -52,7 +52,9 @@ const Navbar = (): ReactElement => {
         mobileFirstLinkRef.current?.focus();
       });
 
-      return (): void => window.cancelAnimationFrame(frame);
+      return (): void => {
+        window.cancelAnimationFrame(frame);
+      };
     }
 
     if (wasMobileMenuOpenRef.current) {
@@ -72,7 +74,9 @@ const Navbar = (): ReactElement => {
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return (): void => document.removeEventListener("keydown", handleKeyDown);
+    return (): void => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpen]);
 
   useEffect(() => {
@@ -82,7 +86,9 @@ const Navbar = (): ReactElement => {
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return (): void => window.removeEventListener("scroll", handleScroll);
+    return (): void => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -107,8 +113,14 @@ const Navbar = (): ReactElement => {
       .map((item) => document.getElementById(item.href.substring(2)))
       .filter((el): el is HTMLElement => Boolean(el));
 
-    elements.forEach((el) => observer.observe(el));
-    return (): void => elements.forEach((el) => observer.unobserve(el));
+    elements.forEach((el) => {
+      observer.observe(el);
+    });
+    return (): void => {
+      elements.forEach((el) => {
+        observer.unobserve(el);
+      });
+    };
   }, []);
 
   const handleNavClick = (
@@ -135,12 +147,7 @@ const Navbar = (): ReactElement => {
     }
   };
 
-  const navClasses =
-    isScrolled || isOpen
-      ? "bg-surface-raised"
-      : !isOpen
-        ? "transparent"
-        : "bg-surface-raised";
+  const navClasses = isScrolled || isOpen ? "bg-surface-raised" : "transparent";
 
   return (
     <nav
@@ -182,7 +189,9 @@ const Navbar = (): ReactElement => {
                         ? "nav-link--active text-accent"
                         : "text-muted-foreground hover:text-accent",
                   )}
-                  onClick={(e): void => handleNavClick(e, item.href)}
+                  onClick={(e): void => {
+                    handleNavClick(e, item.href);
+                  }}
                 >
                   {item.label}
                 </Link>
@@ -198,7 +207,9 @@ const Navbar = (): ReactElement => {
             ref={mobileMenuButtonRef}
             type="button"
             className="text-muted-foreground hover:bg-surface-raised hover:text-accent focus:ring-accent inline-flex items-center justify-center rounded-md p-2 focus:ring-2 focus:outline-none focus:ring-inset md:hidden"
-            onClick={() => setIsOpen((open) => !open)}
+            onClick={() => {
+              setIsOpen((open) => !open);
+            }}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
             aria-label={isOpen ? "Close main menu" : "Open main menu"}

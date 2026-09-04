@@ -23,7 +23,7 @@ export default function GitHubRepoStats({
   }
 
   return (
-    <div className="border-border-strong mx-auto max-w-2xl rounded-lg border p-6 a3d-border">
+    <div className="border-border-strong a3d-border mx-auto max-w-2xl rounded-lg border p-6">
       <div className="flex w-full flex-col items-start p-4">
         <a
           href={repoUrl}

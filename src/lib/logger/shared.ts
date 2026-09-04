@@ -43,6 +43,8 @@ function formatContextValue(value: unknown): string {
   }
 
   const serialized = JSON.stringify(value);
+  // JSON.stringify is typed as always returning string, but returns undefined for values like `undefined`.
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   return serialized ?? JSON.stringify(String(value));
 }
 

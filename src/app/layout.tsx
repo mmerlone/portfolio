@@ -53,7 +53,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps): ReactElement {
   return (
     <html lang="en" suppressHydrationWarning>
-      <GoogleAnalytics gaId={siteConfig?.analytics?.googleAnalytics.id ?? ""} />
+      <GoogleAnalytics gaId={siteConfig.analytics?.googleAnalytics.id ?? ""} />
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"

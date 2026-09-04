@@ -9,10 +9,10 @@ import {
 } from "@phosphor-icons/react/ssr";
 import type { PortfolioSocialLink } from "@/types/portfolio";
 
-type IconProps = {
+interface IconProps {
   size?: number | string;
   className?: string;
-};
+}
 
 const iconMap: Record<string, ComponentType<IconProps>> = {
   linkedin: LinkedinLogoIcon,

@@ -2,12 +2,12 @@
 
 import { useEffect, useId, useRef, type FC } from "react";
 
-type TermsOfServicePolicyProps = {
+interface TermsOfServicePolicyProps {
   visible?: boolean;
   onAccept?: () => void;
   onRefuse?: () => void;
   onClose?: () => void;
-};
+}
 
 const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
   visible = false,

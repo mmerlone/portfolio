@@ -27,7 +27,7 @@ export default function ChallengesSection({
           <div className="mx-auto max-w-4xl space-y-8">
             {challenges.map((challenge, idx) => (
               <ChallengeCard
-                key={challenge.title + challenge.company + idx}
+                key={`${challenge.title}-${challenge.company}-${idx}`}
                 challenge={challenge}
               />
             ))}
