@@ -111,7 +111,7 @@ export default function ExperienceSection({
             rel="noopener noreferrer"
             aria-label="Download the résumé as a PDF document"
             title="Download the résumé as a PDF document"
-            className="cta-link bg-accent hover:bg-accent-strong inline-flex items-center gap-2 rounded-lg px-6 py-3 text-white transition-colors duration-200"
+            className="cta-link bg-action text-action-foreground hover:bg-action-hover inline-flex items-center gap-2 rounded-lg px-6 py-3 transition-colors duration-200"
           >
             Download Résumé (PDF)
             <ArrowSquareOutIcon size={16} weight="bold" aria-hidden="true" />

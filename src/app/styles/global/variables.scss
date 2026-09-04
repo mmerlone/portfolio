@@ -15,6 +15,16 @@
   --accent-soft-foreground: #c2410c;
   --accent-dark: #7c2d12;
 
+  --action-background: #c2410c;
+  --action-background-hover: #9a3412;
+  --action-foreground: #ffffff;
+
+  --consent-accept-background: #15803d;
+  --consent-accept-background-hover: #166534;
+  --consent-refuse-background: #b91c1c;
+  --consent-refuse-background-hover: #991b1b;
+  --consent-action-foreground: #ffffff;
+
   --border: #e5e7eb;
   --border-strong: #d1d5db;
   --elevated-border: #9ca3af;
@@ -68,6 +78,16 @@
   --accent-soft-foreground: #fed7aa;
   --accent-dark: #f59e42;
 
+  --action-background: #fb923c;
+  --action-background-hover: #fdba74;
+  --action-foreground: #111827;
+
+  --consent-accept-background: #4ade80;
+  --consent-accept-background-hover: #86efac;
+  --consent-refuse-background: #f87171;
+  --consent-refuse-background-hover: #fca5a5;
+  --consent-action-foreground: #111827;
+
   --border: #374151;
   --border-strong: #4b5563;
   --elevated-border: #9ca3af;
@@ -98,6 +118,16 @@
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
   --color-accent-soft-foreground: var(--accent-soft-foreground);
+
+  --color-action: var(--action-background);
+  --color-action-hover: var(--action-background-hover);
+  --color-action-foreground: var(--action-foreground);
+
+  --color-consent-accept: var(--consent-accept-background);
+  --color-consent-accept-hover: var(--consent-accept-background-hover);
+  --color-consent-refuse: var(--consent-refuse-background);
+  --color-consent-refuse-hover: var(--consent-refuse-background-hover);
+  --color-consent-action-foreground: var(--consent-action-foreground);
 
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);

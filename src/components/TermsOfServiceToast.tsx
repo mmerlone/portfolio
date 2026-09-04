@@ -63,7 +63,7 @@ const TermsOfServiceToast = (): ReactElement | null => {
             onClick={() => {
               setPolicyOpen(true);
             }}
-            className="bg-surface-raised hover:text-accent underline focus:outline-none"
+            className="bg-surface-raised underline decoration-1 hover:decoration-2 focus:outline-none"
           >
             Terms of Service & Cookie Policy
           </button>
@@ -72,13 +72,13 @@ const TermsOfServiceToast = (): ReactElement | null => {
         <div className="flex space-x-2">
           <button
             onClick={handleAccept}
-            className="rounded bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-600"
+            className="bg-consent-accept text-consent-action-foreground hover:bg-consent-accept-hover rounded px-4 py-2 text-sm"
           >
             Accept
           </button>
           <button
             onClick={handleRefuse}
-            className="rounded bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-600"
+            className="bg-consent-refuse text-consent-action-foreground hover:bg-consent-refuse-hover rounded px-4 py-2 text-sm"
           >
             Refuse
           </button>

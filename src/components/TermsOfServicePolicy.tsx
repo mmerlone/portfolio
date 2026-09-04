@@ -127,14 +127,14 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           <button
             type="button"
             onClick={onAccept}
-            className="rounded bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-600"
+            className="bg-consent-accept text-consent-action-foreground hover:bg-consent-accept-hover rounded px-4 py-2 text-sm"
           >
             Accept
           </button>
           <button
             type="button"
             onClick={onRefuse}
-            className="rounded bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-600"
+            className="bg-consent-refuse text-consent-action-foreground hover:bg-consent-refuse-hover rounded px-4 py-2 text-sm"
           >
             Refuse
           </button>

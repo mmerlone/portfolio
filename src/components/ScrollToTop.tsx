@@ -43,7 +43,7 @@ const ScrollToTop = ({
     <button
       onClick={scrollToTop}
       className={cn(
-        "bg-accent hover:bg-accent-strong fixed right-8 bottom-8 z-40 rounded-full p-3 text-white",
+        "bg-action text-action-foreground hover:bg-action-hover fixed right-8 bottom-8 z-40 rounded-full p-3",
         className,
       )}
       aria-label="Scroll to top"

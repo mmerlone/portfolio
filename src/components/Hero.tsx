@@ -43,7 +43,7 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
           >
             <a
               href="#contact"
-              className="cta-link bg-accent hover:bg-accent-strong rounded-lg px-8 py-3 text-white"
+              className="cta-link bg-action text-action-foreground hover:bg-action-hover rounded-lg px-8 py-3"
             >
               Get in Touch
             </a>
