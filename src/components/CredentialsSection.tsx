@@ -12,9 +12,15 @@ export default function CredentialsSection({
   className,
 }: CredentialsSectionProps): ReactElement {
   return (
-    <section id="credentials" className={cn("relative py-16", className)}>
+    <section
+      id="credentials"
+      aria-labelledby="credentials-title"
+      className={cn("relative py-16", className)}
+    >
       <div className="relative z-10 container mx-auto px-4">
-        <SectionTitle>Languages &amp; Certifications</SectionTitle>
+        <SectionTitle id="credentials-title">
+          Languages &amp; Certifications
+        </SectionTitle>
         <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
           {/* Languages */}
           <article className="border-border bg-surface rounded-xl border p-6">

@@ -14,9 +14,13 @@ export default function ChallengesSection({
   const challenges = portfolio.challenges ?? [];
 
   return (
-    <section id="challenges" className={cn("relative my-4", className)}>
+    <section
+      id="challenges"
+      aria-labelledby="challenges-title"
+      className={cn("relative my-4", className)}
+    >
       <div className="container mx-auto px-4">
-        <SectionTitle>Selected Challenges</SectionTitle>
+        <SectionTitle id="challenges-title">Selected Challenges</SectionTitle>
         <p className="text-muted-foreground mb-8">
           The contributions detailed below primarily represent work undertaken
           for previous employers and clients. Due to confidentiality agreements

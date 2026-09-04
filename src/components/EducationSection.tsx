@@ -12,9 +12,13 @@ export default function EducationSection({
   className,
 }: EducationSectionProps): ReactElement {
   return (
-    <section id="education" className={cn("relative py-16", className)}>
+    <section
+      id="education"
+      aria-labelledby="education-title"
+      className={cn("relative py-16", className)}
+    >
       <div className="relative z-10 container mx-auto px-4">
-        <SectionTitle>Education</SectionTitle>
+        <SectionTitle id="education-title">Education</SectionTitle>
         <div className="mx-auto max-w-3xl space-y-6">
           {portfolio.education.map((entry) => (
             <article

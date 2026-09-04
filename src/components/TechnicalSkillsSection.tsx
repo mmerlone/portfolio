@@ -34,10 +34,10 @@ export default function TechnicalSkillsSection({
   ][];
 
   return (
-    <section id="skills" className="relative">
+    <section id="skills" aria-labelledby="skills-title" className="relative">
       <div className={cn("bg-surface-muted py-16", className)}>
         <div className="relative z-10 container mx-auto px-4">
-          <SectionTitle>Technical Skills</SectionTitle>
+          <SectionTitle id="skills-title">Technical Skills</SectionTitle>
           <div className={cn("relative")}>
             <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {categories.map(([key, skills]) => (

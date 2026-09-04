@@ -15,7 +15,7 @@ export default function Contact({
   const { contact, social } = portfolio.basic;
 
   return (
-    <section id="contact" className="relative">
+    <section id="contact" aria-label="Contact" className="relative">
       <div className={cn(className, "bg-surface-muted")}>
         <hr className="border-accent/10 border-3" />
         <div className="relative z-10 container mx-auto mt-12 px-4">

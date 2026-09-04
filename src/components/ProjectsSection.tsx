@@ -12,9 +12,13 @@ export default function ProjectsSection({
   className,
 }: ProjectsSectionProps): ReactElement {
   return (
-    <section id="projects" className={cn("relative py-16", className)}>
+    <section
+      id="projects"
+      aria-labelledby="projects-title"
+      className={cn("relative py-16", className)}
+    >
       <div className="relative z-10 container mx-auto px-4">
-        <SectionTitle>Open Source Projects</SectionTitle>
+        <SectionTitle id="projects-title">Open Source Projects</SectionTitle>
         <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 lg:grid-cols-3">
           {portfolio.openSourceProjects.map((project) => (
             <article

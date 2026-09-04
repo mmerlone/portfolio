@@ -14,9 +14,13 @@ export default function AboutSection({
   const { summary, label, location } = portfolio.basic;
 
   return (
-    <section id="about" className={cn("relative py-24", className)}>
+    <section
+      id="about"
+      aria-labelledby="about-title"
+      className={cn("relative py-24", className)}
+    >
       <div className="relative z-10 container mx-auto px-4">
-        <SectionTitle>About</SectionTitle>
+        <SectionTitle id="about-title">About</SectionTitle>
         <div className="mx-auto max-w-3xl">
           {label && (
             <p className="text-accent mb-6 text-center text-xl font-semibold">

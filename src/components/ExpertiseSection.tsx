@@ -13,9 +13,13 @@ export default function ExpertiseSection({
   const { expertise } = portfolio.basic;
 
   return (
-    <section id="expertise" className={cn("relative py-16", className)}>
+    <section
+      id="expertise"
+      aria-labelledby="expertise-title"
+      className={cn("relative py-16", className)}
+    >
       <div className="relative z-10 container mx-auto px-4">
-        <SectionTitle>Core Expertise</SectionTitle>
+        <SectionTitle id="expertise-title">Core Expertise</SectionTitle>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {expertise.map((area) => (
             <article

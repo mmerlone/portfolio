@@ -15,6 +15,7 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
   return (
     <section
       id="hero"
+      aria-labelledby="hero-title"
       className={cn(
         "hero-shell m-1 mx-auto mt-10 flex flex-col items-center justify-evenly gap-12 lg:m-2 lg:mt-20 lg:flex-row",
         className,
@@ -22,7 +23,10 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
     >
       <div className="max-w-3xl flex-1 px-6 pt-12 text-center md:pt-18 lg:pt-18 lg:text-left">
         <div className="border-border a3d-border rounded-lg border p-8">
-          <h1 className="balanced-heading text-muted-foreground mb-6 text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl">
+          <h1
+            id="hero-title"
+            className="balanced-heading text-muted-foreground mb-6 text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl"
+          >
             {name}
           </h1>
           <h2 className="balanced-heading text-muted-foreground mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
@@ -64,6 +68,7 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
               alt={name}
               width={500}
               height={500}
+              sizes="(min-width: 1024px) 500px, (min-width: 640px) 512px, 100vw"
               priority
               className="rounded-full"
             />

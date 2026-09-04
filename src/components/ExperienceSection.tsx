@@ -18,10 +18,13 @@ export default function ExperienceSection({
   return (
     <section
       id="experience"
+      aria-labelledby="experience-title"
       className={cn("relative py-8 sm:py-16", className)}
     >
       <div className="relative z-10 container mx-auto overflow-x-visible px-4">
-        <SectionTitle>Professional Experience</SectionTitle>
+        <SectionTitle id="experience-title">
+          Professional Experience
+        </SectionTitle>
         <div className="mx-auto">
           <div className={cn("relative space-y-12")}>
             {jobs.map((job: PortfolioExperienceItem) => (
@@ -38,6 +41,7 @@ export default function ExperienceSection({
                       alt={`${job.company} logo`}
                       width={64}
                       height={64}
+                      sizes="(min-width: 640px) 64px, 48px"
                       className="h-full w-full object-cover"
                     />
                   ) : (
