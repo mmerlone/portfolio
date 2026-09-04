@@ -18,14 +18,12 @@ export default [
       "vite.config.*",
       "vitest.config.*",
       "tsconfig.tsbuildinfo",
-      "src/components/archive/**",
-      "src/data/archive/**",
-      "src/types/archive/**",
     ],
   },
 
   js.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
   reactPlugin.configs.flat.recommended,
 
   /* Next & React Configuration */
@@ -133,6 +131,11 @@ export default [
       "@typescript-eslint/no-misused-promises": [
         "error",
         { checksVoidReturn: { attributes: false } },
+      ],
+      // Numbers always stringify safely and predictably, unlike objects/arrays/booleans.
+      "@typescript-eslint/restrict-template-expressions": [
+        "error",
+        { allowNumber: true },
       ],
 
       // Code style

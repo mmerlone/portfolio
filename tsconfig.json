@@ -64,9 +64,6 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "src/components/archive",
-    "src/data/archive",
-    "src/types/archive"
+    "node_modules"
   ]
 }
