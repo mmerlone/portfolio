@@ -160,6 +160,7 @@ export const portfolio: Portfolio = {
           "GIT",
           "VMware ESXi",
           "vCenter",
+          "Proxmox",
           "Zabbix",
           "Graylog",
           "IPAM",

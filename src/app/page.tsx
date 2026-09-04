@@ -38,10 +38,6 @@ const LoadingSection = (): ReactElement => (
   <div className="border-border bg-surface-muted h-48 w-full border-y" />
 );
 
-// Force dynamic rendering to avoid prerendering issues,
-// ensuring cookies are re-read on every request.
-export const dynamic = "force-dynamic";
-
 export default function Home(): ReactElement {
   const repoUrl = siteConfig.github?.repoUrl ?? "";
   const repoStatsPromise = repoUrl
