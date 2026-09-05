@@ -13,7 +13,7 @@
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "type-check": "tsc --noEmit",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"scripts/**/*.mjs\" package.json next.config.ts middleware.ts postcss.config.mjs eslint.config.mjs",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"scripts/**/*.mjs\" package.json next.config.ts postcss.config.mjs eslint.config.mjs",
     "test": "jest",
     "dead-code": "knip",
     "generate:og-image": "node scripts/generate-og-image.mjs"
