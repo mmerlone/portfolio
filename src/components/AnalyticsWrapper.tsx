@@ -14,6 +14,7 @@ export default function AnalyticsWrapper(): ReactElement | null {
 
   const gtmId = siteConfig.analytics?.googleTagManager.id ?? null;
   const gaId = siteConfig.analytics?.googleAnalytics.id ?? null;
+  const ahrefsKey = siteConfig.analytics?.ahrefs.key ?? null;
   const cookieName = siteConfig.cookie.name;
 
   useEffect(() => {
@@ -42,6 +43,13 @@ export default function AnalyticsWrapper(): ReactElement | null {
         <GoogleTagManager gtmId={gtmId} dataLayerName="dataLayer" />
       ) : gaId ? (
         <GoogleAnalytics gaId={gaId} dataLayerName="dataLayer" />
+      ) : null}
+      {ahrefsKey ? (
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key={ahrefsKey}
+          async
+        />
       ) : null}
     </>
   );

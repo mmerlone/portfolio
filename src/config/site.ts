@@ -46,6 +46,9 @@ export const siteConfig: SiteConfig = {
     googleTagManager: {
       id: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID ?? null,
     },
+    ahrefs: {
+      key: process.env.NEXT_PUBLIC_AHREFS_ANALYTICS_KEY ?? null,
+    },
   },
 
   // GitHub repository info

@@ -25,6 +25,9 @@ export interface AnalyticsConfig {
   readonly googleTagManager: {
     readonly id: string | null;
   };
+  readonly ahrefs: {
+    readonly key: string | null;
+  };
 }
 
 export interface GitHubConfig {

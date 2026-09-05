@@ -14,6 +14,7 @@ jest.mock("@/config/site", () => ({
     analytics: {
       googleAnalytics: { id: "G-test" },
       googleTagManager: { id: "GTM-test" },
+      ahrefs: { key: null },
     },
   },
 }));
