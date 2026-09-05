@@ -109,7 +109,6 @@ export default function ExperienceSection({
             type="application/pdf"
             download
             rel="noopener noreferrer"
-            aria-label="Download the résumé as a PDF document"
             title="Download the résumé as a PDF document"
             className="cta-link bg-action text-action-foreground hover:bg-action-hover inline-flex items-center gap-2 rounded-lg px-6 py-3 transition-colors duration-200"
           >
