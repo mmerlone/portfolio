@@ -10,7 +10,6 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import TermsOfServiceToast from "@/components/TermsOfServiceToast";
 import StructuredData from "@/components/StructuredData";
 import { getSeoKeywords } from "@/lib/seoKeywords";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 interface LayoutProps {
   children: ReactNode;
@@ -108,7 +107,6 @@ export default function RootLayout({ children }: LayoutProps): ReactElement {
       <head>
         <StructuredData />
       </head>
-      <GoogleAnalytics gaId={siteConfig.analytics?.googleAnalytics.id ?? ""} />
       <body className={inter.className}>
         <a href="#top" className="skip-link">
           Skip to main content

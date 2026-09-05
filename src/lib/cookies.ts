@@ -1,20 +1,26 @@
+export const COOKIE_CHANGE_EVENT = "portfolio-cookie-change";
+
 export const setCookie = (name: string, value: string, days: number): void => {
-  const d = new Date();
-  d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
-  const expires = "expires=" + d.toUTCString();
   if (typeof document !== "undefined") {
-    const domain = window.location.hostname;
-    document.cookie = `${name}=${value};${expires};path=/;domain=${domain}`;
+    const expiresAt = new Date();
+    expiresAt.setTime(expiresAt.getTime() + days * 24 * 60 * 60 * 1000);
+    const secure = window.location.protocol === "https:" ? "; Secure" : "";
+
+    document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expiresAt.toUTCString()}; path=/; SameSite=Lax${secure}`;
+    window.dispatchEvent(new Event(COOKIE_CHANGE_EVENT));
   }
 };
 
 export const getCookie = (name: string): string | null => {
   if (typeof document === "undefined") return null;
-  const nameEQ = name + "=";
-  const ca = document.cookie.split(";");
-  for (let c of ca) {
-    c = c.trim();
-    if (c.startsWith(nameEQ)) return c.substring(nameEQ.length);
+  const encodedName = `${encodeURIComponent(name)}=`;
+
+  for (const cookie of document.cookie.split(";")) {
+    const normalizedCookie = cookie.trim();
+    if (normalizedCookie.startsWith(encodedName)) {
+      return decodeURIComponent(normalizedCookie.substring(encodedName.length));
+    }
   }
+
   return null;
 };
