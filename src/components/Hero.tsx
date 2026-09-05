@@ -69,7 +69,8 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
               width={500}
               height={500}
               sizes="(min-width: 1024px) 500px, (min-width: 640px) 512px, 100vw"
-              priority
+              loading="eager"
+              fetchPriority="high"
               className="rounded-full"
             />
           </div>
