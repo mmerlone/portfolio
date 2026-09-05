@@ -119,6 +119,7 @@ This project includes a Terms of Service (TOS) component with cookie handling an
   Analytics will only be loaded after the user accepts the cookie consent notice (GDPR compliant).
   - **Google Analytics:** Set `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="G-XXXXXXXX"` in your `.env` to enable.
   - **Google Tag Manager:** Set `NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID="GTM-XXXXXX"` in your `.env` to enable.
+  - When both are configured, Google Tag Manager takes precedence and should own the Google Analytics tag to prevent duplicate page views.
 
 If these variables are not set, the respective features will be disabled automatically.
 
