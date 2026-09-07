@@ -3,13 +3,15 @@ import sitemap from "@/app/sitemap";
 
 describe("metadata routes", () => {
   it("publishes only the canonical page in the sitemap", () => {
-    expect(sitemap()).toEqual([
-      {
-        url: "https://mmerlone.dev.br/",
-        changeFrequency: "monthly",
-        priority: 1,
-      },
-    ]);
+    const [entry] = sitemap();
+
+    expect(entry).toMatchObject({
+      url: "https://mmerlone.dev.br/",
+      changeFrequency: "monthly",
+      priority: 1,
+      images: ["https://mmerlone.dev.br/images/profile/profile.png"],
+    });
+    expect(entry.lastModified).toBeInstanceOf(Date);
   });
 
   it("allows crawling and advertises the canonical sitemap", () => {
