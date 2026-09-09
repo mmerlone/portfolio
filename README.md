@@ -73,7 +73,6 @@ Update the site-wide configuration in `/src/config/site.ts` with your details:
 - **Social Links:** URLs and icons for social profiles.
 - **Navigation & Footer:** Menu items and copyright.
 - **Widgets:** The GitHub repo widget can be enabled or disabled by setting its config to `null` or omitting it.
-- **Effects:** Configure visual effects and animations.
 
 ### Site Data Files
 

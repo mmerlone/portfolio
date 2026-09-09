@@ -7,6 +7,9 @@ Use this site to evaluate Marcio Merlone's professional background and experienc
 ## Docs
 
 - [Homepage (Markdown)](https://mmerlone.dev.br/index.md): full Markdown representation of the homepage — identity, summary, expertise, experience, selected challenges, open source projects, technical skills, credentials, and education.
+- [About](https://mmerlone.dev.br/about): background, areas of expertise, and location.
+- [Contact](https://mmerlone.dev.br/contact): email and social links to reach Marcio Merlone directly.
+- [Privacy Policy](https://mmerlone.dev.br/privacy): what analytics/infrastructure data this site collects, retention periods, and how to opt out.
 - [Résumé (PDF)](https://mmerlone.dev.br/documents/MarcioMerlone.pdf): downloadable résumé PDF.
 
 ## Contact

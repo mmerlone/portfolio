@@ -5,7 +5,13 @@ import { siteConfig } from "@/config/site";
 const LLMS_TXT_PATH = path.join(process.cwd(), "public", "llms.txt");
 
 // Local paths this repo actually serves; keep in sync with routes/public assets.
-const EXISTING_LOCAL_PATHS = new Set(["/", "/index.md"]);
+const EXISTING_LOCAL_PATHS = new Set([
+  "/",
+  "/index.md",
+  "/about",
+  "/contact",
+  "/privacy",
+]);
 
 function isExistingLocalPath(pathname: string): boolean {
   if (EXISTING_LOCAL_PATHS.has(pathname)) return true;
@@ -86,7 +92,7 @@ describe("public/llms.txt", () => {
 
   it("does not link to routes that don't exist in this repo", () => {
     const links = extractListLinks(lines);
-    const nonexistentRoutes = ["/developers", "/about", "/contact", "/privacy"];
+    const nonexistentRoutes = ["/developers"];
 
     for (const { url } of links) {
       for (const route of nonexistentRoutes) {
