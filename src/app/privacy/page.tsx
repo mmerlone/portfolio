@@ -93,6 +93,12 @@ export default function PrivacyPage(): ReactElement {
               indefinitely
             </li>
             <li>Vercel Web Analytics: 30 days on the Hobby plan</li>
+            <li>
+              Vercel Speed Insights: 24-hour or 7-day reporting windows on the
+              free tier used by this project (longer 30/90-day windows require
+              the paid Speed Insights Plus tier), within a shared allocation of
+              10,000 events per rolling 30 days
+            </li>
           </ul>
 
           <h3 className="text-foreground mt-6 mb-2 text-xl font-semibold">
