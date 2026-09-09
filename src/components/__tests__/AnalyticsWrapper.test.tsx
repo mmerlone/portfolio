@@ -1,5 +1,6 @@
 import { act, render, screen } from "@testing-library/react";
 import AnalyticsWrapper from "@/components/AnalyticsWrapper";
+import { creditsData } from "@/data/credits";
 import { setCookie } from "@/lib/cookies";
 
 jest.mock("@/hooks/useIsHydrated", () => ({
@@ -69,4 +70,22 @@ describe("AnalyticsWrapper", () => {
     expect(screen.queryByTestId("google-tag-manager")).toBeNull();
     expect(screen.queryByTestId("google-analytics")).toBeNull();
   });
+});
+
+describe("AnalyticsWrapper disclosure", () => {
+  // Every processor conditionally rendered in AnalyticsWrapper must be disclosed in the Credits data.
+  const disclosedProcessors = [
+    "Vercel",
+    "Vercel Speed Insights",
+    "Google Analytics",
+    "Google Tag Manager",
+    "Ahrefs Analytics",
+  ];
+
+  it.each(disclosedProcessors)(
+    "has a credits entry for %s",
+    (name: string): void => {
+      expect(creditsData.some((credit) => credit.name === name)).toBe(true);
+    },
+  );
 });

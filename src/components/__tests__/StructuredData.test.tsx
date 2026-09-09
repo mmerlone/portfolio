@@ -24,11 +24,17 @@ describe("StructuredData", () => {
       "Person",
       "WebSite",
       "WebPage",
+      "WebPage",
+      "WebPage",
+      "WebPage",
     ]);
     expect(data["@graph"].map((entry) => entry["@id"])).toEqual([
       "https://mmerlone.dev.br/#person",
       "https://mmerlone.dev.br/#website",
       "https://mmerlone.dev.br/#webpage",
+      "https://mmerlone.dev.br/about#webpage",
+      "https://mmerlone.dev.br/contact#webpage",
+      "https://mmerlone.dev.br/privacy#webpage",
     ]);
     expect(data["@graph"][0]).toEqual(
       expect.objectContaining({
@@ -56,6 +62,33 @@ describe("StructuredData", () => {
     );
     expect(data["@graph"][2]).toEqual(
       expect.objectContaining({
+        isPartOf: { "@id": "https://mmerlone.dev.br/#website" },
+        mainEntity: { "@id": "https://mmerlone.dev.br/#person" },
+      }),
+    );
+    expect(data["@graph"][3]).toEqual(
+      expect.objectContaining({
+        url: "https://mmerlone.dev.br/about",
+        name: "About — Marcio Merlone",
+        inLanguage: "en-US",
+        isPartOf: { "@id": "https://mmerlone.dev.br/#website" },
+        mainEntity: { "@id": "https://mmerlone.dev.br/#person" },
+      }),
+    );
+    expect(data["@graph"][4]).toEqual(
+      expect.objectContaining({
+        url: "https://mmerlone.dev.br/contact",
+        name: "Contact — Marcio Merlone",
+        inLanguage: "en-US",
+        isPartOf: { "@id": "https://mmerlone.dev.br/#website" },
+        mainEntity: { "@id": "https://mmerlone.dev.br/#person" },
+      }),
+    );
+    expect(data["@graph"][5]).toEqual(
+      expect.objectContaining({
+        url: "https://mmerlone.dev.br/privacy",
+        name: "Privacy Policy — Marcio Merlone",
+        inLanguage: "en-US",
         isPartOf: { "@id": "https://mmerlone.dev.br/#website" },
         mainEntity: { "@id": "https://mmerlone.dev.br/#person" },
       }),
