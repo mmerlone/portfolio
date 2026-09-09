@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactElement } from "react";
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { portfolio } from "@/data/portfolio";
 import TermsOfServicePolicy from "./TermsOfServicePolicy";
@@ -42,17 +43,28 @@ const Footer = (): ReactElement => {
               &copy; <span>{currentYear}</span> {portfolio.basic.name}.{" "}
               {siteConfig.footer.copyright.text}
             </small>
-            {/* Terms of Service & Cookie Policy link */}
-            <a
-              href="#"
-              className="text-sm hover:underline"
-              onClick={(e) => {
-                e.preventDefault();
-                handlePolicyOpen();
-              }}
-            >
-              Terms of Service & Cookie Policy
-            </a>
+            <div className="flex items-center gap-4">
+              <Link href="/about" className="text-sm hover:underline">
+                About
+              </Link>
+              <Link href="/contact" className="text-sm hover:underline">
+                Contact
+              </Link>
+              <Link href="/privacy" className="text-sm hover:underline">
+                Privacy Policy
+              </Link>
+              {/* Terms of Service & Cookie Policy link */}
+              <a
+                href="#"
+                className="text-sm hover:underline"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePolicyOpen();
+                }}
+              >
+                Terms of Service & Cookie Policy
+              </a>
+            </div>
           </div>
         </div>
       </div>

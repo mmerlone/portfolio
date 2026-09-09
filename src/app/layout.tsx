@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import TermsOfServiceToast from "@/components/TermsOfServiceToast";
+import Footer from "@/components/Footer";
 import StructuredData from "@/components/StructuredData";
 import { getSeoKeywords } from "@/lib/seoKeywords";
 
@@ -105,6 +106,8 @@ export default function RootLayout({ children }: LayoutProps): ReactElement {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="alternate" type="text/markdown" href="/index.md" />
+        <link rel="describedby" href="/llms.txt" />
         <StructuredData />
       </head>
       <body className={inter.className}>
@@ -120,6 +123,7 @@ export default function RootLayout({ children }: LayoutProps): ReactElement {
           <ScrollProgressBar />
           <Navbar />
           {children}
+          <Footer />
           <TermsOfServiceToast />
         </ThemeProvider>
       </body>
