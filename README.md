@@ -21,10 +21,7 @@ This is a Next.js portfolio project showcasing a small part of my experience in 
 - [Features & Environment Variables](#features--environment-variables)
   - [Managing Environment Variables](#managing-environment-variables)
   - [Analytics & Cookie Consent](#analytics--cookie-consent)
-  - [Weather Widget](#weather-widget)
-  - [Quote Widget](#quote-widget)
   - [GitHub Repo Widget](#github-repo-widget)
-  - [Visual Effects](#visual-effects)
 - [Credits](#credits)
 - [Learn More](#learn-more)
 - [License](#license)
@@ -56,11 +53,12 @@ You can start editing the page by modifying the `app/page.tsx` file.
 This portfolio was built with [Next.js](https://nextjs.org/) and showcases:
 
 - A detailed **About** section describing my background and philosophy.
-- A **Skills** breakdown organized by category, displaying proficiency via icons and descriptions.
-- A timeline of **Professional Experience** demonstrating leadership and project contributions.
+- A **Technical Skills** breakdown organized by category.
+- A timeline of **Professional Experience** and **Education**.
+- A **Challenges** section highlighting notable problems solved.
 - A **Projects** section highlighting selected works with images, detailed descriptions, and the technologies used.
-- A **Contributions** section showcasing selected contributions on private projects.
-- Interactive **Visual Effects** that enhance the user experience.
+- A **Credentials** section listing certifications.
+- A **GitHub** widget showing live repository statistics.
 
 ---
 
@@ -74,19 +72,19 @@ Update the site-wide configuration in `/src/config/site.ts` with your details:
 - **Contact:** Email, phone, and location.
 - **Social Links:** URLs and icons for social profiles.
 - **Navigation & Footer:** Menu items and copyright.
-- **Widgets:** Weather, GitHub, and Quotes widgets can be enabled or disabled by setting their config to `null` or omitting them.
+- **Widgets:** The GitHub repo widget can be enabled or disabled by setting its config to `null` or omitting it.
 - **Effects:** Configure visual effects and animations.
 
 ### Site Data Files
 
 Content for various sections is maintained in `/src/data/`:
 
-- **About:** `/src/data/about.ts`
+- **Portfolio (about, skills, experience, education, credentials, expertise):** `/src/data/portfolio.ts`
 - **Credits:** `/src/data/credits.ts`
-- **Skills:** `/src/data/skills.ts`
-- **Experience:** `/src/data/experience.ts`
+- **Experiences detail:** `/src/data/experiences.ts`
+- **Education detail:** `/src/data/education.ts`
+- **Challenges:** `/src/data/challenges.ts`
 - **Projects:** `/src/data/projects.ts`
-- **Contributions:** `/src/data/contributions.ts`
 
 Ensure these files reflect your updated portfolio content.
 
@@ -96,7 +94,7 @@ Ensure these files reflect your updated portfolio content.
 
 ### Managing Environment Variables
 
-Sensitive information—such as API keys for analytics and weather—is stored in the `.env` file at the project root.  
+Sensitive information—such as API keys for analytics—is stored in the `.env` file at the project root.  
 A sample of these keys is provided via `.env.example`.
 
 To set up:
@@ -133,32 +131,6 @@ Search-console verification metadata is optional and omitted when unset:
 
 ---
 
-### Weather Widget
-
-The weather widget is **optional** and will only be displayed if configured.
-
-1. Get an API key from [OpenWeatherMap](https://openweathermap.org/api)
-2. Add it to your environment variables:
-   ```bash
-   WEATHER_API_KEY="your-api-key"
-   ```
-
-- **Security:**  
-  The weather API key is never exposed to the client. The widget is only rendered if the key is present on the server.
-
-If the `WEATHER_API_KEY` is not set, the weather widget will not be rendered.
-
----
-
-### Quote Widget
-
-The quote widget is now **optional** and can be enabled or disabled in the site config.
-
-- To disable, set `quotes: null` or remove the `quotes` property from your site config.
-- If enabled, quotes are fetched from [ZenQuotes API](https://zenquotes.io/) and can be cached locally for faster access.
-
----
-
 ### GitHub Repo Widget
 
 The GitHub repository statistics widget is also **optional**.
@@ -168,42 +140,24 @@ The GitHub repository statistics widget is also **optional**.
 
 ---
 
-### Visual Effects
-
-The portfolio includes various visual effects that can be configured:
-
-- **3D Globe:** Interactive globe visualization with customizable points and arcs.
-- **Background Effects:** Dynamic background patterns and animations.
-- **UI Components:** Enhanced UI components with animations and transitions.
-- **Theme Support:** Dark and light mode with smooth transitions.
-
-Configure these effects in the site config file under the `effects` section.
-
----
-
 ## Credits
 
 This project leverages the following tools, services, and resources:
 
-- **OpenWeatherMap:** Weather data provided by [OpenWeatherMap](https://openweathermap.org/).
-- **Heroicons:** SVG icons by the makers of [Tailwind CSS](https://heroicons.com/).
-- **Tailwind CSS:** Utility-first CSS framework ([tailwindcss.com](https://tailwindcss.com/)).
-- **FontAwesome:** Iconic font and CSS toolkit ([fontawesome.com](https://fontawesome.com/)).
-- **ZenQuotes API:** Inspirational quotes ([zenquotes.io](https://zenquotes.io/)).
 - **Vercel:** Hosting and performance ([vercel.com](https://vercel.com/)).
-- **React Slick:** Carousel component ([react-slick.neostack.com](https://react-slick.neostack.com/)).
+- **Vercel Speed Insights:** Performance insights ([vercel.com/docs/speed-insights](https://vercel.com/docs/speed-insights)).
 - **Google Analytics:** Web analytics ([analytics.google.com](https://analytics.google.com/)).
-- **Google Tag Manager:** Tag management ([tagmanager.google.com](https://tagmanager.google.com/)).
-- **Vercel Speed Insights:** Performance insights ([vercel.com/speed](https://vercel.com/speed)).
+- **Google Tag Manager:** Tag management, takes precedence over Google Analytics when both are configured ([tagmanager.google.com](https://tagmanager.google.com/)).
+- **Ahrefs Analytics:** Cookieless web analytics ([ahrefs.com/web-analytics](https://ahrefs.com/web-analytics)).
+- **Cloudflare:** CDN, security, and performance optimization ([cloudflare.com](https://cloudflare.com/)).
 - **improvmx.com:** Email forwarding ([improvmx.com](https://improvmx.com/)).
-- **Three.js:** 3D graphics library ([threejs.org](https://threejs.org/)).
-- **React Three Fiber:** React renderer for Three.js ([docs.pmnd.rs](https://docs.pmnd.rs/react-three-fiber/)).
-- **Framer Motion:** Animation library ([framer.com/motion](https://www.framer.com/motion/)).
-- **GSAP:** Animation library ([gsap.com](https://gsap.com/)).
-- **TanStack Query:** Data fetching and caching ([tanstack.com/query](https://tanstack.com/query/latest)).
-- **Aceternity UI:** Modern UI components ([ui.aceternity.com](https://ui.aceternity.com/)).
+- **Next.js:** The React framework for production ([nextjs.org](https://nextjs.org/)).
+- **React:** The JavaScript library for building user interfaces ([react.dev](https://react.dev/)).
+- **Open Props:** CSS token library for design system primitives ([open-props.style](https://open-props.style/)).
+- **Phosphor Icons:** Icon family used throughout this interface ([phosphoricons.com](https://phosphoricons.com/)).
+- **Tailwind CSS:** Utility-first CSS framework ([tailwindcss.com](https://tailwindcss.com/)).
 
-_...and many more. Kudos to everyone involved!_
+_Kudos to everyone involved!_
 
 ---
 
@@ -238,16 +192,14 @@ Contributions are welcome! If you have suggestions for improvements, bug fixes, 
 This project utilizes the following technologies:
 
 - Next.js
+- React
 - TypeScript
 - Tailwind CSS
+- Sass
 - ESLint
 - Prettier
+- Jest
 - Vercel
-- Three.js
-- React Three Fiber
-- Framer Motion
-- GSAP
-- TanStack Query
 
 ## Contact
 
