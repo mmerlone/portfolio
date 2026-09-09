@@ -18,13 +18,33 @@ function getLastModified(): Date {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = getLastModified();
+
   return [
     {
       url: `${siteConfig.url}/`,
-      lastModified: getLastModified(),
+      lastModified,
       changeFrequency: "monthly",
       priority: 1,
       images: [`${siteConfig.url}${siteConfig.images.profile}`],
+    },
+    {
+      url: `${siteConfig.url}/about`,
+      lastModified,
+      changeFrequency: "yearly",
+      priority: 0.6,
+    },
+    {
+      url: `${siteConfig.url}/contact`,
+      lastModified,
+      changeFrequency: "yearly",
+      priority: 0.6,
+    },
+    {
+      url: `${siteConfig.url}/privacy`,
+      lastModified,
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
   ];
 }

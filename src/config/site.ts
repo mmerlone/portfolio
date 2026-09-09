@@ -15,14 +15,14 @@ export const siteConfig: SiteConfig = {
 
   // Navigation
   navigation: [
-    { label: "About", href: "/#about" },
+    { label: "About", href: "/about" },
     { label: "Expertise", href: "/#expertise" },
     { label: "Experience", href: "/#experience" },
     { label: "Challenges", href: "/#challenges" },
     { label: "Projects", href: "/#projects" },
     { label: "Skills", href: "/#skills" },
     { label: "Credits", href: "/#credits" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Contact", href: "/contact" },
   ],
 
   // Footer configuration

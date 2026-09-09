@@ -9,6 +9,10 @@ const websiteId = `${pageUrl}#website`;
 const webpageId = `${pageUrl}#webpage`;
 const seoKeywords = getSeoKeywords();
 
+const aboutUrl = `${siteConfig.url}/about`;
+const contactUrl = `${siteConfig.url}/contact`;
+const privacyUrl = `${siteConfig.url}/privacy`;
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -42,6 +46,33 @@ const structuredData = {
       url: pageUrl,
       name: siteConfig.seo.title,
       description: siteConfig.seo.description,
+      inLanguage: "en-US",
+      isPartOf: { "@id": websiteId },
+      mainEntity: { "@id": personId },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${aboutUrl}#webpage`,
+      url: aboutUrl,
+      name: `About — ${portfolio.basic.name}`,
+      inLanguage: "en-US",
+      isPartOf: { "@id": websiteId },
+      mainEntity: { "@id": personId },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${contactUrl}#webpage`,
+      url: contactUrl,
+      name: `Contact — ${portfolio.basic.name}`,
+      inLanguage: "en-US",
+      isPartOf: { "@id": websiteId },
+      mainEntity: { "@id": personId },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${privacyUrl}#webpage`,
+      url: privacyUrl,
+      name: `Privacy Policy — ${portfolio.basic.name}`,
       inLanguage: "en-US",
       isPartOf: { "@id": websiteId },
       mainEntity: { "@id": personId },
