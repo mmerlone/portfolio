@@ -6,6 +6,7 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // Optional: for global mocks or setup
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1', // To match your path aliases
+    '^@lib/(.*)$': '<rootDir>/src/lib/$1',
   },
   transform: {
     '^.+\\.tsx?$': ['ts-jest', {
