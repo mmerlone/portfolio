@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, type FC } from "react";
+import Link from "next/link";
 
 interface TermsOfServicePolicyProps {
   visible?: boolean;
@@ -108,9 +109,14 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           collected:
         </p>
         <ul className="text-muted-foreground mb-4 ml-5 list-disc">
-          <li>Google Analytics for visitor statistics</li>
-          <li>Google Tag Manager for managing tracking scripts</li>
+          <li>
+            Google Analytics or Google Tag Manager for visitor statistics
+            (mutually exclusive at runtime; Google Tag Manager takes precedence
+            when both are configured)
+          </li>
+          <li>Ahrefs Analytics for cookieless traffic insights</li>
           <li>Vercel Analytics for performance monitoring</li>
+          <li>Vercel Speed Insights for page speed metrics</li>
           <li>Interaction events (clicks, scrolls, and navigation)</li>
           <li>Session and usage statistics</li>
           <li>Device and browser information</li>
@@ -121,7 +127,11 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           don’t ask again.
         </p>
         <p className="text-muted-foreground mb-4">
-          For more details, please review the full Privacy Policy on my website.
+          For more details, please review the full{" "}
+          <Link href="/privacy" className="text-accent hover:underline">
+            Privacy Policy
+          </Link>
+          .
         </p>
         <div className="mt-4 flex justify-end space-x-2">
           <button

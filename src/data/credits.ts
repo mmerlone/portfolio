@@ -23,6 +23,20 @@ export const creditsData: readonly Credit[] = [
     icon: "google-analytics.svg",
   },
   {
+    name: "Google Tag Manager",
+    description:
+      "Google Tag Manager manages tracking scripts and takes precedence over Google Analytics when both are configured.",
+    url: "https://tagmanager.google.com/",
+    icon: "google-analytics.svg",
+  },
+  {
+    name: "Ahrefs Analytics",
+    description:
+      "Ahrefs Analytics provides cookieless, privacy-friendly website traffic insights.",
+    url: "https://ahrefs.com/web-analytics",
+    icon: "ahrefs.svg",
+  },
+  {
     name: "Cloudflare",
     description:
       "Cloudflare provides CDN, security, and performance optimization.",
