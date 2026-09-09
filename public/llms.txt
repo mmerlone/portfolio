@@ -1,0 +1,16 @@
+# Marcio Merlone
+
+> Personal software-engineering portfolio and résumé-equivalent for Marcio Merlone, Software Engineer — Platform Architect & Full-Stack Reliability Engineer.
+
+Use this site to evaluate Marcio Merlone's professional background and experience for a role, to match platform/reliability/frontend expertise against a job requirement, to locate résumé or project evidence, and to find official contact channels. This website has no public API, CLI, or MCP server. Some scanners report an `mcp.mmerlone.dev.br` hostname; that is only a wildcard-DNS artifact (`*.mmerlone.dev.br`) resolving to this same site, not a real separate service — no such service exists.
+
+## Docs
+
+- [Homepage (Markdown)](https://mmerlone.dev.br/index.md): full Markdown representation of the homepage — identity, summary, expertise, experience, selected challenges, open source projects, technical skills, credentials, and education.
+- [Résumé (PDF)](https://mmerlone.dev.br/documents/MarcioMerlone.pdf): downloadable résumé PDF.
+
+## Contact
+
+- [Website](https://mmerlone.dev.br/): canonical site URL.
+- [GitHub](https://github.com/mmerlone): source code and open source projects.
+- [LinkedIn](https://www.linkedin.com/in/mmerlone): professional profile and work history.
