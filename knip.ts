@@ -2,6 +2,7 @@ import type { KnipConfig } from "knip";
 
 const config: KnipConfig = {
   ignore: [
+    "src/data/**",
     // Logging infrastructure kept intentionally for future use; not wired up yet.
     "src/lib/logger/**",
     "src/types/logger.types.ts",
