@@ -67,7 +67,7 @@ export const siteConfig: SiteConfig = {
   seo: {
     title: "Marcio Merlone — Software Engineer & Platform Architect",
     description:
-      "Software engineer with 20+ years of experience building resilient platforms, reliable infrastructure, and accessible web applications.",
+      "Senior Software Engineer building resilient products from infrastructure to interface.",
     ...(googleSiteVerification || bingSiteVerification
       ? {
           verification: {
