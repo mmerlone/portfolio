@@ -27,6 +27,11 @@ describe("StructuredData", () => {
       "WebPage",
       "WebPage",
       "WebPage",
+      "WebPage",
+      "SoftwareApplication",
+      "SoftwareApplication",
+      "SoftwareApplication",
+      "Article",
     ]);
     expect(data["@graph"].map((entry) => entry["@id"])).toEqual([
       "https://mmerlone.dev.br/#person",
@@ -35,16 +40,24 @@ describe("StructuredData", () => {
       "https://mmerlone.dev.br/about#webpage",
       "https://mmerlone.dev.br/contact#webpage",
       "https://mmerlone.dev.br/privacy#webpage",
+      "https://mmerlone.dev.br/under-the-hood#webpage",
+      "https://mmerlone.dev.br/#work-0",
+      "https://mmerlone.dev.br/#work-1",
+      "https://mmerlone.dev.br/#work-2",
+      "https://mmerlone.dev.br/#work-3",
     ]);
     expect(data["@graph"][0]).toEqual(
       expect.objectContaining({
         name: "Marcio Merlone",
         url: "https://mmerlone.dev.br/",
-        jobTitle: "Software Engineer",
+        jobTitle: "Senior Software Engineer",
         image: "https://mmerlone.dev.br/images/profile/profile.png",
         sameAs: expect.arrayContaining([
           "https://www.linkedin.com/in/mmerlone",
           "https://github.com/mmerlone",
+          "https://mmerlone.dev.br/",
+          "https://www.instagram.com/mmerlone/",
+          "https://www.facebook.com/mmerlone",
         ]),
         knowsAbout: expect.arrayContaining([
           "High-Performance UI Architecture",
@@ -91,6 +104,36 @@ describe("StructuredData", () => {
         inLanguage: "en-US",
         isPartOf: { "@id": "https://mmerlone.dev.br/#website" },
         mainEntity: { "@id": "https://mmerlone.dev.br/#person" },
+      }),
+    );
+    expect(data["@graph"][6]).toEqual(
+      expect.objectContaining({
+        url: "https://mmerlone.dev.br/under-the-hood",
+        name: "Under the Hood — Marcio Merlone",
+        inLanguage: "en-US",
+        isPartOf: { "@id": "https://mmerlone.dev.br/#website" },
+        mainEntity: { "@id": "https://mmerlone.dev.br/#person" },
+      }),
+    );
+    expect(data["@graph"][7]).toEqual(
+      expect.objectContaining({
+        "@type": "SoftwareApplication",
+        name: "YwyBase",
+        url: "https://ywybase.vercel.app/",
+        codeRepository: "https://github.com/mmerlone/ywybase",
+        author: { "@id": "https://mmerlone.dev.br/#person" },
+      }),
+    );
+    expect(data["@graph"][10]).toEqual(
+      expect.objectContaining({
+        "@type": "Article",
+        name: "Headless CMS Migration: From WordPress to Contentstack",
+        url: "https://arctouch.com/blog/headless-cms-migration",
+        author: { "@id": "https://mmerlone.dev.br/#person" },
+        publisher: {
+          "@type": "Organization",
+          name: "ArcTouch",
+        },
       }),
     );
   });

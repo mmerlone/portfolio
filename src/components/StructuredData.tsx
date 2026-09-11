@@ -13,6 +13,44 @@ const aboutUrl = `${siteConfig.url}/about`;
 const contactUrl = `${siteConfig.url}/contact`;
 const privacyUrl = `${siteConfig.url}/privacy`;
 
+const workStructuredData = portfolio.openSourceProjects.map((item, index) => {
+  if (item.kind === "external") {
+    return {
+      "@type": "Article",
+      "@id": `${pageUrl}#work-${index}`,
+      url: item.articleUrl,
+      name: item.name,
+      author: { "@id": personId },
+      publisher: { "@type": "Organization", name: item.publisher },
+      isPartOf: { "@id": webpageId },
+      description: item.description,
+      keywords: item.technologies ?? [],
+    };
+  }
+
+  const sameAs = [
+    item.github,
+    item.npm,
+    ...(item.otherLinks?.map((link) => link.url) ?? []),
+  ].filter((url): url is string => Boolean(url));
+
+  return {
+    "@type": "SoftwareApplication",
+    "@id": `${pageUrl}#work-${index}`,
+    url: item.demo,
+    name: item.name,
+    description: item.description,
+    author: { "@id": personId },
+    publisher: { "@id": personId },
+    isPartOf: { "@id": webpageId },
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Web",
+    softwareRequirements: item.technologies,
+    codeRepository: item.github,
+    ...(sameAs.length > 0 ? { sameAs } : {}),
+  };
+});
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -77,6 +115,16 @@ const structuredData = {
       isPartOf: { "@id": websiteId },
       mainEntity: { "@id": personId },
     },
+    {
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}/under-the-hood#webpage`,
+      url: `${siteConfig.url}/under-the-hood`,
+      name: `Under the Hood — ${portfolio.basic.name}`,
+      inLanguage: "en-US",
+      isPartOf: { "@id": websiteId },
+      mainEntity: { "@id": personId },
+    },
+    ...workStructuredData,
   ],
 };
 
