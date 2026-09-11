@@ -59,9 +59,9 @@ export default function AboutPage(): ReactElement {
         </Section>
       </div>
 
-        <Section>
-          <Credits />
-        </Section>
+      <Section>
+        <Credits />
+      </Section>
     </main>
   );
 }
