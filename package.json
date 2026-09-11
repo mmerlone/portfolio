@@ -51,6 +51,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.12.0",
     "jest": "^30.5.1",
+    "jest-axe": "^9.0.0",
     "jest-environment-jsdom": "^30.5.1",
     "knip": "^5.66.0",
     "postcss": "^8.5.27",
