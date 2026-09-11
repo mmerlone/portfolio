@@ -4,23 +4,25 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import ChallengeCard from "@/components/ui/ChallengeCard";
 import { cn } from "@/lib/cn";
 
-interface ChallengesSectionProps {
+interface SelectedExperienceSectionProps {
   className?: string;
 }
 
-export default function ChallengesSection({
+export default function SelectedExperienceSection({
   className,
-}: ChallengesSectionProps): ReactElement {
+}: SelectedExperienceSectionProps): ReactElement {
   const challenges = portfolio.challenges ?? [];
 
   return (
     <section
-      id="challenges"
-      aria-labelledby="challenges-title"
+      id="selected-experience"
+      aria-labelledby="selected-experience-title"
       className={cn("relative my-4", className)}
     >
       <div className="container mx-auto px-4">
-        <SectionTitle id="challenges-title">Selected Challenges</SectionTitle>
+        <SectionTitle id="selected-experience-title">
+          Selected experience
+        </SectionTitle>
         <p className="text-muted-foreground mb-8">
           The contributions detailed below primarily represent work undertaken
           for previous employers and clients. Due to confidentiality agreements

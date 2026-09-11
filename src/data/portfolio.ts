@@ -17,8 +17,8 @@ import { challenges } from "@/data/challenges";
 export const portfolio: Portfolio = {
   basic: {
     name: "Marcio Merlone",
-    title: "Software Engineer",
-    label: "Platform Architect & Full-Stack Reliability Engineer",
+    title: "Senior Software Engineer",
+    label: "I build software with a systems engineer's perspective.",
     location: "Araucária, PR, Brazil — Curitiba Area, Brazil",
     contact: {
       email: "mmerlone@gmail.com",
@@ -26,7 +26,7 @@ export const portfolio: Portfolio = {
       website: "https://mmerlone.dev.br/",
     },
     summary:
-      "Bridging the gap between ambitious technical vision and reliable production systems through collaborative engineering and operational empathy. Specialist in building resilient, accessible platforms that scale from foundational infrastructure to pixel-perfect UIs for global brands. With 20+ years of experience, I excel at 'living with decisions,' evolving legacy ERPs into scalable cloud-ready environments while maintaining a relentless focus on reliability, performance, and user experience.",
+      "From industrial automation to global frontend platforms — 20+ years evolving mission-critical systems into resilient, accessible products. I bring a systems engineer's perspective to modern software: make structure explicit, treat accessibility as architecture, design stable reusable APIs, automate repeatable validation, and live with operational decisions.",
     technical: {
       programming: [
         "React",

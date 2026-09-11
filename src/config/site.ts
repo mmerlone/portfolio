@@ -16,13 +16,14 @@ export const siteConfig: SiteConfig = {
   // Navigation
   navigation: [
     { label: "About", href: "/about" },
-    { label: "Expertise", href: "/#expertise" },
-    { label: "Experience", href: "/#experience" },
-    { label: "Challenges", href: "/#challenges" },
-    { label: "Projects", href: "/#projects" },
+    { label: "Selected engineering work", href: "/#selected-engineering-work" },
+    { label: "How I build", href: "/#how-i-build" },
+    { label: "My path", href: "/#my-path" },
+    { label: "Selected experience", href: "/#selected-experience" },
     { label: "Skills", href: "/#skills" },
-    { label: "Credits", href: "/#credits" },
+    { label: "Credits", href: "/about#credits" },
     { label: "Contact", href: "/contact" },
+    { label: "Under the Hood", href: "/under-the-hood" },
   ],
 
   // Footer configuration
@@ -51,21 +52,16 @@ export const siteConfig: SiteConfig = {
     },
   },
 
-  // GitHub repository info
-  github: {
-    repoUrl: "https://github.com/mmerlone/portfolio",
-  },
-
   // CTA configuration
   cta: {
-    text: "Let’s build a resilient architecture together.",
+    text: "Let's build a resilient architecture together.",
     linkText: "Let's talk!",
     link: "https://calendly.com/mmerlone",
   },
 
   // Search metadata
   seo: {
-    title: "Marcio Merlone — Software Engineer & Platform Architect",
+    title: "Marcio Merlone — Senior Software Engineer",
     description:
       "Senior Software Engineer building resilient products from infrastructure to interface.",
     ...(googleSiteVerification || bingSiteVerification

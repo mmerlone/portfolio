@@ -131,9 +131,11 @@ export interface PortfolioBasic {
 }
 
 /**
- * Open source or personal project entry.
+ * Open source or personal project entry owned by Marcio Merlone.
  */
 export interface PortfolioProjectItem {
+  /** Discriminant kind for the work-item union. */
+  readonly kind: "owned";
   /** Project name */
   readonly name: string;
   /** Optional project description */
@@ -144,11 +146,57 @@ export interface PortfolioProjectItem {
   readonly demo: string;
   /** Link to project's source code */
   readonly github: string;
+  /** Optional npm registry URL for published packages */
+  readonly npm?: string;
   /** Optional free-form notes about the project */
   readonly otherLinks?: { label: string; url: string }[];
   /** Optional image URL for the project in the assets folder */
   readonly image?: string;
+  /** Marcio's personal role in the project */
+  readonly role?: string;
+  /** Problem or context the project addresses */
+  readonly context?: string;
+  /** Constraints faced while building the project */
+  readonly constraints?: readonly string[];
+  /** Key decisions made while building the project */
+  readonly decisions?: readonly string[];
+  /** Trade-offs accepted while building the project */
+  readonly tradeoffs?: readonly string[];
+  /** Outcome or result of the project */
+  readonly outcome?: string;
 }
+
+/**
+ * External published article bylined by Marcio Merlone and hosted by a
+ * third-party publisher. Content is linked, never hosted or duplicated here.
+ */
+export interface PortfolioExternalArticle {
+  /** Discriminant kind for the work-item union. */
+  readonly kind: "external";
+  /** Human-readable title of the published article */
+  readonly name: string;
+  /** Publisher of the externally hosted article */
+  readonly publisher: string;
+  /** URL of the published article (external link only) */
+  readonly articleUrl: string;
+  /** Bylined author name */
+  readonly author: string;
+  /** URL of the author's profile on the publisher's site */
+  readonly authorProfileUrl: string;
+  /** Optional short factual summary of the article */
+  readonly description?: string;
+  /** Approved personal-role wording for the published work */
+  readonly role?: string;
+  /** Technologies or topics covered by the article */
+  readonly technologies?: readonly string[];
+  /** Optional image URL for the article in the assets folder */
+  readonly image?: string;
+}
+
+/**
+ * Discriminated union of owned projects and external articles.
+ */
+export type PortfolioWorkItem = PortfolioProjectItem | PortfolioExternalArticle;
 
 /**
  * Social media or professional network link.
@@ -192,8 +240,8 @@ export interface Portfolio {
   readonly professionalExperience: PortfolioExperienceItem[];
   /** Selected professional challenges and contributions */
   readonly challenges?: PortfolioChallenge[];
-  /** Open source projects */
-  readonly openSourceProjects: PortfolioProjectItem[];
+  /** Selected owned projects and external articles */
+  readonly openSourceProjects: PortfolioWorkItem[];
   /** Education history */
   readonly education: PortfolioEducationItem[];
   /** Languages and proficiency */

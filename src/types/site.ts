@@ -30,10 +30,6 @@ export interface AnalyticsConfig {
   };
 }
 
-export interface GitHubConfig {
-  readonly repoUrl: string | null;
-}
-
 export interface CTAConfig {
   readonly text: string;
   readonly linkText: string;
@@ -57,7 +53,6 @@ export interface SiteConfig {
   readonly footer: FooterConfig;
   readonly cookie: CookieConfig;
   readonly analytics?: AnalyticsConfig;
-  readonly github?: GitHubConfig;
   readonly cta?: CTAConfig;
   readonly seo: SeoConfig;
 }

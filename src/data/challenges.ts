@@ -53,7 +53,7 @@ export const challenges: PortfolioChallenge[] = [
     ],
     result: [
       "Successfully migrated content to Contentstack, providing a more modern and scalable content management solution.",
-      "Documented the process and outcomes, which will be featured in an upcoming ArcTouch blog article.",
+      "The migration approach and outcomes are documented in the published ArcTouch engineering case study 'Headless CMS Migration: From WordPress to Contentstack' by Marcio Merlone.",
     ],
     technologies: [
       "WordPress",

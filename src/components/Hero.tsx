@@ -2,7 +2,7 @@ import { type ReactElement } from "react";
 import Image from "next/image";
 import { portfolio } from "@/data/portfolio";
 import { siteConfig } from "@/config/site";
-import { cn } from "@lib/cn";
+import { cn } from "@/lib/cn";
 import { CTA } from "@/components/ui/CTA";
 
 interface HeroProps {
@@ -11,6 +11,21 @@ interface HeroProps {
 
 export default function Hero({ className = "" }: HeroProps): ReactElement {
   const { name, title, label } = portfolio.basic;
+
+  const proofLinks = [
+    {
+      label: "Selected engineering work",
+      href: "#selected-engineering-work",
+    },
+    {
+      label: "Cirrus migration article",
+      href: "#cirrus-article",
+    },
+    {
+      label: "Résumé and contact",
+      href: "#resume-contact",
+    },
+  ] as const;
 
   return (
     <section
@@ -38,21 +53,18 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
             </p>
           )}
           <nav
-            aria-label="Call to action"
+            aria-label="Proof links"
             className="flex flex-wrap justify-center gap-4 lg:justify-start"
           >
-            <a
-              href="#contact"
-              className="cta-link bg-action text-action-foreground hover:bg-action-hover rounded-lg px-8 py-3"
-            >
-              Get in Touch
-            </a>
-            <a
-              href="#about"
-              className="border-border-strong bg-surface text-foreground hover:bg-surface-raised cta-link rounded-lg border px-8 py-3"
-            >
-              Learn More
-            </a>
+            {proofLinks.map((link, idx) => (
+              <a
+                key={idx}
+                href={link.href}
+                className="cta-link bg-action text-action-foreground hover:bg-action-hover rounded-lg px-8 py-3"
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
         </div>
         <div className="mt-16">

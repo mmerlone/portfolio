@@ -2,17 +2,12 @@ import NextDynamic from "next/dynamic";
 import { Suspense, type ReactElement } from "react";
 import Hero from "@/components/Hero";
 import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
-import GitHubWidgetSection from "@/components/GitHubWidgetSection";
-import { siteConfig } from "@/config/site";
-import { getGitHubRepoStatsWidgetData } from "@/lib/widgetData";
 
 // Lazy load complex sections below the fold
-const ExpertiseSection = NextDynamic(
-  () => import("@/components/ExpertiseSection"),
+const HowIBuildSection = NextDynamic(
+  () => import("@/components/HowIBuildSection"),
 );
-const ExperienceSection = NextDynamic(
-  () => import("@/components/ExperienceSection"),
-);
+const MyPathSection = NextDynamic(() => import("@/components/MyPathSection"));
 const ChallengesSection = NextDynamic(
   () => import("@/components/ChallengesSection"),
 );
@@ -22,13 +17,9 @@ const ProjectsSection = NextDynamic(
 const TechnicalSkillsSection = NextDynamic(
   () => import("@/components/TechnicalSkillsSection"),
 );
-const CredentialsSection = NextDynamic(
-  () => import("@/components/CredentialsSection"),
+const ResumeContactSection = NextDynamic(
+  () => import("@/components/ResumeContactSection"),
 );
-const EducationSection = NextDynamic(
-  () => import("@/components/EducationSection"),
-);
-const Credits = NextDynamic(() => import("@/components/Credits"));
 const ScrollToTop = NextDynamic(() => import("@/components/ScrollToTop"));
 
 const LoadingSection = (): ReactElement => (
@@ -36,43 +27,27 @@ const LoadingSection = (): ReactElement => (
 );
 
 export default function Home(): ReactElement {
-  const repoUrl = siteConfig.github?.repoUrl ?? "";
-  const repoStatsPromise = repoUrl
-    ? getGitHubRepoStatsWidgetData(repoUrl)
-    : null;
-
   return (
     <main id="top">
       <ClientAnalyticsWrapper />
       <Hero />
-      {repoStatsPromise ? (
-        <Suspense fallback={<LoadingSection />}>
-          <GitHubWidgetSection repoStatsPromise={repoStatsPromise} />
-        </Suspense>
-      ) : null}
       <Suspense fallback={<LoadingSection />}>
-        <ExpertiseSection />
+        <ProjectsSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
-        <ExperienceSection />
+        <HowIBuildSection />
+      </Suspense>
+      <Suspense fallback={<LoadingSection />}>
+        <MyPathSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
         <ChallengesSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
-        <ProjectsSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
         <TechnicalSkillsSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
-        <CredentialsSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <EducationSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <Credits />
+        <ResumeContactSection />
       </Suspense>
       <Suspense fallback={null}>
         <ScrollToTop />
