@@ -13,7 +13,7 @@ describe("metadata routes", () => {
     expect(entry.lastModified).toBeInstanceOf(Date);
   });
 
-  it("publishes /about, /contact, and /privacy at or below homepage priority", () => {
+  it("publishes /about, /contact, /privacy, and /under-the-hood at or below homepage priority", () => {
     const entries = sitemap();
     const [homepage] = entries;
 
@@ -25,6 +25,9 @@ describe("metadata routes", () => {
     );
     const privacy = entries.find(
       (entry) => entry.url === "https://mmerlone.dev.br/privacy",
+    );
+    const underTheHood = entries.find(
+      (entry) => entry.url === "https://mmerlone.dev.br/under-the-hood",
     );
 
     expect(about).toMatchObject({
@@ -39,8 +42,12 @@ describe("metadata routes", () => {
       changeFrequency: "yearly",
       priority: 0.3,
     });
+    expect(underTheHood).toMatchObject({
+      changeFrequency: "yearly",
+      priority: 0.4,
+    });
 
-    for (const entry of [about, contact, privacy]) {
+    for (const entry of [about, contact, privacy, underTheHood]) {
       expect(entry?.lastModified).toBeInstanceOf(Date);
       expect(entry?.priority ?? 0).toBeLessThanOrEqual(homepage.priority ?? 1);
     }
