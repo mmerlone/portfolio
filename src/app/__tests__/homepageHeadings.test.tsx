@@ -1,12 +1,6 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Home from "@/app/page";
-
-jest.mock("@/lib/widgetData", () => ({
-  getGitHubRepoStatsWidgetData: (): Promise<{
-    stats: null;
-    errorMessage: string;
-  }> => Promise.resolve({ stats: null, errorMessage: "mocked" }),
-}));
+import { portfolio } from "@/data/portfolio";
 
 function normalizeText(text: string): string {
   return text.replace(/\s+/g, " ").trim();
@@ -21,6 +15,33 @@ describe("homepage heading outline and content", () => {
     );
 
     expect(h1s).toHaveLength(1);
+  });
+
+  it("renders hero with updated role and point of view", () => {
+    render(<Home />);
+
+    expect(screen.getByText(portfolio.basic.name)).toBeInTheDocument();
+    expect(screen.getByText("Senior Software Engineer")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "I build software with a systems engineer's perspective.",
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it("renders three proof links in hero", () => {
+    const { container } = render(<Home />);
+
+    expect(
+      screen.getByRole("link", { name: "Selected engineering work" }),
+    ).toHaveAttribute("href", "#selected-engineering-work");
+    expect(
+      screen.getByRole("link", { name: "Cirrus migration article" }),
+    ).toHaveAttribute("href", "#cirrus-article");
+    expect(
+      screen.getByRole("link", { name: "Résumé and contact" }),
+    ).toHaveAttribute("href", "#resume-contact");
+    expect(container.querySelector("#cirrus-article")).not.toBeNull();
   });
 
   it("renders at least 500 normalized characters of meaningful content", () => {
@@ -43,5 +64,23 @@ describe("homepage heading outline and content", () => {
       expect(level).toBeLessThanOrEqual(previousLevel + 1);
       previousLevel = level;
     }
+  });
+
+  it("renders the approved homepage section order with correct headings", () => {
+    render(<Home />);
+
+    const h2s = screen.getAllByRole("heading", { level: 2 });
+    const headingTexts = h2s.map((h) => h.textContent);
+
+    expect(headingTexts).toEqual([
+      "Senior Software Engineer",
+      "Selected engineering work",
+      "How I build",
+      "My Path",
+      "Selected experience",
+      "Technical Skills",
+      "Résumé & Contact",
+    ]);
+    expect(screen.queryByText("Portfolio Credits")).not.toBeInTheDocument();
   });
 });
