@@ -35,13 +35,12 @@ describe("renderPortfolioMarkdown", () => {
       "## Summary",
       "## Core Expertise",
       "## Professional Experience",
-      "## Selected Challenges",
-      "## Open Source Projects",
+      "## Selected experience",
+      "## Selected engineering work",
       "## Technical Skills",
       "## Credentials & Certifications",
       "## Education",
       "## Resume",
-      "## Source Code",
       "## Contact",
     ].forEach((section) => {
       expect(markdown).toContain(section);
@@ -106,8 +105,8 @@ describe("renderPortfolioMarkdown", () => {
     expect(output).not.toMatch(/\bundefined\b/);
     expect(output).not.toMatch(/\bnull\b/);
     expect(output).not.toContain("## Core Expertise");
-    expect(output).not.toContain("## Selected Challenges");
-    expect(output).not.toContain("## Open Source Projects");
+    expect(output).not.toContain("## Selected experience");
+    expect(output).not.toContain("## Selected engineering work");
     expect(output).not.toContain("## Technical Skills");
     expect(output).not.toContain("## Credentials & Certifications");
     expect(output).not.toContain("## Education");
@@ -150,5 +149,132 @@ describe("renderPortfolioMarkdown", () => {
 
     expect(output.startsWith("# A\\*B\\_C")).toBe(true);
     expect(output).toContain("\\[brackets\\] and \\`code\\` and \\*stars\\*");
+  });
+
+  it("renders owned projects with descriptive links", () => {
+    const ownedPortfolio: Portfolio = {
+      basic: {
+        name: "Test Person",
+        title: "Engineer",
+        location: "Nowhere",
+        contact: { email: "test@example.com" },
+        summary: "A short summary.",
+        technical: {
+          programming: [],
+          operatingSystems: [],
+          hardware: [],
+          serversAndServices: [],
+          databases: [],
+          platformsAndTools: [],
+          virtualization: [],
+          networkingAndSecurity: [],
+          backupAndRecovery: [],
+          cloud: [],
+          automation: [],
+          other: [],
+        },
+        expertise: [],
+      },
+      professionalExperience: [],
+      openSourceProjects: [
+        {
+          kind: "owned",
+          name: "Owned Project",
+          technologies: ["TypeScript"],
+          context: "A project context.",
+          constraints: ["Keep the API small."],
+          decisions: ["Use a typed contract."],
+          tradeoffs: ["Favor clarity over flexibility."],
+          outcome: "A measured outcome.",
+          demo: "https://example.com/demo",
+          github: "https://example.com/repo",
+          npm: "https://www.npmjs.com/package/owned-project",
+          otherLinks: [
+            {
+              label: "Architecture and design",
+              url: "https://example.com/about",
+            },
+          ],
+        },
+      ],
+      education: [],
+      languages: [],
+      certifications: [],
+    };
+
+    const output = renderPortfolioMarkdown(ownedPortfolio);
+
+    expect(output).toContain("## Selected engineering work");
+    expect(output).toContain("### Owned Project");
+    expect(output).toContain("**Context:** A project context.");
+    expect(output).toContain("**Constraints:**");
+    expect(output).toContain("**Decisions:**");
+    expect(output).toContain("**Trade-offs:**");
+    expect(output).toContain("**Outcome:** A measured outcome.");
+    expect(output).toContain("[Live demo](https://example.com/demo)");
+    expect(output).toContain("[GitHub](https://example.com/repo)");
+    expect(output).toContain(
+      "[npm](https://www.npmjs.com/package/owned-project)",
+    );
+    expect(output).toContain(
+      "[Architecture and design](https://example.com/about)",
+    );
+  });
+
+  it("renders external articles with publisher and author attribution", () => {
+    const externalPortfolio: Portfolio = {
+      basic: {
+        name: "Test Person",
+        title: "Engineer",
+        location: "Nowhere",
+        contact: { email: "test@example.com" },
+        summary: "A short summary.",
+        technical: {
+          programming: [],
+          operatingSystems: [],
+          hardware: [],
+          serversAndServices: [],
+          databases: [],
+          platformsAndTools: [],
+          virtualization: [],
+          networkingAndSecurity: [],
+          backupAndRecovery: [],
+          cloud: [],
+          automation: [],
+          other: [],
+        },
+        expertise: [],
+      },
+      professionalExperience: [],
+      openSourceProjects: [
+        {
+          kind: "external",
+          name: "Headless CMS Migration: From WordPress to Contentstack",
+          publisher: "ArcTouch",
+          author: "Marcio Merlone",
+          articleUrl: "https://arctouch.com/blog/headless-cms-migration",
+          authorProfileUrl: "https://arctouch.com/blog/author/marcio-merlone",
+        },
+      ],
+      education: [],
+      languages: [],
+      certifications: [],
+    };
+
+    const output = renderPortfolioMarkdown(externalPortfolio);
+
+    expect(output).toContain(
+      "### Headless CMS Migration: From WordPress to Contentstack",
+    );
+    expect(output).toContain("**Publisher:** ArcTouch");
+    expect(output).toContain("**Author:** Marcio Merlone");
+    expect(output).toContain(
+      "[Read the article](https://arctouch.com/blog/headless-cms-migration)",
+    );
+    expect(output).toContain(
+      "[ArcTouch author profile](https://arctouch.com/blog/author/marcio-merlone)",
+    );
+    expect(output).not.toContain("[GitHub]");
+    expect(output).not.toContain("[npm]");
   });
 });

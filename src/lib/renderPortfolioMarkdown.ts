@@ -5,8 +5,10 @@ import type {
   PortfolioChallenge,
   PortfolioEducationItem,
   PortfolioExperienceItem,
+  PortfolioExternalArticle,
   PortfolioProjectItem,
   PortfolioTechnical,
+  PortfolioWorkItem,
 } from "@/types/portfolio";
 
 const TECHNICAL_CATEGORY_LABELS: Record<keyof PortfolioTechnical, string> = {
@@ -94,8 +96,30 @@ function renderProject(item: PortfolioProjectItem): string {
   const lines: string[] = [heading(3, item.name)];
 
   if (nonEmpty(item.description)) lines.push(escapeMarkdown(item.description));
-  lines.push(`- ${mdLink("Demo", item.demo)}`);
-  lines.push(`- ${mdLink("Source", item.github)}`);
+  if (nonEmpty(item.role)) lines.push(`**Role:** ${escapeMarkdown(item.role)}`);
+  if (nonEmpty(item.context)) {
+    lines.push(`**Context:** ${escapeMarkdown(item.context)}`);
+  }
+  if (item.constraints && item.constraints.length > 0) {
+    lines.push(`**Constraints:**\n\n${bulletList(item.constraints)}`);
+  }
+  if (item.decisions && item.decisions.length > 0) {
+    lines.push(`**Decisions:**\n\n${bulletList(item.decisions)}`);
+  }
+  if (item.tradeoffs && item.tradeoffs.length > 0) {
+    lines.push(`**Trade-offs:**\n\n${bulletList(item.tradeoffs)}`);
+  }
+  if (nonEmpty(item.outcome)) {
+    lines.push(`**Outcome:** ${escapeMarkdown(item.outcome)}`);
+  }
+  lines.push(`- ${mdLink("Live demo", item.demo)}`);
+  lines.push(`- ${mdLink("GitHub", item.github)}`);
+  if (nonEmpty(item.npm)) lines.push(`- ${mdLink("npm", item.npm)}`);
+  if (item.otherLinks) {
+    for (const link of item.otherLinks) {
+      lines.push(`- ${mdLink(link.label, link.url)}`);
+    }
+  }
   if (item.technologies.length > 0) {
     lines.push(
       `**Technologies:** ${escapeMarkdown(item.technologies.join(", "))}`,
@@ -103,6 +127,29 @@ function renderProject(item: PortfolioProjectItem): string {
   }
 
   return lines.join("\n\n");
+}
+
+function renderExternalArticle(item: PortfolioExternalArticle): string {
+  const lines: string[] = [heading(3, item.name)];
+
+  lines.push(`**Publisher:** ${escapeMarkdown(item.publisher)}`);
+  lines.push(`**Author:** ${escapeMarkdown(item.author)}`);
+  if (nonEmpty(item.description)) lines.push(escapeMarkdown(item.description));
+  if (nonEmpty(item.role)) lines.push(`**Role:** ${escapeMarkdown(item.role)}`);
+  lines.push(`- ${mdLink("Read the article", item.articleUrl)}`);
+  lines.push(`- ${mdLink("ArcTouch author profile", item.authorProfileUrl)}`);
+  if (item.technologies && item.technologies.length > 0) {
+    lines.push(
+      `**Technologies:** ${escapeMarkdown(item.technologies.join(", "))}`,
+    );
+  }
+
+  return lines.join("\n\n");
+}
+
+function renderWorkItem(item: PortfolioWorkItem): string {
+  if (item.kind === "external") return renderExternalArticle(item);
+  return renderProject(item);
 }
 
 function renderEducation(item: PortfolioEducationItem): string {
@@ -158,7 +205,7 @@ export function renderPortfolioMarkdown(data: Portfolio = portfolio): string {
   if (data.challenges && data.challenges.length > 0) {
     sections.push(
       [
-        heading(2, "Selected Challenges"),
+        heading(2, "Selected experience"),
         ...data.challenges.map(renderChallenge),
       ].join("\n\n"),
     );
@@ -167,8 +214,8 @@ export function renderPortfolioMarkdown(data: Portfolio = portfolio): string {
   if (data.openSourceProjects.length > 0) {
     sections.push(
       [
-        heading(2, "Open Source Projects"),
-        ...data.openSourceProjects.map(renderProject),
+        heading(2, "Selected engineering work"),
+        ...data.openSourceProjects.map(renderWorkItem),
       ].join("\n\n"),
     );
   }
@@ -214,16 +261,6 @@ export function renderPortfolioMarkdown(data: Portfolio = portfolio): string {
       [
         heading(2, "Resume"),
         `- ${mdLink("Download résumé (PDF)", toAbsoluteUrl(basic.resume))}`,
-      ].join("\n\n"),
-    );
-  }
-
-  const repoUrl = siteConfig.github?.repoUrl;
-  if (nonEmpty(repoUrl)) {
-    sections.push(
-      [
-        heading(2, "Source Code"),
-        `- ${mdLink("View source on GitHub", repoUrl)}`,
       ].join("\n\n"),
     );
   }
