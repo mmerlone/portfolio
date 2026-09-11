@@ -79,7 +79,7 @@ After completing any coding task:
 
 ### Dead-code exceptions
 
-`knip` findings must be fixed by removing the unused code, not by disabling the check. The only accepted exception is a narrow, commented entry in `knip.ts` for code that is intentionally unused today (e.g. reserved infrastructure or an in-progress refactor target). Each entry must state why it is kept.
+`knip` findings must be fixed by removing the unused code, not by disabling the check. The only accepted exception is a narrow, commented entry in `knip.ts` for code that is intentionally unused today (e.g. reserved infrastructure or an in-progress refactor target), and the data dir. Each entry must state why it is kept.
 
 ## Commit Guidelines
 
