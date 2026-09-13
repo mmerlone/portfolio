@@ -77,12 +77,12 @@ body {
   gap: var(--size-3);
 }
 
-.editorial-section-title::after {
+/* .editorial-section-title::after {
   inline-size: min(4rem, 20vw);
   block-size: var(--border-size-2);
   background: var(--content-rule);
   content: "";
-}
+} */
 
 .hero-label {
   border-inline-start: var(--border-size-2) solid var(--content-rule);

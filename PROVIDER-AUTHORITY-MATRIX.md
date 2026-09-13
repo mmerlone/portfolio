@@ -13,29 +13,29 @@ enabled until it has been observed in a live response.
 
 | Header / control                         | Authority   | Evidence                            | Owner  | Date | Status      |
 | ---------------------------------------- | ----------- | ----------------------------------- | ------ | ---- | ----------- |
-| HTTPS redirect, TLS policy, certificate  | Cloudflare  | Cloudflare dashboard — SSL/TLS mode | Marcio |      | TODO        |
-| `Strict-Transport-Security` (HSTS)       | Cloudflare  | Observed `max-age` in response      | Marcio |      | TODO        |
+| HTTPS redirect, TLS policy, certificate  | Vercel      | Vercel project dashboard — Domains and HTTPS | Marcio |      | TODO        |
+| `Strict-Transport-Security` (HSTS)       | Vercel      | Observed `max-age` in response      | Marcio |      | TODO        |
 | `Content-Security-Policy`                | Next.js app | `next.config.ts` `headers()`        | Agent  |      | Implemented |
 | `X-Content-Type-Options`                 | Next.js app | `next.config.ts` `headers()`        | Agent  |      | Implemented |
 | `X-Frame-Options`                        | Next.js app | `next.config.ts` `headers()`        | Agent  |      | Implemented |
 | `Referrer-Policy`                        | Next.js app | `next.config.ts` `headers()`        | Agent  |      | Implemented |
 | `Permissions-Policy`                     | Next.js app | `next.config.ts` `headers()`        | Agent  |      | Implemented |
 | Automatic HTTPS, deployment firewall/WAF | Vercel      | Vercel project dashboard            | Marcio |      | TODO        |
-| Edge WAF, bot policy, cache behavior     | Cloudflare  | Cloudflare dashboard                | Marcio |      | TODO        |
+| Edge WAF, bot policy, cache behavior     | Vercel      | Vercel project dashboard            | Marcio |      | TODO        |
 
 ## Cloudflare checklist
 
-- [ ] SSL/TLS mode is **Full (strict)**; Flexible SSL is not used.
-- [ ] HTTP-to-HTTPS redirect applies to all canonical paths.
-- [ ] Cloudflare is the sole HSTS authority; actual `max-age`, scope, and
-      HTTPS-only subdomains re-measured. `preload` disabled until approved.
-- [ ] Minimum TLS 1.2, TLS 1.3 where available; certificate auto-renewal and
-      renewal alerts active.
-- [ ] WAF/managed rules and bot/crawler handling do not challenge security
-      tooling or legitimate crawlers.
-- [ ] No Transform Rules duplicate application-owned CSP, frame protection,
-      `X-Content-Type-Options`, `Referrer-Policy`, or `Permissions-Policy`.
-- [ ] `Vary: Accept` preserved for homepage HTML/Markdown negotiation.
+- [ ] Confirm Cloudflare is the authoritative DNS provider for `mmerlone.dev.br`
+      on the Free zone plan.
+- [ ] Verify all DNS records are set to **DNS only** (grey-clouded), so Cloudflare
+      does not proxy or cache site content; Vercel owns the edge, TLS, HSTS, WAF,
+      and caching.
+- [ ] Confirm DNSSEC is configured for the zone and records the expected DS
+      fingerprint.
+- [ ] Review CAA records authorize only the intended certificate providers.
+- [ ] Since Cloudflare is DNS-only here, no Cloudflare edge caching or Transform
+      Rules apply, so `Vary: Accept` is owned by Vercel and the HTML/Markdown
+      variants are never collapsed by Cloudflare.
 
 ## Vercel checklist
 
@@ -64,6 +64,6 @@ enabled until it has been observed in a live response.
   [`buildSecurityHeaders`](src/lib/buildSecurityHeaders.ts) and emitted through
   `next.config.ts` async `headers()`. They apply to direct Vercel, preview,
   and production responses.
-- HSTS is **never** emitted by repository code; Cloudflare owns it.
+- HSTS is **never** emitted by repository code; Vercel owns it.
 - Record observed behavior and any deviation here; never emit duplicate HSTS or
   CSP headers.

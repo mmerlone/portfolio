@@ -6,7 +6,7 @@
  * (defaulting to `process.env`) so it can be unit-tested without a running
  * server, following the existing `src/lib/__tests__/varyHeader.test.ts` style.
  *
- * Cloudflare owns HSTS and transport controls, so this helper never emits
+ * Vercel owns HSTS and transport controls at the edge, so this helper never emits
  * `Strict-Transport-Security`. The Content-Security-Policy is scoped to
  * origins the application actually uses: self-hosted assets, the always-on
  * Vercel web-analytics loader, and the env-gated Google/Ahrefs script origins.
@@ -32,6 +32,10 @@ export function buildSecurityHeaders({
     "'unsafe-inline'",
     "https://va.vercel-scripts.com",
   ];
+  // Next.js dev mode uses eval() for React Fast Refresh/debugging; never allowed in production.
+  if (env.NODE_ENV !== "production") {
+    scriptSrc.push("'unsafe-eval'");
+  }
   if (hasGoogleAnalytics) {
     scriptSrc.push("https://www.googletagmanager.com");
   }

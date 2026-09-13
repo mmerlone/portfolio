@@ -33,8 +33,13 @@
   position: absolute;
   width: 480px;
   height: 60px;
-  bottom: 0;
+  bottom: -.2rem;
   border-radius: var(--radius-lg);
+  background-image: linear-gradient(
+    to bottom,
+    oklch(from var(--surface) calc(l + 0.05) c h),
+    transparent
+  );
   transition:
     transform 500ms ease 0s,
     opacity 500ms ease 0s,

@@ -21,7 +21,7 @@ const statusByArea = [
       "Application-owned CSP and hardening headers are defined in src/lib/buildSecurityHeaders.ts and emitted by next.config.ts. The application does not emit HSTS.",
   },
   {
-    area: "Cloudflare and Vercel authority",
+    area: "Vercel edge and Cloudflare DNS authority",
     status: "External verification pending",
     evidence:
       "Provider settings, direct-origin behavior, edge behavior, and duplicate-header checks require dashboard inventory and dated captures.",
@@ -48,7 +48,7 @@ const statusByArea = [
     area: "TLS and certificate verification",
     status: "External result pending",
     evidence:
-      "Cloudflare/Vercel settings and a dated Qualys SSL Labs result remain owner-run evidence.",
+      "Vercel settings (TLS, HSTS, edge caching, WAF) and Cloudflare DNS settings and a dated Qualys SSL Labs result remain owner-run evidence.",
   },
   {
     area: "Technology stack",
@@ -115,9 +115,9 @@ export default function UnderTheHoodPage(): ReactElement {
             Provider Authority
           </SectionTitle>
           <p className="text-muted-foreground mb-4 leading-relaxed">
-            Cloudflare owns transport and edge behavior, Vercel owns hosting and
-            deployment controls, GitHub owns repository automation and branch
-            protection, and this Next.js application owns its browser-hardening
+            Vercel owns transport, edge caching, and WAF behavior; Cloudflare owns
+            DNS; GitHub owns repository automation and branch protection, and
+            this Next.js application owns its browser-hardening
             headers. The provider inventory and rollback record remain in the
             authority matrix until Marcio Merlone supplies dated evidence.
           </p>

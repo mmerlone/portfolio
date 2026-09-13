@@ -68,11 +68,11 @@ export default function PrivacyPage(): ReactElement {
           </h3>
           <p>
             Regardless of your cookie choice, this site&apos;s infrastructure
-            providers — Cloudflare (the CDN/WAF in front of this site) and
-            Vercel (the hosting platform) — transiently log request metadata
-            such as IP address and User-Agent for security and operational
-            purposes. This is infrastructure/security logging, not analytics,
-            and it is not gated by the consent cookie.
+            providers — Cloudflare (the DNS authority for this site) and
+            Vercel (the hosting platform and CDN/WAF) — transiently log
+            request metadata such as IP address and User-Agent for security
+            and operational purposes. This is infrastructure/security logging,
+            not analytics, and it is not gated by the consent cookie.
           </p>
         </Section>
 
@@ -106,8 +106,6 @@ export default function PrivacyPage(): ReactElement {
           </h3>
           <ul className="ml-5 list-disc space-y-1">
             <li>Vercel Runtime Logs: 1 hour on the Hobby plan</li>
-            <li>Cloudflare Security Analytics: 7 days on the Free zone plan</li>
-            <li>Cloudflare Security Events: 24 hours on the Free zone plan</li>
           </ul>
         </Section>
 
@@ -135,9 +133,9 @@ export default function PrivacyPage(): ReactElement {
             >
               Google&apos;s Analytics opt-out mechanism
             </a>
-            . For Cloudflare and Vercel infrastructure logs, there is no manual
-            per-visitor deletion capability; those logs age out automatically
-            within the short windows stated above.
+            . For Vercel infrastructure logs, there is no manual per-visitor
+            deletion capability; those logs age out automatically within the
+            short windows stated above.
           </p>
         </Section>
 

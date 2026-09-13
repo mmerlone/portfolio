@@ -12,7 +12,7 @@ describe("buildSecurityHeaders", () => {
     );
   });
 
-  it("never emits Strict-Transport-Security (Cloudflare owns it)", () => {
+  it("never emits Strict-Transport-Security (Vercel owns it)", () => {
     const headers = buildSecurityHeaders({ env: {} });
     expect(headers["Strict-Transport-Security"]).toBeUndefined();
   });
