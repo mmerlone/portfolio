@@ -37,7 +37,7 @@ export const creditsData: readonly Credit[] = [
   {
     name: "Cloudflare",
     description:
-      "Cloudflare provides CDN, security, and performance optimization.",
+      "Cloudflare provides DNS services for this site.",
     url: "https://cloudflare.com/",
     icon: "cloudflare.svg",
   },
