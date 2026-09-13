@@ -1,3 +1,4 @@
+import { caseStudies, getCaseStudyHref } from "@/lib/caseStudies";
 import { type SiteConfig } from "@/types/site";
 
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
@@ -15,15 +16,38 @@ export const siteConfig: SiteConfig = {
 
   // Navigation
   navigation: [
-    { label: "About", href: "/about" },
-    { label: "Selected engineering work", href: "/#selected-engineering-work" },
-    { label: "How I build", href: "/#how-i-build" },
-    { label: "My path", href: "/#my-path" },
-    { label: "Selected experience", href: "/#selected-experience" },
-    { label: "Skills", href: "/#skills" },
-    { label: "Credits", href: "/about#credits" },
+    {
+      label: "Me",
+      href: "/#top",
+      group: "sections",
+    },
+    {
+      label: "Selected engineering work",
+      shortLabel: "Engineering",
+      href: "/#selected-engineering-work",
+      group: "sections",
+    },
+    { label: "How I build", href: "/#how-i-build", group: "sections" },
+    { label: "My path", href: "/#my-path", group: "sections" },
+    {
+      label: "Selected experience",
+      shortLabel: "Experience",
+      href: "/#selected-experience",
+      group: "sections",
+    },
+    { label: "Skills", href: "/#skills", group: "sections" },
+    { label: "Résumé", href: "/#resume", group: "sections" },
+    {
+      label: "Case studies",
+      group: "case-studies",
+      children: caseStudies.map((caseStudy) => ({
+        label: caseStudy.name,
+        href: getCaseStudyHref(caseStudy),
+      })),
+    },
     { label: "Contact", href: "/contact" },
-    { label: "Under the Hood", href: "/under-the-hood" },
+    { label: "About", href: "/about" },
+    // { label: "Under the Hood", href: "/under-the-hood" },
   ],
 
   // Footer configuration

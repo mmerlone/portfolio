@@ -2,10 +2,22 @@ export interface ImagePaths {
   readonly profile: string;
 }
 
-export interface NavigationItem {
+export interface NavigationLinkItem {
   readonly label: string;
+  /** Shorter text shown in the desktop top-level nav bar; falls back to `label`. */
+  readonly shortLabel?: string;
   readonly href: string;
+  /** Groups same-page anchors under a desktop dropdown instead of the top-level bar. */
+  readonly group?: "sections";
 }
+
+export interface NavigationGroupItem {
+  readonly label: string;
+  readonly group: "case-studies";
+  readonly children: readonly NavigationLinkItem[];
+}
+
+export type NavigationItem = NavigationLinkItem | NavigationGroupItem;
 
 export interface FooterConfig {
   readonly copyright: {
