@@ -3,14 +3,14 @@ import { buildSecurityHeaders } from "./src/lib/buildSecurityHeaders";
 
 interface HeaderRoute {
   source: string;
-  headers: Array<{ key: string; value: string }>;
+  headers: { key: string; value: string }[];
 }
 
 const config: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
-  headers: async (): Promise<HeaderRoute[]> => {
+  headers: (): HeaderRoute[] => {
     const headers = buildSecurityHeaders();
     return [
       {

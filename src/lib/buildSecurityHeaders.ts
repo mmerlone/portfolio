@@ -9,9 +9,12 @@
  * Vercel owns HSTS and transport controls at the edge, so this helper never emits
  * `Strict-Transport-Security`. The Content-Security-Policy is scoped to
  * origins the application actually uses: self-hosted assets, the always-on
- * Vercel web-analytics loader, and the env-gated Google/Ahrefs script origins.
- * Third-party origins that are not enabled by an environment variable are never
- * added to the policy.
+ * Vercel web-analytics loader, Next.js RSC runtime inline scripts, and the
+ * env-gated Google/Ahrefs script origins. Third-party origins that are not
+ * enabled by an environment variable are never added to the policy.
+ * 'unsafe-inline' is required for Next.js App Router RSC runtime scripts
+ * (e.g. $RC directives) which the framework injects per-request and cannot
+ * be individually hashed or nonced.
  */
 
 export function buildSecurityHeaders({
@@ -27,8 +30,9 @@ export function buildSecurityHeaders({
   // in production they fall back to same-origin `/_vercel/*`, which `self`
   // already covers. Google GA/GTM and Ahrefs are only declared when their
   // env-gated identifiers are actually set, so no enabled service is invented.
-  const scriptSrc = ["'self'", "https://va.vercel-scripts.com"];
+  const scriptSrc = ["'self'", "https://va.vercel-scripts.com", "'unsafe-inline'"];
   // Next.js dev mode uses eval() for React Fast Refresh/debugging; never allowed in production.
+  // 'unsafe-inline' is required for Next.js App Router RSC runtime inline scripts (e.g. $RC directives).
   if (env.NODE_ENV !== "production") {
     scriptSrc.push("'unsafe-eval'");
   }
