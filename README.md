@@ -2,11 +2,11 @@
 
 ![License](https://img.shields.io/github/license/mmerlone/portfolio)
 ![Vercel](https://img.shields.io/badge/deployed%20on-vercel-000?logo=vercel)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.0.2-blue)
 
-This repository contains a Next.js portfolio for Marcio Merlone. It presents selected professional experience, projects, technical skills, credentials, education, and contact information.
+This repository contains a Next.js 16 portfolio for Marcio Merlone. It presents selected engineering work, career path, selected experience, compressed technical skills, résumé, and contact information. Shared portfolio data and the generated Markdown representation also retain languages, certifications, education, and the full professional history.
 
-The current implementation uses native React and CSS patterns. Framer Motion, GSAP, Three.js, React Three Fiber, and Drei are not part of the current portfolio stack. The protected credits carousel keeps its isolated CSS transforms; no new animation or 3D feature is introduced by this cleanup.
+The current implementation uses React 19, TypeScript, Tailwind CSS 4, Sass, Open Props, Phosphor Icons, and `next-themes`. Framer Motion, GSAP, Three.js, React Three Fiber, and Drei are not dependencies. The credits carousel remains a React and CSS implementation with isolated transforms and reduced-motion handling.
 
 [Visit the live site](https://mmerlone.dev.br)
 
@@ -17,12 +17,14 @@ The current implementation uses native React and CSS patterns. Framer Motion, GS
 - [Getting Started](#getting-started)
 - [About the Project](#about-the-project)
 - [Current Architecture and Navigation](#current-architecture-and-navigation)
+  - [Public Routes and Machine-Readable Outputs](#public-routes-and-machine-readable-outputs)
 - [Site Configuration](#site-configuration)
   - [Site Config File](#site-config-file)
   - [Site Data Files](#site-data-files)
 - [Features & Environment Variables](#features--environment-variables)
   - [Managing Environment Variables](#managing-environment-variables)
   - [Analytics & Cookie Consent](#analytics--cookie-consent)
+  - [Search Engine Verification](#search-engine-verification)
 - [Provider-Owned Security, TLS, and CI](#provider-owned-security-tls-and-ci)
 - [Credits](#credits)
 - [Historical Documentation](#historical-documentation)
@@ -36,7 +38,7 @@ The current implementation uses native React and CSS patterns. Framer Motion, GS
 
 ## Getting Started
 
-This project uses `pnpm` exclusively. Install dependencies and start the development server with:
+This project uses Node.js 25.9.0 (see `.nvmrc`) and `pnpm` 10.33.0 (see `packageManager`). Install dependencies and start the development server with:
 
 ```bash
 pnpm install --frozen-lockfile
@@ -45,7 +47,9 @@ pnpm dev
 
 Then open [http://localhost:3000](http://localhost:3000) in a browser. Changes are reflected by the Next.js development server.
 
-The homepage is composed in `src/app/page.tsx` from focused section components. Section content is sourced from the typed data modules under `src/data/`.
+For a production build, run `pnpm build` followed by `pnpm start`. Regenerate the Open Graph image after changing the profile asset with `pnpm generate:og-image`.
+
+The homepage is composed in `src/app/page.tsx` from focused section components. Below-fold sections use `next/dynamic` with `Suspense`, and section content is sourced from the typed data modules under `src/data/`.
 
 Run the repository quality gates with:
 
@@ -70,7 +74,8 @@ This portfolio was built with [Next.js](https://nextjs.org/) and showcases:
 - A **My path** section tracing industrial systems, infrastructure, and software/product engineering.
 - A **Selected experience** section for confidential employer and client work.
 - A compressed **Technical Skills** disclosure with the full retained inventory in shared data.
-- A **Credentials** section listing certifications.
+- A résumé download and a dedicated contact page.
+- Shared data and a generated Markdown representation containing languages, certifications, education, and the full professional history; the dedicated credentials and education components are retained but are not mounted in the current HTML routes.
 
 ---
 
@@ -86,13 +91,30 @@ The App Router homepage is composed from focused section components and shared l
 | My path                   | `/#my-path`                   |
 | Selected experience       | `/#selected-experience`       |
 | Skills                    | `/#skills`                    |
-| Credits                   | `/about#credits`              |
+| Résumé                    | `/#resume`                    |
 | Contact                   | `/contact`                    |
 | Under the Hood            | `/under-the-hood`             |
 
-The homepage order is Hero, Selected engineering work, How I build, My path, Selected experience, Technical Skills, and Résumé & Contact. Credentials and Education remain available in the shared portfolio data for negotiated output; Credits is rendered on `/about`. The Under the Hood route records repository implementation status and keeps external audit results pending until dated evidence exists.
+The homepage order is Hero, Selected engineering work, How I build, My path, Selected experience, Technical Skills, and Résumé. Credentials and Education remain available in the shared portfolio data for negotiated output; Credits is rendered on `/about`. The reusable `GetInTouch` component (email, social links, location) renders on `/contact` only. The Under the Hood route records repository implementation status and keeps external audit results pending until dated evidence exists.
 
-The global style entry point imports Tailwind, the selected Open Props token modules, local variables, base styles, the protected carousel stylesheet, and the scroll-progress stylesheet. Non-carousel decorative effects are intentionally omitted, except for the protected scroll-progress bar. The carousel remains a protected exception with isolated CSS transforms and reduced-motion handling.
+The root layout provides the theme provider, scroll-progress indicator, navigation bar, footer, consent toast, and structured data. The homepage also mounts a reduced-motion-aware scroll-to-top control. `ConfigBar` is currently the theme toggle, with Light, System, and Dark choices.
+
+The global style entry point imports local variables, the theme-toggle stylesheet, Tailwind, the selected Open Props token modules, base styles, the protected carousel stylesheet, and the scroll-progress stylesheet. The removed legacy globe, quote, weather, GitHub-stats, and animation-library implementations are absent. The dedicated global effect styles are the theme toggle and scroll-progress indicator; ordinary component transitions and hover/focus states remain. The carousel remains a protected exception with isolated CSS transforms and reduced-motion handling.
+
+### Public Routes and Machine-Readable Outputs
+
+The current public surface also includes:
+
+- `/privacy` — privacy policy and infrastructure logging disclosure.
+- `/index.md` — explicit full Markdown representation of the portfolio.
+- `/` with `Accept: text/markdown` — content-negotiated Markdown via `src/proxy.ts`; HTML remains the default.
+- `/llms.txt` — agent-oriented site guidance and contact links.
+- `/robots.txt` — crawler directives, `Content-Signal`, and sitemap location.
+- `/sitemap.xml` — homepage, About, Contact, Privacy, and Under the Hood entries.
+- `/documents/MarcioMerlone.pdf` — downloadable résumé.
+- `/manifest.json` — PWA metadata and icons.
+
+The Markdown renderer is implemented in `src/lib/renderPortfolioMarkdown.ts`; the explicit route is `src/app/index.md/route.ts`. Content negotiation and its `Vary: Accept` handling are implemented in `src/lib/acceptNegotiation.ts`, `src/lib/varyHeader.ts`, and `src/proxy.ts`.
 
 ---
 
@@ -104,7 +126,7 @@ Update the site-wide configuration in `/src/config/site.ts` with your details:
 
 - **Site:** URL, Open Graph image, and profile image path.
 - **Contact and social:** Email, location, and social-profile URLs in `/src/data/portfolio.ts`.
-- **Navigation & Footer:** Menu items and copyright.
+- **Navigation & Footer:** Menu items, copyright text, and the footer links for About, Contact, Privacy Policy, and the Terms of Service/Cookie Policy dialog.
 - **Cookie Consent:** Cookie name and expiry.
 - **Analytics and verification:** Optional Google Analytics, Google Tag Manager, Ahrefs, and search-engine verification settings; Vercel Analytics and Speed Insights render after consent.
 - **CTA and SEO:** Call-to-action text and SEO metadata.
@@ -113,9 +135,10 @@ Update the site-wide configuration in `/src/config/site.ts` with your details:
 
 Content for various sections is maintained in `/src/data/`:
 
-- **Portfolio (about, skills, experience, education, credentials, expertise):** `/src/data/portfolio.ts`
+- **Portfolio (identity, expertise, technical inventory, professional experience, selected challenges, open-source work, education, certifications, languages, résumé, and social links):** `/src/data/portfolio.ts`
+- **Career path stages:** `/src/data/pathStages.ts`
 - **Credits:** `/src/data/credits.ts`
-- **Experiences detail:** `/src/data/experiences.ts`
+- **Professional experience detail:** `/src/data/experiences.ts`
 - **Education detail:** `/src/data/education.ts`
 - **Selected experience:** `/src/data/challenges.ts`
 - **Selected engineering work:** `/src/data/projects.ts`
@@ -168,20 +191,18 @@ This section is an owner-run record, not a claim that provider settings have bee
 
 | Area                         | Authority and dashboard location                                                                                                                                                                                                                                         | Owner          | Evidence status                                                                           | Rollback record                                                                                                                       |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Cloudflare edge              | Cloudflare dashboard for `mmerlone.dev.br`: DNS, SSL/TLS, Rules, and Caching. Owns edge DNS, TLS mode and minimum policy, redirects, HSTS, WAF/managed rules, cache behavior, and edge response-header modifications.                                                    | Marcio Merlone | Pending owner inventory and direct-edge capture.                                          | Record the prior values and the provider change-history or revert action before changing a setting.                                   |
+| Cloudflare DNS / Vercel edge              | Cloudflare dashboard for `mmerlone.dev.br`: DNS. Vercel project dashboard for `mmerlone.dev.br`: Settings, Domains, Deployments, and Analytics. Cloudflare owns edge DNS; Vercel owns TLS mode and minimum policy, HTTPS redirects, HSTS, WAF/managed rules, cache behavior, and edge response-header modifications.                                                    | Marcio Merlone | Pending owner inventory and direct-edge capture.                                          | Record the prior values and the provider change-history or revert action before changing a setting.                                   |
 | Vercel origin and deployment | Vercel project dashboard for `mmerlone.dev.br`: Settings, Domains, Deployments, and Analytics. Owns the hosting project, custom-domain assignment, deployment branch and environment, provider firewall/WAF state, analytics state, and provider-level response headers. | Marcio Merlone | Pending owner inventory and direct-origin capture.                                        | Record the prior deployment and project settings; use the provider's previous production deployment or settings history for rollback. |
 | GitHub repository controls   | GitHub repository Settings, Actions, Branches, and Code security pages for `mmerlone/portfolio`. Owns Actions, branch protection, required checks, Dependabot alerts and updates, and workflow permissions. GitHub is not an HTTP-header provider for this site.         | Marcio Merlone | Workflow exists; provider settings remain pending owner inventory.                        | Revert the workflow or repository-setting change and preserve the required-check policy.                                              |
 | Application response headers | Repository-owned `next.config.ts` and its header tests. The application owns CSP and browser-hardening headers and must not emit HSTS.                                                                                                                                   | Marcio Merlone | Local build and focused header tests pass; provider and edge verification remain pending. | Revert the configuration change and redeploy from the previous known-good revision.                                                   |
 
 ### Cloudflare Checklist
 
-- Use SSL/TLS **Full (strict)**; do not use Flexible SSL.
-- Verify the HTTP-to-HTTPS redirect and confirm it applies to all canonical paths.
-- Confirm Cloudflare is the sole HSTS authority; record the actual `max-age`, scope, and whether all covered subdomains are HTTPS-only. Keep `preload` disabled until separately approved.
-- Confirm minimum TLS 1.2 and TLS 1.3 support, certificate auto-renewal, and renewal alerts.
-- Review WAF/managed rules and bot/crawler handling so security tooling and legitimate crawlers are not challenged.
-- Remove or disable Transform Rules that duplicate application-owned CSP, frame protection, `X-Content-Type-Options`, `Referrer-Policy`, or `Permissions-Policy`.
-- Preserve `Vary: Accept` for the HTML/Markdown homepage negotiation; do not collapse the two cache variants.
+- Confirm Cloudflare is the authoritative DNS provider for `mmerlone.dev.br` on the Free zone plan.
+- Verify all DNS records are set to **DNS only** (grey-clouded), so Cloudflare does not proxy or cache site content; Vercel owns the edge, TLS, HSTS, WAF, and caching.
+- Confirm DNSSEC is configured for the zone and records the expected DS fingerprint.
+- Review CAA records authorize only the intended certificate providers.
+- Since Cloudflare is DNS-only here, no Cloudflare edge caching or Transform Rules apply, so `Vary: Accept` is owned by Vercel and the HTML/Markdown variants are never collapsed by Cloudflare.
 - Record the dashboard location, owner, date, evidence link, and rollback note for every completed item.
 
 ### Vercel Checklist
@@ -216,7 +237,7 @@ Lighthouse CI remains deferred until a stable three-run baseline exists and an e
 
 Marcio Merlone owns the workflow and provider settings. Apply this maintenance policy:
 
-- **Review cadence:** Review dependency and security alerts monthly; review Cloudflare, Vercel, and GitHub protection settings and rerun external audits quarterly; also review immediately after a provider, domain, analytics, CSP, or deployment-architecture change.
+- **Review cadence:** Review dependency and security alerts monthly; review Cloudflare (DNS), Vercel, and GitHub protection settings and rerun external audits quarterly; also review immediately after a provider, domain, analytics, CSP, or deployment-architecture change.
 - **Failure response:** Deterministic repository checks block merge and must be fixed in the same pull request. Investigate flaky infrastructure failures before rerunning; do not bypass a required check. Treat a scheduled or external audit regression as an issue to triage within seven days, escalating immediately for certificate, HTTPS, HSTS, or exploitable security failures.
 - **Budget revisions:** Change performance budgets only in a dedicated pull request containing before/after evidence and rationale. Prefer improving the implementation; never lower a threshold solely to admit a regression.
 - **Badge lifecycle:** Retain only the README CI badge when it is backed by `ci.yml` runs on `main`. Remove or update it in the same change if the workflow is renamed, disabled, or stops publishing a valid status. Do not add performance badges.
@@ -233,7 +254,7 @@ This project acknowledges the following tools, services, and resources:
 - **Google Analytics:** Web analytics ([analytics.google.com](https://analytics.google.com/)).
 - **Google Tag Manager:** Tag management; it takes precedence over Google Analytics when both are configured ([tagmanager.google.com](https://tagmanager.google.com/)).
 - **Ahrefs Analytics:** Cookieless web analytics ([ahrefs.com/web-analytics](https://ahrefs.com/web-analytics)).
-- **Cloudflare:** CDN, security, and performance services ([cloudflare.com](https://cloudflare.com/)).
+- **Cloudflare:** DNS provider ([cloudflare.com](https://cloudflare.com/)).
 - **improvmx.com:** Email forwarding service ([improvmx.com](https://improvmx.com/)).
 - **Next.js:** The React framework for production ([nextjs.org](https://nextjs.org/)).
 - **React:** The JavaScript library for building user interfaces ([react.dev](https://react.dev/)).

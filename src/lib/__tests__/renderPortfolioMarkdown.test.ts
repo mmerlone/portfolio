@@ -75,6 +75,7 @@ describe("renderPortfolioMarkdown", () => {
         title: "Engineer",
         location: "Nowhere",
         contact: { email: "test@example.com" },
+        roleTitles: [],
         summary: "A short summary.",
         technical: {
           programming: [],
@@ -121,6 +122,7 @@ describe("renderPortfolioMarkdown", () => {
         title: "Engineer",
         location: "Nowhere",
         contact: { email: "test@example.com" },
+        roleTitles: [],
         summary: "Uses [brackets] and `code` and *stars*.",
         technical: {
           programming: [],
@@ -158,6 +160,7 @@ describe("renderPortfolioMarkdown", () => {
         title: "Engineer",
         location: "Nowhere",
         contact: { email: "test@example.com" },
+        roleTitles: [],
         summary: "A short summary.",
         technical: {
           programming: [],
@@ -179,6 +182,7 @@ describe("renderPortfolioMarkdown", () => {
       openSourceProjects: [
         {
           kind: "owned",
+          slug: "owned-project",
           name: "Owned Project",
           technologies: ["TypeScript"],
           context: "A project context.",
@@ -228,6 +232,7 @@ describe("renderPortfolioMarkdown", () => {
         title: "Engineer",
         location: "Nowhere",
         contact: { email: "test@example.com" },
+        roleTitles: [],
         summary: "A short summary.",
         technical: {
           programming: [],
@@ -249,6 +254,7 @@ describe("renderPortfolioMarkdown", () => {
       openSourceProjects: [
         {
           kind: "external",
+          slug: "headless-cms-migration",
           name: "Headless CMS Migration: From WordPress to Contentstack",
           publisher: "ArcTouch",
           author: "Marcio Merlone",

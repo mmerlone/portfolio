@@ -7,6 +7,9 @@ interface HeaderRoute {
 }
 
 const config: NextConfig = {
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   headers: async (): Promise<HeaderRoute[]> => {
     const headers = buildSecurityHeaders();
     return [
