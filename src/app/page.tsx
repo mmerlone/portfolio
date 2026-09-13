@@ -7,7 +7,9 @@ import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
 const HowIBuildSection = NextDynamic(
   () => import("@/components/sections/HowIBuildSection"),
 );
-const MyPathSection = NextDynamic(() => import("@/components/sections/MyPathSection"));
+const MyPathSection = NextDynamic(
+  () => import("@/components/sections/MyPathSection"),
+);
 const ChallengesSection = NextDynamic(
   () => import("@/components/sections/ChallengesSection"),
 );
@@ -17,7 +19,9 @@ const ProjectsSection = NextDynamic(
 const TechnicalSkillsSection = NextDynamic(
   () => import("@/components/sections/TechnicalSkillsSection"),
 );
-const ResumeSection = NextDynamic(() => import("@/components/sections/ResumeSection"));
+const ResumeSection = NextDynamic(
+  () => import("@/components/sections/ResumeSection"),
+);
 const ScrollToTop = NextDynamic(() => import("@/components/ScrollToTop"));
 
 const LoadingSection = (): ReactElement => (
