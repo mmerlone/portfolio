@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
-import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
+import TechnicalSkillsSection from "@/components/sections/TechnicalSkillsSection";
 
 describe("TechnicalSkillsSection accessibility", () => {
   it("has no aXe violations", async () => {

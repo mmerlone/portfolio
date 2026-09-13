@@ -1,7 +1,9 @@
 import { type ReactElement } from "react";
+import Link from "next/link";
 import { portfolio } from "@/data/portfolio";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { cn } from "@/lib/cn";
+import { getCaseStudyHref } from "@/lib/caseStudies";
 import { GithubLogoIcon, ArrowSquareOutIcon } from "@phosphor-icons/react/ssr";
 
 interface ProjectsSectionProps {
@@ -47,80 +49,8 @@ export default function ProjectsSection({
                     Role: {project.role}
                   </p>
                 )}
-                {project.kind === "owned" && (
-                  <details className="border-border bg-surface-raised rounded-lg border p-4 text-sm">
-                    <summary className="text-foreground cursor-pointer font-semibold">
-                      Case study details
-                    </summary>
-                    <dl className="mt-3 space-y-3">
-                      {project.context && (
-                        <div>
-                          <dt className="text-foreground font-semibold">
-                            Context
-                          </dt>
-                          <dd className="text-muted-foreground">
-                            {project.context}
-                          </dd>
-                        </div>
-                      )}
-                      {project.constraints &&
-                        project.constraints.length > 0 && (
-                          <div>
-                            <dt className="text-foreground font-semibold">
-                              Constraints
-                            </dt>
-                            <dd className="text-muted-foreground">
-                              <ul className="mt-1 list-disc space-y-1 pl-5">
-                                {project.constraints.map((constraint) => (
-                                  <li key={constraint}>{constraint}</li>
-                                ))}
-                              </ul>
-                            </dd>
-                          </div>
-                        )}
-                      {project.decisions && project.decisions.length > 0 && (
-                        <div>
-                          <dt className="text-foreground font-semibold">
-                            Decisions
-                          </dt>
-                          <dd className="text-muted-foreground">
-                            <ul className="mt-1 list-disc space-y-1 pl-5">
-                              {project.decisions.map((decision) => (
-                                <li key={decision}>{decision}</li>
-                              ))}
-                            </ul>
-                          </dd>
-                        </div>
-                      )}
-                      {project.tradeoffs && project.tradeoffs.length > 0 && (
-                        <div>
-                          <dt className="text-foreground font-semibold">
-                            Trade-offs
-                          </dt>
-                          <dd className="text-muted-foreground">
-                            <ul className="mt-1 list-disc space-y-1 pl-5">
-                              {project.tradeoffs.map((tradeoff) => (
-                                <li key={tradeoff}>{tradeoff}</li>
-                              ))}
-                            </ul>
-                          </dd>
-                        </div>
-                      )}
-                      {project.outcome && (
-                        <div>
-                          <dt className="text-foreground font-semibold">
-                            Outcome
-                          </dt>
-                          <dd className="text-muted-foreground">
-                            {project.outcome}
-                          </dd>
-                        </div>
-                      )}
-                    </dl>
-                  </details>
-                )}
                 {project.technologies && project.technologies.length > 0 && (
-                  <div className="mb-4 flex flex-wrap gap-2">
+                  <div className="m-4 flex flex-wrap gap-2">
                     {project.technologies.map((tech, idx) => (
                       <span
                         key={`${project.name}-${tech}-${idx}`}
@@ -132,13 +62,20 @@ export default function ProjectsSection({
                   </div>
                 )}
                 <div className="flex flex-wrap gap-3">
+                  <Link
+                    href={getCaseStudyHref(project)}
+                    className="content-action-link text-accent hover:text-accent-strong inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+                  >
+                    <ArrowSquareOutIcon size={14} weight="bold" />
+                    View case study
+                  </Link>
                   {project.kind === "external" ? (
                     <>
                       <a
                         href={project.articleUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="content-action-link text-accent hover:text-accent-strong inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+                        className="content-action-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
                       >
                         <ArrowSquareOutIcon size={14} weight="bold" />
                         Read the article
@@ -159,7 +96,7 @@ export default function ProjectsSection({
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="content-action-link text-accent hover:text-accent-strong inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+                        className="content-action-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
                       >
                         <ArrowSquareOutIcon size={14} weight="bold" />
                         Live demo

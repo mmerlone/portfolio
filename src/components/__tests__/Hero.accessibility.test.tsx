@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
-import Hero from "@/components/Hero";
+import Hero from "@/components/sections/Hero";
 
 describe("Hero section accessibility", () => {
   it("has no aXe violations", async () => {

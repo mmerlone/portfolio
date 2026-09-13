@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
-import CredentialsSection from "@/components/CredentialsSection";
+import CredentialsSection from "@/components/sections/CredentialsSection";
 
 describe("CredentialsSection accessibility", () => {
   it("has no aXe violations", async () => {

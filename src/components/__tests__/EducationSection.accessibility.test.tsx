@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { axe } from "jest-axe";
-import EducationSection from "@/components/EducationSection";
+import EducationSection from "@/components/sections/EducationSection";
 
 describe("EducationSection accessibility", () => {
   it("has no aXe violations", async () => {

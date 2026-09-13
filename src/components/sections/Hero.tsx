@@ -10,7 +10,7 @@ interface HeroProps {
 }
 
 export default function Hero({ className = "" }: HeroProps): ReactElement {
-  const { name, title, label } = portfolio.basic;
+  const { name, title, label, roleTitles } = portfolio.basic;
 
   const proofLinks = [
     {
@@ -22,10 +22,12 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
       href: "#cirrus-article",
     },
     {
-      label: "Résumé and contact",
-      href: "#resume-contact",
+      label: "Résumé",
+      href: "#resume",
     },
   ] as const;
+
+  const roles = roleTitles.join(", ");
 
   return (
     <section
@@ -44,7 +46,10 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
           >
             {name}
           </h1>
-          <h2 className="balanced-heading text-muted-foreground mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+          <h2
+            className="balanced-heading text-muted-foreground mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl"
+            {...(roles ? { title: "Fits: " + roles } : {})}
+          >
             {title}
           </h2>
           {label && (
