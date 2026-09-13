@@ -38,7 +38,7 @@ export const pathStages: PortfolioPathStage[] = [
   },
   {
     title: "Software & Product Engineering",
-    period: "20022–Present",
+    period: "2022–Present",
     description:
       "Transitioned to product-focused frontend engineering: React, TypeScript, Node.js, Docker, Tailwind, MUI. At ArcTouch, delivered accessible UIs for global brands (HP, Cirrus Aircraft, Quizlet, Starbucks), built Shopify/Discourse/WordPress themes, and engineered the Cirrus Aircraft WordPress-to-Contentstack migration. As personal hobby authored npm packages (react-tz-globepicker, mui7-phone-number) and open-source contributions on GitHub.",
     highlights: [
