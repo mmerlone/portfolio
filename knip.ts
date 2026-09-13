@@ -4,7 +4,7 @@ const config: KnipConfig = {
   ignore: [
     // Data and public assets: never removed, kept intentionally.
     "src/data/**",
-    "public",
+    "public/**",
     "public/archive/**",
     // Logging infrastructure kept intentionally for future use; not wired up yet.
     "src/lib/logger/**",
