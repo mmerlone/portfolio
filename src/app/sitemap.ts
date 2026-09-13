@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process";
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
+import { caseStudies, getCaseStudyHref } from "@/lib/caseStudies";
 
 // Reflects the last commit date so crawlers see a real freshness signal
 // instead of a new timestamp on every build.
@@ -52,5 +53,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.4,
     },
+    ...caseStudies.map((caseStudy) => ({
+      url: `${siteConfig.url}${getCaseStudyHref(caseStudy)}`,
+      lastModified,
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
+    })),
   ];
 }

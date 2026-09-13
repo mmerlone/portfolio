@@ -3,6 +3,7 @@ import { type PortfolioWorkItem } from "@/types/portfolio";
 export const projects: PortfolioWorkItem[] = [
   {
     kind: "owned",
+    slug: "ywybase",
     name: "YwyBase",
     description:
       "A Solid Ground to Scale. A comprehensive Next.js application with authentication, Material UI, and modern best practices.",
@@ -44,9 +45,17 @@ export const projects: PortfolioWorkItem[] = [
       "Sentry",
       "Pino Logger",
     ],
+    heroImage: {
+      src: "/images/projects/ywybase.webp",
+      alt: "YwyBase application screenshot showing the main dashboard interface",
+      width: 1665,
+      height: 918,
+      sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 896px",
+    },
   },
   {
     kind: "owned",
+    slug: "mui7-phone-number",
     name: "@mmerlone/mui7-phone-number",
     description:
       "A phone number input component for MUI v7+ with auto-formatting, country selection, and full TypeScript support.",
@@ -73,9 +82,17 @@ export const projects: PortfolioWorkItem[] = [
     github: "https://github.com/mmerlone/mui7-phone-number",
     npm: "https://www.npmjs.com/package/@mmerlone/mui7-phone-number",
     technologies: ["React 19+", "TypeScript", "Material UI v7+"],
+    heroImage: {
+      src: "/images/projects/mui7-phone-number.webp",
+      alt: "@mmerlone/mui7-phone-number component demo showing phone number input with country selector",
+      width: 889,
+      height: 868,
+      sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 896px",
+    },
   },
   {
     kind: "owned",
+    slug: "react-tz-globepicker",
     name: "@mmerlone/react-tz-globepicker",
     description:
       "Interactive globe picker for React applications that need timezone selection, timezone visualization, or a compact world-time UI.",
@@ -102,23 +119,39 @@ export const projects: PortfolioWorkItem[] = [
     github: "https://github.com/mmerlone/react-tz-globepicker",
     npm: "https://www.npmjs.com/package/@mmerlone/react-tz-globepicker",
     technologies: ["React 19+", "TypeScript"],
+    heroImage: {
+      src: "/images/projects/react-tz-globepicker.webp",
+      alt: "@mmerlone/react-tz-globepicker interactive globe picker with timezone visualization",
+      width: 1330,
+      height: 886,
+      sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 896px",
+    },
   },
   {
     kind: "external",
+    slug: "headless-cms-migration",
     name: "Headless CMS Migration: From WordPress to Contentstack",
     publisher: "ArcTouch",
     author: "Marcio Merlone",
     articleUrl: "https://arctouch.com/blog/headless-cms-migration",
     authorProfileUrl: "https://arctouch.com/blog/author/marcio-merlone",
     description:
-      "An engineering case study documenting the modeling, extraction, validation, and migration of content from WordPress to Contentstack, including 980 images and documents totaling 683 MB.",
-    role: "I authored the data migration script for ArcTouch's WordPress-to-Contentstack migration, engineered for maximum data extraction, normalization, and curation while filtering out years of accumulated database pollution, and I authored the published engineering case study documenting the approach and outcomes. The new Contentstack content schema was designed and built by the ArcTouch team.",
+      "An engineering case study documenting the migration of Cirrus Aircraft's WordPress content and forum plugin data into a new Contentstack CMS and a new Discourse platform. I owned the migration script that extracted and transformed WordPress data for both destinations, and I also led Discourse's visual identity customization, heavily tailoring its theme, components, and plugins.",
+    role: "I owned the migration script that extracted and transformed WordPress content and forum plugin data for both the new Contentstack CMS and Discourse platform, and I led Discourse's visual identity customization, heavily tailoring its theme, components, and plugins. I also authored the published engineering case study documenting the approach and outcomes. The new Contentstack content schema was designed and built by the ArcTouch team.",
     technologies: [
       "WordPress",
+      "Discourse",
       "Contentstack",
       "Data Migration",
-      "JavaScript",
+      "TypeScript",
       "PHP",
     ],
+    heroImage: {
+      src: "/images/projects/headless-cms-migration.webp",
+      alt: "Cirrus Aircraft logo representing the Headless CMS Migration project",
+      width: 822,
+      height: 912,
+      sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 896px",
+    },
   },
 ];

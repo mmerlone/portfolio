@@ -128,6 +128,16 @@ export interface PortfolioBasic {
   readonly resume?: string;
   /** Social media links */
   readonly social?: PortfolioSocialLink[];
+  /**Role titles */
+  readonly roleTitles: string[];
+}
+
+export interface PortfolioHeroImage {
+  readonly src: string;
+  readonly alt: string;
+  readonly width?: number;
+  readonly height?: number;
+  readonly sizes?: string;
 }
 
 /**
@@ -136,6 +146,8 @@ export interface PortfolioBasic {
 export interface PortfolioProjectItem {
   /** Discriminant kind for the work-item union. */
   readonly kind: "owned";
+  /** Stable route segment for the case study page. */
+  readonly slug: string;
   /** Project name */
   readonly name: string;
   /** Optional project description */
@@ -152,6 +164,8 @@ export interface PortfolioProjectItem {
   readonly otherLinks?: { label: string; url: string }[];
   /** Optional image URL for the project in the assets folder */
   readonly image?: string;
+  /** Optional hero image for the case study page. */
+  readonly heroImage?: PortfolioHeroImage;
   /** Marcio's personal role in the project */
   readonly role?: string;
   /** Problem or context the project addresses */
@@ -173,6 +187,8 @@ export interface PortfolioProjectItem {
 export interface PortfolioExternalArticle {
   /** Discriminant kind for the work-item union. */
   readonly kind: "external";
+  /** Stable route segment for the case study page. */
+  readonly slug: string;
   /** Human-readable title of the published article */
   readonly name: string;
   /** Publisher of the externally hosted article */
@@ -191,6 +207,8 @@ export interface PortfolioExternalArticle {
   readonly technologies?: readonly string[];
   /** Optional image URL for the article in the assets folder */
   readonly image?: string;
+  /** Optional hero image for the case study page. */
+  readonly heroImage?: PortfolioHeroImage;
 }
 
 /**
@@ -227,6 +245,22 @@ export interface PortfolioChallenge {
   /** List of results or impact achieved */
   readonly result: string[];
   /** Technologies used during the resolution */
+  readonly technologies: string[];
+}
+
+/**
+ * A career-path stage summarizing a period of professional focus.
+ */
+export interface PortfolioPathStage {
+  /** Name of the stage */
+  readonly title: string;
+  /** Period the stage covers */
+  readonly period: string;
+  /** Detailed description of the stage */
+  readonly description: string;
+  /** Notable achievements or responsibilities during the stage */
+  readonly highlights: string[];
+  /** Technologies or tools used during the stage */
   readonly technologies: string[];
 }
 
