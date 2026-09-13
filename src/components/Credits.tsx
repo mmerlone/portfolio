@@ -20,7 +20,7 @@ const Credits: FC<CreditsProps> = ({
       aria-labelledby="credits-title"
       className="relative flex items-center justify-center overflow-hidden"
     >
-      <div className={cn("bg-surface-muted w-full", className)}>
+      <div className={cn("w-full", className)}>
         <div className="relative z-10 container flex flex-col items-center justify-center">
           <SectionTitle id="credits-title">Portfolio Credits</SectionTitle>
           <p className="text-muted-foreground mx-5 py-5 leading-relaxed first:mt-0 sm:mx-12 sm:text-center sm:text-balance">
