@@ -26,7 +26,11 @@ export default function ProjectsSection({
         <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 lg:grid-cols-3">
           {portfolio.openSourceProjects.map((project) => (
             <article
-              id={project.kind === "external" ? "cirrus-article" : undefined}
+              id={
+                project.kind === "external"
+                  ? `${project.slug}-article`
+                  : undefined
+              }
               key={project.name}
               className="project-article border-border bg-surface flex flex-col overflow-hidden rounded-xl border"
             >

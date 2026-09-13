@@ -19,7 +19,7 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
     },
     {
       label: "Cirrus migration article",
-      href: "#cirrus-article",
+      href: "#headless-cms-migration-article",
     },
     {
       label: "Résumé",

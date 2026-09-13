@@ -20,6 +20,20 @@ describe("ProjectsSection", () => {
     }
   });
 
+  it("assigns a stable unique ID to each external project", () => {
+    const { container } = render(<ProjectsSection />);
+
+    const externalArticleIds = Array.from(
+      container.querySelectorAll("article[id]"),
+    ).map((article) => article.id);
+    const expectedIds = portfolio.openSourceProjects
+      .filter((project) => project.kind === "external")
+      .map((project) => `${project.slug}-article`);
+
+    expect(externalArticleIds).toEqual(expectedIds);
+    expect(new Set(externalArticleIds).size).toBe(externalArticleIds.length);
+  });
+
   it("does not render inline expandable case-study details inside cards", () => {
     const { container } = render(<ProjectsSection />);
 

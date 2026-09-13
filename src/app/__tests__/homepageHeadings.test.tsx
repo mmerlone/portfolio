@@ -37,12 +37,13 @@ describe("homepage heading outline and content", () => {
     ).toHaveAttribute("href", "#selected-engineering-work");
     expect(
       screen.getByRole("link", { name: "Cirrus migration article" }),
-    ).toHaveAttribute("href", "#cirrus-article");
-    expect(screen.getByRole("link", { name: "Résumé" })).toHaveAttribute(
-      "href",
-      "#resume",
-    );
-    expect(container.querySelector("#cirrus-article")).not.toBeNull();
+    ).toHaveAttribute("href", "#headless-cms-migration-article");
+    expect(
+      screen.getByRole("link", { name: "Résumé" }),
+    ).toHaveAttribute("href", "#resume");
+    expect(
+      container.querySelector("#headless-cms-migration-article"),
+    ).not.toBeNull();
   });
 
   it("renders at least 500 normalized characters of meaningful content", () => {

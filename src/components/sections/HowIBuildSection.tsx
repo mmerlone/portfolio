@@ -40,7 +40,7 @@ const principles: HowIBuildPrinciple[] = [
     description:
       "Large-scale content migrations demand scriptable, auditable pipelines. The Cirrus Aircraft WordPress-to-Contentstack migration used engineered extraction, normalization, and curation scripts that filtered years of database pollution — repeatable, not manual.",
     evidence: "Cirrus migration article",
-    evidenceHref: "#cirrus-article",
+    evidenceHref: "#headless-cms-migration-article",
   },
   {
     title: "Live with operational decisions",
