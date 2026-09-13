@@ -81,6 +81,12 @@ After completing any coding task:
 
 `knip` findings must be fixed by removing the unused code, not by disabling the check. The only accepted exception is a narrow, commented entry in `knip.ts` for code that is intentionally unused today (e.g. reserved infrastructure or an in-progress refactor target). Each entry must state why it is kept.
 
+### Data and assets
+
+- `src/data/**` and `public/**` are ignored by knip. **No data or asset may be removed.**
+- Keep data files stale; do not delete or prune them.
+- Move unused assets to `public/archive/` instead of deleting.
+
 ## Commit Guidelines
 
 - **Group by feature/domain** - each commit addresses a single logical change
