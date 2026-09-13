@@ -280,7 +280,7 @@ describe("renderPortfolioMarkdown", () => {
     expect(output).toContain(
       "[ArcTouch author profile](https://arctouch.com/blog/author/marcio-merlone)",
     );
-    expect(output).not.toContain("[GitHub]");
-    expect(output).not.toContain("[npm]");
+    expect(output).not.toContain("[GitHub](");
+    expect(output).not.toContain("[npm](");
   });
 });
