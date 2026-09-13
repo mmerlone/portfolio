@@ -29,7 +29,6 @@ export function buildSecurityHeaders({
   // env-gated identifiers are actually set, so no enabled service is invented.
   const scriptSrc = [
     "'self'",
-    "'unsafe-inline'",
     "https://va.vercel-scripts.com",
   ];
   // Next.js dev mode uses eval() for React Fast Refresh/debugging; never allowed in production.
