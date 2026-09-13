@@ -27,10 +27,7 @@ export function buildSecurityHeaders({
   // in production they fall back to same-origin `/_vercel/*`, which `self`
   // already covers. Google GA/GTM and Ahrefs are only declared when their
   // env-gated identifiers are actually set, so no enabled service is invented.
-  const scriptSrc = [
-    "'self'",
-    "https://va.vercel-scripts.com",
-  ];
+  const scriptSrc = ["'self'", "https://va.vercel-scripts.com"];
   // Next.js dev mode uses eval() for React Fast Refresh/debugging; never allowed in production.
   if (env.NODE_ENV !== "production") {
     scriptSrc.push("'unsafe-eval'");
