@@ -1,4 +1,5 @@
 import sitemap from "@/app/sitemap";
+import { caseStudies, getCaseStudyHref } from "@/lib/caseStudies";
 
 describe("metadata routes", () => {
   it("publishes the homepage in the sitemap", () => {
@@ -13,7 +14,7 @@ describe("metadata routes", () => {
     expect(entry.lastModified).toBeInstanceOf(Date);
   });
 
-  it("publishes /about, /contact, and /privacy at or below homepage priority", () => {
+  it("publishes /about, /contact, /privacy, and /under-the-hood at or below homepage priority", () => {
     const entries = sitemap();
     const [homepage] = entries;
 
@@ -25,6 +26,9 @@ describe("metadata routes", () => {
     );
     const privacy = entries.find(
       (entry) => entry.url === "https://mmerlone.dev.br/privacy",
+    );
+    const underTheHood = entries.find(
+      (entry) => entry.url === "https://mmerlone.dev.br/under-the-hood",
     );
 
     expect(about).toMatchObject({
@@ -39,8 +43,12 @@ describe("metadata routes", () => {
       changeFrequency: "yearly",
       priority: 0.3,
     });
+    expect(underTheHood).toMatchObject({
+      changeFrequency: "yearly",
+      priority: 0.4,
+    });
 
-    for (const entry of [about, contact, privacy]) {
+    for (const entry of [about, contact, privacy, underTheHood]) {
       expect(entry?.lastModified).toBeInstanceOf(Date);
       expect(entry?.priority ?? 0).toBeLessThanOrEqual(homepage.priority ?? 1);
     }
@@ -52,5 +60,21 @@ describe("metadata routes", () => {
     expect(urls).not.toContain("https://mmerlone.dev.br/index.md");
     expect(urls).not.toContain("https://mmerlone.dev.br/llms.txt");
     expect(urls).not.toContain("https://mmerlone.dev.br/robots.txt");
+  });
+
+  it("publishes all case-study pages in the sitemap", () => {
+    const entries = sitemap();
+
+    for (const caseStudy of caseStudies) {
+      expect(
+        entries.find(
+          (entry) =>
+            entry.url === `https://mmerlone.dev.br${getCaseStudyHref(caseStudy)}`,
+        ),
+      ).toMatchObject({
+        changeFrequency: "yearly",
+        priority: 0.5,
+      });
+    }
   });
 });

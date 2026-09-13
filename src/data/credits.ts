@@ -3,8 +3,7 @@ import type { Credit } from "@/types/credits";
 export const creditsData: readonly Credit[] = [
   {
     name: "Vercel",
-    description:
-      "The platform for frontend developers, providing the best developer experience and performance.",
+    description: "A platform for building and deploying web applications.",
     url: "https://vercel.com/",
     icon: "vercel.svg",
   },
@@ -31,21 +30,20 @@ export const creditsData: readonly Credit[] = [
   },
   {
     name: "Ahrefs Analytics",
-    description:
-      "Ahrefs Analytics provides cookieless, privacy-friendly website traffic insights.",
+    description: "Cookieless web analytics.",
     url: "https://ahrefs.com/web-analytics",
     icon: "ahrefs.svg",
   },
   {
     name: "Cloudflare",
     description:
-      "Cloudflare provides CDN, security, and performance optimization.",
+      "Cloudflare provides DNS services for this site.",
     url: "https://cloudflare.com/",
     icon: "cloudflare.svg",
   },
   {
     name: "improvmx.com",
-    description: "The leading email forwarding provider in Mexico.",
+    description: "An email forwarding service.",
     url: "https://improvmx.com/",
     icon: "improvmx.svg",
   },

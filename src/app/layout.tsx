@@ -122,7 +122,7 @@ export default function RootLayout({ children }: LayoutProps): ReactElement {
         >
           <ScrollProgressBar />
           <Navbar />
-          {children}
+          <div className="pb-28 sm:pb-14">{children}</div>
           <Footer />
           <TermsOfServiceToast />
         </ThemeProvider>

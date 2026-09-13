@@ -4,6 +4,7 @@ import { MapPinIcon } from "@phosphor-icons/react/ssr";
 import { portfolio } from "@/data/portfolio";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import Section from "@/components/Section";
+import Credits from "@/components/Credits";
 
 export const metadata: Metadata = {
   title: `About — ${portfolio.basic.name}`,
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage(): ReactElement {
-  const { name, title, label, summary, location, expertise } = portfolio.basic;
+  const { name, label, summary, location, expertise } = portfolio.basic;
 
   return (
     <main className="container mx-auto px-4 py-24">
@@ -23,8 +24,7 @@ export default function AboutPage(): ReactElement {
       </h1>
       <div className="mx-auto max-w-3xl">
         <p className="text-accent mb-8 text-center text-xl font-semibold">
-          {title}
-          {label ? ` — ${label}` : ""}
+          {label}
         </p>
 
         <Section>
@@ -57,6 +57,8 @@ export default function AboutPage(): ReactElement {
           </p>
         </Section>
       </div>
+
+      <Credits />
     </main>
   );
 }

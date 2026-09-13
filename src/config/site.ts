@@ -1,3 +1,4 @@
+import { caseStudies, getCaseStudyHref } from "@/lib/caseStudies";
 import { type SiteConfig } from "@/types/site";
 
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
@@ -15,14 +16,38 @@ export const siteConfig: SiteConfig = {
 
   // Navigation
   navigation: [
-    { label: "About", href: "/about" },
-    { label: "Expertise", href: "/#expertise" },
-    { label: "Experience", href: "/#experience" },
-    { label: "Challenges", href: "/#challenges" },
-    { label: "Projects", href: "/#projects" },
-    { label: "Skills", href: "/#skills" },
-    { label: "Credits", href: "/#credits" },
+    {
+      label: "Me",
+      href: "/#top",
+      group: "sections",
+    },
+    {
+      label: "Selected engineering work",
+      shortLabel: "Engineering",
+      href: "/#selected-engineering-work",
+      group: "sections",
+    },
+    { label: "How I build", href: "/#how-i-build", group: "sections" },
+    { label: "My path", href: "/#my-path", group: "sections" },
+    {
+      label: "Selected experience",
+      shortLabel: "Experience",
+      href: "/#selected-experience",
+      group: "sections",
+    },
+    { label: "Skills", href: "/#skills", group: "sections" },
+    { label: "Résumé", href: "/#resume", group: "sections" },
+    {
+      label: "Case studies",
+      group: "case-studies",
+      children: caseStudies.map((caseStudy) => ({
+        label: caseStudy.name,
+        href: getCaseStudyHref(caseStudy),
+      })),
+    },
     { label: "Contact", href: "/contact" },
+    { label: "About", href: "/about" },
+    // { label: "Under the Hood", href: "/under-the-hood" },
   ],
 
   // Footer configuration
@@ -51,21 +76,16 @@ export const siteConfig: SiteConfig = {
     },
   },
 
-  // GitHub repository info
-  github: {
-    repoUrl: "https://github.com/mmerlone/portfolio",
-  },
-
   // CTA configuration
   cta: {
-    text: "Let’s build a resilient architecture together.",
+    text: "Let's build a resilient architecture together.",
     linkText: "Let's talk!",
     link: "https://calendly.com/mmerlone",
   },
 
   // Search metadata
   seo: {
-    title: "Marcio Merlone — Software Engineer & Platform Architect",
+    title: "Marcio Merlone — Senior Software Engineer",
     description:
       "Senior Software Engineer building resilient products from infrastructure to interface.",
     ...(googleSiteVerification || bingSiteVerification

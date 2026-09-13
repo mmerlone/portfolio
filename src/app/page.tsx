@@ -1,34 +1,23 @@
 import NextDynamic from "next/dynamic";
 import { Suspense, type ReactElement } from "react";
-import Hero from "@/components/Hero";
+import Hero from "@/components/sections/Hero";
 import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
-import GitHubWidgetSection from "@/components/GitHubWidgetSection";
-import { siteConfig } from "@/config/site";
-import { getGitHubRepoStatsWidgetData } from "@/lib/widgetData";
 
 // Lazy load complex sections below the fold
-const ExpertiseSection = NextDynamic(
-  () => import("@/components/ExpertiseSection"),
+const HowIBuildSection = NextDynamic(
+  () => import("@/components/sections/HowIBuildSection"),
 );
-const ExperienceSection = NextDynamic(
-  () => import("@/components/ExperienceSection"),
-);
+const MyPathSection = NextDynamic(() => import("@/components/sections/MyPathSection"));
 const ChallengesSection = NextDynamic(
-  () => import("@/components/ChallengesSection"),
+  () => import("@/components/sections/ChallengesSection"),
 );
 const ProjectsSection = NextDynamic(
-  () => import("@/components/ProjectsSection"),
+  () => import("@/components/sections/ProjectsSection"),
 );
 const TechnicalSkillsSection = NextDynamic(
-  () => import("@/components/TechnicalSkillsSection"),
+  () => import("@/components/sections/TechnicalSkillsSection"),
 );
-const CredentialsSection = NextDynamic(
-  () => import("@/components/CredentialsSection"),
-);
-const EducationSection = NextDynamic(
-  () => import("@/components/EducationSection"),
-);
-const Credits = NextDynamic(() => import("@/components/Credits"));
+const ResumeSection = NextDynamic(() => import("@/components/sections/ResumeSection"));
 const ScrollToTop = NextDynamic(() => import("@/components/ScrollToTop"));
 
 const LoadingSection = (): ReactElement => (
@@ -36,43 +25,27 @@ const LoadingSection = (): ReactElement => (
 );
 
 export default function Home(): ReactElement {
-  const repoUrl = siteConfig.github?.repoUrl ?? "";
-  const repoStatsPromise = repoUrl
-    ? getGitHubRepoStatsWidgetData(repoUrl)
-    : null;
-
   return (
     <main id="top">
       <ClientAnalyticsWrapper />
       <Hero />
-      {repoStatsPromise ? (
-        <Suspense fallback={<LoadingSection />}>
-          <GitHubWidgetSection repoStatsPromise={repoStatsPromise} />
-        </Suspense>
-      ) : null}
       <Suspense fallback={<LoadingSection />}>
-        <ExpertiseSection />
+        <ProjectsSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
-        <ExperienceSection />
+        <HowIBuildSection />
+      </Suspense>
+      <Suspense fallback={<LoadingSection />}>
+        <MyPathSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
         <ChallengesSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
-        <ProjectsSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
         <TechnicalSkillsSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
-        <CredentialsSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <EducationSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <Credits />
+        <ResumeSection />
       </Suspense>
       <Suspense fallback={null}>
         <ScrollToTop />

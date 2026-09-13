@@ -34,7 +34,7 @@ const Footer = (): ReactElement => {
   };
 
   return (
-    <footer className="text-foreground">
+    <footer className="text-foreground bg-surface fixed right-0 bottom-0 left-0 z-40">
       <hr className="border-accent/10 border-2" />
       <div>
         <div className="relative z-10 container mx-auto p-2">

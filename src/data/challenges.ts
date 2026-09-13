@@ -53,7 +53,7 @@ export const challenges: PortfolioChallenge[] = [
     ],
     result: [
       "Successfully migrated content to Contentstack, providing a more modern and scalable content management solution.",
-      "Documented the process and outcomes, which will be featured in an upcoming ArcTouch blog article.",
+      "The migration approach and outcomes are documented in the published ArcTouch engineering case study 'Headless CMS Migration: From WordPress to Contentstack' by Marcio Merlone.",
     ],
     technologies: [
       "WordPress",
@@ -88,18 +88,19 @@ export const challenges: PortfolioChallenge[] = [
     title: "Modernizing Communication and Collaboration Infrastructure",
     company: "A1 Engenharia",
     challenge:
-      "Replace a legacy Postfix email server with a more modern solution that reduces cloud hosting costs and improves user experience with integrated calendaring and contacts.",
+      "Extend the existing on-premises Postfix mail system with modern collaboration capabilities, postponing the company's cloud migration while offering features comparable to cloud email for several years.",
     action: [
-      "Evaluated various self-hosted solutions and selected SOGo.",
-      "Deployed and configured the SOGo server and migrated existing email data.",
-      "Provided user guidance on the new features, including calendaring and contacts.",
+      "Evaluated self-hosted collaboration options and selected SOGo to complement the existing mail infrastructure.",
+      "Integrated and configured SOGo with the existing Postfix system, preserving email data and established workflows.",
+      "Supported users in adopting calendaring, contacts, and other collaboration features.",
     ],
     result: [
-      "Significantly reduced cloud-based email hosting costs by implementing a self-hosted solution.",
-      "Improved user experience by offering built-in calendaring and contacts functionalities.",
+      "Extended the useful life of the on-premises email platform and delayed cloud migration for several years.",
+      "Delivered integrated calendaring and contacts with a user experience comparable to cloud-based email before the eventual migration.",
     ],
     technologies: [
       "Postfix",
+      "Dovecot",
       "SOGo",
       "Linux Server Administration",
       "Email Protocols (IMAP, SMTP, EAS)",

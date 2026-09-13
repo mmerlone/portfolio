@@ -22,6 +22,7 @@ describe("/about page", () => {
       "Background",
       "Areas of Expertise",
       "Location",
+      "Portfolio Credits",
     ]);
   });
 
@@ -35,5 +36,18 @@ describe("/about page", () => {
     for (const area of portfolio.basic.expertise) {
       expect(screen.getByText(new RegExp(area.name))).not.toBeNull();
     }
+  });
+
+  it("renders Credits section with carousel", () => {
+    render(<AboutPage />);
+
+    expect(screen.getByText("Portfolio Credits")).toBeInTheDocument();
+    expect(
+      screen.getByText((content: string) =>
+        content.includes(
+          "This portfolio acknowledges the companies and technologies that support it",
+        ),
+      ),
+    ).toBeInTheDocument();
   });
 });

@@ -53,7 +53,8 @@
       "node",
       "estree",
       "json-schema",
-      "jest"
+      "jest",
+      "@testing-library/jest-dom"
     ]
   },
   "include": [
