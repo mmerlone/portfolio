@@ -1,25 +1,23 @@
 import NextDynamic from "next/dynamic";
 import { Suspense, type ReactElement } from "react";
-import Hero from "@/components/Hero";
+import Hero from "@/components/sections/Hero";
 import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
 
 // Lazy load complex sections below the fold
 const HowIBuildSection = NextDynamic(
-  () => import("@/components/HowIBuildSection"),
+  () => import("@/components/sections/HowIBuildSection"),
 );
-const MyPathSection = NextDynamic(() => import("@/components/MyPathSection"));
+const MyPathSection = NextDynamic(() => import("@/components/sections/MyPathSection"));
 const ChallengesSection = NextDynamic(
-  () => import("@/components/ChallengesSection"),
+  () => import("@/components/sections/ChallengesSection"),
 );
 const ProjectsSection = NextDynamic(
-  () => import("@/components/ProjectsSection"),
+  () => import("@/components/sections/ProjectsSection"),
 );
 const TechnicalSkillsSection = NextDynamic(
-  () => import("@/components/TechnicalSkillsSection"),
+  () => import("@/components/sections/TechnicalSkillsSection"),
 );
-const ResumeContactSection = NextDynamic(
-  () => import("@/components/ResumeContactSection"),
-);
+const ResumeSection = NextDynamic(() => import("@/components/sections/ResumeSection"));
 const ScrollToTop = NextDynamic(() => import("@/components/ScrollToTop"));
 
 const LoadingSection = (): ReactElement => (
@@ -47,7 +45,7 @@ export default function Home(): ReactElement {
         <TechnicalSkillsSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
-        <ResumeContactSection />
+        <ResumeSection />
       </Suspense>
       <Suspense fallback={null}>
         <ScrollToTop />

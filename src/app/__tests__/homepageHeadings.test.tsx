@@ -38,9 +38,10 @@ describe("homepage heading outline and content", () => {
     expect(
       screen.getByRole("link", { name: "Cirrus migration article" }),
     ).toHaveAttribute("href", "#cirrus-article");
-    expect(
-      screen.getByRole("link", { name: "Résumé and contact" }),
-    ).toHaveAttribute("href", "#resume-contact");
+    expect(screen.getByRole("link", { name: "Résumé" })).toHaveAttribute(
+      "href",
+      "#resume",
+    );
     expect(container.querySelector("#cirrus-article")).not.toBeNull();
   });
 
@@ -79,7 +80,7 @@ describe("homepage heading outline and content", () => {
       "My Path",
       "Selected experience",
       "Technical Skills",
-      "Résumé & Contact",
+      "Résumé",
     ]);
     expect(screen.queryByText("Portfolio Credits")).not.toBeInTheDocument();
   });

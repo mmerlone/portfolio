@@ -10,7 +10,7 @@ describe("/contact page", () => {
     expect(metadata.title).toBe(`Contact — ${portfolio.basic.name}`);
   });
 
-  it("renders a single h1 and a sequential heading outline", () => {
+  it("renders a single h1 followed by the Get in Touch heading", () => {
     render(<ContactPage />);
 
     const h1s = screen.getAllByRole("heading", { level: 1 });
@@ -18,14 +18,10 @@ describe("/contact page", () => {
     expect(h1s[0].textContent).toBe(`Contact ${portfolio.basic.name}`);
 
     const h2s = screen.getAllByRole("heading", { level: 2 });
-    expect(h2s.map((h) => h.textContent)).toEqual([
-      "Email",
-      "Social Links",
-      "Location",
-    ]);
+    expect(h2s.map((h) => h.textContent)).toEqual(["Get in Touch"]);
   });
 
-  it("renders a working mailto link and the configured social links", () => {
+  it("renders a working mailto link, configured social links, and location", () => {
     render(<ContactPage />);
 
     const mailLink = screen.getByRole("link", {
@@ -39,5 +35,7 @@ describe("/contact page", () => {
       const link = screen.getByRole("link", { name: social.name });
       expect(link.getAttribute("href")).toBe(social.url);
     }
+
+    expect(screen.getByText(portfolio.basic.location)).toBeInTheDocument();
   });
 });
