@@ -13,8 +13,6 @@ import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { portfolio } from "@/data/portfolio";
 import { ListIcon, XIcon, CaretDownIcon } from "@phosphor-icons/react";
-import ConfigBar from "@/components/ConfigBar";
-import { cn } from "@/lib/cn";
 import { useDismissOnOutsideOrEscape } from "@/hooks/useDismissOnOutsideOrEscape";
 import type {
   NavigationGroupItem,
@@ -45,13 +43,15 @@ const getNavLinkClassName = (
   pathname: string,
   extra?: string,
 ): string =>
-  cn(
+  [
     "nav-link transition-colors duration-500 ease-in-out",
     extra,
     isNavItemActive(item, activeSection, pathname)
-      ? "nav-link--active text-accent"
-      : "text-muted-foreground hover:text-accent",
-  );
+      ? "nav-link--active text-orange-600 dark:text-orange-400"
+      : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400",
+  ]
+    .filter((cls): cls is string => Boolean(cls))
+    .join(" ");
 
 const Navbar = (): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
@@ -226,7 +226,8 @@ const Navbar = (): ReactElement => {
     }
   };
 
-  const navClasses = isScrolled || isOpen ? "bg-surface-raised" : "transparent";
+  const navClasses =
+    isScrolled || isOpen ? "bg-gray-200 dark:bg-gray-700" : "transparent";
   const showLogo = isScrolled || pathname !== "/";
 
   // Navbar persists across route changes; stale in-page-section state must not leak off "/".
@@ -260,12 +261,11 @@ const Navbar = (): ReactElement => {
           <button
             ref={sectionsTriggerRef}
             type="button"
-            className={cn(
-              "nav-link flex items-center gap-1 transition-colors duration-500 ease-in-out",
+            className={
               isSectionsActive
-                ? "nav-link--active text-accent"
-                : "text-muted-foreground hover:text-accent",
-            )}
+                ? "nav-link nav-link--active flex items-center gap-1 text-orange-600 transition-colors duration-500 ease-in-out dark:text-orange-400"
+                : "nav-link flex items-center gap-1 text-gray-600 transition-colors duration-500 ease-in-out hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
+            }
             aria-haspopup="true"
             aria-expanded={isSectionsOpen}
             aria-controls="on-this-page-menu"
@@ -277,17 +277,18 @@ const Navbar = (): ReactElement => {
             <CaretDownIcon
               size={14}
               weight="bold"
-              className={cn(
-                "transition-transform duration-200",
-                isSectionsOpen && "rotate-180",
-              )}
+              className={
+                isSectionsOpen
+                  ? "rotate-180 transition-transform duration-200"
+                  : "transition-transform duration-200"
+              }
             />
           </button>
           <div
             ref={sectionsPanelRef}
             id="on-this-page-menu"
             hidden={!isSectionsOpen}
-            className="border-border bg-surface absolute top-full left-0 z-40 mt-2 min-w-48 rounded-lg border p-2 shadow-lg"
+            className="absolute top-full left-0 z-40 mt-2 min-w-48 rounded-lg border border-gray-200 bg-white p-2 shadow-lg dark:border-gray-700 dark:bg-gray-800"
           >
             <ul className="space-y-1">
               {sectionItems.map((sectionItem, index) => (
@@ -323,12 +324,11 @@ const Navbar = (): ReactElement => {
           <button
             ref={caseStudiesTriggerRef}
             type="button"
-            className={cn(
-              "nav-link flex items-center gap-1 transition-colors duration-500 ease-in-out",
+            className={
               isCaseStudiesActive
-                ? "nav-link--active text-accent"
-                : "text-muted-foreground hover:text-accent",
-            )}
+                ? "nav-link nav-link--active flex items-center gap-1 text-orange-600 transition-colors duration-500 ease-in-out dark:text-orange-400"
+                : "nav-link flex items-center gap-1 text-gray-600 transition-colors duration-500 ease-in-out hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
+            }
             aria-haspopup="true"
             aria-expanded={isCaseStudiesOpen}
             aria-controls="case-studies-menu"
@@ -340,17 +340,18 @@ const Navbar = (): ReactElement => {
             <CaretDownIcon
               size={14}
               weight="bold"
-              className={cn(
-                "transition-transform duration-200",
-                isCaseStudiesOpen && "rotate-180",
-              )}
+              className={
+                isCaseStudiesOpen
+                  ? "rotate-180 transition-transform duration-200"
+                  : "transition-transform duration-200"
+              }
             />
           </button>
           <div
             ref={caseStudiesPanelRef}
             id="case-studies-menu"
             hidden={!isCaseStudiesOpen}
-            className="border-border bg-surface absolute top-full left-0 z-40 mt-2 min-w-64 rounded-lg border p-2 shadow-lg"
+            className="absolute top-full left-0 z-40 mt-2 min-w-64 rounded-lg border border-gray-200 bg-white p-2 shadow-lg dark:border-gray-700 dark:bg-gray-800"
           >
             <ul className="space-y-1">
               {item.children.map((child, index) => (
@@ -401,22 +402,22 @@ const Navbar = (): ReactElement => {
   return (
     <nav
       aria-label="Primary navigation"
-      className={cn(
-        "fixed top-0 right-0 left-0 z-50 transition-all duration-300",
-        navClasses,
-      )}
+      className={
+        "fixed top-0 right-0 left-0 z-50 transition-all duration-300 " +
+        navClasses
+      }
     >
       <div className="container mx-auto px-4">
         <div
-          className={cn(
-            "flex h-16 items-center",
-            showLogo ? "justify-between" : "justify-end",
-          )}
+          className={
+            "flex h-16 items-center " +
+            (showLogo ? "justify-between" : "justify-end")
+          }
         >
           {showLogo && (
             <Link
               href="/#top"
-              className="text-foreground hover:text-accent text-xl font-bold transition-colors"
+              className="text-xl font-bold text-gray-900 transition-colors hover:text-orange-600 dark:text-gray-100 dark:hover:text-orange-400"
             >
               {portfolio.basic.name}
             </Link>
@@ -425,16 +426,13 @@ const Navbar = (): ReactElement => {
           {/* Desktop Navigation */}
           <ul className="hidden items-center space-x-4 md:flex">
             {desktopNavItems}
-            <li>
-              <ConfigBar />
-            </li>
           </ul>
 
           {/* Mobile Menu Button */}
           <button
             ref={mobileMenuButtonRef}
             type="button"
-            className="text-muted-foreground hover:bg-surface-raised hover:text-accent focus:ring-accent inline-flex items-center justify-center rounded-md p-2 focus:ring-2 focus:outline-none focus:ring-inset md:hidden"
+            className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-200 hover:text-orange-600 focus:ring-2 focus:ring-orange-600 focus:outline-none focus:ring-inset md:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-orange-400 dark:focus:ring-orange-400"
             onClick={() => {
               setIsOpen((open) => !open);
             }}
@@ -456,14 +454,12 @@ const Navbar = (): ReactElement => {
             role="navigation"
             aria-label="Mobile navigation"
             hidden={!isOpen}
-            className={cn(
-              "border-border bg-surface fixed top-16 right-0 left-0 z-40 mx-auto max-h-[80vh] w-full max-w-md overflow-y-auto rounded-b-xl border md:hidden",
-            )}
+            className="fixed top-16 right-0 left-0 z-40 mx-auto max-h-[80vh] w-full max-w-md overflow-y-auto rounded-b-xl border border-gray-200 bg-white md:hidden dark:border-gray-700 dark:bg-gray-800"
           >
             <ul className="space-y-4 py-4">
               {sectionItems.length > 0 && (
                 <li>
-                  <p className="text-foreground px-4 text-sm font-semibold">
+                  <p className="px-4 text-sm font-semibold text-gray-900 dark:text-gray-100">
                     Root
                   </p>
                   <ul className="mt-2 space-y-2">
@@ -499,7 +495,7 @@ const Navbar = (): ReactElement => {
                   if (isNavigationGroupItem(item)) {
                     return (
                       <li key={item.group}>
-                        <p className="text-foreground px-4 text-sm font-semibold">
+                        <p className="px-4 text-sm font-semibold text-gray-900 dark:text-gray-100">
                           {item.label}
                         </p>
                         <ul className="mt-2 space-y-2">
@@ -546,9 +542,6 @@ const Navbar = (): ReactElement => {
                     </li>
                   );
                 })}
-              <li className="m-1 max-w-fit flex-none">
-                <ConfigBar />
-              </li>
             </ul>
           </div>
         </div>
