@@ -87,10 +87,7 @@ export const Carousel3D: FC<Carousel3DProps> = ({
               <div className="slide" style={getStyles(i)}>
                 <CardCredit credit={item} />
               </div>
-              <div
-                className="reflection"
-                style={getStyles(i)}
-              />
+              <div className="reflection" style={getStyles(i)} />
             </Fragment>
           );
         })}

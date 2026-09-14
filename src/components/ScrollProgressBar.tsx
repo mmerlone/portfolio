@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useRef, type ReactElement } from "react";
-import { cn } from "@/lib/cn";
-
 interface ScrollProgressBarProps {
   className?: string;
 }
@@ -47,10 +45,7 @@ const ScrollProgressBar = ({
   return (
     <div
       aria-hidden="true"
-      className={cn(
-        "scroll-progress fixed top-0 right-0 left-0 z-[55]",
-        className,
-      )}
+      className={`scroll-progress fixed top-0 right-0 left-0 z-[55] ${className}`}
     >
       <div ref={fillRef} className="scroll-progress__fill" />
     </div>

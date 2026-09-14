@@ -1,8 +1,6 @@
 import { type ReactElement } from "react";
 
 import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/cn";
-
 interface CTAProps {
   className?: string;
 }
@@ -16,14 +14,14 @@ export function CTA({ className }: CTAProps): ReactElement | null {
 
   return (
     <div
-      className={cn("flex flex-col items-center gap-2 text-center", className)}
+      className={`flex flex-col items-center gap-2 text-center ${className}`}
     >
-      <p className="text-muted-foreground text-lg">{text}</p>
+      <p className="text-lg text-gray-600 dark:text-gray-300">{text}</p>
       <a
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="cta-link bg-action text-action-foreground hover:bg-action-hover focus:ring-accent inline-flex items-center justify-center rounded-lg px-6 py-2 text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:outline-none"
+        className="cta-link inline-flex items-center justify-center rounded-lg bg-orange-700 px-6 py-2 text-sm font-medium text-white hover:bg-orange-800 focus:ring-2 focus:ring-orange-600 focus:ring-offset-2 focus:outline-none dark:bg-orange-400 dark:text-gray-900 dark:hover:bg-orange-300 dark:focus:ring-orange-400"
       >
         {linkText}
       </a>

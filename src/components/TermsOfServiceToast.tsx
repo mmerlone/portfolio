@@ -53,7 +53,7 @@ const TermsOfServiceToast = (): ReactElement | null => {
 
   return (
     <>
-      <div className="border-border-strong bg-surface-raised text-foreground fixed right-4 bottom-4 left-4 z-50 flex flex-col items-center justify-between rounded border p-4 md:flex-row">
+      <div className="fixed right-4 bottom-4 left-4 z-50 flex flex-col items-center justify-between rounded border border-gray-300 bg-gray-200 p-4 text-gray-900 md:flex-row dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100">
         <p className="mx-4 mb-2 text-sm md:mb-0">
           I use cookies to enhance your experience and track interactions. By
           clicking <strong>Accept</strong> or <strong>Refuse</strong> you agree
@@ -63,7 +63,7 @@ const TermsOfServiceToast = (): ReactElement | null => {
             onClick={() => {
               setPolicyOpen(true);
             }}
-            className="bg-surface-raised underline decoration-1 hover:decoration-2 focus:outline-none"
+            className="bg-gray-200 underline decoration-1 hover:decoration-2 focus:outline-none dark:bg-gray-700"
           >
             Terms of Service & Cookie Policy
           </button>
@@ -72,13 +72,13 @@ const TermsOfServiceToast = (): ReactElement | null => {
         <div className="flex space-x-2">
           <button
             onClick={handleAccept}
-            className="bg-consent-accept text-consent-action-foreground hover:bg-consent-accept-hover rounded px-4 py-2 text-sm"
+            className="rounded bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-800 dark:bg-green-300 dark:text-gray-900 dark:hover:bg-green-200"
           >
             Accept
           </button>
           <button
             onClick={handleRefuse}
-            className="bg-consent-refuse text-consent-action-foreground hover:bg-consent-refuse-hover rounded px-4 py-2 text-sm"
+            className="rounded bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-800 dark:bg-red-400 dark:text-gray-900 dark:hover:bg-red-300"
           >
             Refuse
           </button>

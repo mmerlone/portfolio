@@ -2,8 +2,6 @@
 
 import { ArrowUpIcon } from "@phosphor-icons/react";
 import { useEffect, useState, type ReactElement } from "react";
-import { cn } from "@/lib/cn";
-
 interface ScrollToTopProps {
   className?: string;
 }
@@ -42,10 +40,7 @@ const ScrollToTop = ({
   return (
     <button
       onClick={scrollToTop}
-      className={cn(
-        "bg-action text-action-foreground hover:bg-action-hover fixed right-8 bottom-8 z-50 rounded-full p-3",
-        className,
-      )}
+      className={`fixed right-8 bottom-8 z-50 rounded-full bg-orange-700 p-3 text-white hover:bg-orange-800 dark:bg-orange-400 dark:text-gray-900 dark:hover:bg-orange-300 ${className}`}
       aria-label="Scroll to top"
     >
       <ArrowUpIcon size={20} weight="bold" />

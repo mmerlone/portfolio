@@ -98,17 +98,20 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
         tabIndex={-1}
-        className="border-border-strong bg-surface relative mx-4 max-h-screen w-full max-w-xl overflow-y-auto rounded-lg border p-6"
+        className="relative mx-4 max-h-screen w-full max-w-xl overflow-y-auto rounded-lg border border-gray-300 bg-white p-6 dark:border-gray-600 dark:bg-gray-800"
       >
-        <h2 id={titleId} className="text-foreground mb-4 text-2xl font-bold">
+        <h2
+          id={titleId}
+          className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100"
+        >
           Terms of Service & Cookie Policy
         </h2>
-        <p id={descriptionId} className="text-muted-foreground mb-4">
+        <p id={descriptionId} className="mb-4 text-gray-600 dark:text-gray-300">
           I use cookies to enhance your browsing experience, analyze site
           traffic, and tailor my marketing efforts. The following data is
           collected:
         </p>
-        <ul className="text-muted-foreground mb-4 ml-5 list-disc">
+        <ul className="mb-4 ml-5 list-disc text-gray-600 dark:text-gray-300">
           <li>
             Google Analytics or Google Tag Manager for visitor statistics
             (mutually exclusive at runtime; Google Tag Manager takes precedence
@@ -121,14 +124,17 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           <li>Session and usage statistics</li>
           <li>Device and browser information</li>
         </ul>
-        <p className="text-muted-foreground mb-4">
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           By accepting, you agree to our data usage in accordance with this
           policy. Your consent is stored as a cookie in your browser so that we
           don’t ask again.
         </p>
-        <p className="text-muted-foreground mb-4">
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           For more details, please review the full{" "}
-          <Link href="/privacy" className="text-accent hover:underline">
+          <Link
+            href="/privacy"
+            className="text-orange-600 hover:underline dark:text-orange-400"
+          >
             Privacy Policy
           </Link>
           .
@@ -137,14 +143,14 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           <button
             type="button"
             onClick={onAccept}
-            className="bg-consent-accept text-consent-action-foreground hover:bg-consent-accept-hover rounded px-4 py-2 text-sm"
+            className="rounded bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-800 dark:bg-green-300 dark:text-gray-900 dark:hover:bg-green-200"
           >
             Accept
           </button>
           <button
             type="button"
             onClick={onRefuse}
-            className="bg-consent-refuse text-consent-action-foreground hover:bg-consent-refuse-hover rounded px-4 py-2 text-sm"
+            className="rounded bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-800 dark:bg-red-400 dark:text-gray-900 dark:hover:bg-red-300"
           >
             Refuse
           </button>
@@ -154,7 +160,7 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           type="button"
           onClick={onClose}
           aria-label="Close terms and cookie policy"
-          className="text-subtle-foreground hover:text-foreground absolute top-2 right-2"
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
         >
           <span aria-hidden="true">&#10005;</span>
         </button>
