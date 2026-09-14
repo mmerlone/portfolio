@@ -20,10 +20,10 @@ export default function PrivacyPage(): ReactElement {
 
   return (
     <main className="container mx-auto px-4 py-24">
-      <h1 className="text-foreground mb-6 text-center text-4xl font-bold md:text-5xl">
+      <h1 className="mb-6 text-center text-4xl font-bold text-gray-900 md:text-5xl dark:text-gray-100">
         Privacy Policy
       </h1>
-      <div className="text-muted-foreground mx-auto max-w-3xl space-y-8 leading-relaxed">
+      <div className="mx-auto max-w-3xl space-y-8 leading-relaxed text-gray-600 dark:text-gray-300">
         <Section>
           <SectionTitle id="privacy-controller">
             Who Controls This Data
@@ -32,7 +32,10 @@ export default function PrivacyPage(): ReactElement {
             This website is owned and operated by {portfolio.basic.name}{" "}
             individually — there is no separate company behind it. For any
             question about this policy or the data described below, contact{" "}
-            <a href={`mailto:${email}`} className="text-accent hover:underline">
+            <a
+              href={`mailto:${email}`}
+              className="text-orange-600 hover:underline dark:text-orange-400"
+            >
               {email}
             </a>
             .
@@ -42,7 +45,7 @@ export default function PrivacyPage(): ReactElement {
         <Section>
           <SectionTitle id="privacy-collection">What We Collect</SectionTitle>
 
-          <h3 className="text-foreground mt-4 mb-2 text-xl font-semibold">
+          <h3 className="mt-4 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
             Analytics (Only With Your Consent)
           </h3>
           <p className="mb-2">
@@ -63,23 +66,23 @@ export default function PrivacyPage(): ReactElement {
             collect aggregate, non-identifying performance data.
           </p>
 
-          <h3 className="text-foreground mt-6 mb-2 text-xl font-semibold">
+          <h3 className="mt-6 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
             Infrastructure &amp; Security Logging (Always)
           </h3>
           <p>
             Regardless of your cookie choice, this site&apos;s infrastructure
-            providers — Cloudflare (the DNS authority for this site) and
-            Vercel (the hosting platform and CDN/WAF) — transiently log
-            request metadata such as IP address and User-Agent for security
-            and operational purposes. This is infrastructure/security logging,
-            not analytics, and it is not gated by the consent cookie.
+            providers — Cloudflare (the DNS authority for this site) and Vercel
+            (the hosting platform and CDN/WAF) — transiently log request
+            metadata such as IP address and User-Agent for security and
+            operational purposes. This is infrastructure/security logging, not
+            analytics, and it is not gated by the consent cookie.
           </p>
         </Section>
 
         <Section>
           <SectionTitle id="privacy-retention">Retention</SectionTitle>
 
-          <h3 className="text-foreground mt-4 mb-2 text-xl font-semibold">
+          <h3 className="mt-4 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
             Analytics Retention
           </h3>
           <ul className="ml-5 list-disc space-y-1">
@@ -101,7 +104,7 @@ export default function PrivacyPage(): ReactElement {
             </li>
           </ul>
 
-          <h3 className="text-foreground mt-6 mb-2 text-xl font-semibold">
+          <h3 className="mt-6 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
             Infrastructure Retention
           </h3>
           <ul className="ml-5 list-disc space-y-1">
@@ -113,7 +116,9 @@ export default function PrivacyPage(): ReactElement {
           <SectionTitle id="privacy-choices">Your Choices</SectionTitle>
           <p className="mb-2">
             The consent cookie is named{" "}
-            <code className="bg-surface-muted rounded px-1">{cookieName}</code>{" "}
+            <code className="rounded bg-gray-100 px-1 dark:bg-gray-950">
+              {cookieName}
+            </code>{" "}
             and lasts {expiryDays} days. Refusing or revoking consent stops new
             analytics collection immediately, but it does not retroactively
             delete data already collected.
@@ -129,7 +134,7 @@ export default function PrivacyPage(): ReactElement {
               href="https://tools.google.com/dlpage/gaoptout"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent hover:underline"
+              className="text-orange-600 hover:underline dark:text-orange-400"
             >
               Google&apos;s Analytics opt-out mechanism
             </a>
@@ -143,7 +148,10 @@ export default function PrivacyPage(): ReactElement {
           <SectionTitle id="privacy-contact">Contact</SectionTitle>
           <p>
             Questions about this policy can be sent to{" "}
-            <a href={`mailto:${email}`} className="text-accent hover:underline">
+            <a
+              href={`mailto:${email}`}
+              className="text-orange-600 hover:underline dark:text-orange-400"
+            >
               {email}
             </a>
             .

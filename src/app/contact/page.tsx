@@ -16,7 +16,7 @@ export default function ContactPage(): ReactElement {
 
   return (
     <main className="container mx-auto px-4 py-24">
-      <h1 className="text-foreground mb-6 text-center text-4xl font-bold md:text-5xl">
+      <h1 className="mb-6 text-center text-4xl font-bold text-gray-900 md:text-5xl dark:text-gray-100">
         Contact {name}
       </h1>
       <div className="mx-auto max-w-3xl">

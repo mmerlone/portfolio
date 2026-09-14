@@ -119,33 +119,35 @@ export default async function CaseStudyPage({
       <article className="mx-auto max-w-4xl">
         <Link
           href="/#selected-engineering-work"
-          className="content-action-link text-muted-foreground hover:text-foreground mb-8 inline-flex text-sm font-medium transition-colors"
+          className="content-action-link mb-8 inline-flex text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
         >
           Back to selected engineering work
         </Link>
 
         <header className="mb-10">
-          <p className="text-accent mb-3 text-sm font-semibold tracking-wide uppercase">
+          <p className="mb-3 text-sm font-semibold tracking-wide text-orange-600 uppercase dark:text-orange-400">
             Case study
           </p>
-          <h1 className="text-foreground balanced-heading mb-5 text-4xl font-bold md:text-5xl">
+          <h1 className="balanced-heading mb-5 text-4xl font-bold text-gray-900 md:text-5xl dark:text-gray-100">
             {caseStudy.name}
           </h1>
           {caseStudy.description && (
-            <p className="text-muted-foreground text-xl leading-relaxed">
+            <p className="text-xl leading-relaxed text-gray-600 dark:text-gray-300">
               {caseStudy.description}
             </p>
           )}
         </header>
 
         {caseStudy.heroImage && (
-          <figure className="border-border bg-surface-muted mb-10 overflow-hidden rounded-xl border">
+          <figure className="mb-10 overflow-hidden rounded-xl border border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-950">
             <Image
               src={caseStudy.heroImage.src}
               alt={caseStudy.heroImage.alt}
               width={caseStudy.heroImage.width ?? 1600}
               height={caseStudy.heroImage.height ?? 900}
-              sizes={caseStudy.heroImage.sizes ?? "(max-width: 768px) 100vw, 896px"}
+              sizes={
+                caseStudy.heroImage.sizes ?? "(max-width: 768px) 100vw, 896px"
+              }
               className="h-auto w-full object-cover"
               priority
             />
@@ -158,11 +160,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-role">
                 <h2
                   id="case-study-role"
-                  className="text-foreground mb-3 text-2xl font-semibold"
+                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
                 >
                   Role
                 </h2>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
                   {caseStudy.role}
                 </p>
               </section>
@@ -172,11 +174,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-publication">
                 <h2
                   id="case-study-publication"
-                  className="text-foreground mb-3 text-2xl font-semibold"
+                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
                 >
                   Publication
                 </h2>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
                   Publisher: {caseStudy.publisher} · Author: {caseStudy.author}
                 </p>
               </section>
@@ -186,11 +188,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-context">
                 <h2
                   id="case-study-context"
-                  className="text-foreground mb-3 text-2xl font-semibold"
+                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
                 >
                   Context
                 </h2>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
                   {caseStudy.context}
                 </p>
               </section>
@@ -200,11 +202,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-constraints">
                 <h2
                   id="case-study-constraints"
-                  className="text-foreground mb-3 text-2xl font-semibold"
+                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
                 >
                   Constraints
                 </h2>
-                <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
+                <ul className="list-disc space-y-2 pl-5 leading-relaxed text-gray-600 dark:text-gray-300">
                   {constraints.map((constraint) => (
                     <li key={constraint}>{constraint}</li>
                   ))}
@@ -216,11 +218,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-decisions">
                 <h2
                   id="case-study-decisions"
-                  className="text-foreground mb-3 text-2xl font-semibold"
+                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
                 >
                   Decisions
                 </h2>
-                <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
+                <ul className="list-disc space-y-2 pl-5 leading-relaxed text-gray-600 dark:text-gray-300">
                   {decisions.map((decision) => (
                     <li key={decision}>{decision}</li>
                   ))}
@@ -232,11 +234,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-tradeoffs">
                 <h2
                   id="case-study-tradeoffs"
-                  className="text-foreground mb-3 text-2xl font-semibold"
+                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
                 >
                   Trade-offs
                 </h2>
-                <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
+                <ul className="list-disc space-y-2 pl-5 leading-relaxed text-gray-600 dark:text-gray-300">
                   {tradeoffs.map((tradeoff) => (
                     <li key={tradeoff}>{tradeoff}</li>
                   ))}
@@ -248,18 +250,18 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-outcome">
                 <h2
                   id="case-study-outcome"
-                  className="text-foreground mb-3 text-2xl font-semibold"
+                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
                 >
                   Outcome
                 </h2>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
                   {caseStudy.outcome}
                 </p>
               </section>
             )}
           </div>
 
-          <aside className="border-border bg-surface h-fit rounded-xl border p-5">
+          <aside className="h-fit rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
             {caseStudy.technologies && caseStudy.technologies.length > 0 && (
               <section
                 aria-labelledby="case-study-technologies"
@@ -267,7 +269,7 @@ export default async function CaseStudyPage({
               >
                 <h2
                   id="case-study-technologies"
-                  className="text-foreground mb-3 text-base font-semibold"
+                  className="mb-3 text-base font-semibold text-gray-900 dark:text-gray-100"
                 >
                   Technologies
                 </h2>
@@ -275,7 +277,7 @@ export default async function CaseStudyPage({
                   {caseStudy.technologies.map((technology) => (
                     <li
                       key={technology}
-                      className="bg-surface-raised text-muted-foreground rounded px-2 py-1 text-xs font-medium"
+                      className="rounded bg-gray-200 px-2 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300"
                     >
                       {technology}
                     </li>
@@ -287,7 +289,7 @@ export default async function CaseStudyPage({
             <section aria-labelledby="case-study-links">
               <h2
                 id="case-study-links"
-                className="text-foreground mb-3 text-base font-semibold"
+                className="mb-3 text-base font-semibold text-gray-900 dark:text-gray-100"
               >
                 Links
               </h2>
@@ -298,7 +300,7 @@ export default async function CaseStudyPage({
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="content-action-link text-accent hover:text-accent-strong inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+                      className="content-action-link inline-flex items-center gap-1.5 text-sm font-medium text-orange-600 transition-colors hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-200"
                     >
                       <LinkIcon icon={link.icon} />
                       {link.label}

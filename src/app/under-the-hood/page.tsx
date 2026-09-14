@@ -67,10 +67,10 @@ const statusByArea = [
 export default function UnderTheHoodPage(): ReactElement {
   return (
     <main className="container mx-auto px-4 py-24">
-      <h1 className="text-foreground mb-6 text-center text-4xl font-bold md:text-5xl">
+      <h1 className="mb-6 text-center text-4xl font-bold text-gray-900 md:text-5xl dark:text-gray-100">
         Under the Hood
       </h1>
-      <p className="text-muted-foreground mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed">
+      <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-gray-600 dark:text-gray-300">
         This page records what is implemented in the repository, what has been
         tested locally, and what still requires a dated external or provider
         result. It does not turn targets or provisional observations into
@@ -82,25 +82,25 @@ export default function UnderTheHoodPage(): ReactElement {
           <SectionTitle id="verification-status">
             Verification Status
           </SectionTitle>
-          <div className="border-border overflow-x-auto rounded-lg border">
+          <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-surface-raised text-foreground">
+              <thead className="bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Area</th>
                   <th className="px-4 py-3 font-semibold">Status</th>
                   <th className="px-4 py-3 font-semibold">Evidence boundary</th>
                 </tr>
               </thead>
-              <tbody className="divide-border divide-y">
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                 {statusByArea.map((item) => (
-                  <tr key={item.area} className="bg-surface">
-                    <td className="text-foreground px-4 py-3 font-semibold">
+                  <tr key={item.area} className="bg-white dark:bg-gray-800">
+                    <td className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
                       {item.area}
                     </td>
-                    <td className="text-accent px-4 py-3 font-medium">
+                    <td className="px-4 py-3 font-medium text-orange-600 dark:text-orange-400">
                       {item.status}
                     </td>
-                    <td className="text-muted-foreground px-4 py-3">
+                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300">
                       {item.evidence}
                     </td>
                   </tr>
@@ -114,16 +114,16 @@ export default function UnderTheHoodPage(): ReactElement {
           <SectionTitle id="provider-authority">
             Provider Authority
           </SectionTitle>
-          <p className="text-muted-foreground mb-4 leading-relaxed">
-            Vercel owns transport, edge caching, and WAF behavior; Cloudflare owns
-            DNS; GitHub owns repository automation and branch protection, and
-            this Next.js application owns its browser-hardening
-            headers. The provider inventory and rollback record remain in the
-            authority matrix until Marcio Merlone supplies dated evidence.
+          <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300">
+            Vercel owns transport, edge caching, and WAF behavior; Cloudflare
+            owns DNS; GitHub owns repository automation and branch protection,
+            and this Next.js application owns its browser-hardening headers. The
+            provider inventory and rollback record remain in the authority
+            matrix until Marcio Merlone supplies dated evidence.
           </p>
           <a
             href="https://github.com/mmerlone/portfolio/blob/main/PROVIDER-AUTHORITY-MATRIX.md"
-            className="text-accent inline-flex font-medium hover:underline"
+            className="inline-flex font-medium text-orange-600 hover:underline dark:text-orange-400"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -135,11 +135,11 @@ export default function UnderTheHoodPage(): ReactElement {
           <SectionTitle id="repository-evidence">
             Repository Evidence
           </SectionTitle>
-          <ul className="text-muted-foreground list-disc space-y-2 pl-5">
+          <ul className="list-disc space-y-2 pl-5 text-gray-600 dark:text-gray-300">
             <li>
               <a
                 href="https://github.com/mmerlone/portfolio/blob/main/README.md"
-                className="text-accent hover:underline"
+                className="text-orange-600 hover:underline dark:text-orange-400"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -149,7 +149,7 @@ export default function UnderTheHoodPage(): ReactElement {
             <li>
               <a
                 href="https://github.com/mmerlone/portfolio/blob/main/.github/workflows/ci.yml"
-                className="text-accent hover:underline"
+                className="text-orange-600 hover:underline dark:text-orange-400"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -159,7 +159,7 @@ export default function UnderTheHoodPage(): ReactElement {
             <li>
               <a
                 href={`mailto:${portfolio.basic.contact.email}`}
-                className="text-accent hover:underline"
+                className="text-orange-600 hover:underline dark:text-orange-400"
               >
                 Contact {portfolio.basic.name}
               </a>
