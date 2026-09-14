@@ -1,7 +1,6 @@
 import { type ReactElement } from "react";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { pathStages } from "@/data/pathStages";
-import { cn } from "@/lib/cn";
 
 interface MyPathSectionProps {
   className?: string;
@@ -14,7 +13,7 @@ export default function MyPathSection({
     <section
       id="my-path"
       aria-labelledby="my-path-title"
-      className={cn("relative py-16", className)}
+      className={"relative py-16 " + (className ?? "")}
     >
       <div className="relative z-10 container mx-auto px-4">
         <SectionTitle id="my-path-title">My Path</SectionTitle>
@@ -22,18 +21,20 @@ export default function MyPathSection({
           {pathStages.map((stage, idx) => (
             <article
               key={idx}
-              className="border-border bg-surface rounded-lg border p-8"
+              className="rounded-lg border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                <h3 className="text-foreground text-xl font-semibold">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                   {stage.title}
                 </h3>
-                <span className="text-accent text-sm font-medium">
+                <span className="text-sm font-medium text-orange-600 dark:text-orange-400">
                   {stage.period}
                 </span>
               </div>
-              <p className="text-muted-foreground mb-4">{stage.description}</p>
-              <ul className="text-muted-foreground mb-4 list-disc space-y-1 pl-5 text-sm">
+              <p className="mb-4 text-gray-600 dark:text-gray-300">
+                {stage.description}
+              </p>
+              <ul className="mb-4 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-300">
                 {stage.highlights.map((hl, i) => (
                   <li key={i}>{hl}</li>
                 ))}
@@ -42,7 +43,7 @@ export default function MyPathSection({
                 {stage.technologies.map((tech, techIdx) => (
                   <span
                     key={techIdx}
-                    className="bg-surface-raised text-muted-foreground inline-block rounded px-2 py-0.5 text-xs"
+                    className="inline-block rounded bg-gray-200 px-2 py-0.5 text-xs text-gray-600 dark:bg-gray-700 dark:text-gray-300"
                   >
                     {tech}
                   </span>

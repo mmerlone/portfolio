@@ -2,7 +2,6 @@ import { type ReactElement } from "react";
 import { EnvelopeSimpleIcon, MapPinIcon } from "@phosphor-icons/react/ssr";
 import { portfolio } from "@/data/portfolio";
 import { getSocialIcon } from "@/lib/getSocialIcon";
-import { cn } from "@/lib/cn";
 
 interface GetInTouchSectionProps {
   className?: string;
@@ -18,22 +17,22 @@ export default function GetInTouchSection({
 
   return (
     <article
-      className={cn(
-        "get-in-touch border-border bg-surface rounded-lg border p-8",
-        className,
-      )}
+      className={
+        "rounded-lg border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800 " +
+        (className ?? "")
+      }
     >
-      <HeadingTag className="text-foreground mb-4 text-xl font-semibold">
+      <HeadingTag className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
         Get in Touch
       </HeadingTag>
-      <p className="text-muted-foreground mb-6">
+      <p className="mb-6 text-gray-600 dark:text-gray-300">
         I&apos;m open to discussing senior engineering roles, architecture
         consulting, and speaking opportunities.
       </p>
       <div className="space-y-4">
         <a
           href={`mailto:${contact.email}`}
-          className="text-muted-foreground hover:text-accent flex items-center gap-3 transition-colors"
+          className="flex items-center gap-3 text-gray-600 transition-colors hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
         >
           <EnvelopeSimpleIcon size={20} weight="bold" aria-hidden="true" />
           <span>{contact.email}</span>
@@ -47,14 +46,14 @@ export default function GetInTouchSection({
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-accent flex items-center gap-3 transition-colors"
+              className="flex items-center gap-3 text-gray-600 transition-colors hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
             >
               <Icon size={20} weight="bold" aria-hidden="true" />
               <span className="text-sm font-medium">{link.name}</span>
             </a>
           );
         })}
-        <p className="text-muted-foreground flex items-center gap-3">
+        <p className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
           <MapPinIcon size={20} weight="bold" aria-hidden="true" />
           <span>{location}</span>
         </p>

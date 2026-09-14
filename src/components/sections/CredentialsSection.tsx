@@ -1,7 +1,6 @@
 import { type ReactElement } from "react";
 import { portfolio } from "@/data/portfolio";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { cn } from "@/lib/cn";
 import { CertificateIcon, TranslateIcon } from "@phosphor-icons/react/ssr";
 
 interface CredentialsSectionProps {
@@ -15,7 +14,7 @@ export default function CredentialsSection({
     <section
       id="credentials"
       aria-labelledby="credentials-title"
-      className={cn("relative py-16", className)}
+      className={"relative py-16 " + (className ?? "")}
     >
       <div className="relative z-10 container mx-auto px-4">
         <SectionTitle id="credentials-title">
@@ -23,9 +22,13 @@ export default function CredentialsSection({
         </SectionTitle>
         <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
           {/* Languages */}
-          <article className="border-border bg-surface rounded-xl border p-6">
-            <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
-              <TranslateIcon size={20} weight="bold" className="text-accent" />
+          <article className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+            <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              <TranslateIcon
+                size={20}
+                weight="bold"
+                className="text-orange-600 dark:text-orange-400"
+              />
               Languages
             </h3>
             <ul className="space-y-3">
@@ -34,10 +37,10 @@ export default function CredentialsSection({
                   key={lang.language}
                   className="flex items-center justify-between"
                 >
-                  <span className="text-foreground font-medium">
+                  <span className="font-medium text-gray-900 dark:text-gray-100">
                     {lang.language}
                   </span>
-                  <span className="text-subtle-foreground text-sm">
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
                     {lang.level}
                   </span>
                 </li>
@@ -46,12 +49,12 @@ export default function CredentialsSection({
           </article>
 
           {/* Certifications */}
-          <article className="border-border bg-surface rounded-xl border p-6">
-            <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
+          <article className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+            <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
               <CertificateIcon
                 size={20}
                 weight="bold"
-                className="text-accent"
+                className="text-orange-600 dark:text-orange-400"
               />
               Certifications
             </h3>
@@ -59,9 +62,9 @@ export default function CredentialsSection({
               {portfolio.certifications.map((cert) => (
                 <li
                   key={cert}
-                  className="text-muted-foreground flex items-start gap-2 text-sm"
+                  className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300"
                 >
-                  <span className="bg-accent mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-600 dark:bg-orange-400" />
                   {cert}
                 </li>
               ))}
