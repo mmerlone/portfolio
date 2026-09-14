@@ -1,12 +1,10 @@
 import { type ReactElement, type ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
-import "./globals.scss";
+import "./global.css";
 import { siteConfig } from "@/config/site";
 import { portfolio } from "@/data/portfolio";
 import Navbar from "@/components/Navbar";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import TermsOfServiceToast from "@/components/TermsOfServiceToast";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/StructuredData";
@@ -15,12 +13,6 @@ import { getSeoKeywords } from "@/lib/seoKeywords";
 interface LayoutProps {
   children: ReactNode;
 }
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  fallback: ["system-ui", "sans-serif"],
-});
 
 const seoKeywords = getSeoKeywords();
 
@@ -104,28 +96,21 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps): ReactElement {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <link rel="alternate" type="text/markdown" href="/index.md" />
         <link rel="describedby" href="/llms.txt" />
         <StructuredData />
       </head>
-      <body className={inter.className}>
+      <body>
         <a href="#top" className="skip-link">
           Skip to main content
         </a>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ScrollProgressBar />
-          <Navbar />
-          <div className="pb-28 sm:pb-14">{children}</div>
-          <Footer />
-          <TermsOfServiceToast />
-        </ThemeProvider>
+        <ScrollProgressBar />
+        <Navbar />
+        <div className="pb-28 sm:pb-14">{children}</div>
+        <Footer />
+        <TermsOfServiceToast />
       </body>
     </html>
   );
