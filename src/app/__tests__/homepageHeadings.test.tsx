@@ -38,9 +38,10 @@ describe("homepage heading outline and content", () => {
     expect(
       screen.getByRole("link", { name: "Cirrus migration article" }),
     ).toHaveAttribute("href", "#headless-cms-migration-article");
-    expect(
-      screen.getByRole("link", { name: "Résumé" }),
-    ).toHaveAttribute("href", "#resume");
+    expect(screen.getByRole("link", { name: "Résumé" })).toHaveAttribute(
+      "href",
+      "#resume",
+    );
     expect(
       container.querySelector("#headless-cms-migration-article"),
     ).not.toBeNull();

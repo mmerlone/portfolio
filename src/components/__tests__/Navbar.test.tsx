@@ -1,19 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Navbar from "@/components/Navbar";
 import { caseStudies, getCaseStudyHref } from "@/lib/caseStudies";
-import { ThemeEnum } from "@/types/theme";
-
-const setTheme = jest.fn();
 
 jest.mock("next/navigation", () => ({
   usePathname: (): string => "/",
-}));
-
-jest.mock("next-themes", () => ({
-  useTheme: (): { theme: string; setTheme: typeof setTheme } => ({
-    theme: ThemeEnum.SYSTEM,
-    setTheme,
-  }),
 }));
 
 class IntersectionObserverMock {

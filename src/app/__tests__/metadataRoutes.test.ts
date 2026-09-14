@@ -69,7 +69,8 @@ describe("metadata routes", () => {
       expect(
         entries.find(
           (entry) =>
-            entry.url === `https://mmerlone.dev.br${getCaseStudyHref(caseStudy)}`,
+            entry.url ===
+            `https://mmerlone.dev.br${getCaseStudyHref(caseStudy)}`,
         ),
       ).toMatchObject({
         changeFrequency: "yearly",

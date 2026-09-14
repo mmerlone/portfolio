@@ -39,9 +39,7 @@ describe("/privacy page", () => {
       0,
     );
     expect(screen.getAllByText(/Cloudflare/).length).toBeGreaterThan(0);
-    expect(
-      screen.queryByText(/the CDN\/WAF in front of this site/),
-    ).toBeNull();
+    expect(screen.queryByText(/the CDN\/WAF in front of this site/)).toBeNull();
     expect(screen.getByText(new RegExp(siteConfig.cookie.name))).not.toBeNull();
   });
 
