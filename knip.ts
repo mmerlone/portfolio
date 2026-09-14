@@ -11,9 +11,10 @@ const config: KnipConfig = {
     "src/types/logger.types.ts",
   ],
   ignoreDependencies: [
-    // Consumed only via CSS `@import`, invisible to static JS/TS analysis.
+    // Consumed via CSS `@import`, invisible to static JS/TS analysis.
     "tailwindcss",
-    "open-props",
+    "@tailwindcss/postcss",
+    "@fontsource/instrument-serif",
   ],
 };
 
