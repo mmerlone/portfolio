@@ -1,0 +1,277 @@
+@import "tailwindcss";
+@import "@fontsource/instrument-serif/400.css";
+@import "./styles/global/carousel-3d.css";
+
+@theme {
+  --font-sans: system-ui, sans-serif;
+  --font-serif: "Instrument Serif", serif;
+  /* "Instrument Serif", ui-serif, Georgia, Cambria, "Times New Roman", serif; */
+}
+
+/*
+ * Design tokens consumed by carousel-3d.css.
+ * Defined as plain CSS custom properties (no SCSS, no open-props)
+ * and overridden per color-scheme via media queries.
+ */
+:root {
+  --surface: #ffffff;
+  --foreground: #111827;
+  --accent-dark: #7c2d12;
+  --radius-lg: 0.5rem;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1f2937;
+    --foreground: #ffffff;
+    --accent-dark: #f59e42;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base reset & element defaults                                       */
+/* ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: theme(--font-sans);
+  scroll-padding-block-start: 4.5rem;
+}
+
+body {
+  margin: 0;
+  background: #ebedf3;
+  color: #111827;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: theme(--font-serif);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0f1117;
+    color: #f3f4f5;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Skip link                                                          */
+/* ------------------------------------------------------------------ */
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: #111827;
+  transform: translateY(calc(-100% - 1rem));
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .skip-link {
+    border-color: #4b5563;
+    background: #1f2937;
+    color: #f3f4f5;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Focus rings & :target                                              */
+/* ------------------------------------------------------------------ */
+
+:where(a, button, select, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid #c2410c;
+  outline-offset: 2px;
+}
+
+:target {
+  outline: 2px solid #c2410c;
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :where(a, button, select, input, textarea, [tabindex]):focus-visible {
+    outline-color: #fb923c;
+  }
+
+  :target {
+    outline-color: #fb923c;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Text wrapping & overflow                                           */
+/* ------------------------------------------------------------------ */
+
+:where(p, li, dd, figcaption) {
+  overflow-wrap: anywhere;
+}
+
+.balanced-heading {
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reduced motion                                                     */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Forced colors                                                      */
+/* ------------------------------------------------------------------ */
+
+@media (forced-colors: active) {
+  :where(a, button, select, input, textarea, [tabindex]):focus-visible {
+    outline-color: Highlight;
+  }
+
+  :target {
+    outline-color: Highlight;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Semantic utility classes (no CSS variables)                        */
+/* ------------------------------------------------------------------ */
+
+/* Link underline styles */
+.content-action-link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .content-action-link:hover {
+    text-decoration-thickness: 3px;
+  }
+}
+
+/* No underline for cta-link elements */
+.cta-link,
+.nav-link {
+  text-decoration: none;
+}
+
+/* Nav link active indicator */
+.nav-link {
+  border-block-end: 2px solid transparent;
+  padding-block: 0.25rem;
+}
+
+.nav-link--active {
+  border-block-end-color: currentColor;
+}
+
+/* Hero label accent border */
+.hero-label {
+  border-inline-start: 2px solid #fdba74;
+  padding-inline-start: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero-label {
+    border-inline-start-color: #fb923c;
+  }
+}
+
+/* 3D shadow for hero / profile image */
+.a3d-border {
+  box-shadow:
+    2px 2px 7px 0px rgba(0, 0, 0, 0.7),
+    inset 2px 2px 7px -2px rgba(0, 0, 0, 0.7);
+}
+
+/* Editorial section title: flex row with centered items */
+.editorial-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Project article focus/hover states */
+.project-article:focus-within,
+.experience-entry:focus-within {
+  border-color: #9ca3af;
+  border-inline-start-color: #fdba74;
+  background: #1e293b;
+}
+
+@media (prefers-color-scheme: dark) {
+  .project-article:focus-within,
+  .experience-entry:focus-within {
+    background: #374151;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-article:hover {
+    border-color: #9ca3af;
+    border-inline-start-color: #fdba74;
+    background: #e5e7eb;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  @media (hover: hover) and (pointer: fine) {
+    .project-article:hover {
+      background: #1e2937;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scroll progress bar                                                */
+/* ------------------------------------------------------------------ */
+
+.scroll-progress {
+  height: 3px;
+  pointer-events: none;
+}
+
+.scroll-progress__fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  transform: scaleX(var(--scroll-progress, 0));
+  will-change: transform;
+  background: linear-gradient(90deg, #f59e0b, #fb923c);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress {
+    display: none;
+  }
+}

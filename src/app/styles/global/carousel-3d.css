@@ -33,7 +33,7 @@
   position: absolute;
   width: 480px;
   height: 60px;
-  bottom: -.2rem;
+  bottom: -0.2rem;
   border-radius: var(--radius-lg);
   background-image: linear-gradient(
     to bottom,
