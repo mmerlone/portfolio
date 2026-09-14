@@ -77,4 +77,10 @@ export const creditsData: readonly Credit[] = [
     url: "https://tailwindcss.com/",
     icon: "tailwindcss.svg",
   },
+  {
+    name: "Calendly",
+    description: "A scheduling automation platform for booking meetings.",
+    url: "https://calendly.com/",
+    icon: "calendly.svg",
+  },
 ];
