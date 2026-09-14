@@ -30,7 +30,11 @@ export function buildSecurityHeaders({
   // in production they fall back to same-origin `/_vercel/*`, which `self`
   // already covers. Google GA/GTM and Ahrefs are only declared when their
   // env-gated identifiers are actually set, so no enabled service is invented.
-  const scriptSrc = ["'self'", "https://va.vercel-scripts.com", "'unsafe-inline'"];
+  const scriptSrc = [
+    "'self'",
+    "https://va.vercel-scripts.com",
+    "'unsafe-inline'",
+  ];
   // Next.js dev mode uses eval() for React Fast Refresh/debugging; never allowed in production.
   // 'unsafe-inline' is required for Next.js App Router RSC runtime inline scripts (e.g. $RC directives).
   if (env.NODE_ENV !== "production") {
