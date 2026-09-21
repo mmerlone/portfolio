@@ -7,13 +7,13 @@ export interface NavigationLinkItem {
   /** Shorter text shown in the desktop top-level nav bar; falls back to `label`. */
   readonly shortLabel?: string;
   readonly href: string;
-  /** Groups same-page anchors under a desktop dropdown instead of the top-level bar. */
-  readonly group?: "sections";
+  /** Special handling for root navigation that must serialize as the root URL. */
+  readonly behavior?: "home";
 }
 
 export interface NavigationGroupItem {
+  readonly id: string;
   readonly label: string;
-  readonly group: "case-studies";
   readonly children: readonly NavigationLinkItem[];
 }
 

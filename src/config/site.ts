@@ -17,29 +17,33 @@ export const siteConfig: SiteConfig = {
   // Navigation
   navigation: [
     {
-      label: "Me",
-      href: "/#top",
-      group: "sections",
+      id: "root",
+      label: "Root",
+      children: [
+        {
+          label: "Me",
+          href: "/",
+          behavior: "home",
+        },
+        {
+          label: "Selected engineering work",
+          shortLabel: "Engineering",
+          href: "/#selected-engineering-work",
+        },
+        { label: "How I build", href: "/#how-i-build" },
+        { label: "My path", href: "/#my-path" },
+        {
+          label: "Selected experience",
+          shortLabel: "Experience",
+          href: "/#selected-experience",
+        },
+        { label: "Skills", href: "/#skills" },
+        { label: "Résumé", href: "/#resume" },
+      ],
     },
     {
-      label: "Selected engineering work",
-      shortLabel: "Engineering",
-      href: "/#selected-engineering-work",
-      group: "sections",
-    },
-    { label: "How I build", href: "/#how-i-build", group: "sections" },
-    { label: "My path", href: "/#my-path", group: "sections" },
-    {
-      label: "Selected experience",
-      shortLabel: "Experience",
-      href: "/#selected-experience",
-      group: "sections",
-    },
-    { label: "Skills", href: "/#skills", group: "sections" },
-    { label: "Résumé", href: "/#resume", group: "sections" },
-    {
+      id: "case-studies",
       label: "Case studies",
-      group: "case-studies",
       children: caseStudies.map((caseStudy) => ({
         label: caseStudy.name,
         href: getCaseStudyHref(caseStudy),
