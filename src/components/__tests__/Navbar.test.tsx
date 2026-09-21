@@ -2,8 +2,13 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Navbar from "@/components/Navbar";
 import { caseStudies, getCaseStudyHref } from "@/lib/caseStudies";
 
+const mockReplace = jest.fn();
+
 jest.mock("next/navigation", () => ({
   usePathname: (): string => "/",
+  useRouter: (): { replace: jest.Mock } => ({
+    replace: mockReplace,
+  }),
 }));
 
 class IntersectionObserverMock {
@@ -19,6 +24,10 @@ class IntersectionObserverMock {
 describe("Navbar", () => {
   beforeAll(() => {
     window.IntersectionObserver = IntersectionObserverMock;
+  });
+
+  beforeEach(() => {
+    mockReplace.mockClear();
   });
 
   it("renders a Case studies dropdown between Root and Contact", () => {
@@ -52,5 +61,28 @@ describe("Navbar", () => {
         screen.getByRole("link", { name: caseStudy.name }),
       ).toHaveAttribute("href", getCaseStudyHref(caseStudy));
     }
+  });
+
+  it("uses root navigation for Me without serializing the top anchor", () => {
+    render(<Navbar />);
+
+    fireEvent.click(screen.getByRole("button", { name: /root/i }));
+    const meLink = screen.getByRole("link", { name: "Me" });
+    fireEvent.click(meLink);
+
+    expect(mockReplace).toHaveBeenCalledWith("/", { scroll: true });
+    expect(meLink).toHaveAttribute("href", "/");
+  });
+
+  it("keeps section anchors in the URL", () => {
+    render(<Navbar />);
+
+    fireEvent.click(screen.getByRole("button", { name: /root/i }));
+
+    expect(screen.getByRole("link", { name: "Experience" })).toHaveAttribute(
+      "href",
+      "/#selected-experience",
+    );
+    expect(mockReplace).not.toHaveBeenCalled();
   });
 });

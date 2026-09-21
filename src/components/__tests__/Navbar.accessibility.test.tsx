@@ -4,6 +4,9 @@ import Navbar from "@/components/Navbar";
 
 jest.mock("next/navigation", () => ({
   usePathname: (): string => "/",
+  useRouter: (): { replace: jest.Mock } => ({
+    replace: jest.fn(),
+  }),
 }));
 
 // jsdom does not implement IntersectionObserver; provide a minimal mock

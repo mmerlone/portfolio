@@ -2,6 +2,12 @@ import { render, screen } from "@testing-library/react";
 import Home from "@/app/page";
 import { portfolio } from "@/data/portfolio";
 
+jest.mock("next/navigation", () => ({
+  useRouter: (): { replace: jest.Mock } => ({
+    replace: jest.fn(),
+  }),
+}));
+
 function normalizeText(text: string): string {
   return text.replace(/\s+/g, " ").trim();
 }
