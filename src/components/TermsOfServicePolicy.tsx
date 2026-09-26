@@ -7,6 +7,7 @@ interface TermsOfServicePolicyProps {
   visible?: boolean;
   onAccept?: () => void;
   onRefuse?: () => void;
+  onAcceptAnalyticsOnly?: () => void;
   onClose?: () => void;
 }
 
@@ -14,6 +15,7 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
   visible = false,
   onAccept,
   onRefuse,
+  onAcceptAnalyticsOnly,
   onClose,
 }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -107,52 +109,76 @@ const TermsOfServicePolicy: FC<TermsOfServicePolicyProps> = ({
           Terms of Service & Cookie Policy
         </h2>
         <p id={descriptionId} className="mb-4 text-gray-600 dark:text-gray-300">
-          I use cookies to enhance your browsing experience, analyze site
-          traffic, and tailor my marketing efforts. The following data is
-          collected:
+          I use cookies and similar technologies to enhance your browsing
+          experience, analyze site traffic, and tailor marketing efforts. Choose
+          which categories you consent to:
         </p>
-        <ul className="mb-4 ml-5 list-disc text-gray-600 dark:text-gray-300">
-          <li>
-            Google Analytics or Google Tag Manager for visitor statistics
-            (mutually exclusive at runtime; Google Tag Manager takes precedence
-            when both are configured)
-          </li>
-          <li>Ahrefs Analytics for cookieless traffic insights</li>
-          <li>Vercel Analytics for performance monitoring</li>
-          <li>Vercel Speed Insights for page speed metrics</li>
-          <li>Interaction events (clicks, scrolls, and navigation)</li>
-          <li>Session and usage statistics</li>
-          <li>Device and browser information</li>
-        </ul>
+        <div className="mb-4 space-y-3 text-gray-600 dark:text-gray-300">
+          <div className="p-3 rounded border border-gray-200 dark:border-gray-600">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+              Analytics & Performance (Legitimate Interest)
+            </h3>
+            <p className="text-sm">
+              Vercel Analytics & Speed Insights — aggregate, privacy-friendly
+              metrics (no personal identifiers, no cross-site tracking). Processed
+              under legitimate interest; you may opt out below.
+            </p>
+            <ul className="mt-1 ml-5 list-disc text-sm">
+              <li>Page views & session counts (aggregated)</li>
+              <li>Core Web Vitals & load performance</li>
+              <li>Referrer & device class (no fingerprinting)</li>
+            </ul>
+          </div>
+          <div className="p-3 rounded border border-gray-200 dark:border-gray-600">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+              Marketing & Measurement (Requires Consent)
+            </h3>
+            <p className="text-sm">
+              Google Analytics / Google Tag Manager, Ahrefs Analytics — detailed
+              visitor statistics, behavior tracking, and traffic attribution.
+              These set cookies and process personal data (IP, identifiers).
+            </p>
+            <ul className="mt-1 ml-5 list-disc text-sm">
+              <li>Google Analytics / GTM: user journeys, events, conversions</li>
+              <li>Ahrefs Analytics: organic traffic insights (sets cookies)</li>
+              <li>Interaction events (clicks, scrolls, navigation)</li>
+              <li>Session & usage statistics with identifiers</li>
+              <li>Device & browser information</li>
+            </ul>
+          </div>
+        </div>
         <p className="mb-4 text-gray-600 dark:text-gray-300">
-          By accepting, you agree to our data usage in accordance with this
-          policy. Your consent is stored as a cookie in your browser so that we
-          don’t ask again.
-        </p>
-        <p className="mb-4 text-gray-600 dark:text-gray-300">
-          For more details, please review the full{" "}
+          Your preferences are stored as cookies in your browser. You can change
+          them anytime via the{" "}
           <Link
             href="/privacy"
             className="text-orange-600 hover:underline dark:text-orange-400"
           >
             Privacy Policy
           </Link>
-          .
+          {" "}or the &ldquo;Manage Consent&rdquo; link in the footer.
         </p>
-        <div className="mt-4 flex justify-end space-x-2">
+        <div className="mt-4 flex flex-col space-y-2">
           <button
             type="button"
             onClick={onAccept}
             className="rounded bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-800 dark:bg-green-300 dark:text-gray-900 dark:hover:bg-green-200"
           >
-            Accept
+            Accept all
+          </button>
+          <button
+            type="button"
+            onClick={onAcceptAnalyticsOnly}
+            className="rounded bg-blue-700 px-4 py-2 text-sm text-white hover:bg-blue-800 dark:bg-blue-300 dark:text-gray-900 dark:hover:bg-blue-200"
+          >
+            Analytics only
           </button>
           <button
             type="button"
             onClick={onRefuse}
             className="rounded bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-800 dark:bg-red-400 dark:text-gray-900 dark:hover:bg-red-300"
           >
-            Refuse
+            Refuse all
           </button>
         </div>
         <button

@@ -4,33 +4,18 @@ import { useState, type ReactElement } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { portfolio } from "@/data/portfolio";
-import TermsOfServicePolicy from "./TermsOfServicePolicy";
-import { setCookie } from "@/lib/cookies";
+import ConsentManager from "./ConsentManager";
 
 const Footer = (): ReactElement => {
   const currentYear = new Date().getFullYear();
-  const [policyOpen, setPolicyOpen] = useState(false);
+  const [consentManagerOpen, setConsentManagerOpen] = useState(false);
 
-  // Retrieve cookie name and expiry from site config
-  const COOKIE_NAME = siteConfig.cookie.name;
-  const COOKIE_EXPIRY_DAYS = siteConfig.cookie.expiryDays;
-
-  const handlePolicyOpen = (): void => {
-    setPolicyOpen(true);
+  const handleConsentManagerOpen = (): void => {
+    setConsentManagerOpen(true);
   };
 
-  const handlePolicyClose = (): void => {
-    setPolicyOpen(false);
-  };
-
-  const handlePolicyAccept = (): void => {
-    setCookie(COOKIE_NAME, "true", COOKIE_EXPIRY_DAYS);
-    setPolicyOpen(false);
-  };
-
-  const handlePolicyRefuse = (): void => {
-    setCookie(COOKIE_NAME, "false", COOKIE_EXPIRY_DAYS);
-    setPolicyOpen(false);
+  const handleConsentManagerClose = (): void => {
+    setConsentManagerOpen(false);
   };
 
   return (
@@ -53,26 +38,23 @@ const Footer = (): ReactElement => {
               <Link href="/privacy" className="text-sm hover:underline">
                 Privacy Policy
               </Link>
-              {/* Terms of Service & Cookie Policy link */}
               <a
                 href="#"
                 className="text-sm hover:underline"
                 onClick={(e) => {
                   e.preventDefault();
-                  handlePolicyOpen();
+                  handleConsentManagerOpen();
                 }}
               >
-                Terms of Service & Cookie Policy
+                Cookie Consent
               </a>
             </div>
           </div>
         </div>
       </div>
-      <TermsOfServicePolicy
-        visible={policyOpen}
-        onAccept={handlePolicyAccept}
-        onRefuse={handlePolicyRefuse}
-        onClose={handlePolicyClose}
+      <ConsentManager
+        open={consentManagerOpen}
+        onClose={handleConsentManagerClose}
       />
     </footer>
   );

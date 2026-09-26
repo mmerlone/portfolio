@@ -26,8 +26,14 @@ export interface FooterConfig {
 }
 
 export interface CookieConfig {
-  readonly name: string;
-  readonly expiryDays: number;
+  readonly analytics: {
+    readonly name: string;
+    readonly expiryDays: number;
+  };
+  readonly marketing: {
+    readonly name: string;
+    readonly expiryDays: number;
+  };
 }
 
 export interface AnalyticsConfig {

@@ -3,7 +3,11 @@
 import { useState, type ReactElement } from "react";
 import TermsOfServicePolicy from "./TermsOfServicePolicy";
 import { useIsHydrated } from "@/hooks/useIsHydrated";
-import { setCookie, getCookie } from "@/lib/cookies";
+import {
+  setConsent,
+  hasExplicitConsentDecision,
+  deleteAnalyticsCookies,
+} from "@/lib/cookies";
 import { siteConfig } from "@/config/site";
 
 const TermsOfServiceToast = (): ReactElement | null => {
@@ -11,43 +15,37 @@ const TermsOfServiceToast = (): ReactElement | null => {
   const [closed, setClosed] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
 
-  // Retrieve cookie name and expiry from site config
-  const COOKIE_NAME = siteConfig.cookie.name;
-  const COOKIE_EXPIRY_DAYS = siteConfig.cookie.expiryDays;
+  const ANALYTICS_EXPIRY_DAYS = siteConfig.cookie.analytics.expiryDays;
+  const MARKETING_EXPIRY_DAYS = siteConfig.cookie.marketing.expiryDays;
 
-  // Handler for the toast's Accept button.
-  const handleAccept = (): void => {
-    setCookie(COOKIE_NAME, "true", COOKIE_EXPIRY_DAYS);
+  const handleAcceptAll = (): void => {
+    setConsent("analytics", true, ANALYTICS_EXPIRY_DAYS);
+    setConsent("marketing", true, MARKETING_EXPIRY_DAYS);
     setClosed(true);
   };
 
-  // Handler for the toast's Refuse button.
-  const handleRefuse = (): void => {
-    setCookie(COOKIE_NAME, "false", COOKIE_EXPIRY_DAYS);
-    setClosed(true);
-    // Optionally, add logic here to disable tracking.
-  };
-
-  // Handlers for the policy modal.
-  const handlePolicyAccept = (): void => {
-    setCookie(COOKIE_NAME, "true", COOKIE_EXPIRY_DAYS);
-    setPolicyOpen(false);
+  const handleRefuseAll = (): void => {
+    setConsent("analytics", false, ANALYTICS_EXPIRY_DAYS);
+    setConsent("marketing", false, MARKETING_EXPIRY_DAYS);
+    deleteAnalyticsCookies();
     setClosed(true);
   };
 
-  const handlePolicyRefuse = (): void => {
-    setCookie(COOKIE_NAME, "false", COOKIE_EXPIRY_DAYS);
-    setPolicyOpen(false);
+  const handleAnalyticsOnly = (): void => {
+    setConsent("analytics", true, ANALYTICS_EXPIRY_DAYS);
+    setConsent("marketing", false, MARKETING_EXPIRY_DAYS);
     setClosed(true);
-    // Optionally, add logic here to disable tracking.
   };
 
   if (!isClient) {
     return null;
   }
 
-  const accepted = getCookie(COOKIE_NAME);
-  if (accepted || closed) {
+  const analyticsDecided = hasExplicitConsentDecision("analytics");
+  const marketingDecided = hasExplicitConsentDecision("marketing");
+  const hasExplicitDecision = analyticsDecided || marketingDecided;
+
+  if (hasExplicitDecision || closed) {
     return null;
   }
 
@@ -56,8 +54,7 @@ const TermsOfServiceToast = (): ReactElement | null => {
       <div className="fixed right-4 bottom-4 left-4 z-50 flex flex-col items-center justify-between rounded border border-gray-300 bg-gray-200 p-4 text-gray-900 md:flex-row dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100">
         <p className="mx-4 mb-2 text-sm md:mb-0">
           I use cookies to enhance your experience and track interactions. By
-          clicking <strong>Accept</strong> or <strong>Refuse</strong> you agree
-          to my{" "}
+          clicking <strong>Accept all</strong> you agree to my{" "}
           <button
             type="button"
             onClick={() => {
@@ -69,25 +66,32 @@ const TermsOfServiceToast = (): ReactElement | null => {
           </button>
           .
         </p>
-        <div className="flex space-x-2">
+        <div className="flex flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
           <button
-            onClick={handleAccept}
-            className="rounded bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-800 dark:bg-green-300 dark:text-gray-900 dark:hover:bg-green-200"
+            onClick={handleAcceptAll}
+            className="rounded bg-green-700 px-4 py-2 text-sm text-white hover:bg-green-800 dark:bg-green-300 dark:text-gray-900 dark:hover:bg-green-200 whitespace-nowrap"
           >
-            Accept
+            Accept all
           </button>
           <button
-            onClick={handleRefuse}
-            className="rounded bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-800 dark:bg-red-400 dark:text-gray-900 dark:hover:bg-red-300"
+            onClick={handleAnalyticsOnly}
+            className="rounded bg-blue-700 px-4 py-2 text-sm text-white hover:bg-blue-800 dark:bg-blue-300 dark:text-gray-900 dark:hover:bg-blue-200 whitespace-nowrap"
           >
-            Refuse
+            Analytics only
+          </button>
+          <button
+            onClick={handleRefuseAll}
+            className="rounded bg-red-700 px-4 py-2 text-sm text-white hover:bg-red-800 dark:bg-red-400 dark:text-gray-900 dark:hover:bg-red-300 whitespace-nowrap"
+          >
+            Refuse all
           </button>
         </div>
       </div>
       <TermsOfServicePolicy
         visible={policyOpen}
-        onAccept={handlePolicyAccept}
-        onRefuse={handlePolicyRefuse}
+        onAccept={handleAcceptAll}
+        onRefuse={handleRefuseAll}
+        onAcceptAnalyticsOnly={handleAnalyticsOnly}
         onClose={() => {
           setPolicyOpen(false);
         }}

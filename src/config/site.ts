@@ -63,8 +63,14 @@ export const siteConfig: SiteConfig = {
 
   // Cookie configuration
   cookie: {
-    name: "mmerlone-dev-br-analytics-consent",
-    expiryDays: 365,
+    analytics: {
+      name: "mmerlone-dev-br-analytics-consent",
+      expiryDays: 365,
+    },
+    marketing: {
+      name: "mmerlone-dev-br-marketing-consent",
+      expiryDays: 365,
+    },
   },
 
   // Analytics configuration

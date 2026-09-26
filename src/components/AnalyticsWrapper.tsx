@@ -5,23 +5,24 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { useIsHydrated } from "@/hooks/useIsHydrated";
-import { COOKIE_CHANGE_EVENT, getCookie } from "@/lib/cookies";
+import { COOKIE_CHANGE_EVENT, getConsent } from "@/lib/cookies";
 import { siteConfig } from "@/config/site";
 
 export default function AnalyticsWrapper(): ReactElement | null {
   const hasMounted = useIsHydrated();
-  const [hasConsent, setHasConsent] = useState(false);
+  const [analyticsConsent, setAnalyticsConsent] = useState(false);
+  const [marketingConsent, setMarketingConsent] = useState(false);
 
   const gtmId = siteConfig.analytics?.googleTagManager.id ?? null;
   const gaId = siteConfig.analytics?.googleAnalytics.id ?? null;
   const ahrefsKey = siteConfig.analytics?.ahrefs.key ?? null;
-  const cookieName = siteConfig.cookie.name;
 
   useEffect(() => {
     if (!hasMounted) return;
 
     const updateConsent = (): void => {
-      setHasConsent(getCookie(cookieName) === "true");
+      setAnalyticsConsent(getConsent("analytics"));
+      setMarketingConsent(getConsent("marketing"));
     };
 
     updateConsent();
@@ -29,28 +30,36 @@ export default function AnalyticsWrapper(): ReactElement | null {
     return (): void => {
       window.removeEventListener(COOKIE_CHANGE_EVENT, updateConsent);
     };
-  }, [cookieName, hasMounted]);
+  }, [hasMounted]);
 
-  if (!hasMounted || !hasConsent) {
+  if (!hasMounted) {
     return null;
   }
 
   return (
     <>
-      <Analytics />
-      <SpeedInsights />
-      {gtmId ? (
-        <GoogleTagManager gtmId={gtmId} dataLayerName="dataLayer" />
-      ) : gaId ? (
-        <GoogleAnalytics gaId={gaId} dataLayerName="dataLayer" />
-      ) : null}
-      {ahrefsKey ? (
-        <script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key={ahrefsKey}
-          async
-        />
-      ) : null}
+      {analyticsConsent && (
+        <>
+          <Analytics />
+          <SpeedInsights />
+        </>
+      )}
+      {marketingConsent && (
+        <>
+          {gtmId ? (
+            <GoogleTagManager gtmId={gtmId} dataLayerName="dataLayer" />
+          ) : gaId ? (
+            <GoogleAnalytics gaId={gaId} dataLayerName="dataLayer" />
+          ) : null}
+          {ahrefsKey ? (
+            <script
+              src="https://analytics.ahrefs.com/analytics.js"
+              data-key={ahrefsKey}
+              async
+            />
+          ) : null}
+        </>
+      )}
     </>
   );
 }
