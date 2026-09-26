@@ -40,7 +40,12 @@ describe("/privacy page", () => {
     );
     expect(screen.getAllByText(/Cloudflare/).length).toBeGreaterThan(0);
     expect(screen.queryByText(/the CDN\/WAF in front of this site/)).toBeNull();
-    expect(screen.getByText(new RegExp(siteConfig.cookie.name))).not.toBeNull();
+    expect(
+      screen.getByText(new RegExp(siteConfig.cookie.analytics.name)),
+    ).not.toBeNull();
+    expect(
+      screen.getByText(new RegExp(siteConfig.cookie.marketing.name)),
+    ).not.toBeNull();
   });
 
   it("links the site's public contact email without rendering any secret values", () => {
