@@ -9,6 +9,8 @@ const config: KnipConfig = {
     // Logging infrastructure kept intentionally for future use; not wired up yet.
     "src/lib/logger/**",
     "src/types/logger.types.ts",
+    // Internal utilities in cookies.ts used by exported functions (knip doesn't detect intra-file usage).
+    "src/lib/cookies.ts",
   ],
   ignoreDependencies: [
     // Consumed via CSS `@import`, invisible to static JS/TS analysis.
