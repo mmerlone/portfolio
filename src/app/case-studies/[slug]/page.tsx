@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { type ReactElement } from "react";
+import type { ReactElement } from "react";
 import { ArrowSquareOutIcon, GithubLogoIcon } from "@phosphor-icons/react/ssr";
 import { portfolio } from "@/data/portfolio";
 import {

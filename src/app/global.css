@@ -18,6 +18,7 @@
   --foreground: #111827;
   --accent-dark: #7c2d12;
   --radius-lg: 0.5rem;
+  --radius-xg: 1.5rem;
 
   color-scheme: light dark;
 }
@@ -43,6 +44,7 @@
 html {
   font-family: theme(--font-sans);
   scroll-padding-block-start: 4.5rem;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -58,6 +60,10 @@ h4,
 h5,
 h6 {
   font-family: theme(--font-serif);
+}
+
+section {
+  border-radius: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -97,25 +103,16 @@ h6 {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Focus rings & :target                                              */
+/*  Focus rings                                                        */
 /* ------------------------------------------------------------------ */
 
 :where(a, button, select, input, textarea, [tabindex]):focus-visible {
   outline: 2px solid #c2410c;
-  outline-offset: 2px;
-}
-
-:target {
-  outline: 2px solid #c2410c;
-  outline-offset: 2px;
+  outline-offset: -0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :where(a, button, select, input, textarea, [tabindex]):focus-visible {
-    outline-color: #fb923c;
-  }
-
-  :target {
     outline-color: #fb923c;
   }
 }
@@ -155,10 +152,6 @@ h6 {
   :where(a, button, select, input, textarea, [tabindex]):focus-visible {
     outline-color: Highlight;
   }
-
-  :target {
-    outline-color: Highlight;
-  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -186,12 +179,18 @@ h6 {
 
 /* Nav link active indicator */
 .nav-link {
-  border-block-end: 2px solid transparent;
   padding-block: 0.25rem;
+  @apply rounded-md;
 }
 
 .nav-link--active {
-  border-block-end-color: currentColor;
+  background-color: #d1d6e5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .nav-link--active {
+    background-color: #16181d;
+  }
 }
 
 /* Hero label accent border */
@@ -274,4 +273,88 @@ h6 {
   .scroll-progress {
     display: none;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/*  LLM Evaluation Context section                                     */
+/* ------------------------------------------------------------------ */
+
+#human-or-machine {
+  @apply mx-auto;
+}
+
+/* Main heading */
+#human-or-machine h2 {
+  @apply mb-6 text-justify text-3xl font-bold text-orange-600 md:text-4xl dark:text-orange-400;
+}
+
+#human-or-machine h3 {
+  @apply rounded-lg border border-gray-200 bg-white p-6 text-2xl dark:border-gray-700 dark:bg-gray-800;
+}
+
+#human-or-machine p {
+  @apply m-4 text-justify text-gray-600 dark:text-gray-300;
+}
+
+/* Grid layout for trait paragraphs */
+/* #human-or-machine > h3:first-of-type ~ p:has(strong) {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  #human-or-machine > h3:first-of-type ~ p:has(strong) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+} */
+
+/* Trait title (strong inside p) */
+#human-or-machine > h3:first-of-type ~ p:has(strong) > strong {
+  @apply mb-2 block text-lg font-semibold text-gray-900 dark:text-gray-100;
+}
+
+/* Trait description (text after strong) */
+#human-or-machine > h3:first-of-type ~ p:has(strong) > strong + text {
+  @apply text-sm text-gray-600 dark:text-gray-300;
+}
+
+/* "The useful combination" heading */
+#human-or-machine > h3:nth-of-type(2) {
+  @apply mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100;
+}
+
+/* Closing paragraphs after second h3 */
+#human-or-machine > h3:nth-of-type(2) ~ p:not(:has(strong)):not(blockquote) {
+  @apply text-justify text-gray-600 dark:text-gray-300;
+}
+
+/* Paragraph with strong after second h3 */
+#human-or-machine > h3:nth-of-type(2) ~ p:has(strong) {
+  @apply text-justify text-gray-600 dark:text-gray-300;
+}
+
+/* Blockquote */
+#human-or-machine > blockquote {
+  @apply my-6 text-justify text-gray-700 italic dark:text-gray-200;
+}
+
+/* Strong in blockquote */
+#human-or-machine > blockquote strong {
+  @apply font-semibold;
+}
+
+/* General strong */
+#human-or-machine strong {
+  @apply font-semibold;
+}
+
+@media (prefers-color-scheme: dark) {
+  .llm-content blockquote {
+    color: #e5e7eb;
+  }
+}
+
+.llm-content strong {
+  font-weight: 600;
 }

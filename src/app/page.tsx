@@ -7,6 +7,9 @@ import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
 const HowIBuildSection = NextDynamic(
   () => import("@/components/sections/HowIBuildSection"),
 );
+const HumanOrMachineSection = NextDynamic(
+  () => import("@/components/sections/HumanOrMachineSection"),
+);
 const MyPathSection = NextDynamic(
   () => import("@/components/sections/MyPathSection"),
 );
@@ -38,6 +41,9 @@ export default function Home(): ReactElement {
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
         <HowIBuildSection />
+      </Suspense>
+      <Suspense fallback={<LoadingSection />}>
+        <HumanOrMachineSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
         <MyPathSection />
