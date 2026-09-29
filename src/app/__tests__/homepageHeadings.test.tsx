@@ -75,16 +75,20 @@ describe("homepage heading outline and content", () => {
     }
   });
 
-  it("renders the approved homepage section order with correct headings", () => {
+  it("renders the approved homepage section order with correct headings", async () => {
     render(<Home />);
 
-    const h2s = screen.getAllByRole("heading", { level: 2 });
+    // Wait for all dynamic sections to load
+    await screen.findByText("Human or machine");
+    
+    const h2s = await screen.findAllByRole("heading", { level: 2 });
     const headingTexts = h2s.map((h) => h.textContent);
 
     expect(headingTexts).toEqual([
       "Senior Software Engineer",
       "Selected engineering work",
       "How I build",
+      "Human or machine",
       "My Path",
       "Selected experience",
       "Technical Skills",

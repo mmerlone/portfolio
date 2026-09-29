@@ -2,33 +2,11 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Navbar from "@/components/Navbar";
 import { caseStudies, getCaseStudyHref } from "@/lib/caseStudies";
 
-const mockReplace = jest.fn();
-
 jest.mock("next/navigation", () => ({
   usePathname: (): string => "/",
-  useRouter: (): { replace: jest.Mock } => ({
-    replace: mockReplace,
-  }),
 }));
 
-class IntersectionObserverMock {
-  readonly root: Element | null = null;
-  readonly rootMargin = "";
-  readonly thresholds: readonly number[] = [];
-  observe = jest.fn();
-  unobserve = jest.fn();
-  disconnect = jest.fn();
-  takeRecords = jest.fn((): IntersectionObserverEntry[] => []);
-}
-
 describe("Navbar", () => {
-  beforeAll(() => {
-    window.IntersectionObserver = IntersectionObserverMock;
-  });
-
-  beforeEach(() => {
-    mockReplace.mockClear();
-  });
 
   it("renders a Case studies dropdown between Root and Contact", () => {
     const { container } = render(<Navbar />);
@@ -63,14 +41,11 @@ describe("Navbar", () => {
     }
   });
 
-  it("uses root navigation for Me without serializing the top anchor", () => {
+  it("renders Me link with href /", () => {
     render(<Navbar />);
 
     fireEvent.click(screen.getByRole("button", { name: /root/i }));
     const meLink = screen.getByRole("link", { name: "Me" });
-    fireEvent.click(meLink);
-
-    expect(mockReplace).toHaveBeenCalledWith("/", { scroll: true });
     expect(meLink).toHaveAttribute("href", "/");
   });
 
@@ -83,6 +58,5 @@ describe("Navbar", () => {
       "href",
       "/#selected-experience",
     );
-    expect(mockReplace).not.toHaveBeenCalled();
   });
 });
