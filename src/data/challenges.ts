@@ -48,7 +48,7 @@ export const challenges: PortfolioChallenge[] = [
       "Migrate a significant amount of content from a WordPress platform to Contentstack with minimal data loss and disruption.",
     action: [
       "Developed and executed a comprehensive content migration strategy.",
-      "Utilized scripting (likely JavaScript or PHP) to automate the transfer and transformation of data.",
+      "Utilized TypeScript to automate the transfer and transformation of data.",
       "Ensured data integrity and performed thorough post-migration testing.",
     ],
     result: [

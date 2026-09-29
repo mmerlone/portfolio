@@ -31,6 +31,7 @@ export const siteConfig: SiteConfig = {
           href: "/#selected-engineering-work",
         },
         { label: "How I build", href: "/#how-i-build" },
+        { label: "Human or machine", href: "/#human-or-machine" },
         { label: "My path", href: "/#my-path" },
         {
           label: "Selected experience",

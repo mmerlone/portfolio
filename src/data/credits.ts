@@ -58,13 +58,13 @@ export const creditsData: readonly Credit[] = [
     url: "https://react.dev/",
     icon: "react.svg",
   },
-  {
-    name: "Open Props",
-    description:
-      "A lightweight CSS token library for design system primitives.",
-    url: "https://open-props.style/",
-    icon: "open-props.svg",
-  },
+  // {
+  //   name: "Open Props",
+  //   description:
+  //     "A lightweight CSS token library for design system primitives.",
+  //   url: "https://open-props.style/",
+  //   icon: "open-props.svg",
+  // },
   {
     name: "Phosphor Icons",
     description: "A flexible icon family used throughout this interface.",
