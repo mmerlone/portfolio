@@ -1,3 +1,10 @@
 {
-  "css.customData": [".vscode/tailwind-css-custom-data.json"]
+  "css.customData": [".vscode/tailwind-css-custom-data.json"],
+  "tailwindCSS.experimental.classRegex": [],
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }

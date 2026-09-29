@@ -31,6 +31,15 @@ pnpm dead-code              # Run knip to detect unused files, exports, and depe
 
 ## Coding Standards
 
+### General:
+
+- Warning suppression is never an option.
+- Do not relax or disable validations and rules.
+
+### CSS
+
+- Never use `!important`! Increase the selector's specificity instead.
+
 ### TypeScript
 
 - **NEVER relax or disable eslint rules.** Only eslint allowed changes are to make them stricter.
@@ -43,11 +52,11 @@ pnpm dead-code              # Run knip to detect unused files, exports, and depe
 
 ```typescript
 // CORRECT - context object first, then message
-logger.info({ userId, op: 'updateProfile' }, 'Profile updated')
-logger.error({ error, userId }, 'Operation failed')
+logger.info({ userId, op: "updateProfile" }, "Profile updated");
+logger.error({ error, userId }, "Operation failed");
 
 // WRONG - causes TypeScript errors
-logger.info('Profile updated', { userId })
+logger.info("Profile updated", { userId });
 ```
 
 ### Error Handling
@@ -95,4 +104,5 @@ After completing any coding task:
 - Stage and commit each group separately
 
 ## Servers
+
 - DO NOT start or kill any server! Ask the user to test.

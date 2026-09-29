@@ -231,11 +231,15 @@ export default [
 
   /* Scripts - Node.js environment */
   {
-    files: ["scripts/**/*"],
+    files: ["scripts/**/*.ts"],
     languageOptions: {
       globals: {
         ...globals.node,
         ...globals.es2024,
+      },
+      parserOptions: {
+        project: "./tsconfig.json",
+        tsconfigRootDir: import.meta.dirname,
       },
     },
     rules: {
