@@ -143,19 +143,120 @@ export default async function CaseStudyPage({
         </header>
 
         {caseStudy.heroImage && (
-          <figure className="border-border bg-muted mb-10 overflow-hidden rounded-xl border">
-            <Image
-              src={caseStudy.heroImage.src}
-              alt={caseStudy.heroImage.alt}
-              width={caseStudy.heroImage.width ?? 1600}
-              height={caseStudy.heroImage.height ?? 900}
-              sizes={
-                caseStudy.heroImage.sizes ?? "(max-width: 768px) 100vw, 896px"
-              }
-              className="h-auto w-full object-cover"
-              priority
-            />
-          </figure>
+          <div className="grid gap-8 sm:grid-cols-[minmax(0,1fr)_16rem] mb-10">
+            <figure className="border-border bg-muted overflow-hidden rounded-xl border">
+              <Image
+                src={caseStudy.heroImage.src}
+                alt={caseStudy.heroImage.alt}
+                width={caseStudy.heroImage.width ?? 1600}
+                height={caseStudy.heroImage.height ?? 900}
+                sizes={
+                  caseStudy.heroImage.sizes ?? "(max-width: 768px) 100vw, 896px"
+                }
+                className="h-auto w-full object-cover"
+                priority
+              />
+            </figure>
+
+            <aside className={cn("h-fit", cardVariants({ padding: "sm" }))}>
+              {caseStudy.technologies && caseStudy.technologies.length > 0 && (
+                <section
+                  aria-labelledby="case-study-technologies"
+                  className="mb-6"
+                >
+                  <h2
+                    id="case-study-technologies"
+                    className="text-foreground mb-3 text-base font-semibold"
+                  >
+                    Technologies
+                  </h2>
+                  <ul className="flex flex-wrap gap-2">
+                    {caseStudy.technologies.map((technology) => (
+                      <li key={technology}>
+                        <Badge variant="outline">{technology}</Badge>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              <section aria-labelledby="case-study-links">
+                <h2
+                  id="case-study-links"
+                  className="text-foreground mb-3 text-base font-semibold"
+                >
+                  Links
+                </h2>
+                <ul className="space-y-3">
+                  {links.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="content-action-link text-primary hover:text-primary/80 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+                      >
+                        <LinkIcon icon={link.icon} />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </aside>
+          </div>
+        )}
+
+        {!caseStudy.heroImage && (
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_16rem] mb-10">
+            <div />
+            <aside className={cn("h-fit", cardVariants({ padding: "sm" }))}>
+              {caseStudy.technologies && caseStudy.technologies.length > 0 && (
+                <section
+                  aria-labelledby="case-study-technologies"
+                  className="mb-6"
+                >
+                  <h2
+                    id="case-study-technologies"
+                    className="text-foreground mb-3 text-base font-semibold"
+                  >
+                    Technologies
+                  </h2>
+                  <ul className="flex flex-wrap gap-2">
+                    {caseStudy.technologies.map((technology) => (
+                      <li key={technology}>
+                        <Badge variant="outline">{technology}</Badge>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              <section aria-labelledby="case-study-links">
+                <h2
+                  id="case-study-links"
+                  className="text-foreground mb-3 text-base font-semibold"
+                >
+                  Links
+                </h2>
+                <ul className="space-y-3">
+                  {links.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="content-action-link text-primary hover:text-primary/80 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+                      >
+                        <LinkIcon icon={link.icon} />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </aside>
+          </div>
         )}
 
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_16rem]">
@@ -264,53 +365,6 @@ export default async function CaseStudyPage({
               </section>
             )}
           </div>
-
-          <aside className={cn("h-fit", cardVariants({ padding: "sm" }))}>
-            {caseStudy.technologies && caseStudy.technologies.length > 0 && (
-              <section
-                aria-labelledby="case-study-technologies"
-                className="mb-6"
-              >
-                <h2
-                  id="case-study-technologies"
-                  className="text-foreground mb-3 text-base font-semibold"
-                >
-                  Technologies
-                </h2>
-                <ul className="flex flex-wrap gap-2">
-                  {caseStudy.technologies.map((technology) => (
-                    <li key={technology}>
-                      <Badge variant="outline">{technology}</Badge>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            <section aria-labelledby="case-study-links">
-              <h2
-                id="case-study-links"
-                className="text-foreground mb-3 text-base font-semibold"
-              >
-                Links
-              </h2>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="content-action-link text-primary hover:text-primary/80 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
-                    >
-                      <LinkIcon icon={link.icon} />
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          </aside>
         </div>
       </article>
     </main>
