@@ -66,10 +66,10 @@ export const creditsData: readonly Credit[] = [
   //   icon: "open-props.svg",
   // },
   {
-    name: "Phosphor Icons",
+    name: "Lucide Icons",
     description: "A flexible icon family used throughout this interface.",
-    url: "https://phosphoricons.com/",
-    icon: "phosphor-icons.svg",
+    url: "https://lucide.dev/icons/",
+    icon: "lucide.svg",
   },
   {
     name: "Tailwind CSS",
