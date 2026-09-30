@@ -250,8 +250,8 @@ export const projects: PortfolioWorkItem[] = [
     articleUrl: "https://arctouch.com/blog/headless-cms-migration",
     authorProfileUrl: "https://arctouch.com/blog/author/marcio-merlone",
     description:
-      "An engineering case study documenting the migration of Cirrus Aircraft's WordPress content and forum plugin data into a new Contentstack CMS and a new Discourse platform. I owned the migration script that extracted and transformed WordPress data for both destinations, and I also led Discourse's visual identity customization, heavily tailoring its theme, components, and plugins.",
-    role: "I owned the migration script that extracted and transformed WordPress content and forum plugin data for both the new Contentstack CMS and Discourse platform, and I led Discourse's visual identity customization, heavily tailoring its theme, components, and plugins. I also authored the published engineering case study documenting the approach and outcomes. The new Contentstack content schema was designed and built by the ArcTouch team.",
+      "An engineering case study documenting the migration of Cirrus Aircraft's WordPress content and forum plugin data into a new Contentstack CMS and a new Discourse platform.",
+    role: "I owned the migration script that extracted and transformed WordPress content and forum plugin data for both the new Contentstack CMS and Discourse platform, and I led Discourse's visual identity customization, heavily tailoring its theme, components, and plugins. I also authored the published engineering case study documenting the approach and outcomes.",
     technologies: [
       "WordPress",
       "Discourse",
