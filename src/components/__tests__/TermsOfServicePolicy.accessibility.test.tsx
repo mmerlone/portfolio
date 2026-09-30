@@ -5,12 +5,7 @@ import TermsOfServicePolicy from "@/components/TermsOfServicePolicy";
 describe("TermsOfServicePolicy dialog accessibility", () => {
   it("has no aXe violations when visible", async () => {
     const { container } = render(
-      <TermsOfServicePolicy
-        visible
-        onAccept={jest.fn()}
-        onRefuse={jest.fn()}
-        onClose={jest.fn()}
-      />,
+      <TermsOfServicePolicy open onAccept={jest.fn()} onRefuse={jest.fn()} />,
     );
     const results = await axe(container);
     expect(results).toHaveNoViolations();

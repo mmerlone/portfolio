@@ -5,10 +5,14 @@ import { siteConfig } from "@/config/site";
 import { portfolio } from "@/data/portfolio";
 import Navbar from "@/components/Navbar";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import TermsOfServiceToast from "@/components/TermsOfServiceToast";
+import ConsentBanner from "@/components/ConsentBanner";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/StructuredData";
 import { getSeoKeywords } from "@/lib/seoKeywords";
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 interface LayoutProps {
   children: ReactNode;
@@ -96,7 +100,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps): ReactElement {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={cn("font-sans", inter.variable)}
+      data-scroll-behavior="smooth"
+    >
       <head>
         <link rel="alternate" type="text/markdown" href="/index.md" />
         <link rel="describedby" href="/llms.txt" />
@@ -110,7 +118,7 @@ export default function RootLayout({ children }: LayoutProps): ReactElement {
         <Navbar />
         <div className="pb-28 sm:pb-14">{children}</div>
         <Footer />
-        <TermsOfServiceToast />
+        <ConsentBanner />
       </body>
     </html>
   );

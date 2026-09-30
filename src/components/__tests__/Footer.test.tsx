@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Footer from "@/components/Footer";
 
 describe("Footer", () => {
@@ -9,14 +9,13 @@ describe("Footer", () => {
     expect(privacyLink.getAttribute("href")).toBe("/privacy");
   });
 
-  it("still opens the Terms of Service & Cookie Policy dialog", () => {
+  it("opens the consent manager dialog only after the trigger is activated", () => {
     render(<Footer />);
 
-    expect(
-      screen.getByRole("link", {
-        name: "Terms of Service & Cookie Policy",
-      }),
-    ).not.toBeNull();
     expect(screen.queryByRole("dialog")).toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: "Cookie Consent" }));
+
+    expect(screen.getByRole("dialog")).not.toBeNull();
   });
 });

@@ -51,12 +51,18 @@ export const getConsent = (category: ConsentCategory): boolean => {
   return getCookie(cookieName) === "true";
 };
 
-export const hasExplicitConsentDecision = (category: ConsentCategory): boolean => {
+export const hasExplicitConsentDecision = (
+  category: ConsentCategory,
+): boolean => {
   const cookieName = CONSENT_COOKIE_NAMES[category];
   return getCookie(cookieName) !== null;
 };
 
-export const setConsent = (category: ConsentCategory, granted: boolean, expiryDays: number): void => {
+export const setConsent = (
+  category: ConsentCategory,
+  granted: boolean,
+  expiryDays: number,
+): void => {
   const cookieName = CONSENT_COOKIE_NAMES[category];
   if (granted) {
     setCookie(cookieName, "true", expiryDays);
