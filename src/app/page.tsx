@@ -28,7 +28,7 @@ const ResumeSection = NextDynamic(
 const ScrollToTop = NextDynamic(() => import("@/components/ScrollToTop"));
 
 const LoadingSection = (): ReactElement => (
-  <div className="h-48 w-full border-y border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-950" />
+  <div className="border-border bg-muted h-48 w-full border-y" />
 );
 
 export default function Home(): ReactElement {

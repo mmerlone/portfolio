@@ -23,10 +23,10 @@ export default function PrivacyPage(): ReactElement {
 
   return (
     <main className="container mx-auto px-4 py-24">
-      <h1 className="mb-6 text-center text-4xl font-bold text-gray-900 md:text-5xl dark:text-gray-100">
+      <h1 className="text-foreground mb-6 text-center text-4xl font-bold md:text-5xl">
         Privacy Policy
       </h1>
-      <div className="mx-auto max-w-3xl space-y-8 leading-relaxed text-gray-600 dark:text-gray-300">
+      <div className="text-muted-foreground mx-auto max-w-3xl space-y-8 leading-relaxed">
         <Section>
           <SectionTitle id="privacy-controller">
             Who Controls This Data
@@ -37,7 +37,7 @@ export default function PrivacyPage(): ReactElement {
             question about this policy or the data described below, contact{" "}
             <a
               href={`mailto:${email}`}
-              className="text-orange-600 hover:underline dark:text-orange-400"
+              className="text-primary hover:underline"
             >
               {email}
             </a>
@@ -48,12 +48,13 @@ export default function PrivacyPage(): ReactElement {
         <Section>
           <SectionTitle id="privacy-collection">What We Collect</SectionTitle>
 
-          <h3 className="mt-4 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
+          <h3 className="text-foreground mt-4 mb-2 text-xl font-semibold">
             Analytics & Performance (Legitimate Interest)
           </h3>
           <p className="mb-2">
-            This category is processed under legitimate interest. You may opt out
-            via the consent banner or the &ldquo;Manage Consent&rdquo; link in the footer.
+            This category is processed under legitimate interest. You may opt
+            out via the consent banner or the &ldquo;Manage Consent&rdquo; link
+            in the footer.
           </p>
           <ul className="ml-5 list-disc space-y-1">
             <li>
@@ -70,7 +71,7 @@ export default function PrivacyPage(): ReactElement {
             cross-site tracking.
           </p>
 
-          <h3 className="mt-6 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
+          <h3 className="text-foreground mt-6 mb-2 text-xl font-semibold">
             Marketing & Measurement (Requires Explicit Consent)
           </h3>
           <p className="mb-2">
@@ -80,28 +81,26 @@ export default function PrivacyPage(): ReactElement {
           <ul className="ml-5 list-disc space-y-1">
             <li>
               Google Analytics or Google Tag Manager for detailed visitor
-              statistics, user journeys, events, and conversions
-              (mutually exclusive at runtime; Google Tag Manager takes
-              precedence when both are configured)
+              statistics, user journeys, events, and conversions (mutually
+              exclusive at runtime; Google Tag Manager takes precedence when
+              both are configured)
             </li>
             <li>
               Ahrefs Analytics for organic traffic insights (sets cookies)
             </li>
-            <li>
-              Interaction events (clicks, scrolls, navigation)
-            </li>
+            <li>Interaction events (clicks, scrolls, navigation)</li>
             <li>Session and usage statistics with identifiers</li>
             <li>Device and browser information</li>
           </ul>
 
-          <h3 className="mt-6 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
+          <h3 className="text-foreground mt-6 mb-2 text-xl font-semibold">
             Infrastructure & Security Logging (Always)
           </h3>
           <p>
             Regardless of your cookie choice, this site&apos;s infrastructure
-            providers &#8212; Cloudflare (the DNS authority for this site) and Vercel
-            (the hosting platform and CDN/WAF) &#8212; transiently log request
-            metadata such as IP address and User-Agent for security and
+            providers &#8212; Cloudflare (the DNS authority for this site) and
+            Vercel (the hosting platform and CDN/WAF) &#8212; transiently log
+            request metadata such as IP address and User-Agent for security and
             operational purposes. This is infrastructure/security logging, not
             analytics, and it is not gated by the consent cookie.
           </p>
@@ -110,7 +109,7 @@ export default function PrivacyPage(): ReactElement {
         <Section>
           <SectionTitle id="privacy-retention">Retention</SectionTitle>
 
-          <h3 className="mt-4 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
+          <h3 className="text-foreground mt-4 mb-2 text-xl font-semibold">
             Analytics & Performance Retention
           </h3>
           <ul className="ml-5 list-disc space-y-1">
@@ -123,7 +122,7 @@ export default function PrivacyPage(): ReactElement {
             </li>
           </ul>
 
-          <h3 className="mt-6 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
+          <h3 className="text-foreground mt-6 mb-2 text-xl font-semibold">
             Marketing & Measurement Retention
           </h3>
           <ul className="ml-5 list-disc space-y-1">
@@ -138,7 +137,7 @@ export default function PrivacyPage(): ReactElement {
             </li>
           </ul>
 
-          <h3 className="mt-6 mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
+          <h3 className="text-foreground mt-6 mb-2 text-xl font-semibold">
             Infrastructure Retention
           </h3>
           <ul className="ml-5 list-disc space-y-1">
@@ -148,32 +147,33 @@ export default function PrivacyPage(): ReactElement {
 
         <Section>
           <SectionTitle id="privacy-choices">Your Choices</SectionTitle>
-          <p className="mb-2">
-            Two consent cookies are used:
-          </p>
+          <p className="mb-2">Two consent cookies are used:</p>
           <ul className="ml-5 list-disc space-y-1">
             <li>
-              <code className="rounded bg-gray-100 px-1 dark:bg-gray-950">
+              <code className="bg-muted rounded px-1">
                 {analyticsCookieName}
               </code>{" "}
-              (expires in {analyticsExpiryDays} days) &#8212; Analytics & Performance
+              (expires in {analyticsExpiryDays} days) &#8212; Analytics &
+              Performance
             </li>
             <li>
-              <code className="rounded bg-gray-100 px-1 dark:bg-gray-950">
+              <code className="bg-muted rounded px-1">
                 {marketingCookieName}
               </code>{" "}
-              (expires in {marketingExpiryDays} days) &#8212; Marketing & Measurement
+              (expires in {marketingExpiryDays} days) &#8212; Marketing &
+              Measurement
             </li>
           </ul>
           <p className="mt-2 mb-2">
             Refusing or revoking consent stops new analytics collection
             immediately and deletes the consent cookie(s), but it does not
-            retroactively delete data already collected by third-party providers.
+            retroactively delete data already collected by third-party
+            providers.
           </p>
           <p className="mb-2">
-            This site has no first-party user database &#8212; no accounts, no forms,
-            and no backend datastore &#8212; so there is nothing here to delete beyond
-            the consent cookies, which your own browser controls.
+            This site has no first-party user database &#8212; no accounts, no
+            forms, and no backend datastore &#8212; so there is nothing here to
+            delete beyond the consent cookies, which your own browser controls.
           </p>
           <p>
             For data already collected by Google Analytics, use{" "}
@@ -181,7 +181,7 @@ export default function PrivacyPage(): ReactElement {
               href="https://tools.google.com/dlpage/gaoptout"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-orange-600 hover:underline dark:text-orange-400"
+              className="text-primary hover:underline"
             >
               Google&apos;s Analytics opt-out mechanism
             </a>
@@ -197,7 +197,7 @@ export default function PrivacyPage(): ReactElement {
             Questions about this policy can be sent to{" "}
             <a
               href={`mailto:${email}`}
-              className="text-orange-600 hover:underline dark:text-orange-400"
+              className="text-primary hover:underline"
             >
               {email}
             </a>

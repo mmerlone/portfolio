@@ -3,7 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { ReactElement } from "react";
-import { ArrowSquareOutIcon, GithubLogoIcon } from "@phosphor-icons/react/ssr";
+import { ExternalLink } from "lucide-react";
+import { GithubIcon } from "@/components/ui/SocialIcons";
+import { Badge } from "@/components/ui/badge";
+import { cardVariants } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { portfolio } from "@/data/portfolio";
 import {
   caseStudies,
@@ -90,10 +94,10 @@ function getCaseStudyLinks(caseStudy: PortfolioWorkItem): CaseStudyLink[] {
 
 function LinkIcon({ icon }: Pick<CaseStudyLink, "icon">): ReactElement {
   if (icon === "github") {
-    return <GithubLogoIcon size={16} weight="bold" />;
+    return <GithubIcon size={16} strokeWidth={2.5} />;
   }
 
-  return <ArrowSquareOutIcon size={16} weight="bold" />;
+  return <ExternalLink size={16} strokeWidth={2.5} />;
 }
 
 export default async function CaseStudyPage({
@@ -119,27 +123,27 @@ export default async function CaseStudyPage({
       <article className="mx-auto max-w-4xl">
         <Link
           href="/#selected-engineering-work"
-          className="content-action-link mb-8 inline-flex text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+          className="content-action-link text-muted-foreground hover:text-foreground mb-8 inline-flex text-sm font-medium transition-colors"
         >
           Back to selected engineering work
         </Link>
 
         <header className="mb-10">
-          <p className="mb-3 text-sm font-semibold tracking-wide text-orange-600 uppercase dark:text-orange-400">
+          <p className="text-primary mb-3 text-sm font-semibold tracking-wide uppercase">
             Case study
           </p>
-          <h1 className="balanced-heading mb-5 text-4xl font-bold text-gray-900 md:text-5xl dark:text-gray-100">
+          <h1 className="balanced-heading text-foreground mb-5 text-4xl font-bold md:text-5xl">
             {caseStudy.name}
           </h1>
           {caseStudy.description && (
-            <p className="text-xl leading-relaxed text-gray-600 dark:text-gray-300">
+            <p className="text-muted-foreground text-xl leading-relaxed">
               {caseStudy.description}
             </p>
           )}
         </header>
 
         {caseStudy.heroImage && (
-          <figure className="mb-10 overflow-hidden rounded-xl border border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-950">
+          <figure className="border-border bg-muted mb-10 overflow-hidden rounded-xl border">
             <Image
               src={caseStudy.heroImage.src}
               alt={caseStudy.heroImage.alt}
@@ -160,11 +164,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-role">
                 <h2
                   id="case-study-role"
-                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
+                  className="text-foreground mb-3 text-2xl font-semibold"
                 >
                   Role
                 </h2>
-                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
+                <p className="text-muted-foreground leading-relaxed">
                   {caseStudy.role}
                 </p>
               </section>
@@ -174,11 +178,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-publication">
                 <h2
                   id="case-study-publication"
-                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
+                  className="text-foreground mb-3 text-2xl font-semibold"
                 >
                   Publication
                 </h2>
-                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
+                <p className="text-muted-foreground leading-relaxed">
                   Publisher: {caseStudy.publisher} · Author: {caseStudy.author}
                 </p>
               </section>
@@ -188,11 +192,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-context">
                 <h2
                   id="case-study-context"
-                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
+                  className="text-foreground mb-3 text-2xl font-semibold"
                 >
                   Context
                 </h2>
-                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
+                <p className="text-muted-foreground leading-relaxed">
                   {caseStudy.context}
                 </p>
               </section>
@@ -202,11 +206,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-constraints">
                 <h2
                   id="case-study-constraints"
-                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
+                  className="text-foreground mb-3 text-2xl font-semibold"
                 >
                   Constraints
                 </h2>
-                <ul className="list-disc space-y-2 pl-5 leading-relaxed text-gray-600 dark:text-gray-300">
+                <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
                   {constraints.map((constraint) => (
                     <li key={constraint}>{constraint}</li>
                   ))}
@@ -218,11 +222,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-decisions">
                 <h2
                   id="case-study-decisions"
-                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
+                  className="text-foreground mb-3 text-2xl font-semibold"
                 >
                   Decisions
                 </h2>
-                <ul className="list-disc space-y-2 pl-5 leading-relaxed text-gray-600 dark:text-gray-300">
+                <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
                   {decisions.map((decision) => (
                     <li key={decision}>{decision}</li>
                   ))}
@@ -234,11 +238,11 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-tradeoffs">
                 <h2
                   id="case-study-tradeoffs"
-                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
+                  className="text-foreground mb-3 text-2xl font-semibold"
                 >
                   Trade-offs
                 </h2>
-                <ul className="list-disc space-y-2 pl-5 leading-relaxed text-gray-600 dark:text-gray-300">
+                <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
                   {tradeoffs.map((tradeoff) => (
                     <li key={tradeoff}>{tradeoff}</li>
                   ))}
@@ -250,18 +254,18 @@ export default async function CaseStudyPage({
               <section aria-labelledby="case-study-outcome">
                 <h2
                   id="case-study-outcome"
-                  className="mb-3 text-2xl font-semibold text-gray-900 dark:text-gray-100"
+                  className="text-foreground mb-3 text-2xl font-semibold"
                 >
                   Outcome
                 </h2>
-                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
+                <p className="text-muted-foreground leading-relaxed">
                   {caseStudy.outcome}
                 </p>
               </section>
             )}
           </div>
 
-          <aside className="h-fit rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
+          <aside className={cn("h-fit", cardVariants({ padding: "sm" }))}>
             {caseStudy.technologies && caseStudy.technologies.length > 0 && (
               <section
                 aria-labelledby="case-study-technologies"
@@ -269,17 +273,14 @@ export default async function CaseStudyPage({
               >
                 <h2
                   id="case-study-technologies"
-                  className="mb-3 text-base font-semibold text-gray-900 dark:text-gray-100"
+                  className="text-foreground mb-3 text-base font-semibold"
                 >
                   Technologies
                 </h2>
                 <ul className="flex flex-wrap gap-2">
                   {caseStudy.technologies.map((technology) => (
-                    <li
-                      key={technology}
-                      className="rounded bg-gray-200 px-2 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300"
-                    >
-                      {technology}
+                    <li key={technology}>
+                      <Badge variant="outline">{technology}</Badge>
                     </li>
                   ))}
                 </ul>
@@ -289,7 +290,7 @@ export default async function CaseStudyPage({
             <section aria-labelledby="case-study-links">
               <h2
                 id="case-study-links"
-                className="mb-3 text-base font-semibold text-gray-900 dark:text-gray-100"
+                className="text-foreground mb-3 text-base font-semibold"
               >
                 Links
               </h2>
@@ -300,7 +301,7 @@ export default async function CaseStudyPage({
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="content-action-link inline-flex items-center gap-1.5 text-sm font-medium text-orange-600 transition-colors hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-200"
+                      className="content-action-link text-primary hover:text-primary/80 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
                     >
                       <LinkIcon icon={link.icon} />
                       {link.label}
