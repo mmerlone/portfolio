@@ -100,6 +100,60 @@ function LinkIcon({ icon }: Pick<CaseStudyLink, "icon">): ReactElement {
   return <ExternalLink size={16} strokeWidth={2.5} />;
 }
 
+function CaseStudyMeta({
+  caseStudy,
+  links,
+}: {
+  readonly caseStudy: PortfolioWorkItem;
+  readonly links: readonly CaseStudyLink[];
+}): ReactElement {
+  return (
+    <aside className={cn("h-fit", cardVariants({ padding: "sm" }))}>
+      {caseStudy.technologies && caseStudy.technologies.length > 0 && (
+        <section aria-labelledby="case-study-technologies" className="mb-6">
+          <h2
+            id="case-study-technologies"
+            className="text-foreground mb-3 text-base font-semibold"
+          >
+            Technologies
+          </h2>
+          <ul className="flex flex-wrap gap-2">
+            {caseStudy.technologies.map((technology) => (
+              <li key={technology}>
+                <Badge variant="outline">{technology}</Badge>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <section aria-labelledby="case-study-links">
+        <h2
+          id="case-study-links"
+          className="text-foreground mb-3 text-base font-semibold"
+        >
+          Links
+        </h2>
+        <ul className="space-y-3">
+          {links.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="content-action-link text-primary hover:text-primary/80 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+              >
+                <LinkIcon icon={link.icon} />
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </aside>
+  );
+}
+
 export default async function CaseStudyPage({
   params,
 }: CaseStudyPageProps): Promise<ReactElement> {
@@ -142,8 +196,20 @@ export default async function CaseStudyPage({
           )}
         </header>
 
-        {caseStudy.heroImage && (
-          <div className="grid gap-8 sm:grid-cols-[minmax(0,1fr)_16rem] mb-10">
+        {/*
+          The hero image and the meta card share one grid row. Without a hero
+          image the first cell is an empty placeholder, so the card keeps
+          landing in the second column instead of stretching full width.
+        */}
+        <div
+          className={cn(
+            "mb-10 grid gap-8",
+            caseStudy.heroImage
+              ? "sm:grid-cols-[minmax(0,1fr)_16rem]"
+              : "lg:grid-cols-[minmax(0,1fr)_16rem]",
+          )}
+        >
+          {caseStudy.heroImage && (
             <figure className="border-border bg-muted overflow-hidden rounded-xl border">
               <Image
                 src={caseStudy.heroImage.src}
@@ -157,214 +223,117 @@ export default async function CaseStudyPage({
                 priority
               />
             </figure>
+          )}
 
-            <aside className={cn("h-fit", cardVariants({ padding: "sm" }))}>
-              {caseStudy.technologies && caseStudy.technologies.length > 0 && (
-                <section
-                  aria-labelledby="case-study-technologies"
-                  className="mb-6"
-                >
-                  <h2
-                    id="case-study-technologies"
-                    className="text-foreground mb-3 text-base font-semibold"
-                  >
-                    Technologies
-                  </h2>
-                  <ul className="flex flex-wrap gap-2">
-                    {caseStudy.technologies.map((technology) => (
-                      <li key={technology}>
-                        <Badge variant="outline">{technology}</Badge>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              )}
+          {!caseStudy.heroImage && <div />}
 
-              <section aria-labelledby="case-study-links">
-                <h2
-                  id="case-study-links"
-                  className="text-foreground mb-3 text-base font-semibold"
-                >
-                  Links
-                </h2>
-                <ul className="space-y-3">
-                  {links.map((link) => (
-                    <li key={link.href}>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="content-action-link text-primary hover:text-primary/80 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
-                      >
-                        <LinkIcon icon={link.icon} />
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            </aside>
-          </div>
-        )}
+          <CaseStudyMeta caseStudy={caseStudy} links={links} />
+        </div>
 
-        {!caseStudy.heroImage && (
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_16rem] mb-10">
-            <div />
-            <aside className={cn("h-fit", cardVariants({ padding: "sm" }))}>
-              {caseStudy.technologies && caseStudy.technologies.length > 0 && (
-                <section
-                  aria-labelledby="case-study-technologies"
-                  className="mb-6"
-                >
-                  <h2
-                    id="case-study-technologies"
-                    className="text-foreground mb-3 text-base font-semibold"
-                  >
-                    Technologies
-                  </h2>
-                  <ul className="flex flex-wrap gap-2">
-                    {caseStudy.technologies.map((technology) => (
-                      <li key={technology}>
-                        <Badge variant="outline">{technology}</Badge>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              )}
+        <div className="space-y-10">
+          {caseStudy.role && (
+            <section aria-labelledby="case-study-role">
+              <h2
+                id="case-study-role"
+                className="text-foreground mb-3 text-2xl font-semibold"
+              >
+                Role
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                {caseStudy.role}
+              </p>
+            </section>
+          )}
 
-              <section aria-labelledby="case-study-links">
-                <h2
-                  id="case-study-links"
-                  className="text-foreground mb-3 text-base font-semibold"
-                >
-                  Links
-                </h2>
-                <ul className="space-y-3">
-                  {links.map((link) => (
-                    <li key={link.href}>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="content-action-link text-primary hover:text-primary/80 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
-                      >
-                        <LinkIcon icon={link.icon} />
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            </aside>
-          </div>
-        )}
+          {caseStudy.kind === "external" && (
+            <section aria-labelledby="case-study-publication">
+              <h2
+                id="case-study-publication"
+                className="text-foreground mb-3 text-2xl font-semibold"
+              >
+                Publication
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Publisher: {caseStudy.publisher} · Author: {caseStudy.author}
+              </p>
+            </section>
+          )}
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_16rem]">
-          <div className="space-y-10">
-            {caseStudy.role && (
-              <section aria-labelledby="case-study-role">
-                <h2
-                  id="case-study-role"
-                  className="text-foreground mb-3 text-2xl font-semibold"
-                >
-                  Role
-                </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  {caseStudy.role}
-                </p>
-              </section>
-            )}
+          {caseStudy.kind === "owned" && caseStudy.context && (
+            <section aria-labelledby="case-study-context">
+              <h2
+                id="case-study-context"
+                className="text-foreground mb-3 text-2xl font-semibold"
+              >
+                Context
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                {caseStudy.context}
+              </p>
+            </section>
+          )}
 
-            {caseStudy.kind === "external" && (
-              <section aria-labelledby="case-study-publication">
-                <h2
-                  id="case-study-publication"
-                  className="text-foreground mb-3 text-2xl font-semibold"
-                >
-                  Publication
-                </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  Publisher: {caseStudy.publisher} · Author: {caseStudy.author}
-                </p>
-              </section>
-            )}
+          {constraints.length > 0 && (
+            <section aria-labelledby="case-study-constraints">
+              <h2
+                id="case-study-constraints"
+                className="text-foreground mb-3 text-2xl font-semibold"
+              >
+                Constraints
+              </h2>
+              <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
+                {constraints.map((constraint) => (
+                  <li key={constraint}>{constraint}</li>
+                ))}
+              </ul>
+            </section>
+          )}
 
-            {caseStudy.kind === "owned" && caseStudy.context && (
-              <section aria-labelledby="case-study-context">
-                <h2
-                  id="case-study-context"
-                  className="text-foreground mb-3 text-2xl font-semibold"
-                >
-                  Context
-                </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  {caseStudy.context}
-                </p>
-              </section>
-            )}
+          {decisions.length > 0 && (
+            <section aria-labelledby="case-study-decisions">
+              <h2
+                id="case-study-decisions"
+                className="text-foreground mb-3 text-2xl font-semibold"
+              >
+                Decisions
+              </h2>
+              <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
+                {decisions.map((decision) => (
+                  <li key={decision}>{decision}</li>
+                ))}
+              </ul>
+            </section>
+          )}
 
-            {constraints.length > 0 && (
-              <section aria-labelledby="case-study-constraints">
-                <h2
-                  id="case-study-constraints"
-                  className="text-foreground mb-3 text-2xl font-semibold"
-                >
-                  Constraints
-                </h2>
-                <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
-                  {constraints.map((constraint) => (
-                    <li key={constraint}>{constraint}</li>
-                  ))}
-                </ul>
-              </section>
-            )}
+          {tradeoffs.length > 0 && (
+            <section aria-labelledby="case-study-tradeoffs">
+              <h2
+                id="case-study-tradeoffs"
+                className="text-foreground mb-3 text-2xl font-semibold"
+              >
+                Trade-offs
+              </h2>
+              <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
+                {tradeoffs.map((tradeoff) => (
+                  <li key={tradeoff}>{tradeoff}</li>
+                ))}
+              </ul>
+            </section>
+          )}
 
-            {decisions.length > 0 && (
-              <section aria-labelledby="case-study-decisions">
-                <h2
-                  id="case-study-decisions"
-                  className="text-foreground mb-3 text-2xl font-semibold"
-                >
-                  Decisions
-                </h2>
-                <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
-                  {decisions.map((decision) => (
-                    <li key={decision}>{decision}</li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {tradeoffs.length > 0 && (
-              <section aria-labelledby="case-study-tradeoffs">
-                <h2
-                  id="case-study-tradeoffs"
-                  className="text-foreground mb-3 text-2xl font-semibold"
-                >
-                  Trade-offs
-                </h2>
-                <ul className="text-muted-foreground list-disc space-y-2 pl-5 leading-relaxed">
-                  {tradeoffs.map((tradeoff) => (
-                    <li key={tradeoff}>{tradeoff}</li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {caseStudy.kind === "owned" && caseStudy.outcome && (
-              <section aria-labelledby="case-study-outcome">
-                <h2
-                  id="case-study-outcome"
-                  className="text-foreground mb-3 text-2xl font-semibold"
-                >
-                  Outcome
-                </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  {caseStudy.outcome}
-                </p>
-              </section>
-            )}
-          </div>
+          {caseStudy.kind === "owned" && caseStudy.outcome && (
+            <section aria-labelledby="case-study-outcome">
+              <h2
+                id="case-study-outcome"
+                className="text-foreground mb-3 text-2xl font-semibold"
+              >
+                Outcome
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                {caseStudy.outcome}
+              </p>
+            </section>
+          )}
         </div>
       </article>
     </main>
