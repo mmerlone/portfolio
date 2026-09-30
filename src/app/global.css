@@ -1,6 +1,15 @@
 @import "tailwindcss";
 @import "@fontsource/instrument-serif/400.css";
 @import "./styles/global/carousel-3d.css";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * Dark mode is system-driven: there is no theme toggle and no `.dark` class on
+ * <html>. The variant must therefore resolve to the media query, otherwise every
+ * `dark:` utility in the app silently never matches.
+ */
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
 @theme {
   --font-sans: system-ui, sans-serif;
@@ -15,18 +24,83 @@
  */
 :root {
   --surface: #ffffff;
-  --foreground: #111827;
   --accent-dark: #7c2d12;
   --radius-lg: 0.5rem;
   --radius-xg: 1.5rem;
 
   color-scheme: light dark;
+
+  --background: oklch(0.97 0.005 265);
+
+  --foreground: oklch(0.145 0 0);
+
+  --card: oklch(1 0 0);
+
+  --card-foreground: oklch(0.145 0 0);
+
+  --popover: oklch(1 0 0);
+
+  --popover-foreground: oklch(0.145 0 0);
+
+  /* Brand accent. Previously neutral, which made a default Button render black
+     instead of the portfolio's orange. */
+  --primary: oklch(0.528 0.196 38.6);
+
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(0.95 0.03 70);
+
+  --secondary-foreground: oklch(0.205 0 0);
+
+  --muted: oklch(0.97 0 0);
+
+  --muted-foreground: oklch(0.556 0 0);
+
+  --accent: oklch(0.95 0.03 70);
+
+  --accent-foreground: oklch(0.205 0 0);
+
+  --destructive: oklch(0.577 0.245 27.325);
+
+  --border: oklch(0.922 0 0);
+
+  --input: oklch(0.922 0 0);
+
+  /* Focus ring follows the brand accent so focus indicators stay on-palette. */
+  --ring: oklch(0.646 0.222 41.116);
+
+  --chart-1: oklch(0.87 0 0);
+
+  --chart-2: oklch(0.556 0 0);
+
+  --chart-3: oklch(0.439 0 0);
+
+  --chart-4: oklch(0.371 0 0);
+
+  --chart-5: oklch(0.269 0 0);
+
+  --radius: 0.625rem;
+
+  --sidebar: oklch(0.985 0 0);
+
+  --sidebar-foreground: oklch(0.145 0 0);
+
+  --sidebar-primary: oklch(0.205 0 0);
+
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+
+  --sidebar-accent: oklch(0.97 0 0);
+
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+
+  --sidebar-border: oklch(0.922 0 0);
+
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --surface: #1f2937;
-    --foreground: #ffffff;
     --accent-dark: #f59e42;
   }
 }
@@ -42,16 +116,15 @@
 }
 
 html {
-  font-family: theme(--font-sans);
   scroll-padding-block-start: 4.5rem;
   scroll-behavior: smooth;
 }
 
-body {
-  margin: 0;
-  background: #ebedf3;
-  color: #111827;
-}
+/*
+ * `html` font-family and `body` colors are set once in `@layer base` below via
+ * semantic tokens. Previously duplicated here as hardcoded hex, which fought
+ * the token layer and could not follow the color scheme.
+ */
 
 h1,
 h2,
@@ -66,12 +139,7 @@ section {
   border-radius: 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #0f1117;
-    color: #f3f4f5;
-  }
-}
+/* `body` colors now come from `--background`/`--foreground` in `@layer base`. */
 
 /* ------------------------------------------------------------------ */
 /*  Skip link                                                          */
@@ -83,10 +151,10 @@ section {
   inset-block-start: 0.75rem;
   inset-inline-start: 0.75rem;
   padding: 0.5rem 1rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
   border-radius: 0.5rem;
-  background: #ffffff;
-  color: #111827;
+  background: var(--background);
+  color: var(--foreground);
   transform: translateY(calc(-100% - 1rem));
 }
 
@@ -94,27 +162,13 @@ section {
   transform: translateY(0);
 }
 
-@media (prefers-color-scheme: dark) {
-  .skip-link {
-    border-color: #4b5563;
-    background: #1f2937;
-    color: #f3f4f5;
-  }
-}
-
 /* ------------------------------------------------------------------ */
 /*  Focus rings                                                        */
 /* ------------------------------------------------------------------ */
 
 :where(a, button, select, input, textarea, [tabindex]):focus-visible {
-  outline: 2px solid #c2410c;
+  outline: 2px solid var(--ring);
   outline-offset: -0.5rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :where(a, button, select, input, textarea, [tabindex]):focus-visible {
-    outline-color: #fb923c;
-  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -171,38 +225,10 @@ section {
   }
 }
 
-/* No underline for cta-link elements */
-.cta-link,
-.nav-link {
-  text-decoration: none;
-}
-
-/* Nav link active indicator */
-.nav-link {
-  padding-block: 0.25rem;
-  @apply rounded-md;
-}
-
-.nav-link--active {
-  background-color: #d1d6e5;
-}
-
-@media (prefers-color-scheme: dark) {
-  .nav-link--active {
-    background-color: #16181d;
-  }
-}
-
 /* Hero label accent border */
 .hero-label {
-  border-inline-start: 2px solid #fdba74;
+  border-inline-start: 2px solid var(--primary);
   padding-inline-start: 1rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  .hero-label {
-    border-inline-start-color: #fb923c;
-  }
 }
 
 /* 3D shadow for hero / profile image */
@@ -212,63 +238,15 @@ section {
     inset 2px 2px 7px -2px rgba(0, 0, 0, 0.7);
 }
 
-/* Editorial section title: flex row with centered items */
-.editorial-section-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-/* Project article focus/hover states */
-.project-article:focus-within,
-.experience-entry:focus-within {
-  border-color: #9ca3af;
-  border-inline-start-color: #fdba74;
-  background: #1e293b;
-}
-
-@media (prefers-color-scheme: dark) {
-  .project-article:focus-within,
-  .experience-entry:focus-within {
-    background: #374151;
-  }
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .project-article:hover {
-    border-color: #9ca3af;
-    border-inline-start-color: #fdba74;
-    background: #e5e7eb;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  @media (hover: hover) and (pointer: fine) {
-    .project-article:hover {
-      background: #1e2937;
-    }
-  }
-}
-
 /* ------------------------------------------------------------------ */
 /*  Scroll progress bar                                                */
 /* ------------------------------------------------------------------ */
 
-.scroll-progress {
-  height: 3px;
-  pointer-events: none;
-}
-
-.scroll-progress__fill {
-  height: 100%;
-  width: 100%;
-  transform-origin: left center;
-  transform: scaleX(var(--scroll-progress, 0));
-  will-change: transform;
-  background: linear-gradient(90deg, #f59e0b, #fb923c);
-}
-
+/*
+ * The reading-progress bar is decorative: it is a fixed 3px strip that conveys
+ * no information beyond the scroll position already available from the
+ * scrollbar, so it is hidden outright under reduced motion.
+ */
 @media (prefers-reduced-motion: reduce) {
   .scroll-progress {
     display: none;
@@ -283,60 +261,46 @@ section {
   @apply mx-auto;
 }
 
-/* Main heading */
 #human-or-machine h2 {
-  @apply mb-6 text-justify text-3xl font-bold text-orange-600 md:text-4xl dark:text-orange-400;
+  @apply text-primary mb-6 text-justify text-3xl font-bold md:text-4xl;
 }
 
 #human-or-machine h3 {
-  @apply rounded-lg border border-gray-200 bg-white p-6 text-2xl dark:border-gray-700 dark:bg-gray-800;
+  @apply border-border bg-card rounded-lg border p-6 text-2xl;
 }
 
 #human-or-machine p {
-  @apply m-4 text-justify text-gray-600 dark:text-gray-300;
+  @apply text-muted-foreground m-4 text-justify;
 }
-
-/* Grid layout for trait paragraphs */
-/* #human-or-machine > h3:first-of-type ~ p:has(strong) {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  #human-or-machine > h3:first-of-type ~ p:has(strong) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-} */
 
 /* Trait title (strong inside p) */
 #human-or-machine > h3:first-of-type ~ p:has(strong) > strong {
-  @apply mb-2 block text-lg font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-foreground mb-2 block text-lg font-semibold;
 }
 
 /* Trait description (text after strong) */
 #human-or-machine > h3:first-of-type ~ p:has(strong) > strong + text {
-  @apply text-sm text-gray-600 dark:text-gray-300;
+  @apply text-muted-foreground text-sm;
 }
 
 /* "The useful combination" heading */
 #human-or-machine > h3:nth-of-type(2) {
-  @apply mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-foreground mb-4 text-lg font-semibold;
 }
 
 /* Closing paragraphs after second h3 */
 #human-or-machine > h3:nth-of-type(2) ~ p:not(:has(strong)):not(blockquote) {
-  @apply text-justify text-gray-600 dark:text-gray-300;
+  @apply text-muted-foreground text-justify;
 }
 
 /* Paragraph with strong after second h3 */
 #human-or-machine > h3:nth-of-type(2) ~ p:has(strong) {
-  @apply text-justify text-gray-600 dark:text-gray-300;
+  @apply text-muted-foreground text-justify;
 }
 
 /* Blockquote */
 #human-or-machine > blockquote {
-  @apply my-6 text-justify text-gray-700 italic dark:text-gray-200;
+  @apply text-foreground my-6 text-justify italic;
 }
 
 /* Strong in blockquote */
@@ -349,12 +313,100 @@ section {
   @apply font-semibold;
 }
 
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Dark scheme. This used to be `.dark { ... }`, which never applied because the
+ * app has no theme toggle and nothing sets that class on <html>. As a media
+ * query it is the single source of dark tokens, so every `dark:` utility and
+ * every token-driven surface stays in sync.
+ */
 @media (prefers-color-scheme: dark) {
-  .llm-content blockquote {
-    color: #e5e7eb;
+  :root {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    /* Lightened for contrast against a dark surface. */
+    --primary: oklch(0.758 0.158 60.5);
+    --primary-foreground: oklch(0.145 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.758 0.158 60.5);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
   }
 }
 
-.llm-content strong {
-  font-weight: 600;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
 }
