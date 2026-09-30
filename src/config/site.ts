@@ -23,7 +23,6 @@ export const siteConfig: SiteConfig = {
         {
           label: "Me",
           href: "/",
-          behavior: "home",
         },
         {
           label: "Selected engineering work",

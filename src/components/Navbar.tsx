@@ -1,32 +1,43 @@
 "use client";
 
-import { useEffect, useState, type ReactElement } from "react";
+import { useEffect, useRef, useState, type ReactElement } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { portfolio } from "@/data/portfolio";
-import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 import type {
   NavigationGroupItem,
   NavigationItem,
   NavigationLinkItem,
 } from "@/types/site";
 
-const isNavigationLinkItem = (
-  item: NavigationItem,
-): item is NavigationLinkItem => "href" in item;
-
 const isNavigationGroupItem = (
   item: NavigationItem,
 ): item is NavigationGroupItem => "children" in item;
 
+/**
+ * Tailwind's `md` breakpoint (`--breakpoint-md: 48rem`), which is where the
+ * mobile panel becomes `md:hidden`. Kept in the same `rem` unit so it tracks
+ * the root font size the way the stylesheet does.
+ */
+const DESKTOP_BREAKPOINT_QUERY = "(min-width: 48rem)";
+
 const Navbar = (): ReactElement => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [openGroupId, setOpenGroupId] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const mobileDialogRef = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     const handleScroll = (): void => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -38,168 +49,109 @@ const Navbar = (): ReactElement => {
     };
   }, []);
 
-  useEffect(() => {
-    if (!isOpen && openGroupId === null) return;
-
-    const handlePointerDown = (event: globalThis.PointerEvent): void => {
-      if (!(event.target instanceof Element)) return;
-
-      if (isOpen && !event.target.closest("[data-mobile-navigation]")) {
-        setIsOpen(false);
-      }
-
-      if (openGroupId !== null && !event.target.closest("[data-nav-group]")) {
-        setOpenGroupId(null);
-      }
-    };
-
-    const handleKeyDown = (event: globalThis.KeyboardEvent): void => {
-      if (event.key !== "Escape") return;
-      event.preventDefault();
-      if (openGroupId !== null) {
-        document
-          .getElementById(`primary-navigation-${openGroupId}-trigger`)
-          ?.focus();
-      } else if (isOpen) {
-        document.getElementById("mobile-navigation-trigger")?.focus();
-      }
-      setIsOpen(false);
-      setOpenGroupId(null);
-    };
-
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
-    return (): void => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, openGroupId]);
-
-  const closeNavigationSurfaces = (): void => {
-    setIsOpen(false);
-    setOpenGroupId(null);
-  };
-
-  const clearHash = (): void => {
-    window.history.replaceState(null, "", window.location.pathname + window.location.search);
-  };
-
-  const navClasses =
-    isScrolled || pathname !== "/"
-      ? "bg-gray-200 dark:bg-gray-700"
-      : "transparent";
-
-  const renderNavLink = (
-    item: NavigationLinkItem,
-    extraClassName: string,
-    label: string,
-    onClick?: () => void,
-  ): ReactElement => {
-    const isActive = pathname === item.href;
-    const className = [
-      "nav-link transition-colors duration-500 ease-in-out",
-      extraClassName,
-      isActive
-        ? "nav-link--active text-orange-600 dark:text-orange-400"
-        : "text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400",
-    ]
-      .filter((cls): cls is string => Boolean(cls))
-      .join(" ");
-
-    return (
-      <Link href={item.href} className={className} onClick={onClick}>
-        {label}
-      </Link>
-    );
-  };
-
-  const renderDesktopItem = (item: NavigationItem): ReactElement => {
-    if (isNavigationLinkItem(item)) {
-      return (
-        <li key={item.href}>
-          {renderNavLink(
-            item,
-            "",
-            item.shortLabel ?? item.label,
-            item.behavior === "home" ? clearHash : undefined,
-          )}
-        </li>
-      );
+  /**
+   * The mobile panel is `md:hidden`, but `showModal()` keeps it in the top
+   * layer and leaves the rest of the document inert. Hiding it therefore does
+   * not dismiss it: the close control is unreachable and the page cannot be
+   * used until the viewport shrinks again. Close it when the desktop
+   * breakpoint becomes active.
+   */
+  useEffect((): (() => void) => {
+    // SSR guard: matchMedia not available on server
+    if (typeof window.matchMedia !== "function") {
+      return (): void => {
+        // noop: no listener was registered
+      };
     }
 
-    const isOpenGroup = openGroupId === item.id;
-    const menuId = `primary-navigation-${item.id}`;
+    const desktopQuery = window.matchMedia(DESKTOP_BREAKPOINT_QUERY);
+
+    const closeOnDesktop = (): void => {
+      if (desktopQuery.matches) {
+        mobileDialogRef.current?.close();
+      }
+    };
+
+    desktopQuery.addEventListener("change", closeOnDesktop);
+    return (): void => {
+      desktopQuery.removeEventListener("change", closeOnDesktop);
+    };
+  }, []);
+
+  const isActiveLink = (item: NavigationLinkItem): boolean =>
+    pathname === item.href;
+
+  /**
+   * A section target is same-document navigation whenever we are already on the
+   * home page. A bare fragment is unambiguous there: the browser replaces the
+   * existing one. Routing it as `/#section` instead lets the client router
+   * resolve it against a URL that already carries a fragment, which can
+   * concatenate into `/<old>#<new>`.
+   */
+  const resolveHref = (href: string): string =>
+    pathname === "/" && href.startsWith("/#") ? href.slice(1) : href;
+
+  const renderDesktopGroup = (item: NavigationGroupItem): ReactElement => (
+    <NavigationMenuItem key={item.id}>
+      <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <ul className="grid min-w-56">
+          {item.children.map((child) => (
+            <li key={child.href}>
+              <NavigationMenuLink
+                render={<Link href={resolveHref(child.href)} />}
+                closeOnClick
+                className="w-full"
+              >
+                {child.shortLabel ?? child.label}
+              </NavigationMenuLink>
+            </li>
+          ))}
+        </ul>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  );
+
+  const renderDesktopItem = (item: NavigationItem): ReactElement => {
+    if (isNavigationGroupItem(item)) {
+      return renderDesktopGroup(item);
+    }
 
     return (
-      <li key={item.id} className="relative" data-nav-group={item.id}>
-        <button
-          id={`${menuId}-trigger`}
-          type="button"
-          className={
-            isOpenGroup
-              ? "nav-link nav-link--active flex items-center gap-1 text-orange-600 transition-colors duration-500 ease-in-out dark:text-orange-400"
-              : "nav-link flex items-center gap-1 text-gray-600 transition-colors duration-500 ease-in-out hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400"
-          }
-          aria-haspopup="true"
-          aria-expanded={isOpenGroup}
-          aria-controls={menuId}
-          onClick={() => {
-            setOpenGroupId((currentGroupId) =>
-              currentGroupId === item.id ? null : item.id,
-            );
-          }}
+      <NavigationMenuItem key={item.href}>
+        <NavigationMenuLink
+          render={<Link href={resolveHref(item.href)} />}
+          closeOnClick
+          active={isActiveLink(item)}
+          className={navigationMenuTriggerStyle()}
         >
-          {item.label}
-          <CaretDownIcon
-            size={14}
-            weight="bold"
-            className={
-              isOpenGroup
-                ? "rotate-180 transition-transform duration-200"
-                : "transition-transform duration-200"
-            }
-          />
-        </button>
-        <div
-          id={menuId}
-          hidden={!isOpenGroup}
-          className="absolute top-full left-0 z-40 mt-2 min-w-64 rounded-lg border border-gray-200 bg-white p-2 shadow-lg dark:border-gray-700 dark:bg-gray-800"
-        >
-          <ul className="space-y-1">
-            {item.children.map((child) => (
-              <li key={child.href}>
-                {renderNavLink(
-                  child,
-                  "block rounded-md px-2 py-1",
-                  child.shortLabel ?? child.label,
-                  () => {
-                    setOpenGroupId(null);
-                  },
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </li>
+          {item.shortLabel ?? item.label}
+        </NavigationMenuLink>
+      </NavigationMenuItem>
     );
   };
 
   const renderMobileItem = (item: NavigationItem): ReactElement => {
+    const closeDialog = (): void => {
+      mobileDialogRef.current?.close();
+    };
+
     if (isNavigationGroupItem(item)) {
       return (
         <li key={item.id}>
-          <p className="px-4 text-sm font-semibold text-gray-900 dark:text-gray-100">
+          <p className="text-foreground px-4 text-sm font-semibold">
             {item.label}
           </p>
           <ul className="mt-2 space-y-2">
             {item.children.map((child) => (
               <li key={child.href}>
-                {renderNavLink(
-                  child,
-                  "block px-4",
-                  child.label,
-                  closeNavigationSurfaces,
-                )}
+                <Link
+                  href={resolveHref(child.href)}
+                  onClick={closeDialog}
+                  className="text-muted-foreground hover:text-primary block px-4"
+                >
+                  {child.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -209,81 +161,85 @@ const Navbar = (): ReactElement => {
 
     return (
       <li key={item.href}>
-        {renderNavLink(
-          item,
-          "block px-4",
-          item.label,
-            item.behavior === "home"
-            ? (): void => {
-                clearHash();
-                closeNavigationSurfaces();
-              }
-            : closeNavigationSurfaces,
-        )}
+        <Link
+          href={resolveHref(item.href)}
+          onClick={closeDialog}
+          className="text-muted-foreground hover:text-primary block px-4"
+        >
+          {item.label}
+        </Link>
       </li>
     );
   };
 
   return (
-    <nav
-      aria-label="Primary navigation"
+    <header
       className={
-        "fixed top-0 right-0 left-0 z-50 transition-all duration-300 " +
-        navClasses
+        "fixed top-0 right-0 left-0 z-50 transition-colors duration-300 " +
+        (isScrolled || pathname !== "/"
+          ? "bg-background/90 backdrop-blur-sm"
+          : "bg-transparent")
       }
     >
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          <Link
-            href="/"
-            className="text-xl font-bold text-gray-900 transition-colors hover:text-orange-600 dark:text-gray-100 dark:hover:text-orange-400"
-            onClick={clearHash}
-          >
-            {portfolio.basic.name}
-          </Link>
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <Link
+          href="/"
+          className="text-foreground hover:text-primary text-xl font-bold"
+        >
+          {portfolio.basic.name}
+        </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden items-center space-x-4 md:flex">
+        <NavigationMenu
+          aria-label="Primary"
+          className="hidden md:flex"
+          delay={50}
+          closeDelay={150}
+        >
+          <NavigationMenuList>
             {siteConfig.navigation.map(renderDesktopItem)}
-          </ul>
+          </NavigationMenuList>
+        </NavigationMenu>
 
-          {/* Mobile Menu Button */}
-          <button
-            id="mobile-navigation-trigger"
-            type="button"
-            className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-200 hover:text-orange-600 focus:ring-2 focus:ring-orange-600 focus:outline-none focus:ring-inset md:hidden dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-orange-400 dark:focus:ring-orange-400"
-            onClick={() => {
-              setIsOpen((open) => !open);
-            }}
-            data-mobile-navigation
-            aria-expanded={isOpen}
-            aria-controls="mobile-navigation"
-            aria-label={isOpen ? "Close main menu" : "Open main menu"}
-          >
-            {isOpen ? (
-              <XIcon size={24} weight="bold" />
-            ) : (
-              <ListIcon size={24} weight="bold" />
-            )}
-          </button>
-
-          {/* Mobile menu content */}
-          {isOpen && (
-            <div
-              id="mobile-navigation"
-              role="navigation"
-              aria-label="Mobile navigation"
-              data-mobile-navigation
-              className="fixed top-16 right-0 left-0 z-40 mx-auto max-h-[80vh] w-full max-w-md overflow-y-auto rounded-b-xl border border-gray-200 bg-white md:hidden dark:border-gray-700 dark:bg-gray-800"
-            >
-              <ul className="space-y-4 py-4">
-                {siteConfig.navigation.map(renderMobileItem)}
-              </ul>
-            </div>
-          )}
-        </div>
+        <button
+          type="button"
+          className="text-muted-foreground hover:bg-muted hover:text-primary rounded-md p-2 md:hidden"
+          aria-label="Open main menu"
+          onClick={(): void => {
+            mobileDialogRef.current?.showModal();
+          }}
+        >
+          <Menu size={24} strokeWidth={2.5} />
+        </button>
       </div>
-    </nav>
+
+      {/*
+        Native <dialog> supplies the top-layer placement, Escape handling, focus
+        trap, scroll lock, and focus restoration that the previous hand-rolled
+        mobile menu implemented with document-level listeners.
+      */}
+      <dialog
+        ref={mobileDialogRef}
+        aria-label="Mobile navigation"
+        className="bg-card text-card-foreground m-0 h-full max-h-full w-full max-w-sm border-0 p-0 text-left backdrop:bg-black/60 md:hidden"
+      >
+        <div className="flex h-16 items-center justify-between px-4">
+          <span className="text-xl font-bold">{portfolio.basic.name}</span>
+          <button
+            type="button"
+            className="text-muted-foreground hover:bg-muted rounded-md p-2"
+            aria-label="Close main menu"
+            onClick={(): void => {
+              mobileDialogRef.current?.close();
+            }}
+          >
+            <X size={24} strokeWidth={2.5} />
+          </button>
+        </div>
+        <ul className="space-y-4 overflow-y-auto py-4">
+          {siteConfig.navigation.map(renderMobileItem)}
+        </ul>
+      </dialog>
+    </header>
   );
 };
 

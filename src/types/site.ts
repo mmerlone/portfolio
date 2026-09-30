@@ -7,8 +7,6 @@ export interface NavigationLinkItem {
   /** Shorter text shown in the desktop top-level nav bar; falls back to `label`. */
   readonly shortLabel?: string;
   readonly href: string;
-  /** Special handling for root navigation that must serialize as the root URL. */
-  readonly behavior?: "home";
 }
 
 export interface NavigationGroupItem {
