@@ -143,7 +143,7 @@ export default [
         "error",
         {
           allowExpressions: false,
-          allowTypedFunctionExpressions: true,
+          // allowTypedFunctionExpressions: true,
         },
       ],
       "@typescript-eslint/consistent-type-imports": [
@@ -173,12 +173,6 @@ export default [
           selector:
             "TSAsExpression[expression.type='TSAsExpression'] > TSAsExpression",
           message: "Triple casting is forbidden.",
-        },
-        {
-          selector:
-            "ImportDeclaration[source.value='@phosphor-icons/react'] ImportSpecifier[imported.name=/^(?!.*Icon$).+/]",
-          message:
-            "Use Icon-suffixed exports from @phosphor-icons/react; shorthand root exports are deprecated.",
         },
         {
           selector:

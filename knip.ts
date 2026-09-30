@@ -11,6 +11,8 @@ const config: KnipConfig = {
     "src/types/logger.types.ts",
     // Internal utilities in cookies.ts used by exported functions (knip doesn't detect intra-file usage).
     "src/lib/cookies.ts",
+    // SocialIcons exports used dynamically via getSocialIcon() - knip can't detect dynamic imports.
+    "src/components/ui/SocialIcons.tsx",
   ],
   ignoreDependencies: [
     // Consumed via CSS `@import`, invisible to static JS/TS analysis.

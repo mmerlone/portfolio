@@ -35,6 +35,9 @@ pnpm dead-code              # Run knip to detect unused files, exports, and depe
 
 - Warning suppression is never an option.
 - Do not relax or disable validations and rules.
+- Prefer native and idiomatic HTML+CSS over custom code.
+- Always search for existing utilities before implementing new ones.
+- Always search for DRY opportunities.
 
 ### CSS
 
@@ -105,4 +108,4 @@ After completing any coding task:
 
 ## Servers
 
-- DO NOT start or kill any server! Ask the user to test.
+- The user is always running the dev server, there is no need to start it again.
