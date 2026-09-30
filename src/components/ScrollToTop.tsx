@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, type ReactElement } from "react";
-import { ArrowUpIcon } from "@phosphor-icons/react";
+import { ArrowUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ScrollToTopProps {
   className?: string;
@@ -32,13 +33,14 @@ const ScrollToTop = ({
   if (!isVisible) return null;
 
   return (
-    <button
+    <Button
       onClick={scrollToTop}
-      className={`fixed right-8 bottom-8 z-50 rounded-full bg-orange-700 p-3 text-white hover:bg-orange-800 dark:bg-orange-400 dark:text-gray-900 dark:hover:bg-orange-300 ${className}`}
+      size="icon-lg"
+      className={`fixed right-8 bottom-8 z-50 rounded-full ${className}`}
       aria-label="Scroll to top"
     >
-      <ArrowUpIcon size={20} weight="bold" />
-    </button>
+      <ArrowUp size={20} strokeWidth={2.5} />
+    </Button>
   );
 };
 

@@ -1,5 +1,6 @@
 import { type ReactElement } from "react";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { Card } from "@/components/ui/card";
 import { howIBuildPrinciples } from "@/data/howIBuildPrinciples";
 
 interface HowIBuildSectionProps {
@@ -19,23 +20,20 @@ export default function HowIBuildSection({
         <SectionTitle id="how-i-build-title">How I build</SectionTitle>
         <div className="mx-auto max-w-5xl space-y-8">
           {howIBuildPrinciples.map((principle, idx) => (
-            <article
-              key={idx}
-              className="rounded-lg border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800"
-            >
-              <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            <Card key={idx} padding="lg">
+              <h3 className="text-foreground mb-3 text-xl font-semibold">
                 {principle.title}
               </h3>
-              <p className="mb-4 text-gray-600 dark:text-gray-300">
+              <p className="text-muted-foreground mb-4">
                 {principle.description}
               </p>
               <a
                 href={principle.evidenceHref}
-                className="text-sm font-medium text-orange-600 hover:underline dark:text-orange-400"
+                className="text-primary text-sm font-medium hover:underline"
               >
                 Evidence: {principle.evidence}
               </a>
-            </article>
+            </Card>
           ))}
         </div>
       </div>

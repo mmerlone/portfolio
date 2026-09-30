@@ -12,7 +12,7 @@ export const SectionTitle = ({
   return (
     <h2
       id={id}
-      className="balanced-heading editorial-section-title mb-6 pt-6 text-center text-3xl font-bold text-orange-600 md:text-4xl dark:text-orange-400"
+      className="balanced-heading text-primary mb-6 pt-6 text-center text-3xl font-bold md:text-4xl"
     >
       {children}
     </h2>

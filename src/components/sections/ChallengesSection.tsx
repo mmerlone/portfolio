@@ -22,7 +22,7 @@ export default function SelectedExperienceSection({
         <SectionTitle id="selected-experience-title">
           Selected experience
         </SectionTitle>
-        <p className="mb-8 text-gray-600 dark:text-gray-300">
+        <p className="text-muted-foreground mb-8">
           The contributions detailed below primarily represent work undertaken
           for previous employers and clients. Due to confidentiality agreements
           and intellectual property considerations, specific project details and

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { portfolio } from "@/data/portfolio";
 import { siteConfig } from "@/config/site";
 import { CTA } from "@/components/ui/CTA";
+import { buttonVariants } from "@/components/ui/button";
 
 interface HeroProps {
   className?: string;
@@ -41,18 +42,18 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
         <div className="p-8">
           <h1
             id="hero-title"
-            className="balanced-heading mb-6 text-3xl font-bold text-gray-600 sm:text-4xl md:text-5xl lg:text-6xl dark:text-gray-300"
+            className="balanced-heading text-muted-foreground mb-6 text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl"
           >
             {name}
           </h1>
           <h2
-            className="balanced-heading mb-4 text-xl text-gray-600 sm:text-2xl md:text-3xl lg:text-4xl dark:text-gray-300"
+            className="balanced-heading text-muted-foreground mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl"
             {...(roles ? { title: "Fits: " + roles } : {})}
           >
             {title}
           </h2>
           {label && (
-            <p className="hero-label mb-8 text-lg text-orange-600 sm:text-xl md:text-2xl dark:text-orange-400">
+            <p className="hero-label text-primary mb-8 text-lg sm:text-xl md:text-2xl">
               {label}
             </p>
           )}
@@ -60,11 +61,11 @@ export default function Hero({ className = "" }: HeroProps): ReactElement {
             aria-label="Proof links"
             className="flex flex-wrap justify-center gap-4 lg:justify-start"
           >
-            {proofLinks.map((link, idx) => (
+            {proofLinks.map((link) => (
               <a
-                key={idx}
+                key={link.href}
                 href={link.href}
-                className="cta-link rounded-lg bg-orange-700 px-8 py-3 text-white hover:bg-orange-800 dark:bg-orange-400 dark:text-gray-900 dark:hover:bg-orange-300"
+                className={buttonVariants({ size: "lg" })}
               >
                 {link.label}
               </a>

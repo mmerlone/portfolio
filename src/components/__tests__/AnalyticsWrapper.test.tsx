@@ -1,7 +1,7 @@
 import { act, render, screen } from "@testing-library/react";
 import AnalyticsWrapper from "@/components/AnalyticsWrapper";
 import { creditsData } from "@/data/credits";
-import { setCookie } from "@/lib/cookies";
+import { deleteAllConsentCookies, setConsent } from "@/lib/cookies";
 
 jest.mock("@/hooks/useIsHydrated", () => ({
   useIsHydrated: (): boolean => true,
@@ -10,7 +10,14 @@ jest.mock("@/hooks/useIsHydrated", () => ({
 jest.mock("@/config/site", () => ({
   siteConfig: {
     cookie: {
-      name: "configured-consent",
+      analytics: {
+        name: "mmerlone-dev-br-analytics-consent",
+        expiryDays: 365,
+      },
+      marketing: {
+        name: "mmerlone-dev-br-marketing-consent",
+        expiryDays: 365,
+      },
     },
     analytics: {
       googleAnalytics: { id: "G-test" },
@@ -39,8 +46,9 @@ jest.mock("@next/third-parties/google", () => ({
 
 describe("AnalyticsWrapper", () => {
   beforeEach(() => {
-    document.cookie =
-      "configured-consent=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+    act(() => {
+      deleteAllConsentCookies();
+    });
   });
 
   it("loads one Google integration only after configured consent is accepted", () => {
@@ -50,7 +58,8 @@ describe("AnalyticsWrapper", () => {
     expect(screen.queryByTestId("google-tag-manager")).toBeNull();
 
     act(() => {
-      setCookie("configured-consent", "true", 365);
+      setConsent("analytics", true, 365);
+      setConsent("marketing", true, 365);
     });
 
     expect(screen.getByTestId("vercel-analytics")).not.toBeNull();
@@ -63,7 +72,8 @@ describe("AnalyticsWrapper", () => {
     render(<AnalyticsWrapper />);
 
     act(() => {
-      setCookie("configured-consent", "false", 365);
+      setConsent("analytics", false, 365);
+      setConsent("marketing", false, 365);
     });
 
     expect(screen.queryByTestId("vercel-analytics")).toBeNull();

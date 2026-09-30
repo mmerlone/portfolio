@@ -7,7 +7,7 @@ import {
   Fragment,
   useState,
 } from "react";
-import { CaretRightIcon, CaretLeftIcon } from "@phosphor-icons/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CardCredit } from "./CardCredit";
 import type { Credit } from "@/types/credits";
 
@@ -99,14 +99,14 @@ export const Carousel3D: FC<Carousel3DProps> = ({
           onClick={prev}
           aria-label="Previous credit"
         >
-          <CaretLeftIcon size={32} weight="bold" />
+          <ChevronLeft size={32} strokeWidth={2.5} />
         </button>
         <button
           className="btn pointer text-primary"
           onClick={next}
           aria-label="Next credit"
         >
-          <CaretRightIcon size={32} weight="bold" />
+          <ChevronRight size={32} strokeWidth={2.5} />
         </button>
       </div>
     </>

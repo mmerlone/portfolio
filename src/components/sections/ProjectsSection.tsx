@@ -22,7 +22,7 @@ export default function ProjectsSection({
           Selected engineering work
         </SectionTitle>
         {sectionCopy.projects.introParagraphs.map((paragraph, index) => (
-          <p key={index} className="mb-8 text-gray-600 dark:text-gray-300">
+          <p key={index} className="text-muted-foreground mb-8">
             {paragraph}
           </p>
         ))}

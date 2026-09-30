@@ -22,7 +22,7 @@ const Credits: FC<CreditsProps> = ({
       <div className={`w-full ${className}`}>
         <div className="relative z-10 container flex flex-col items-center justify-center">
           <SectionTitle id="credits-title">Portfolio Credits</SectionTitle>
-          <p className="mx-5 py-5 leading-relaxed text-gray-600 first:mt-0 sm:mx-12 sm:text-center sm:text-balance dark:text-gray-300">
+          <p className="text-muted-foreground mx-5 py-5 leading-relaxed first:mt-0 sm:mx-12 sm:text-center sm:text-balance">
             This portfolio acknowledges the companies and technologies that
             support it, along with the contributions of the people who built
             them.

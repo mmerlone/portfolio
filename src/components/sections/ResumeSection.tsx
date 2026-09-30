@@ -1,7 +1,9 @@
 import { type ReactElement } from "react";
-import { ArrowSquareOutIcon } from "@phosphor-icons/react/ssr";
+import { ExternalLink } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { Card } from "@/components/ui/card";
+import { buttonVariants } from "@/components/ui/button";
 
 interface ResumeSectionProps {
   className?: string;
@@ -21,11 +23,11 @@ export default function ResumeSection({
       <div className="relative z-10 container mx-auto px-4">
         <SectionTitle id="resume-title">Résumé</SectionTitle>
         <div className="mx-auto max-w-3xl">
-          <article className="rounded-lg border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800">
-            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
+          <Card padding="lg">
+            <h3 className="text-foreground mb-4 text-xl font-semibold">
               Download Résumé
             </h3>
-            <p className="mb-6 text-gray-600 dark:text-gray-300">
+            <p className="text-muted-foreground mb-6">
               A concise PDF summary of my professional experience, education,
               and certifications.
             </p>
@@ -35,12 +37,12 @@ export default function ResumeSection({
               download
               rel="noopener noreferrer"
               title="Download the résumé as a PDF document"
-              className="cta-link inline-flex items-center gap-2 rounded-lg bg-orange-700 px-6 py-3 text-white transition-colors duration-200 hover:bg-orange-800 dark:bg-orange-400 dark:text-gray-900 dark:hover:bg-orange-300"
+              className={buttonVariants({ size: "lg" })}
             >
               Download Résumé (PDF)
-              <ArrowSquareOutIcon size={16} weight="bold" aria-hidden="true" />
+              <ExternalLink size={16} strokeWidth={2.5} aria-hidden="true" />
             </a>
-          </article>
+          </Card>
         </div>
       </div>
     </section>

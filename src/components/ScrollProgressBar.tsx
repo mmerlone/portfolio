@@ -1,30 +1,28 @@
 "use client";
 
-import { useEffect, useRef, type ReactElement } from "react";
-interface ScrollProgressBarProps {
-  className?: string;
-}
+import { useEffect, useState, type ReactElement } from "react";
+import { Progress } from "@/components/ui/progress";
 
-const ScrollProgressBar = ({
-  className = "",
-}: ScrollProgressBarProps): ReactElement => {
-  const fillRef = useRef<HTMLDivElement>(null);
+/**
+ * Reading progress across the whole document. The value is rounded to whole
+ * percent and the bar is labelled, so assistive technology reports a stable
+ * figure rather than a value that changes on every scroll frame.
+ */
+const ScrollProgressBar = (): ReactElement => {
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     let frame = 0;
 
     const update = (): void => {
       frame = 0;
-      const element = fillRef.current;
-      if (!element) return;
-
       const scrollable =
         document.documentElement.scrollHeight - window.innerHeight;
       const ratio =
         scrollable > 0
           ? Math.min(1, Math.max(0, window.scrollY / scrollable))
           : 0;
-      element.style.setProperty("--scroll-progress", String(ratio));
+      setValue(Math.round(ratio * 100));
     };
 
     const requestUpdate = (): void => {
@@ -43,12 +41,11 @@ const ScrollProgressBar = ({
   }, []);
 
   return (
-    <div
-      aria-hidden="true"
-      className={`scroll-progress fixed top-0 right-0 left-0 z-[55] ${className}`}
-    >
-      <div ref={fillRef} className="scroll-progress__fill" />
-    </div>
+    <Progress
+      value={value}
+      aria-label="Reading progress"
+      className="scroll-progress [&_[data-slot=progress-indicator]]:bg-primary pointer-events-none fixed top-0 right-0 left-0 z-55 gap-0 [&_[data-slot=progress-track]]:h-[3px]"
+    />
   );
 };
 

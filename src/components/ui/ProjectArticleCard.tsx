@@ -1,7 +1,10 @@
 import { type ReactElement } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { GithubLogoIcon, ArrowSquareOutIcon } from "@phosphor-icons/react/ssr";
+import { ExternalLink } from "lucide-react";
+import { GithubIcon } from "@/components/ui/SocialIcons";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { getCaseStudyHref } from "@/lib/caseStudies";
 import { type PortfolioWorkItem } from "@/types/portfolio";
 
@@ -13,13 +16,13 @@ export function ProjectArticleCard({
   project,
 }: ProjectArticleCardProps): ReactElement {
   return (
-    <article
+    <Card
+      padding="none"
       id={project.kind === "external" ? `${project.slug}-article` : undefined}
-      key={project.name}
-      className="project-article flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
+      className="flex flex-col overflow-hidden"
     >
       {project.heroImage && (
-        <figure className="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-950">
+        <figure className="bg-muted relative aspect-video w-full overflow-hidden">
           <Image
             src={project.heroImage.src}
             alt={project.heroImage.alt}
@@ -34,42 +37,37 @@ export function ProjectArticleCard({
         </figure>
       )}
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
+        <h3 className="text-foreground mb-2 text-xl font-semibold">
           {project.name}
         </h3>
         {project.description && (
-          <p className="mb-4 flex-1 text-sm text-gray-600 dark:text-gray-300">
+          <p className="text-muted-foreground mb-4 flex-1 text-sm">
             {project.description}
           </p>
         )}
         {project.kind === "external" ? (
-          <p className="mb-4 text-xs text-gray-600 dark:text-gray-300">
+          <p className="text-muted-foreground mb-4 text-xs">
             Publisher: {project.publisher} · Author: {project.author}
           </p>
         ) : null}
         {project.role && (
-          <p className="mb-4 text-xs font-medium text-gray-600 dark:text-gray-300">
+          <p className="text-muted-foreground mb-4 text-xs font-medium">
             Role: {project.role}
           </p>
         )}
         {project.technologies && project.technologies.length > 0 && (
           <div className="m-4 flex flex-wrap gap-2">
             {project.technologies.map((tech, idx) => (
-              <span
-                key={`${project.name}-${tech}-${idx}`}
-                className="inline-block rounded bg-gray-200 px-2 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300"
-              >
-                {tech}
-              </span>
+              <Badge key={`${project.name}-${tech}-${idx}`}>{tech}</Badge>
             ))}
           </div>
         )}
         <div className="flex flex-wrap gap-3">
           <Link
             href={getCaseStudyHref(project)}
-            className="content-action-link inline-flex items-center gap-1.5 text-sm font-medium text-orange-600 transition-colors hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-200"
+            className="content-action-link text-primary hover:text-primary/80 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
           >
-            <ArrowSquareOutIcon size={14} weight="bold" />
+            <ExternalLink size={14} strokeWidth={2.5} />
             View case study
           </Link>
           {project.kind === "external" ? (
@@ -78,18 +76,18 @@ export function ProjectArticleCard({
                 href={project.articleUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="content-action-link inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+                className="content-action-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
               >
-                <ArrowSquareOutIcon size={14} weight="bold" />
+                <ExternalLink size={14} strokeWidth={2.5} />
                 Read the article
               </a>
               <a
                 href={project.authorProfileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="content-action-link inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+                className="content-action-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
               >
-                <ArrowSquareOutIcon size={14} weight="bold" />
+                <ExternalLink size={14} strokeWidth={2.5} />
                 ArcTouch author profile
               </a>
             </>
@@ -99,18 +97,18 @@ export function ProjectArticleCard({
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="content-action-link inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+                className="content-action-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
               >
-                <ArrowSquareOutIcon size={14} weight="bold" />
+                <ExternalLink size={14} strokeWidth={2.5} />
                 Live demo
               </a>
               <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="content-action-link inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+                className="content-action-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
               >
-                <GithubLogoIcon size={14} weight="bold" />
+                <GithubIcon size={14} strokeWidth={2.5} />
                 GitHub
               </a>
               {project.npm && (
@@ -118,9 +116,9 @@ export function ProjectArticleCard({
                   href={project.npm}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="content-action-link inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+                  className="content-action-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
                 >
-                  <ArrowSquareOutIcon size={14} weight="bold" />
+                  <ExternalLink size={14} strokeWidth={2.5} />
                   npm
                 </a>
               )}
@@ -130,9 +128,9 @@ export function ProjectArticleCard({
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="content-action-link inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+                  className="content-action-link text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
                 >
-                  <ArrowSquareOutIcon size={14} weight="bold" />
+                  <ExternalLink size={14} strokeWidth={2.5} />
                   {link.label}
                 </a>
               ))}
@@ -140,6 +138,6 @@ export function ProjectArticleCard({
           )}
         </div>
       </div>
-    </article>
+    </Card>
   );
 }

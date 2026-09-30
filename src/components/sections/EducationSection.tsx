@@ -1,7 +1,8 @@
 import { type ReactElement } from "react";
 import { portfolio } from "@/data/portfolio";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { GraduationCapIcon } from "@phosphor-icons/react/ssr";
+import { Card } from "@/components/ui/card";
+import { GraduationCap } from "lucide-react";
 
 interface EducationSectionProps {
   className?: string;
@@ -20,30 +21,26 @@ export default function EducationSection({
         <SectionTitle id="education-title">Education</SectionTitle>
         <div className="mx-auto max-w-3xl space-y-6">
           {portfolio.education.map((entry) => (
-            <article
+            <Card
               key={`${entry.institution}-${entry.years}`}
-              className="flex gap-4 rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
+              className="flex gap-4"
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-200">
-                <GraduationCapIcon size={20} weight="bold" />
+              <div className="bg-secondary text-secondary-foreground flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
+                <GraduationCap size={20} strokeWidth={2.5} />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                <h3 className="text-foreground text-lg font-semibold">
                   {entry.program}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {entry.institution}
-                </p>
-                <p className="text-sm text-orange-600 dark:text-orange-400">
-                  {entry.years}
-                </p>
+                <p className="text-muted-foreground">{entry.institution}</p>
+                <p className="text-primary text-sm">{entry.years}</p>
                 {entry.notes && (
-                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-muted-foreground mt-1 text-sm">
                     {entry.notes}
                   </p>
                 )}
               </div>
-            </article>
+            </Card>
           ))}
         </div>
       </div>
