@@ -8,6 +8,7 @@ import ScrollProgressBar from "@/components/ScrollProgressBar";
 import ConsentBanner from "@/components/ConsentBanner";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/StructuredData";
+import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
 import { getSeoKeywords } from "@/lib/seoKeywords";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -111,6 +112,7 @@ export default function RootLayout({ children }: LayoutProps): ReactElement {
         <StructuredData />
       </head>
       <body>
+        <ClientAnalyticsWrapper />
         <a href="#top" className="skip-link">
           Skip to main content
         </a>

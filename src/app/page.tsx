@@ -1,7 +1,6 @@
 import NextDynamic from "next/dynamic";
 import { Suspense, type ReactElement } from "react";
 import Hero from "@/components/sections/Hero";
-import ClientAnalyticsWrapper from "@/components/ClientAnalyticsWrapper";
 
 // Lazy load complex sections below the fold
 const HowIBuildSection = NextDynamic(
@@ -34,7 +33,6 @@ const LoadingSection = (): ReactElement => (
 export default function Home(): ReactElement {
   return (
     <main id="top">
-      <ClientAnalyticsWrapper />
       <Hero />
       <Suspense fallback={<LoadingSection />}>
         <ProjectsSection />
