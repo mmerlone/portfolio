@@ -2,6 +2,8 @@ import { render } from "@testing-library/react";
 import StructuredData from "@/components/StructuredData";
 import { portfolio } from "@/data/portfolio";
 import { siteConfig } from "@/config/site";
+import { getSkillLabels } from "@/lib/skills";
+import { getSeoKeywords } from "@/lib/seoKeywords";
 
 const pageUrl = `${siteConfig.url}/`;
 
@@ -73,6 +75,15 @@ describe("StructuredData", () => {
       expectedTypes,
     );
     expect(data["@graph"].map((entry) => entry["@id"])).toEqual(expectedIds);
+    expect(data["@graph"][0].knowsAbout).toEqual(getSeoKeywords());
+    for (const [index, project] of portfolio.openSourceProjects.entries()) {
+      const entry = data["@graph"][2 + webpageIds.length + index];
+      const property =
+        project.kind === "external" ? "keywords" : "softwareRequirements";
+      expect(entry[property]).toEqual(
+        getSkillLabels(project.technologies ?? []),
+      );
+    }
     expect(data["@graph"][0]).toEqual(
       expect.objectContaining({
         name: "Marcio Merlone",

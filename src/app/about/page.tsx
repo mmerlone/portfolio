@@ -2,6 +2,7 @@ import { type ReactElement } from "react";
 import type { Metadata } from "next";
 import { MapPin } from "lucide-react";
 import { portfolio } from "@/data/portfolio";
+import { skills } from "@/data/skills";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import Section from "@/components/Section";
 import Credits from "@/components/Credits";
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage(): ReactElement {
-  const { name, label, summary, location, expertise } = portfolio.basic;
+  const { name, label, summary, location } = portfolio.basic;
 
   return (
     <main className="container mx-auto px-4 py-24">
@@ -37,7 +38,7 @@ export default function AboutPage(): ReactElement {
         <Section>
           <SectionTitle id="about-expertise">Areas of Expertise</SectionTitle>
           <ul className="text-muted-foreground space-y-4">
-            {expertise.map((area) => (
+            {skills.hard.expertise.map((area) => (
               <li key={area.name}>
                 <span className="text-foreground font-semibold">
                   {area.name}

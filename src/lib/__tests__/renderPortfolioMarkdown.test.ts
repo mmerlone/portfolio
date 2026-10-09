@@ -1,7 +1,19 @@
 import { renderPortfolioMarkdown } from "@/lib/renderPortfolioMarkdown";
 import { portfolio } from "@/data/portfolio";
+import { skills } from "@/data/skills";
 import { siteConfig } from "@/config/site";
 import type { Portfolio } from "@/types/portfolio";
+import type { SkillData } from "@/types/skills";
+
+const emptySkills: SkillData = {
+  hard: {
+    catalog: skills.hard.catalog,
+    categories: [],
+    clusters: [],
+    expertise: [],
+  },
+  soft: [],
+};
 
 function headingLevels(markdown: string): number[] {
   return markdown
@@ -14,6 +26,52 @@ function headingLevels(markdown: string): number[] {
 describe("renderPortfolioMarkdown", () => {
   const markdown = renderPortfolioMarkdown();
   const lines = markdown.split("\n");
+
+  it("resolves all labels through the injected catalog without global selection leakage", (): void => {
+    const injected: SkillData = {
+      hard: {
+        catalog: { ...skills.hard.catalog, react: { name: "Injected React" } },
+        categories: [
+          {
+            id: "programming",
+            name: "Injected Category",
+            skills: [{ id: "react" }],
+          },
+        ],
+        clusters: [],
+        expertise: [
+          {
+            id: "fixture",
+            name: "Injected Expertise",
+            description: "Fixture narrative.",
+            keywords: [{ id: "react" }],
+          },
+        ],
+      },
+      soft: [],
+    };
+    const fixture: Portfolio = {
+      ...portfolio,
+      professionalExperience: [
+        {
+          company: "Fixture",
+          role: "Engineer",
+          start: "2020",
+          end: "2021",
+          highlights: [],
+          technologies: [{ id: "react" }],
+        },
+      ],
+      challenges: [],
+      openSourceProjects: [],
+    };
+    const output = renderPortfolioMarkdown(fixture, injected);
+    expect(output).toContain("### Injected Category\n\n- Injected React");
+    expect(output).toContain("**Keywords:** Injected React");
+    expect(output).toContain("**Technologies:** Injected React");
+    expect(output).not.toContain("High-Performance UI Architecture");
+    expect(output).not.toContain("[object Object]");
+  });
 
   it("uses the person's name as the sole H1", () => {
     expect(lines[0]).toBe(`# ${portfolio.basic.name}`);
@@ -37,7 +95,7 @@ describe("renderPortfolioMarkdown", () => {
       "## Professional Experience",
       "## Selected experience",
       "## Selected engineering work",
-      "## Technical Skills",
+      "## Hard Skills",
       "## Credentials & Certifications",
       "## Education",
       "## Resume",
@@ -77,21 +135,6 @@ describe("renderPortfolioMarkdown", () => {
         contact: { email: "test@example.com" },
         roleTitles: [],
         summary: "A short summary.",
-        technical: {
-          programming: [],
-          operatingSystems: [],
-          hardware: [],
-          serversAndServices: [],
-          databases: [],
-          platformsAndTools: [],
-          virtualization: [],
-          networkingAndSecurity: [],
-          backupAndRecovery: [],
-          cloud: [],
-          automation: [],
-          other: [],
-        },
-        expertise: [],
       },
       professionalExperience: [],
       openSourceProjects: [],
@@ -100,7 +143,7 @@ describe("renderPortfolioMarkdown", () => {
       certifications: [],
     };
 
-    const output = renderPortfolioMarkdown(minimalPortfolio);
+    const output = renderPortfolioMarkdown(minimalPortfolio, emptySkills);
 
     expect(output.startsWith("# Test Person")).toBe(true);
     expect(output).not.toMatch(/\bundefined\b/);
@@ -108,7 +151,7 @@ describe("renderPortfolioMarkdown", () => {
     expect(output).not.toContain("## Core Expertise");
     expect(output).not.toContain("## Selected experience");
     expect(output).not.toContain("## Selected engineering work");
-    expect(output).not.toContain("## Technical Skills");
+    expect(output).not.toContain("## Hard Skills");
     expect(output).not.toContain("## Credentials & Certifications");
     expect(output).not.toContain("## Education");
     expect(output).not.toContain("## Resume");
@@ -124,21 +167,6 @@ describe("renderPortfolioMarkdown", () => {
         contact: { email: "test@example.com" },
         roleTitles: [],
         summary: "Uses [brackets] and `code` and *stars*.",
-        technical: {
-          programming: [],
-          operatingSystems: [],
-          hardware: [],
-          serversAndServices: [],
-          databases: [],
-          platformsAndTools: [],
-          virtualization: [],
-          networkingAndSecurity: [],
-          backupAndRecovery: [],
-          cloud: [],
-          automation: [],
-          other: [],
-        },
-        expertise: [],
       },
       professionalExperience: [],
       openSourceProjects: [],
@@ -147,7 +175,7 @@ describe("renderPortfolioMarkdown", () => {
       certifications: [],
     };
 
-    const output = renderPortfolioMarkdown(specialPortfolio);
+    const output = renderPortfolioMarkdown(specialPortfolio, emptySkills);
 
     expect(output.startsWith("# A\\*B\\_C")).toBe(true);
     expect(output).toContain("\\[brackets\\] and \\`code\\` and \\*stars\\*");
@@ -162,21 +190,6 @@ describe("renderPortfolioMarkdown", () => {
         contact: { email: "test@example.com" },
         roleTitles: [],
         summary: "A short summary.",
-        technical: {
-          programming: [],
-          operatingSystems: [],
-          hardware: [],
-          serversAndServices: [],
-          databases: [],
-          platformsAndTools: [],
-          virtualization: [],
-          networkingAndSecurity: [],
-          backupAndRecovery: [],
-          cloud: [],
-          automation: [],
-          other: [],
-        },
-        expertise: [],
       },
       professionalExperience: [],
       openSourceProjects: [
@@ -184,7 +197,7 @@ describe("renderPortfolioMarkdown", () => {
           kind: "owned",
           slug: "owned-project",
           name: "Owned Project",
-          technologies: ["TypeScript"],
+          technologies: [{ id: "typescript" }],
           context: "A project context.",
           constraints: ["Keep the API small."],
           decisions: ["Use a typed contract."],
@@ -206,7 +219,7 @@ describe("renderPortfolioMarkdown", () => {
       certifications: [],
     };
 
-    const output = renderPortfolioMarkdown(ownedPortfolio);
+    const output = renderPortfolioMarkdown(ownedPortfolio, emptySkills);
 
     expect(output).toContain("## Selected engineering work");
     expect(output).toContain("### Owned Project");
@@ -234,21 +247,6 @@ describe("renderPortfolioMarkdown", () => {
         contact: { email: "test@example.com" },
         roleTitles: [],
         summary: "A short summary.",
-        technical: {
-          programming: [],
-          operatingSystems: [],
-          hardware: [],
-          serversAndServices: [],
-          databases: [],
-          platformsAndTools: [],
-          virtualization: [],
-          networkingAndSecurity: [],
-          backupAndRecovery: [],
-          cloud: [],
-          automation: [],
-          other: [],
-        },
-        expertise: [],
       },
       professionalExperience: [],
       openSourceProjects: [
@@ -267,7 +265,7 @@ describe("renderPortfolioMarkdown", () => {
       certifications: [],
     };
 
-    const output = renderPortfolioMarkdown(externalPortfolio);
+    const output = renderPortfolioMarkdown(externalPortfolio, emptySkills);
 
     expect(output).toContain(
       "### Headless CMS Migration: From WordPress to Contentstack",

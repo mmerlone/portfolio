@@ -18,8 +18,8 @@ const ChallengesSection = NextDynamic(
 const ProjectsSection = NextDynamic(
   () => import("@/components/sections/ProjectsSection"),
 );
-const TechnicalSkillsSection = NextDynamic(
-  () => import("@/components/sections/TechnicalSkillsSection"),
+const SkillsSection = NextDynamic(
+  () => import("@/components/sections/SkillsSection"),
 );
 const ResumeSection = NextDynamic(
   () => import("@/components/sections/ResumeSection"),
@@ -50,7 +50,7 @@ export default function Home(): ReactElement {
         <ChallengesSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
-        <TechnicalSkillsSection />
+        <SkillsSection />
       </Suspense>
       <Suspense fallback={<LoadingSection />}>
         <ResumeSection />

@@ -100,7 +100,7 @@ describe("homepage heading outline and content", () => {
       "Human or machine",
       "My Path",
       "Selected experience",
-      "Technical Skills",
+      "Skills",
       "Résumé",
     ]);
     expect(screen.queryByText("Portfolio Credits")).not.toBeInTheDocument();

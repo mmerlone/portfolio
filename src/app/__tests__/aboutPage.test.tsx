@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import AboutPage, { metadata } from "@/app/about/page";
 import { portfolio } from "@/data/portfolio";
+import { skills } from "@/data/skills";
 
 describe("/about page", () => {
   it("has a route-specific canonical URL in metadata", () => {
@@ -33,7 +34,7 @@ describe("/about page", () => {
     expect(
       screen.getByText(new RegExp(portfolio.basic.location)),
     ).not.toBeNull();
-    for (const area of portfolio.basic.expertise) {
+    for (const area of skills.hard.expertise) {
       expect(screen.getByText(new RegExp(area.name))).not.toBeNull();
     }
   });

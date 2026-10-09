@@ -8,6 +8,7 @@ import { GithubIcon } from "@/components/ui/SocialIcons";
 import { Badge } from "@/components/ui/badge";
 import { cardVariants } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { getSkillLabels } from "@/lib/skills";
 import { portfolio } from "@/data/portfolio";
 import {
   caseStudies,
@@ -118,7 +119,7 @@ function CaseStudyMeta({
             Technologies
           </h2>
           <ul className="flex flex-wrap gap-2">
-            {caseStudy.technologies.map((technology) => (
+            {getSkillLabels(caseStudy.technologies).map((technology) => (
               <li key={technology}>
                 <Badge variant="outline">{technology}</Badge>
               </li>
