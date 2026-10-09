@@ -1,23 +1,19 @@
-import { portfolio } from "@/data/portfolio";
+import { skills } from "@/data/skills";
+import { getSkillLabels } from "@/lib/skills";
+import type { SkillData } from "@/types/skills";
 
-export function getSeoKeywords(): string[] {
-  const { expertise, technical } = portfolio.basic;
+export function getSeoKeywords(data: SkillData = skills): string[] {
+  const { expertise, categories } = data.hard;
 
   return [
     ...new Set([
-      ...expertise.flatMap(({ name, keywords }) => [name, ...keywords]),
-      ...technical.programming,
-      ...technical.operatingSystems,
-      ...technical.hardware,
-      ...technical.serversAndServices,
-      ...technical.databases,
-      ...technical.platformsAndTools,
-      ...technical.virtualization,
-      ...technical.networkingAndSecurity,
-      ...technical.backupAndRecovery,
-      ...technical.cloud,
-      ...technical.automation,
-      ...technical.other,
+      ...expertise.flatMap(({ name, keywords }): string[] => [
+        name,
+        ...getSkillLabels(keywords, data),
+      ]),
+      ...categories.flatMap((category): string[] =>
+        getSkillLabels(category.skills, data),
+      ),
     ]),
   ];
 }

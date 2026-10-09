@@ -1,5 +1,7 @@
 import { portfolio } from "@/data/portfolio";
+import { skills } from "@/data/skills";
 import { siteConfig } from "@/config/site";
+import { getSkillLabels } from "@/lib/skills";
 import type {
   Portfolio,
   PortfolioChallenge,
@@ -7,24 +9,9 @@ import type {
   PortfolioExperienceItem,
   PortfolioExternalArticle,
   PortfolioProjectItem,
-  PortfolioTechnical,
   PortfolioWorkItem,
 } from "@/types/portfolio";
-
-const TECHNICAL_CATEGORY_LABELS: Record<keyof PortfolioTechnical, string> = {
-  programming: "Programming Languages",
-  operatingSystems: "Operating Systems",
-  hardware: "Hardware",
-  serversAndServices: "Servers & Services",
-  databases: "Databases",
-  platformsAndTools: "Platforms & Tools",
-  virtualization: "Virtualization",
-  networkingAndSecurity: "Networking & Security",
-  backupAndRecovery: "Backup & Recovery",
-  cloud: "Cloud",
-  automation: "Automation",
-  other: "Other",
-};
+import type { SkillData } from "@/types/skills";
 
 // Escapes emphasis/link/table syntax and neutralizes leading list/heading markers.
 function escapeMarkdown(value: string): string {
@@ -57,7 +44,10 @@ function nonEmpty(value: string | null | undefined): value is string {
   return typeof value === "string" && value.trim().length > 0;
 }
 
-function renderExperience(item: PortfolioExperienceItem): string {
+function renderExperience(
+  item: PortfolioExperienceItem,
+  skillData: SkillData,
+): string {
   const lines: string[] = [heading(3, `${item.company} — ${item.role}`)];
 
   const meta = [`${item.start} – ${item.end}`, item.location]
@@ -69,14 +59,17 @@ function renderExperience(item: PortfolioExperienceItem): string {
   if (item.highlights.length > 0) lines.push(bulletList(item.highlights));
   if (item.technologies && item.technologies.length > 0) {
     lines.push(
-      `**Technologies:** ${escapeMarkdown(item.technologies.join(", "))}`,
+      `**Technologies:** ${escapeMarkdown(getSkillLabels(item.technologies, skillData).join(", "))}`,
     );
   }
 
   return lines.join("\n\n");
 }
 
-function renderChallenge(item: PortfolioChallenge): string {
+function renderChallenge(
+  item: PortfolioChallenge,
+  skillData: SkillData,
+): string {
   const lines: string[] = [heading(3, item.title)];
 
   lines.push(`**Company:** ${escapeMarkdown(item.company)}`);
@@ -85,14 +78,17 @@ function renderChallenge(item: PortfolioChallenge): string {
   lines.push(`**Results:**\n\n${bulletList(item.result)}`);
   if (item.technologies.length > 0) {
     lines.push(
-      `**Technologies:** ${escapeMarkdown(item.technologies.join(", "))}`,
+      `**Technologies:** ${escapeMarkdown(getSkillLabels(item.technologies, skillData).join(", "))}`,
     );
   }
 
   return lines.join("\n\n");
 }
 
-function renderProject(item: PortfolioProjectItem): string {
+function renderProject(
+  item: PortfolioProjectItem,
+  skillData: SkillData,
+): string {
   const lines: string[] = [heading(3, item.name)];
 
   if (nonEmpty(item.description)) lines.push(escapeMarkdown(item.description));
@@ -122,14 +118,17 @@ function renderProject(item: PortfolioProjectItem): string {
   }
   if (item.technologies.length > 0) {
     lines.push(
-      `**Technologies:** ${escapeMarkdown(item.technologies.join(", "))}`,
+      `**Technologies:** ${escapeMarkdown(getSkillLabels(item.technologies, skillData).join(", "))}`,
     );
   }
 
   return lines.join("\n\n");
 }
 
-function renderExternalArticle(item: PortfolioExternalArticle): string {
+function renderExternalArticle(
+  item: PortfolioExternalArticle,
+  skillData: SkillData,
+): string {
   const lines: string[] = [heading(3, item.name)];
 
   lines.push(`**Publisher:** ${escapeMarkdown(item.publisher)}`);
@@ -140,16 +139,16 @@ function renderExternalArticle(item: PortfolioExternalArticle): string {
   lines.push(`- ${mdLink("ArcTouch author profile", item.authorProfileUrl)}`);
   if (item.technologies && item.technologies.length > 0) {
     lines.push(
-      `**Technologies:** ${escapeMarkdown(item.technologies.join(", "))}`,
+      `**Technologies:** ${escapeMarkdown(getSkillLabels(item.technologies, skillData).join(", "))}`,
     );
   }
 
   return lines.join("\n\n");
 }
 
-function renderWorkItem(item: PortfolioWorkItem): string {
-  if (item.kind === "external") return renderExternalArticle(item);
-  return renderProject(item);
+function renderWorkItem(item: PortfolioWorkItem, skillData: SkillData): string {
+  if (item.kind === "external") return renderExternalArticle(item, skillData);
+  return renderProject(item, skillData);
 }
 
 function renderEducation(item: PortfolioEducationItem): string {
@@ -162,7 +161,10 @@ function renderEducation(item: PortfolioEducationItem): string {
   return lines.join("\n\n");
 }
 
-export function renderPortfolioMarkdown(data: Portfolio = portfolio): string {
+export function renderPortfolioMarkdown(
+  data: Portfolio = portfolio,
+  skillData: SkillData = skills,
+): string {
   const { basic } = data;
   const sections: string[] = [];
 
@@ -176,16 +178,16 @@ export function renderPortfolioMarkdown(data: Portfolio = portfolio): string {
     [heading(2, "Summary"), escapeMarkdown(basic.summary)].join("\n\n"),
   );
 
-  if (basic.expertise.length > 0) {
+  if (skillData.hard.expertise.length > 0) {
     sections.push(
       [
         heading(2, "Core Expertise"),
-        ...basic.expertise.map((item) =>
+        ...skillData.hard.expertise.map((item) =>
           [
             heading(3, item.name),
             escapeMarkdown(item.description),
             item.keywords.length > 0
-              ? `**Keywords:** ${escapeMarkdown(item.keywords.join(", "))}`
+              ? `**Keywords:** ${escapeMarkdown(getSkillLabels(item.keywords, skillData).join(", "))}`
               : null,
           ]
             .filter((line): line is string => line !== null)
@@ -198,7 +200,9 @@ export function renderPortfolioMarkdown(data: Portfolio = portfolio): string {
   sections.push(
     [
       heading(2, "Professional Experience"),
-      ...data.professionalExperience.map(renderExperience),
+      ...data.professionalExperience.map((item): string =>
+        renderExperience(item, skillData),
+      ),
     ].join("\n\n"),
   );
 
@@ -206,7 +210,9 @@ export function renderPortfolioMarkdown(data: Portfolio = portfolio): string {
     sections.push(
       [
         heading(2, "Selected experience"),
-        ...data.challenges.map(renderChallenge),
+        ...data.challenges.map((item): string =>
+          renderChallenge(item, skillData),
+        ),
       ].join("\n\n"),
     );
   }
@@ -215,24 +221,24 @@ export function renderPortfolioMarkdown(data: Portfolio = portfolio): string {
     sections.push(
       [
         heading(2, "Selected engineering work"),
-        ...data.openSourceProjects.map(renderWorkItem),
+        ...data.openSourceProjects.map((item): string =>
+          renderWorkItem(item, skillData),
+        ),
       ].join("\n\n"),
     );
   }
 
-  const technicalCategories = (
-    Object.keys(TECHNICAL_CATEGORY_LABELS) as (keyof PortfolioTechnical)[]
-  )
-    .map((key) => ({ key, values: basic.technical[key] }))
-    .filter((category) => category.values.length > 0);
-  if (technicalCategories.length > 0) {
+  const hardSkillCategories = skillData.hard.categories.filter(
+    (category): boolean => category.skills.length > 0,
+  );
+  if (hardSkillCategories.length > 0) {
     sections.push(
       [
-        heading(2, "Technical Skills"),
-        ...technicalCategories.map((category) =>
+        heading(2, "Hard Skills"),
+        ...hardSkillCategories.map((category) =>
           [
-            heading(3, TECHNICAL_CATEGORY_LABELS[category.key]),
-            bulletList(category.values),
+            heading(3, category.name),
+            bulletList(getSkillLabels(category.skills, skillData)),
           ].join("\n\n"),
         ),
       ].join("\n\n"),
