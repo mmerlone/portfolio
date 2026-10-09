@@ -42,19 +42,48 @@ export const projects: PortfolioWorkItem[] = [
     demo: "https://mmerlone.dev.br",
     github: "https://github.com/mmerlone/portfolio",
     technologies: [
-      "Next.js 16+",
-      "React 19+",
-      "TypeScript",
-      "Tailwind CSS 4",
-      "Sass",
-      "Open Props",
-      "Lucide Icons",
-      "next-themes",
-      "Pino Logger",
-      "Vercel",
-      "Jest",
-      "jest-axe",
-      "Knip",
+      {
+        id: "next-js",
+        variant: "v16-plus",
+      },
+      {
+        id: "react",
+        variant: "v19-plus",
+      },
+      {
+        id: "typescript",
+      },
+      {
+        id: "tailwind-css",
+        variant: "v4",
+      },
+      {
+        id: "sass",
+      },
+      {
+        id: "open-props",
+      },
+      {
+        id: "lucide-icons",
+      },
+      {
+        id: "next-themes",
+      },
+      {
+        id: "pino-logger",
+      },
+      {
+        id: "vercel",
+      },
+      {
+        id: "jest",
+      },
+      {
+        id: "jest-axe",
+      },
+      {
+        id: "knip",
+      },
     ],
     heroImage: {
       src: "/images/og/og.jpg",
@@ -99,13 +128,28 @@ export const projects: PortfolioWorkItem[] = [
     demo: "https://glb-mesh-inspector.vercel.app/",
     github: "https://github.com/mmerlone/glb-mesh-inspector",
     technologies: [
-      "React 19+",
-      "TypeScript",
-      "Vite",
-      "Three.js",
-      "React Three Fiber",
-      "React Three Drei",
-      "Tailwind CSS",
+      {
+        id: "react",
+        variant: "v19-plus",
+      },
+      {
+        id: "typescript",
+      },
+      {
+        id: "vite",
+      },
+      {
+        id: "three-js",
+      },
+      {
+        id: "react-three-fiber",
+      },
+      {
+        id: "react-three-drei",
+      },
+      {
+        id: "tailwind-css",
+      },
     ],
     heroImage: {
       src: "/images/projects/glb-mesh-inspector.webp",
@@ -150,14 +194,32 @@ export const projects: PortfolioWorkItem[] = [
       },
     ],
     technologies: [
-      "Next.js 15+",
-      "React 19+",
-      "Supabase",
-      "TailwindCSS",
-      "TypeScript",
-      "Material UI",
-      "Sentry",
-      "Pino Logger",
+      {
+        id: "next-js",
+        variant: "v15-plus",
+      },
+      {
+        id: "react",
+        variant: "v19-plus",
+      },
+      {
+        id: "supabase",
+      },
+      {
+        id: "tailwind-css",
+      },
+      {
+        id: "typescript",
+      },
+      {
+        id: "material-ui",
+      },
+      {
+        id: "sentry",
+      },
+      {
+        id: "pino-logger",
+      },
     ],
     heroImage: {
       src: "/images/projects/ywybase.webp",
@@ -195,7 +257,19 @@ export const projects: PortfolioWorkItem[] = [
     demo: "https://ywybase.vercel.app/demos/mui7-phone-number/",
     github: "https://github.com/mmerlone/mui7-phone-number",
     npm: "https://www.npmjs.com/package/@mmerlone/mui7-phone-number",
-    technologies: ["React 19+", "TypeScript", "Material UI v7+"],
+    technologies: [
+      {
+        id: "react",
+        variant: "v19-plus",
+      },
+      {
+        id: "typescript",
+      },
+      {
+        id: "material-ui",
+        variant: "v7-plus",
+      },
+    ],
     heroImage: {
       src: "/images/projects/mui7-phone-number.webp",
       alt: "@mmerlone/mui7-phone-number component demo showing phone number input with country selector",
@@ -232,7 +306,15 @@ export const projects: PortfolioWorkItem[] = [
     demo: "https://ywybase.vercel.app/demos/react-tz-globepicker/",
     github: "https://github.com/mmerlone/react-tz-globepicker",
     npm: "https://www.npmjs.com/package/@mmerlone/react-tz-globepicker",
-    technologies: ["React 19+", "TypeScript"],
+    technologies: [
+      {
+        id: "react",
+        variant: "v19-plus",
+      },
+      {
+        id: "typescript",
+      },
+    ],
     heroImage: {
       src: "/images/projects/react-tz-globepicker.webp",
       alt: "@mmerlone/react-tz-globepicker interactive globe picker with timezone visualization",
@@ -253,12 +335,24 @@ export const projects: PortfolioWorkItem[] = [
       "An engineering case study documenting the migration of Cirrus Aircraft's WordPress content and forum plugin data into a new Contentstack CMS and a new Discourse platform.",
     role: "I owned the migration script that extracted and transformed WordPress content and forum plugin data for both the new Contentstack CMS and Discourse platform, and I led Discourse's visual identity customization, heavily tailoring its theme, components, and plugins. I also authored the published engineering case study documenting the approach and outcomes.",
     technologies: [
-      "WordPress",
-      "Discourse",
-      "Contentstack",
-      "Data Migration",
-      "TypeScript",
-      "PHP",
+      {
+        id: "wordpress",
+      },
+      {
+        id: "discourse",
+      },
+      {
+        id: "contentstack",
+      },
+      {
+        id: "data-migration",
+      },
+      {
+        id: "typescript",
+      },
+      {
+        id: "php",
+      },
     ],
     heroImage: {
       src: "/images/projects/headless-cms-migration.webp",

@@ -11,7 +11,20 @@ export const pathStages: PortfolioPathStage[] = [
       "Supplier negotiations and production line installation",
       "ISO process definition and auditing",
     ],
-    technologies: ["AutoCAD", "Solid Edge", "Industrial Processes", "ISO 9001"],
+    technologies: [
+      {
+        id: "autocad",
+      },
+      {
+        id: "solid-edge",
+      },
+      {
+        id: "industrial-processes",
+      },
+      {
+        id: "iso-9001",
+      },
+    ],
   },
   {
     title: "Infrastructure & Operations",
@@ -26,14 +39,30 @@ export const pathStages: PortfolioPathStage[] = [
       "In-house GitLab migration from legacy CVS",
     ],
     technologies: [
-      "Linux",
-      "Windows Server",
-      "VMware ESXi/vCenter",
-      "Postfix/Dovecot/OpenLDAP",
-      "pfSense/VPN/VLAN",
-      "Zabbix/Graylog",
-      "PHP/MySQL",
-      "GitLab",
+      {
+        id: "linux",
+      },
+      {
+        id: "windows-server",
+      },
+      {
+        id: "vmware-esxi-vcenter",
+      },
+      {
+        id: "postfix-dovecot-openldap",
+      },
+      {
+        id: "pfsense-vpn-vlan",
+      },
+      {
+        id: "zabbix-graylog",
+      },
+      {
+        id: "php-mysql",
+      },
+      {
+        id: "gitlab",
+      },
     ],
   },
   {
@@ -49,18 +78,42 @@ export const pathStages: PortfolioPathStage[] = [
       "Custom themes/integrations for Shopify, Discourse, WordPress",
     ],
     technologies: [
-      "React",
-      "TypeScript",
-      "Node.js",
-      "Docker",
-      "Tailwind",
-      "Material UI",
-      "Shopify Liquid",
-      "WordPress",
-      "Contentstack",
-      "Supabase",
-      "Next.js",
-      "jest/Cypress",
+      {
+        id: "react",
+      },
+      {
+        id: "typescript",
+      },
+      {
+        id: "node-js",
+      },
+      {
+        id: "docker",
+      },
+      {
+        id: "tailwind-css",
+      },
+      {
+        id: "material-ui",
+      },
+      {
+        id: "shopify-liquid",
+      },
+      {
+        id: "wordpress",
+      },
+      {
+        id: "contentstack",
+      },
+      {
+        id: "supabase",
+      },
+      {
+        id: "next-js",
+      },
+      {
+        id: "jest-cypress",
+      },
     ],
   },
 ];

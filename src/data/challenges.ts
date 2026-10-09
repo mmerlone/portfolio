@@ -18,7 +18,23 @@ export const challenges: PortfolioChallenge[] = [
       "Contributed to the development of applications that are more inclusive and accessible to a broader audience, including users with disabilities.",
       "Increased the potential reach and positive impact of the applications by prioritizing accessibility considerations.",
     ],
-    technologies: ["React", "TypeScript", "JavaScript", "HTML", "CSS"],
+    technologies: [
+      {
+        id: "react",
+      },
+      {
+        id: "typescript",
+      },
+      {
+        id: "javascript",
+      },
+      {
+        id: "html",
+      },
+      {
+        id: "css",
+      },
+    ],
   },
   {
     title: "Extending and Customizing Leading SaaS Platforms",
@@ -34,11 +50,21 @@ export const challenges: PortfolioChallenge[] = [
       "Enhanced platform functionality and user engagement through custom extensions.",
     ],
     technologies: [
-      "Shopify Liquid",
-      "Ember",
-      "Handlebars",
-      "JavaScript",
-      "CSS",
+      {
+        id: "shopify-liquid",
+      },
+      {
+        id: "ember",
+      },
+      {
+        id: "handlebars",
+      },
+      {
+        id: "javascript",
+      },
+      {
+        id: "css",
+      },
     ],
   },
   {
@@ -56,11 +82,21 @@ export const challenges: PortfolioChallenge[] = [
       "The migration approach and outcomes are documented in the published ArcTouch engineering case study 'Headless CMS Migration: From WordPress to Contentstack' by Marcio Merlone.",
     ],
     technologies: [
-      "WordPress",
-      "Contentstack",
-      "Data Migration",
-      "JavaScript",
-      "PHP",
+      {
+        id: "wordpress",
+      },
+      {
+        id: "contentstack",
+      },
+      {
+        id: "data-migration",
+      },
+      {
+        id: "javascript",
+      },
+      {
+        id: "php",
+      },
     ],
   },
   {
@@ -78,10 +114,18 @@ export const challenges: PortfolioChallenge[] = [
       "Enhanced security and provided centralized user management for the entire network.",
     ],
     technologies: [
-      "LDAP",
-      "Active Directory",
-      "System Migration",
-      "Authentication Protocols",
+      {
+        id: "ldap",
+      },
+      {
+        id: "active-directory",
+      },
+      {
+        id: "system-migration",
+      },
+      {
+        id: "authentication-protocols",
+      },
     ],
   },
   {
@@ -99,11 +143,21 @@ export const challenges: PortfolioChallenge[] = [
       "Delivered integrated calendaring and contacts with a user experience comparable to cloud-based email before the eventual migration.",
     ],
     technologies: [
-      "Postfix",
-      "Dovecot",
-      "SOGo",
-      "Linux Server Administration",
-      "Email Protocols (IMAP, SMTP, EAS)",
+      {
+        id: "postfix",
+      },
+      {
+        id: "dovecot",
+      },
+      {
+        id: "sogo",
+      },
+      {
+        id: "linux-server-administration",
+      },
+      {
+        id: "email-protocols-imap-smtp-eas",
+      },
     ],
   },
   {
@@ -120,8 +174,12 @@ export const challenges: PortfolioChallenge[] = [
       "Streamlined email management and potentially improved collaboration capabilities.",
     ],
     technologies: [
-      "Microsoft Cloud (Exchange Online)",
-      "Cloud Migration Strategies",
+      {
+        id: "microsoft-cloud-exchange-online",
+      },
+      {
+        id: "cloud-migration-strategies",
+      },
     ],
   },
   {
@@ -139,11 +197,21 @@ export const challenges: PortfolioChallenge[] = [
       "Provided the scalable infrastructure necessary to support over 400% company growth.",
     ],
     technologies: [
-      "VMware ESXi",
-      "vCenter",
-      "Shared SAS Storage",
-      "Windows Server",
-      "Linux",
+      {
+        id: "vmware-esxi",
+      },
+      {
+        id: "vcenter",
+      },
+      {
+        id: "shared-sas-storage",
+      },
+      {
+        id: "windows-server",
+      },
+      {
+        id: "linux",
+      },
     ],
   },
   {
@@ -163,11 +231,21 @@ export const challenges: PortfolioChallenge[] = [
       "Achieved zero security incidents during my tenure.",
     ],
     technologies: [
-      "pfSense",
-      "VLAN",
-      "IPsec VPN",
-      "OpenVPN",
-      "Network Monitoring (Zabbix)",
+      {
+        id: "pfsense",
+      },
+      {
+        id: "vlan",
+      },
+      {
+        id: "ipsec-vpn",
+      },
+      {
+        id: "openvpn",
+      },
+      {
+        id: "network-monitoring-zabbix",
+      },
     ],
   },
   {
@@ -182,7 +260,23 @@ export const challenges: PortfolioChallenge[] = [
     result: [
       "Improved the functionality and user experience for a large user base of the Locaweb platform.",
     ],
-    technologies: ["PERL", "PHP", "MySQL", "CSS", "Smarty"],
+    technologies: [
+      {
+        id: "perl",
+      },
+      {
+        id: "php",
+      },
+      {
+        id: "mysql",
+      },
+      {
+        id: "css",
+      },
+      {
+        id: "smarty",
+      },
+    ],
   },
   {
     title: "Establishing and Managing Core Internet Services",
@@ -196,7 +290,20 @@ export const challenges: PortfolioChallenge[] = [
     result: [
       "Ensured the continuous availability of the company's environmental portal and related internet services for its users.",
     ],
-    technologies: ["Apache", "bind", "postfix", "squid"],
+    technologies: [
+      {
+        id: "apache",
+      },
+      {
+        id: "bind",
+      },
+      {
+        id: "postfix-context",
+      },
+      {
+        id: "squid-context",
+      },
+    ],
   },
   {
     title: "Implementing and Maintaining Internal IT Infrastructure",
@@ -212,6 +319,10 @@ export const challenges: PortfolioChallenge[] = [
       "Provided a foundational IT infrastructure to support the company's operations and facilitate future growth.",
       "Contributed to efforts aimed at achieving ISO quality standards.",
     ],
-    technologies: ["Linux"],
+    technologies: [
+      {
+        id: "linux",
+      },
+    ],
   },
 ];

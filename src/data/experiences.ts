@@ -25,23 +25,57 @@ export const experiences: PortfolioExperienceItem[] = [
       "Leveraged a plethora of AI tools to enhance development efficiency and code quality, while maintaining a strong focus on human-centered design and user experience",
     ],
     technologies: [
-      "React",
-      "TypeScript",
-      "Node.js",
-      "Docker",
-      "Tailwind",
-      "Agile",
-      "Scrum",
-      "jest",
-      "Cypress",
-      "Shopify theme",
-      "Discourse theme",
-      "WordPress theme",
-      "Accessibility",
-      "WCAG",
-      "Responsive Design",
-      "Scalable Applications",
-      "Inclusivity",
+      {
+        id: "react",
+      },
+      {
+        id: "typescript",
+      },
+      {
+        id: "node-js",
+      },
+      {
+        id: "docker",
+      },
+      {
+        id: "tailwind-css",
+      },
+      {
+        id: "agile",
+      },
+      {
+        id: "scrum",
+      },
+      {
+        id: "jest",
+      },
+      {
+        id: "cypress",
+      },
+      {
+        id: "shopify-theme",
+      },
+      {
+        id: "discourse-theme",
+      },
+      {
+        id: "wordpress-theme",
+      },
+      {
+        id: "accessibility",
+      },
+      {
+        id: "wcag",
+      },
+      {
+        id: "responsive-design",
+      },
+      {
+        id: "scalable-applications",
+      },
+      {
+        id: "inclusivity",
+      },
     ],
   },
   {
@@ -66,31 +100,81 @@ export const experiences: PortfolioExperienceItem[] = [
       "Pro-active, providing focused applications for identified needs, including email solutions and tools, communication, secure data sharing, monitoring, storage and everything else related to the business and its growth",
     ],
     technologies: [
-      "PHP",
-      "MySQL",
-      "Linux",
-      "Windows Server",
-      "Self Hosted Email, DNS, MX, etc.",
-      "Virtualization",
-      "Networking",
-      "Security",
-      "Infrastructure",
-      "Project Management",
-      "Team Leadership",
-      "Cost Reduction",
-      "Reliability",
-      "Performance",
-      "Growth",
-      "Uptime",
-      "VPN",
-      "Firewall",
-      "VLAN",
-      "Routing",
-      "Archiving",
-      "Backup",
-      "Open-Source",
-      "ISO 9001",
-      "Auditing",
+      {
+        id: "php",
+      },
+      {
+        id: "mysql",
+      },
+      {
+        id: "linux",
+      },
+      {
+        id: "windows-server",
+      },
+      {
+        id: "self-hosted-email-dns-mx-etc",
+      },
+      {
+        id: "virtualization",
+      },
+      {
+        id: "networking",
+      },
+      {
+        id: "security",
+      },
+      {
+        id: "infrastructure",
+      },
+      {
+        id: "project-management",
+      },
+      {
+        id: "team-leadership",
+      },
+      {
+        id: "cost-reduction",
+      },
+      {
+        id: "reliability",
+      },
+      {
+        id: "performance",
+      },
+      {
+        id: "growth",
+      },
+      {
+        id: "uptime",
+      },
+      {
+        id: "vpn",
+      },
+      {
+        id: "firewall",
+      },
+      {
+        id: "vlan",
+      },
+      {
+        id: "routing-context",
+      },
+      {
+        id: "archiving",
+      },
+      {
+        id: "backup",
+      },
+      {
+        id: "open-source",
+      },
+      {
+        id: "iso-9001",
+      },
+      {
+        id: "auditing",
+      },
     ],
   },
   {
@@ -103,7 +187,17 @@ export const experiences: PortfolioExperienceItem[] = [
       "Full-stack PHP development using Smarty templates, JavaScript, and Ajax",
       "Contributed to an in-house PHP framework using OO and MVC patterns",
     ],
-    technologies: ["PHP", "MySQL", "Linux"],
+    technologies: [
+      {
+        id: "php",
+      },
+      {
+        id: "mysql",
+      },
+      {
+        id: "linux",
+      },
+    ],
   },
   {
     company: "AmbienteBrasil",
@@ -118,12 +212,24 @@ export const experiences: PortfolioExperienceItem[] = [
       "Acted as full-stack PHP developer and product owner; managed long-distance wireless network",
     ],
     technologies: [
-      "PHP",
-      "MySQL",
-      "Linux",
-      "Proxy",
-      "Firewall",
-      "Wireless Networking",
+      {
+        id: "php",
+      },
+      {
+        id: "mysql",
+      },
+      {
+        id: "linux",
+      },
+      {
+        id: "proxy",
+      },
+      {
+        id: "firewall",
+      },
+      {
+        id: "wireless-networking",
+      },
     ],
   },
   {
@@ -138,7 +244,20 @@ export const experiences: PortfolioExperienceItem[] = [
       "Developed and maintained user modules for customer admin portal and webmail",
       "Worked with Perl and PHP using MySQL and Smarty templates",
     ],
-    technologies: ["Perl", "PHP", "MySQL", "Smarty"],
+    technologies: [
+      {
+        id: "perl",
+      },
+      {
+        id: "php",
+      },
+      {
+        id: "mysql",
+      },
+      {
+        id: "smarty",
+      },
+    ],
   },
   {
     company: "Dialdata Ltda",
@@ -154,14 +273,30 @@ export const experiences: PortfolioExperienceItem[] = [
       "Provided Level 3 support and designed resilient mail server clusters (Postfix + OpenLDAP) with load balancing",
     ],
     technologies: [
-      "Solaris",
-      "FreeBSD",
-      "Linux",
-      "Windows 2000",
-      "Postfix",
-      "OpenLDAP",
-      "sendmail",
-      "qmail",
+      {
+        id: "solaris",
+      },
+      {
+        id: "freebsd",
+      },
+      {
+        id: "linux",
+      },
+      {
+        id: "windows-2000",
+      },
+      {
+        id: "postfix",
+      },
+      {
+        id: "openldap",
+      },
+      {
+        id: "sendmail",
+      },
+      {
+        id: "qmail",
+      },
     ],
   },
   {
@@ -177,7 +312,23 @@ export const experiences: PortfolioExperienceItem[] = [
       "Implemented dial-up/ISDN connectivity and Squid proxy",
       "Defined systems/processes for ISO compliance and conducted training and audits",
     ],
-    technologies: ["Linux", "Structured Cabling", "ISDN", "Squid", "Samba"],
+    technologies: [
+      {
+        id: "linux",
+      },
+      {
+        id: "structured-cabling",
+      },
+      {
+        id: "isdn",
+      },
+      {
+        id: "squid",
+      },
+      {
+        id: "samba",
+      },
+    ],
   },
   {
     company: "Visywork e-Business System",
@@ -202,7 +353,14 @@ export const experiences: PortfolioExperienceItem[] = [
       "Managed supplier negotiations, coordinated production line installation",
       "Performed 2D/3D design of mechanical tools and equipment using AutoCAD and Solid Edge",
     ],
-    technologies: ["AutoCAD", "Solid Edge"],
+    technologies: [
+      {
+        id: "autocad",
+      },
+      {
+        id: "solid-edge",
+      },
+    ],
   },
   {
     company: "PBN Indústria e Comércio.",
@@ -218,6 +376,16 @@ export const experiences: PortfolioExperienceItem[] = [
       "Managed supplier negotiations, coordinated production line installation",
       "Performed 2D/3D hand design of mechanical tools and equipment using AutoCAD and Solid Edge",
     ],
-    technologies: ["Physical clipboard and paper", "Ink pen", "technographer"],
+    technologies: [
+      {
+        id: "physical-clipboard-and-paper",
+      },
+      {
+        id: "ink-pen",
+      },
+      {
+        id: "technographer",
+      },
+    ],
   },
 ];
