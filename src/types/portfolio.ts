@@ -1,3 +1,5 @@
+import type { SkillReference } from "@/types/skills";
+
 /**
  * Contact information for a portfolio owner.
  */
@@ -8,20 +10,6 @@ interface PortfolioContact {
   readonly linkedin?: string;
   /** Optional personal website URL */
   readonly website?: string;
-}
-
-/**
- * High level expertise summary.
- */
-interface PortfolioExpertise {
-  /** Name of the expertise area */
-  readonly name: string;
-  /** Short list of core expertise areas */
-  readonly core?: string[];
-  /** Expertise description */
-  readonly description: string;
-  /** Optional keywords for search or filtering */
-  readonly keywords: string[];
 }
 
 /**
@@ -43,7 +31,7 @@ export interface PortfolioExperienceItem {
   /** Notable achievements or responsibilities */
   readonly highlights: string[];
   /** Technologies used in the project */
-  readonly technologies?: string[];
+  readonly technologies?: readonly SkillReference[];
   /** Optional image URL for the company or project logo in the assets folder */
   readonly logo?: string;
 }
@@ -73,36 +61,6 @@ export interface PortfolioLanguageItem {
 }
 
 /**
- * Detailed technical expertise grouped by area.
- */
-export interface PortfolioTechnical {
-  /** Programming languages, frameworks and libraries */
-  readonly programming: string[];
-  /** Operating systems */
-  readonly operatingSystems: string[];
-  /** Hardware */
-  readonly hardware: string[];
-  /** Servers, services and monitoring tools */
-  readonly serversAndServices: string[];
-  /** Database technologies */
-  readonly databases: string[];
-  /** Platforms and tooling */
-  readonly platformsAndTools: string[];
-  /** Virtualization platforms */
-  readonly virtualization: string[];
-  /** Networking and security topics */
-  readonly networkingAndSecurity: string[];
-  /** Backup and recovery tools/strategies */
-  readonly backupAndRecovery: string[];
-  /** Cloud platforms or migration experience */
-  readonly cloud: string[];
-  /** Automation tooling and scripts */
-  readonly automation: string[];
-  /** Miscellaneous useful knowledge */
-  readonly other: string[];
-}
-
-/**
  * Basic personal and professional information.
  */
 export interface PortfolioBasic {
@@ -120,10 +78,6 @@ export interface PortfolioBasic {
   readonly summary: string;
   /** Optional profile / personality note */
   readonly profile?: string;
-  /** Detailed technical expertise */
-  readonly technical: PortfolioTechnical;
-  /** Expertise information */
-  readonly expertise: PortfolioExpertise[];
   /** Optional relative link to resume */
   readonly resume?: string;
   /** Social media links */
@@ -153,7 +107,7 @@ export interface PortfolioProjectItem {
   /** Optional project description */
   readonly description?: string;
   /** Technologies used in the project */
-  readonly technologies: string[];
+  readonly technologies: readonly SkillReference[];
   /** Link to project's demo */
   readonly demo: string;
   /** Link to project's source code */
@@ -204,7 +158,7 @@ export interface PortfolioExternalArticle {
   /** Approved personal-role wording for the published work */
   readonly role?: string;
   /** Technologies or topics covered by the article */
-  readonly technologies?: readonly string[];
+  readonly technologies?: readonly SkillReference[];
   /** Optional image URL for the article in the assets folder */
   readonly image?: string;
   /** Optional hero image for the case study page. */
@@ -245,7 +199,7 @@ export interface PortfolioChallenge {
   /** List of results or impact achieved */
   readonly result: string[];
   /** Technologies used during the resolution */
-  readonly technologies: string[];
+  readonly technologies: readonly SkillReference[];
 }
 
 /**
@@ -261,7 +215,7 @@ export interface PortfolioPathStage {
   /** Notable achievements or responsibilities during the stage */
   readonly highlights: string[];
   /** Technologies or tools used during the stage */
-  readonly technologies: string[];
+  readonly technologies: readonly SkillReference[];
 }
 
 /**
