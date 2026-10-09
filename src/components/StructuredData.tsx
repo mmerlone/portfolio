@@ -2,6 +2,7 @@ import { type ReactElement } from "react";
 import { siteConfig } from "@/config/site";
 import { portfolio } from "@/data/portfolio";
 import { getSeoKeywords } from "@/lib/seoKeywords";
+import { getSkillLabels } from "@/lib/skills";
 
 const pageUrl = `${siteConfig.url}/`;
 const personId = `${pageUrl}#person`;
@@ -24,7 +25,7 @@ const workStructuredData = portfolio.openSourceProjects.map((item, index) => {
       publisher: { "@type": "Organization", name: item.publisher },
       isPartOf: { "@id": webpageId },
       description: item.description,
-      keywords: item.technologies ?? [],
+      keywords: getSkillLabels(item.technologies ?? []),
     };
   }
 
@@ -45,7 +46,7 @@ const workStructuredData = portfolio.openSourceProjects.map((item, index) => {
     isPartOf: { "@id": webpageId },
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Web",
-    softwareRequirements: item.technologies,
+    softwareRequirements: getSkillLabels(item.technologies),
     codeRepository: item.github,
     ...(sameAs.length > 0 ? { sameAs } : {}),
   };

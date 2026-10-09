@@ -6,6 +6,7 @@ import { GithubIcon } from "@/components/ui/SocialIcons";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getCaseStudyHref } from "@/lib/caseStudies";
+import { getSkillLabels } from "@/lib/skills";
 import { type PortfolioWorkItem } from "@/types/portfolio";
 
 interface ProjectArticleCardProps {
@@ -57,7 +58,7 @@ export function ProjectArticleCard({
         )}
         {project.technologies && project.technologies.length > 0 && (
           <div className="m-4 flex flex-wrap gap-2">
-            {project.technologies.map((tech, idx) => (
+            {getSkillLabels(project.technologies).map((tech, idx) => (
               <Badge key={`${project.name}-${tech}-${idx}`}>{tech}</Badge>
             ))}
           </div>

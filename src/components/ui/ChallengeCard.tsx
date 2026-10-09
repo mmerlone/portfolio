@@ -1,6 +1,7 @@
 import { type ReactElement } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { getSkillLabels } from "@/lib/skills";
 import type { PortfolioChallenge } from "@/types/portfolio";
 
 interface ChallengeCardProps {
@@ -39,7 +40,7 @@ const ChallengeCard = ({ challenge }: ChallengeCardProps): ReactElement => (
       </ul>
     </div>
     <div className="mt-2 flex flex-wrap gap-2">
-      {challenge.technologies.map((tech, index) => (
+      {getSkillLabels(challenge.technologies).map((tech, index) => (
         <Badge key={`${tech}-${index}`} variant="accent">
           {tech}
         </Badge>

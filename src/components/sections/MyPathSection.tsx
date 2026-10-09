@@ -3,6 +3,7 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { pathStages } from "@/data/pathStages";
+import { getSkillLabels } from "@/lib/skills";
 
 interface MyPathSectionProps {
   className?: string;
@@ -37,7 +38,7 @@ export default function MyPathSection({
                 ))}
               </ul>
               <div className="flex flex-wrap gap-1.5">
-                {stage.technologies.map((tech, techIdx) => (
+                {getSkillLabels(stage.technologies).map((tech, techIdx) => (
                   <Badge key={techIdx} size="sm">
                     {tech}
                   </Badge>
