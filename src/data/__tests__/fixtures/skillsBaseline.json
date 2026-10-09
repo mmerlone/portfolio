@@ -1,0 +1,786 @@
+{
+  "categories": {
+    "programming": [
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "PHP",
+      "Perl",
+      "HTML",
+      "CSS",
+      "SQL",
+      "Bash"
+    ],
+    "operatingSystems": [
+      "Linux",
+      "Unix",
+      "Solaris",
+      "FreeBSD",
+      "Windows"
+    ],
+    "hardware": [
+      "IBM",
+      "Dell",
+      "iDrac",
+      "tape libraries",
+      "UniFi",
+      "Ubiquiti",
+      "RAID",
+      "DAS",
+      "SAS"
+    ],
+    "serversAndServices": [
+      "DNS",
+      "FTP",
+      "DHCP",
+      "LDAP",
+      "NFS",
+      "SNMP",
+      "GIT",
+      "SMTP",
+      "IMAP",
+      "POP3",
+      "Apache",
+      "nginx",
+      "IIS",
+      "Tomcat",
+      "sendmail",
+      "Postfix",
+      "Dovecot",
+      "OpenLDAP",
+      "Samba",
+      "AD",
+      "IAM",
+      "DRP",
+      "Squid",
+      "Zabbix",
+      "Netdisco",
+      "Graylog",
+      "Openfire RTC Server",
+      "IPAM",
+      "GitLab",
+      "Docker"
+    ],
+    "databases": [
+      "MySQL",
+      "MariaDB",
+      "PostgreSQL",
+      "MS-SQL",
+      "MongoDB"
+    ],
+    "platformsAndTools": [
+      "Shopify",
+      "Discourse",
+      "Contentstack",
+      "WordPress",
+      "SOGo"
+    ],
+    "virtualization": [
+      "VMware ESXi",
+      "vCenter",
+      "VirtualBox"
+    ],
+    "networkingAndSecurity": [
+      "pfSense/OPNSense",
+      "ACL",
+      "VLAN",
+      "IPsec VPN",
+      "OpenVPN",
+      "RLS",
+      "SSL",
+      "TLS",
+      "firewalls",
+      "IDS",
+      "network monitoring",
+      "routing",
+      "switching",
+      "wireless",
+      "network design",
+      "network security"
+    ],
+    "backupAndRecovery": [
+      "Bacula",
+      "rsync",
+      "contingency & disaster recovery",
+      "storage"
+    ],
+    "cloud": [
+      "Azure",
+      "Microsoft Cloud migrations"
+    ],
+    "automation": [
+      "bash",
+      "node",
+      "husky"
+    ],
+    "other": [
+      "design systems",
+      "MVC",
+      "WCAG accessibility"
+    ]
+  },
+  "clusters": [
+    {
+      "title": "Product Engineering",
+      "description": "Frontend architecture, component systems, and accessible UI implementation for global brands.",
+      "skills": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "Shopify",
+        "Discourse",
+        "Contentstack",
+        "WordPress",
+        "SOGo",
+        "design systems",
+        "WCAG accessibility"
+      ]
+    },
+    {
+      "title": "Systems & Infrastructure",
+      "description": "On-premise and cloud infrastructure, virtualization, networking, and operational tooling.",
+      "skills": [
+        "Linux",
+        "Unix",
+        "Solaris",
+        "FreeBSD",
+        "Windows",
+        "IBM",
+        "Dell",
+        "iDrac",
+        "tape libraries",
+        "UniFi",
+        "Ubiquiti",
+        "RAID",
+        "DAS",
+        "SAS",
+        "DNS",
+        "FTP",
+        "DHCP",
+        "LDAP",
+        "NFS",
+        "SNMP",
+        "GIT",
+        "SMTP",
+        "IMAP",
+        "POP3",
+        "Apache",
+        "nginx",
+        "IIS",
+        "sendmail",
+        "Postfix",
+        "Dovecot",
+        "OpenLDAP",
+        "Samba",
+        "AD",
+        "IAM",
+        "DRP",
+        "Squid",
+        "Zabbix",
+        "Netdisco",
+        "Graylog",
+        "Openfire RTC Server",
+        "IPAM",
+        "GitLab",
+        "Docker",
+        "VMware ESXi",
+        "vCenter",
+        "VirtualBox",
+        "pfSense/OPNSense",
+        "ACL",
+        "VLAN",
+        "IPsec VPN",
+        "OpenVPN",
+        "RLS",
+        "SSL",
+        "TLS",
+        "firewalls",
+        "IDS",
+        "network monitoring",
+        "routing",
+        "switching",
+        "wireless",
+        "network design",
+        "network security",
+        "Bacula",
+        "rsync",
+        "contingency & disaster recovery",
+        "storage",
+        "Azure",
+        "Microsoft Cloud migrations"
+      ]
+    },
+    {
+      "title": "Data & Services",
+      "description": "Database technologies, backend services, and content platforms.",
+      "skills": [
+        "MySQL",
+        "MariaDB",
+        "PostgreSQL",
+        "MS-SQL",
+        "MongoDB",
+        "Tomcat",
+        "SOGo"
+      ]
+    },
+    {
+      "title": "Engineering Practice",
+      "description": "Automation, methodologies, and cross-cutting technical competencies.",
+      "skills": [
+        "bash",
+        "node",
+        "husky",
+        "PHP",
+        "Perl",
+        "SQL",
+        "Bash",
+        "MVC"
+      ]
+    }
+  ],
+  "expertise": [
+    {
+      "name": "High-Performance UI Architecture",
+      "keywords": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Docker",
+        "Tailwind",
+        "Agile",
+        "Scrum",
+        "jest",
+        "Cypress",
+        "Shopify theme",
+        "Discourse theme",
+        "WordPress theme",
+        "Accessibility",
+        "WCAG",
+        "Responsive Design",
+        "Scalable Applications",
+        "Inclusivity"
+      ],
+      "description": "Scaling global frontend systems for Fortune 500 brands with a focus on 'Accessibility as Architecture'."
+    },
+    {
+      "name": "Resilient Platform Architecture",
+      "keywords": [
+        "Microsoft",
+        "Samba4",
+        "Postfix",
+        "Dovecot",
+        "OpenLDAP",
+        "DNS",
+        "DHCP",
+        "LDAP",
+        "AD",
+        "GIT",
+        "VMware ESXi",
+        "vCenter",
+        "Proxmox",
+        "Zabbix",
+        "Graylog",
+        "IPAM",
+        "Backup"
+      ],
+      "description": "Architecting resilient internal applications to ensuring reliability and performance with a 99.9% uptime."
+    },
+    {
+      "name": "Operational Stewardship",
+      "keywords": [
+        "Hardware",
+        "Networking",
+        "Monitoring",
+        "Backups",
+        "Process",
+        "Planning",
+        "Self Hosted Email, DNS, MX, etc.",
+        "Virtualization",
+        "Networking",
+        "Security",
+        "Infrastructure",
+        "Project Management",
+        "Team Leadership",
+        "Cost Reduction",
+        "Reliability",
+        "Performance",
+        "Growth",
+        "Uptime"
+      ],
+      "description": "A 20+ year track record of 'living with decisions,' evolving mission-critical legacy ERPs into scalable cloud-ready environments."
+    }
+  ],
+  "soft": [
+    {
+      "id": "analytical-thinking",
+      "name": "Analytical Thinking",
+      "description": "Breaks down complex problems, examines assumptions, and evaluates alternatives before committing to a solution.",
+      "evidence": "Technical troubleshooting, infrastructure investigations, architectural evaluations, and detailed assessment of constraints."
+    },
+    {
+      "id": "independent-judgment",
+      "name": "Independent Judgment",
+      "description": "Forms opinions independently, questions conventional approaches, and makes decisions based on evidence and context rather than trends or authority alone.",
+      "evidence": "Consistently evaluates trade-offs, challenges unnecessary complexity, and seeks solutions appropriate to the actual problem."
+    },
+    {
+      "id": "adaptability",
+      "name": "Adaptability",
+      "description": "Adjusts to changing technologies, unfamiliar domains, and evolving requirements while continuing to develop new capabilities.",
+      "evidence": "Career transitions across industrial design, systems administration, networking, backend development, and modern frontend engineering."
+    },
+    {
+      "id": "self-directed-learning",
+      "name": "Self-Directed Learning",
+      "description": "Takes initiative to acquire knowledge, investigate unfamiliar subjects, and turn learning into practical results.",
+      "evidence": "Self-directed career development, broad technical experience, and independent open-source software projects."
+    },
+    {
+      "id": "problem-solving",
+      "name": "Complex Problem-Solving",
+      "description": "Investigates problems across multiple layers, identifies relevant constraints, and develops practical paths toward resolution.",
+      "evidence": "Work spanning software, operating systems, networks, security, infrastructure, and disaster recovery."
+    },
+    {
+      "id": "strategic-thinking",
+      "name": "Strategic Thinking",
+      "description": "Considers long-term implications, dependencies, costs, and future maintenance rather than optimizing only for immediate results.",
+      "evidence": "Infrastructure modernization, technology migrations, system lifecycle management, and disaster recovery planning."
+    },
+    {
+      "id": "practical-decision-making",
+      "name": "Practical Decision-Making",
+      "description": "Balances ideal solutions against real-world constraints, prioritizing outcomes that are feasible, maintainable, and proportionate to the problem.",
+      "evidence": "Experience with legacy systems, constrained budgets, operational requirements, and incremental modernization."
+    },
+    {
+      "id": "attention-to-detail",
+      "name": "Attention to Detail",
+      "description": "Pays close attention to correctness, edge cases, implementation quality, and constraints that can be overlooked in high-level planning.",
+      "evidence": "Detailed technical investigations, accessibility requirements, semantic implementation, and careful evaluation of system behavior."
+    },
+    {
+      "id": "cross-functional-communication",
+      "name": "Cross-Functional Communication",
+      "description": "Connects different technical disciplines and helps translate complex technical issues into practical considerations for different audiences.",
+      "evidence": "Technical leadership, product ownership, and work involving engineering, infrastructure, design, management, vendors, and users."
+    },
+    {
+      "id": "ownership-accountability",
+      "name": "Ownership and Accountability",
+      "description": "Takes responsibility beyond initial implementation, considering maintenance, operational consequences, and the long-term usefulness of a solution.",
+      "evidence": "Long-term infrastructure responsibilities, business-critical systems, and ownership of technical initiatives."
+    },
+    {
+      "id": "intellectual-curiosity",
+      "name": "Intellectual Curiosity",
+      "description": "Explores unfamiliar technologies and ideas, investigates how things work, and pursues understanding beyond immediate requirements.",
+      "evidence": "Broad technical exploration, open-source development, and investigation of legacy hardware and software systems."
+    },
+    {
+      "id": "continuous-improvement",
+      "name": "Continuous Improvement",
+      "description": "Looks for opportunities to simplify processes, modernize existing systems, improve quality, and reduce recurring operational friction.",
+      "evidence": "Infrastructure modernization, automation, monitoring, tooling improvements, and software component development."
+    },
+    {
+      "id": "ambiguity-management",
+      "name": "Ambiguity Management",
+      "description": "Makes progress when requirements or environments are incompletely documented by investigating the situation and identifying the information needed to move forward.",
+      "evidence": "Legacy infrastructure investigations, undocumented environments, and work across diverse technical domains."
+    },
+    {
+      "id": "systems-level-perspective",
+      "name": "Holistic Perspective",
+      "description": "Recognizes that technical decisions affect interconnected systems, operational teams, users, and business outcomes.",
+      "evidence": "Experience across the software lifecycle, infrastructure operations, networking, security, and business continuity."
+    }
+  ],
+  "contexts": {
+    "projects": [
+      [
+        "Next.js 16+",
+        "React 19+",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "Sass",
+        "Open Props",
+        "Lucide Icons",
+        "next-themes",
+        "Pino Logger",
+        "Vercel",
+        "Jest",
+        "jest-axe",
+        "Knip"
+      ],
+      [
+        "React 19+",
+        "TypeScript",
+        "Vite",
+        "Three.js",
+        "React Three Fiber",
+        "React Three Drei",
+        "Tailwind CSS"
+      ],
+      [
+        "Next.js 15+",
+        "React 19+",
+        "Supabase",
+        "TailwindCSS",
+        "TypeScript",
+        "Material UI",
+        "Sentry",
+        "Pino Logger"
+      ],
+      [
+        "React 19+",
+        "TypeScript",
+        "Material UI v7+"
+      ],
+      [
+        "React 19+",
+        "TypeScript"
+      ],
+      [
+        "WordPress",
+        "Discourse",
+        "Contentstack",
+        "Data Migration",
+        "TypeScript",
+        "PHP"
+      ]
+    ],
+    "experiences": [
+      [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Docker",
+        "Tailwind",
+        "Agile",
+        "Scrum",
+        "jest",
+        "Cypress",
+        "Shopify theme",
+        "Discourse theme",
+        "WordPress theme",
+        "Accessibility",
+        "WCAG",
+        "Responsive Design",
+        "Scalable Applications",
+        "Inclusivity"
+      ],
+      [
+        "PHP",
+        "MySQL",
+        "Linux",
+        "Windows Server",
+        "Self Hosted Email, DNS, MX, etc.",
+        "Virtualization",
+        "Networking",
+        "Security",
+        "Infrastructure",
+        "Project Management",
+        "Team Leadership",
+        "Cost Reduction",
+        "Reliability",
+        "Performance",
+        "Growth",
+        "Uptime",
+        "VPN",
+        "Firewall",
+        "VLAN",
+        "Routing",
+        "Archiving",
+        "Backup",
+        "Open-Source",
+        "ISO 9001",
+        "Auditing"
+      ],
+      [
+        "PHP",
+        "MySQL",
+        "Linux"
+      ],
+      [
+        "PHP",
+        "MySQL",
+        "Linux",
+        "Proxy",
+        "Firewall",
+        "Wireless Networking"
+      ],
+      [
+        "Perl",
+        "PHP",
+        "MySQL",
+        "Smarty"
+      ],
+      [
+        "Solaris",
+        "FreeBSD",
+        "Linux",
+        "Windows 2000",
+        "Postfix",
+        "OpenLDAP",
+        "sendmail",
+        "qmail"
+      ],
+      [
+        "Linux",
+        "Structured Cabling",
+        "ISDN",
+        "Squid",
+        "Samba"
+      ],
+      null,
+      [
+        "AutoCAD",
+        "Solid Edge"
+      ],
+      [
+        "Physical clipboard and paper",
+        "Ink pen",
+        "technographer"
+      ]
+    ],
+    "challenges": [
+      [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      [
+        "Shopify Liquid",
+        "Ember",
+        "Handlebars",
+        "JavaScript",
+        "CSS"
+      ],
+      [
+        "WordPress",
+        "Contentstack",
+        "Data Migration",
+        "JavaScript",
+        "PHP"
+      ],
+      [
+        "LDAP",
+        "Active Directory",
+        "System Migration",
+        "Authentication Protocols"
+      ],
+      [
+        "Postfix",
+        "Dovecot",
+        "SOGo",
+        "Linux Server Administration",
+        "Email Protocols (IMAP, SMTP, EAS)"
+      ],
+      [
+        "Microsoft Cloud (Exchange Online)",
+        "Cloud Migration Strategies"
+      ],
+      [
+        "VMware ESXi",
+        "vCenter",
+        "Shared SAS Storage",
+        "Windows Server",
+        "Linux"
+      ],
+      [
+        "pfSense",
+        "VLAN",
+        "IPsec VPN",
+        "OpenVPN",
+        "Network Monitoring (Zabbix)"
+      ],
+      [
+        "PERL",
+        "PHP",
+        "MySQL",
+        "CSS",
+        "Smarty"
+      ],
+      [
+        "Apache",
+        "bind",
+        "postfix",
+        "squid"
+      ],
+      [
+        "Linux"
+      ]
+    ],
+    "pathStages": [
+      [
+        "AutoCAD",
+        "Solid Edge",
+        "Industrial Processes",
+        "ISO 9001"
+      ],
+      [
+        "Linux",
+        "Windows Server",
+        "VMware ESXi/vCenter",
+        "Postfix/Dovecot/OpenLDAP",
+        "pfSense/VPN/VLAN",
+        "Zabbix/Graylog",
+        "PHP/MySQL",
+        "GitLab"
+      ],
+      [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Docker",
+        "Tailwind",
+        "Material UI",
+        "Shopify Liquid",
+        "WordPress",
+        "Contentstack",
+        "Supabase",
+        "Next.js",
+        "jest/Cypress"
+      ]
+    ]
+  },
+  "seo": [
+    "High-Performance UI Architecture",
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Docker",
+    "Tailwind",
+    "Agile",
+    "Scrum",
+    "jest",
+    "Cypress",
+    "Shopify theme",
+    "Discourse theme",
+    "WordPress theme",
+    "Accessibility",
+    "WCAG",
+    "Responsive Design",
+    "Scalable Applications",
+    "Inclusivity",
+    "Resilient Platform Architecture",
+    "Microsoft",
+    "Samba4",
+    "Postfix",
+    "Dovecot",
+    "OpenLDAP",
+    "DNS",
+    "DHCP",
+    "LDAP",
+    "AD",
+    "GIT",
+    "VMware ESXi",
+    "vCenter",
+    "Proxmox",
+    "Zabbix",
+    "Graylog",
+    "IPAM",
+    "Backup",
+    "Operational Stewardship",
+    "Hardware",
+    "Networking",
+    "Monitoring",
+    "Backups",
+    "Process",
+    "Planning",
+    "Self Hosted Email, DNS, MX, etc.",
+    "Virtualization",
+    "Security",
+    "Infrastructure",
+    "Project Management",
+    "Team Leadership",
+    "Cost Reduction",
+    "Reliability",
+    "Performance",
+    "Growth",
+    "Uptime",
+    "JavaScript",
+    "PHP",
+    "Perl",
+    "HTML",
+    "CSS",
+    "SQL",
+    "Bash",
+    "Linux",
+    "Unix",
+    "Solaris",
+    "FreeBSD",
+    "Windows",
+    "IBM",
+    "Dell",
+    "iDrac",
+    "tape libraries",
+    "UniFi",
+    "Ubiquiti",
+    "RAID",
+    "DAS",
+    "SAS",
+    "FTP",
+    "NFS",
+    "SNMP",
+    "SMTP",
+    "IMAP",
+    "POP3",
+    "Apache",
+    "nginx",
+    "IIS",
+    "Tomcat",
+    "sendmail",
+    "Samba",
+    "IAM",
+    "DRP",
+    "Squid",
+    "Netdisco",
+    "Openfire RTC Server",
+    "GitLab",
+    "MySQL",
+    "MariaDB",
+    "PostgreSQL",
+    "MS-SQL",
+    "MongoDB",
+    "Shopify",
+    "Discourse",
+    "Contentstack",
+    "WordPress",
+    "SOGo",
+    "VirtualBox",
+    "pfSense/OPNSense",
+    "ACL",
+    "VLAN",
+    "IPsec VPN",
+    "OpenVPN",
+    "RLS",
+    "SSL",
+    "TLS",
+    "firewalls",
+    "IDS",
+    "network monitoring",
+    "routing",
+    "switching",
+    "wireless",
+    "network design",
+    "network security",
+    "Bacula",
+    "rsync",
+    "contingency & disaster recovery",
+    "storage",
+    "Azure",
+    "Microsoft Cloud migrations",
+    "bash",
+    "node",
+    "husky",
+    "design systems",
+    "MVC",
+    "WCAG accessibility"
+  ]
+}
