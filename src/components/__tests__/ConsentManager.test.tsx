@@ -3,6 +3,7 @@ import ConsentManager from "@/components/ConsentManager";
 import {
   getConsent,
   deleteAllConsentCookies,
+  getCookie,
   hasExplicitConsentDecision,
 } from "@/lib/cookies";
 
@@ -22,6 +23,14 @@ const getSwitch = (category: "analytics" | "marketing"): HTMLElement => {
 describe("ConsentManager", () => {
   beforeEach(() => {
     deleteAllConsentCookies();
+    document.cookie = "_ga=1; path=/";
+    document.cookie = "_ga_ABC123=1; path=/";
+  });
+
+  afterEach(() => {
+    document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+    document.cookie =
+      "_ga_ABC123=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
   });
 
   it("exposes a switch per category, named by its heading", () => {
@@ -122,5 +131,50 @@ describe("ConsentManager", () => {
 
     expect(getSwitch("analytics").getAttribute("aria-checked")).toBe("true");
     expect(getSwitch("marketing").getAttribute("aria-checked")).toBe("false");
+  });
+
+  describe("Google cookie revocation on save", () => {
+    const save = (): void => {
+      fireEvent.click(screen.getByRole("button", { name: "Save preferences" }));
+    };
+
+    it("keeps Google cookies with analytics off and marketing on", () => {
+      render(<ConsentManager open />);
+
+      fireEvent.click(getSwitch("marketing"));
+      save();
+
+      expect(getCookie("_ga")).toBe("1");
+      expect(getCookie("_ga_ABC123")).toBe("1");
+    });
+
+    it("keeps Google cookies with both categories on", () => {
+      render(<ConsentManager open />);
+
+      fireEvent.click(getSwitch("analytics"));
+      fireEvent.click(getSwitch("marketing"));
+      save();
+
+      expect(getCookie("_ga")).toBe("1");
+    });
+
+    it("removes Google cookies with marketing off and analytics on", () => {
+      render(<ConsentManager open />);
+
+      fireEvent.click(getSwitch("analytics"));
+      save();
+
+      expect(getCookie("_ga")).toBeNull();
+      expect(getCookie("_ga_ABC123")).toBeNull();
+    });
+
+    it("removes Google cookies with both categories off", () => {
+      render(<ConsentManager open />);
+
+      save();
+
+      expect(getCookie("_ga")).toBeNull();
+      expect(getCookie("_ga_ABC123")).toBeNull();
+    });
   });
 });

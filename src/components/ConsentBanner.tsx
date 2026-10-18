@@ -5,12 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import TermsOfServicePolicy from "./TermsOfServicePolicy";
 import { useIsHydrated } from "@/hooks/useIsHydrated";
-import {
-  setConsent,
-  hasExplicitConsentDecision,
-  deleteAnalyticsCookies,
-} from "@/lib/cookies";
-import { siteConfig } from "@/config/site";
+import { setConsent, hasExplicitConsentDecision } from "@/lib/cookies";
+import { cookieConfig } from "@/config/tracking";
 
 /**
  * A consent banner, not a toast: it must reappear on every page load until the
@@ -21,8 +17,8 @@ const ConsentBanner = (): ReactElement | null => {
   const [closed, setClosed] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
 
-  const ANALYTICS_EXPIRY_DAYS = siteConfig.cookie.analytics.expiryDays;
-  const MARKETING_EXPIRY_DAYS = siteConfig.cookie.marketing.expiryDays;
+  const ANALYTICS_EXPIRY_DAYS = cookieConfig.analytics.expiryDays;
+  const MARKETING_EXPIRY_DAYS = cookieConfig.marketing.expiryDays;
 
   const handleAcceptAll = (): void => {
     setConsent("analytics", true, ANALYTICS_EXPIRY_DAYS);
@@ -33,7 +29,6 @@ const ConsentBanner = (): ReactElement | null => {
   const handleRefuseAll = (): void => {
     setConsent("analytics", false, ANALYTICS_EXPIRY_DAYS);
     setConsent("marketing", false, MARKETING_EXPIRY_DAYS);
-    deleteAnalyticsCookies();
     setClosed(true);
   };
 

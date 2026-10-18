@@ -5,12 +5,11 @@ import Link from "next/link";
 import { useIsHydrated } from "@/hooks/useIsHydrated";
 import {
   COOKIE_CHANGE_EVENT,
-  deleteAnalyticsCookies,
   getConsent,
   hasExplicitConsentDecision,
   setConsent,
 } from "@/lib/cookies";
-import { siteConfig } from "@/config/site";
+import { cookieConfig } from "@/config/tracking";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -121,16 +120,13 @@ const ConsentManager: FC<ConsentManagerProps> = ({
     setConsent(
       "analytics",
       states.analytics === "granted",
-      siteConfig.cookie.analytics.expiryDays,
+      cookieConfig.analytics.expiryDays,
     );
     setConsent(
       "marketing",
       states.marketing === "granted",
-      siteConfig.cookie.marketing.expiryDays,
+      cookieConfig.marketing.expiryDays,
     );
-    if (states.analytics !== "granted" || states.marketing !== "granted") {
-      deleteAnalyticsCookies();
-    }
     onOpenChange?.(false);
   };
 
