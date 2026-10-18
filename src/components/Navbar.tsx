@@ -4,8 +4,6 @@ import { useEffect, useRef, useState, type ReactElement } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { siteConfig } from "@/config/site";
-import { portfolio } from "@/data/portfolio";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -32,7 +30,12 @@ const isNavigationGroupItem = (
  */
 const DESKTOP_BREAKPOINT_QUERY = "(min-width: 48rem)";
 
-const Navbar = (): ReactElement => {
+interface NavbarProps {
+  readonly name: string;
+  readonly navigation: readonly NavigationItem[];
+}
+
+const Navbar = ({ name, navigation }: NavbarProps): ReactElement => {
   const [isScrolled, setIsScrolled] = useState(false);
   const mobileDialogRef = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
@@ -186,7 +189,7 @@ const Navbar = (): ReactElement => {
           href="/"
           className="text-foreground hover:text-primary text-xl font-bold"
         >
-          {portfolio.basic.name}
+          {name}
         </Link>
 
         <NavigationMenu
@@ -196,7 +199,7 @@ const Navbar = (): ReactElement => {
           closeDelay={150}
         >
           <NavigationMenuList>
-            {siteConfig.navigation.map(renderDesktopItem)}
+            {navigation.map(renderDesktopItem)}
           </NavigationMenuList>
         </NavigationMenu>
 
@@ -223,7 +226,7 @@ const Navbar = (): ReactElement => {
         className="bg-card text-card-foreground m-0 h-full max-h-full w-full max-w-sm border-0 p-0 text-left backdrop:bg-black/60 md:hidden"
       >
         <div className="flex h-16 items-center justify-between px-4">
-          <span className="text-xl font-bold">{portfolio.basic.name}</span>
+          <span className="text-xl font-bold">{name}</span>
           <button
             type="button"
             className="text-muted-foreground hover:bg-muted rounded-md p-2"
@@ -236,7 +239,7 @@ const Navbar = (): ReactElement => {
           </button>
         </div>
         <ul className="space-y-4 overflow-y-auto py-4">
-          {siteConfig.navigation.map(renderMobileItem)}
+          {navigation.map(renderMobileItem)}
         </ul>
       </dialog>
     </header>

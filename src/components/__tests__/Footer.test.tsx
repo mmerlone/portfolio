@@ -1,5 +1,15 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Footer from "@/components/Footer";
+import type { ReactElement } from "react";
+import FooterBase from "@/components/Footer";
+import { siteConfig } from "@/config/site";
+import { portfolio } from "@/data/portfolio";
+
+const Footer = (): ReactElement => (
+  <FooterBase
+    name={portfolio.basic.name}
+    copyrightText={siteConfig.footer.copyright.text}
+  />
+);
 
 describe("Footer", () => {
   it("links Privacy Policy to the /privacy route", () => {

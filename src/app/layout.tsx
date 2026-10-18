@@ -117,9 +117,15 @@ export default function RootLayout({ children }: LayoutProps): ReactElement {
           Skip to main content
         </a>
         <ScrollProgressBar />
-        <Navbar />
+        <Navbar
+          name={portfolio.basic.name}
+          navigation={siteConfig.navigation}
+        />
         <div className="pb-28 sm:pb-14">{children}</div>
-        <Footer />
+        <Footer
+          name={portfolio.basic.name}
+          copyrightText={siteConfig.footer.copyright.text}
+        />
         <ConsentBanner />
       </body>
     </html>

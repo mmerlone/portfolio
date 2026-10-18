@@ -121,10 +121,10 @@ const iconMap: Record<SocialIconName, FC<SocialIconProps>> = {
   facebook: FacebookIcon,
 };
 
+const isSocialIconName = (value: string): value is SocialIconName =>
+  Object.hasOwn(iconMap, value);
+
 export const getSocialIcon = (name: string): FC<SocialIconProps> => {
   const normalized = name.toLowerCase();
-  if (normalized in iconMap) {
-    return iconMap[normalized as SocialIconName];
-  }
-  return WebsiteIcon;
+  return isSocialIconName(normalized) ? iconMap[normalized] : WebsiteIcon;
 };

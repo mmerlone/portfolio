@@ -1,7 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { usePathname } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import type { ReactElement } from "react";
+import NavbarBase from "@/components/Navbar";
+import { siteConfig } from "@/config/site";
+import { portfolio } from "@/data/portfolio";
 import { caseStudies, getCaseStudyHref } from "@/lib/caseStudies";
+
+const Navbar = (): ReactElement => (
+  <NavbarBase name={portfolio.basic.name} navigation={siteConfig.navigation} />
+);
 
 jest.mock("next/navigation", () => ({
   usePathname: jest.fn((): string => "/"),

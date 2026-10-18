@@ -2,12 +2,15 @@
 
 import { useState, type ReactElement } from "react";
 import Link from "next/link";
-import { siteConfig } from "@/config/site";
-import { portfolio } from "@/data/portfolio";
 import { Separator } from "@/components/ui/separator";
 import ConsentManager from "./ConsentManager";
 
-const Footer = (): ReactElement => {
+interface FooterProps {
+  readonly name: string;
+  readonly copyrightText: string;
+}
+
+const Footer = ({ name, copyrightText }: FooterProps): ReactElement => {
   const currentYear = new Date().getFullYear();
   const [consentManagerOpen, setConsentManagerOpen] = useState(false);
 
@@ -17,8 +20,7 @@ const Footer = (): ReactElement => {
       <div className="relative z-10 container mx-auto p-2">
         <div className="flex flex-col items-center md:flex-row md:justify-between">
           <small>
-            &copy; <span>{currentYear}</span> {portfolio.basic.name}.{" "}
-            {siteConfig.footer.copyright.text}
+            &copy; <span>{currentYear}</span> {name}. {copyrightText}
           </small>
           <div className="flex items-center gap-4">
             <Link href="/about" className="text-sm hover:underline">
