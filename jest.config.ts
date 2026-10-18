@@ -13,7 +13,6 @@ const config: Config = {
   modulePathIgnorePatterns: ["<rootDir>/.kilo/"],
   setupFilesAfterEnv: [
     "<rootDir>/jest.setup.js",
-    "<rootDir>/src/__mocks__/next-dynamic.ts",
     "<rootDir>/src/__mocks__/navigation-menu.tsx",
   ],
   moduleNameMapper: {

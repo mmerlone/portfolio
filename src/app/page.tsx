@@ -1,63 +1,26 @@
-import NextDynamic from "next/dynamic";
-import { Suspense, type ReactElement } from "react";
+import { type ReactElement } from "react";
 import Hero from "@/components/sections/Hero";
-
-// Lazy load complex sections below the fold
-const HowIBuildSection = NextDynamic(
-  () => import("@/components/sections/HowIBuildSection"),
-);
-const HumanOrMachineSection = NextDynamic(
-  () => import("@/components/sections/HumanOrMachineSection"),
-);
-const MyPathSection = NextDynamic(
-  () => import("@/components/sections/MyPathSection"),
-);
-const ChallengesSection = NextDynamic(
-  () => import("@/components/sections/ChallengesSection"),
-);
-const ProjectsSection = NextDynamic(
-  () => import("@/components/sections/ProjectsSection"),
-);
-const SkillsSection = NextDynamic(
-  () => import("@/components/sections/SkillsSection"),
-);
-const ResumeSection = NextDynamic(
-  () => import("@/components/sections/ResumeSection"),
-);
-const ScrollToTop = NextDynamic(() => import("@/components/ScrollToTop"));
-
-const LoadingSection = (): ReactElement => (
-  <div className="border-border bg-muted h-48 w-full border-y" />
-);
+import HowIBuildSection from "@/components/sections/HowIBuildSection";
+import HumanOrMachineSection from "@/components/sections/HumanOrMachineSection";
+import MyPathSection from "@/components/sections/MyPathSection";
+import ChallengesSection from "@/components/sections/ChallengesSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import SkillsSection from "@/components/sections/SkillsSection";
+import ResumeSection from "@/components/sections/ResumeSection";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function Home(): ReactElement {
   return (
     <main id="top">
       <Hero />
-      <Suspense fallback={<LoadingSection />}>
-        <ProjectsSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <HowIBuildSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <HumanOrMachineSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <MyPathSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <ChallengesSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <SkillsSection />
-      </Suspense>
-      <Suspense fallback={<LoadingSection />}>
-        <ResumeSection />
-      </Suspense>
-      <Suspense fallback={null}>
-        <ScrollToTop />
-      </Suspense>
+      <ProjectsSection />
+      <HowIBuildSection />
+      <HumanOrMachineSection />
+      <MyPathSection />
+      <ChallengesSection />
+      <SkillsSection />
+      <ResumeSection />
+      <ScrollToTop />
     </main>
   );
 }
