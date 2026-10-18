@@ -61,31 +61,6 @@ export const siteConfig: SiteConfig = {
     },
   },
 
-  // Cookie configuration
-  cookie: {
-    analytics: {
-      name: "mmerlone-dev-br-analytics-consent",
-      expiryDays: 365,
-    },
-    marketing: {
-      name: "mmerlone-dev-br-marketing-consent",
-      expiryDays: 365,
-    },
-  },
-
-  // Analytics configuration
-  analytics: {
-    googleAnalytics: {
-      id: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? null,
-    },
-    googleTagManager: {
-      id: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID ?? null,
-    },
-    ahrefs: {
-      key: process.env.NEXT_PUBLIC_AHREFS_ANALYTICS_KEY ?? null,
-    },
-  },
-
   // CTA configuration
   cta: {
     text: "Let's build a resilient architecture together.",

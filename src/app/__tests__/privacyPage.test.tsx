@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import PrivacyPage, { metadata } from "@/app/privacy/page";
 import { portfolio } from "@/data/portfolio";
-import { siteConfig } from "@/config/site";
+import { cookieConfig } from "@/config/tracking";
 
 describe("/privacy page", () => {
   it("has a route-specific canonical URL in metadata", () => {
@@ -41,10 +41,10 @@ describe("/privacy page", () => {
     expect(screen.getAllByText(/Cloudflare/).length).toBeGreaterThan(0);
     expect(screen.queryByText(/the CDN\/WAF in front of this site/)).toBeNull();
     expect(
-      screen.getByText(new RegExp(siteConfig.cookie.analytics.name)),
+      screen.getByText(new RegExp(cookieConfig.analytics.name)),
     ).not.toBeNull();
     expect(
-      screen.getByText(new RegExp(siteConfig.cookie.marketing.name)),
+      screen.getByText(new RegExp(cookieConfig.marketing.name)),
     ).not.toBeNull();
   });
 

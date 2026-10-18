@@ -67,8 +67,6 @@ export interface SiteConfig {
   readonly images: ImagePaths;
   readonly navigation: readonly NavigationItem[];
   readonly footer: FooterConfig;
-  readonly cookie: CookieConfig;
-  readonly analytics?: AnalyticsConfig;
   readonly cta?: CTAConfig;
   readonly seo: SeoConfig;
 }

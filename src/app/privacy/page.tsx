@@ -1,7 +1,7 @@
 import { type ReactElement } from "react";
 import type { Metadata } from "next";
 import { portfolio } from "@/data/portfolio";
-import { siteConfig } from "@/config/site";
+import { cookieConfig } from "@/config/tracking";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import Section from "@/components/Section";
 
@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage(): ReactElement {
   const { email } = portfolio.basic.contact;
-  const analyticsCookieName = siteConfig.cookie.analytics.name;
-  const analyticsExpiryDays = siteConfig.cookie.analytics.expiryDays;
-  const marketingCookieName = siteConfig.cookie.marketing.name;
-  const marketingExpiryDays = siteConfig.cookie.marketing.expiryDays;
+  const analyticsCookieName = cookieConfig.analytics.name;
+  const analyticsExpiryDays = cookieConfig.analytics.expiryDays;
+  const marketingCookieName = cookieConfig.marketing.name;
+  const marketingExpiryDays = cookieConfig.marketing.expiryDays;
 
   return (
     <main className="container mx-auto px-4 py-24">
