@@ -6,7 +6,7 @@
 
 This repository contains a Next.js 16 portfolio for Marcio Merlone. It presents selected engineering work, career path, selected experience, grouped hard skills, soft skills, résumé, and contact information. Shared portfolio data and the generated Markdown representation also retain languages, certifications, education, and the full professional history.
 
-The current implementation uses React 19, TypeScript, Tailwind CSS 4, Sass, Open Props, Phosphor Icons, and `next-themes`. Framer Motion, GSAP, Three.js, React Three Fiber, and Drei are not dependencies. The credits carousel remains a React and CSS implementation with isolated transforms and reduced-motion handling.
+The current implementation uses React 19, TypeScript, Tailwind CSS 4, shadcn/ui components on Base UI primitives, and Lucide Icons. Dark mode follows the system color scheme; there is no theme toggle. Framer Motion, GSAP, Three.js, React Three Fiber, and Drei are not dependencies. The credits carousel remains a React and CSS implementation with isolated transforms and reduced-motion handling.
 
 [Visit the live site](https://mmerlone.dev.br)
 
@@ -97,9 +97,9 @@ The App Router homepage is composed from focused section components and shared l
 
 The homepage order is Hero, Selected engineering work, How I build, Human or machine, My path, Selected experience, Skills (Hard and Soft), and Résumé. Credentials and Education remain available in the shared portfolio data for negotiated output; Credits is rendered on `/about`. The reusable `GetInTouch` component (email, social links, location) renders on `/contact` only. The Under the Hood route records repository implementation status and keeps external audit results pending until dated evidence exists.
 
-The root layout provides the theme provider, scroll-progress indicator, navigation bar, footer, consent toast, and structured data. The homepage also mounts a reduced-motion-aware scroll-to-top control. `ConfigBar` is currently the theme toggle, with Light, System, and Dark choices.
+The root layout provides the scroll-progress indicator, navigation bar, footer, consent banner, and structured data. The homepage also mounts a reduced-motion-aware scroll-to-top control. Light and dark appearance follow the visitor's system color scheme.
 
-The global style entry point imports local variables, the theme-toggle stylesheet, Tailwind, the selected Open Props token modules, base styles, the protected carousel stylesheet, and the scroll-progress stylesheet. The removed legacy globe, quote, weather, GitHub-stats, and animation-library implementations are absent. The dedicated global effect styles are the theme toggle and scroll-progress indicator; ordinary component transitions and hover/focus states remain. The carousel remains a protected exception with isolated CSS transforms and reduced-motion handling.
+The global style entry point imports Tailwind, the Instrument Serif font, `tw-animate-css`, the shadcn Tailwind layer, and the protected carousel stylesheet; design tokens are plain CSS custom properties. The removed legacy globe, quote, weather, GitHub-stats, and animation-library implementations are absent. Ordinary component transitions and hover/focus states remain. The carousel remains a protected exception with isolated CSS transforms and reduced-motion handling.
 
 ### Public Routes and Machine-Readable Outputs
 
@@ -259,8 +259,7 @@ This project acknowledges the following tools, services, and resources:
 - **improvmx.com:** Email forwarding service ([improvmx.com](https://improvmx.com/)).
 - **Next.js:** The React framework for production ([nextjs.org](https://nextjs.org/)).
 - **React:** The JavaScript library for building user interfaces ([react.dev](https://react.dev/)).
-- **Open Props:** CSS token library for design system primitives ([open-props.style](https://open-props.style/)).
-- **Phosphor Icons:** Icon family used throughout this interface ([phosphoricons.com](https://phosphoricons.com/)).
+- **Lucide Icons:** Icon family used throughout this interface ([lucide.dev](https://lucide.dev/icons/)).
 - **Tailwind CSS:** Utility-first CSS framework ([tailwindcss.com](https://tailwindcss.com/)).
 
 _Kudos to everyone involved!_
@@ -309,13 +308,12 @@ This project utilizes the following technologies:
 - React
 - TypeScript
 - Tailwind CSS
-- Sass
 - ESLint
 - Prettier
 - Jest
 - jest-axe
 - Knip
-- Phosphor Icons
+- Lucide Icons
 - Vercel
 
 ---

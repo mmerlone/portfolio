@@ -6,7 +6,7 @@ This file provides guidance to LLM or SML tools when working with code in this r
 
 ```bash
 # Development
-pnpm dev                    # Start dev server with pino-pretty logging
+pnpm dev                    # Start dev server
 pnpm build                  # Production build
 pnpm start                  # Start production server
 
@@ -51,7 +51,7 @@ pnpm dead-code              # Run knip to detect unused files, exports, and depe
 - Cast `as any` or `as unknown as` is forbidden by eslint rules.
 - Validate all inputs appropriately
 
-### Logging (Pino-compatible - Context First)
+### Logging (Context First)
 
 ```typescript
 // CORRECT - context object first, then message
@@ -95,9 +95,10 @@ After completing any coding task:
 
 ### Data and assets
 
-- `src/data/**` and `public/**` are ignored by knip. **No data or asset may be removed.**
-- Keep data files stale; do not delete or prune them.
-- Move unused assets to `public/archive/` instead of deleting.
+- `src/data/**` and `public/**` are ignored by knip.
+- **Personal portfolio content is never removed.** This covers the owner's experience, education, challenges, skills, credentials, résumé, and other biographical content in `src/data/**`, and every asset in `public/**`. Keep such data stale rather than deleting or pruning it, and move unused assets to `public/archive/` instead of deleting.
+- **Facts about this portfolio's own tech stack are not retained history; they must stay true.** Technology lists, decisions, trade-offs, and descriptions of how this site is built (for example the portfolio entry in `src/data/projects.ts`, `README.md`, and the credits) must be corrected or removed as soon as a technology is added or dropped. Do not leave claims about libraries that are not in `package.json`.
+- When a stack fact is removed, keep any shared vocabulary entries (such as the `src/data/skills.ts` catalog) that may still represent a personal skill, and update the matching fixtures and tests.
 
 ## Commit Guidelines
 

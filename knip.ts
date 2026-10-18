@@ -6,19 +6,17 @@ const config: KnipConfig = {
     "src/data/**",
     "public/**",
     "public/archive/**",
-    // Logging infrastructure kept intentionally for future use; not wired up yet.
-    "src/lib/logger/**",
-    "src/types/logger.types.ts",
     // Internal utilities in cookies.ts used by exported functions (knip doesn't detect intra-file usage).
     "src/lib/cookies.ts",
+    // Reserved logger pieces with no caller yet. The server logger (used by the
+    // sitemap) is the only one wired up; the isomorphic logger has a known
+    // child() context defect that must be fixed before anything imports it.
+    "src/lib/logger/client.ts",
+    "src/lib/logger/isomorphic.ts",
+    // timeOperation() is a reserved helper; maskEmail() in the same file is used.
+    "src/lib/logger/utils.ts",
     // SocialIcons exports used dynamically via getSocialIcon() - knip can't detect dynamic imports.
     "src/components/ui/SocialIcons.tsx",
-  ],
-  ignoreDependencies: [
-    // Consumed via CSS `@import`, invisible to static JS/TS analysis.
-    "tailwindcss",
-    "@tailwindcss/postcss",
-    "@fontsource/instrument-serif",
   ],
 };
 
