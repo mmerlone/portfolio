@@ -21,12 +21,11 @@ export const projects: PortfolioWorkItem[] = [
     decisions: [
       "Next.js App Router with Server and Client components where each is needed.",
       "React 19 with TypeScript for type-safe component composition.",
-      "Tailwind CSS 4 with Sass and Open Props for a hybrid utility and token-based styling system.",
+      "Tailwind CSS 4 with shadcn/ui components and CSS custom-property design tokens for a utility-first, token-based styling system.",
       "Lucide Icons for a consistent, accessible icon family.",
-      "next-themes for theme management with Light, System, and Dark choices.",
+      "System-driven light and dark color schemes through prefers-color-scheme, with no theme toggle.",
       "Vercel for hosting, deployment, and edge functions.",
       "Content negotiation via Accept header for HTML/Markdown variants with Vary: Accept handling.",
-      "Pino Logger for structured server-side logs.",
       "Reduced-motion-aware carousel with isolated CSS transforms.",
       "Cookie consent with analytics opt-in for Google Analytics, Google Tag Manager, and Ahrefs Analytics.",
       "Automated quality gates: ESLint, TypeScript, Knip, Jest, and build verification in CI.",
@@ -34,7 +33,6 @@ export const projects: PortfolioWorkItem[] = [
     tradeoffs: [
       "Using free tiers of AI tools trades some stability for rapid experimentation and learning.",
       "The portfolio itself is a living sandbox in permanent evolution, while published npm modules and YwyBase prioritize stability and maintainability.",
-      "Hybrid styling (Tailwind + Open Props + Sass) requires discipline to avoid conflicting utility and token styles.",
       "Content negotiation adds complexity but enables machine-readable portfolio data.",
     ],
     outcome:
@@ -58,19 +56,7 @@ export const projects: PortfolioWorkItem[] = [
         variant: "v4",
       },
       {
-        id: "sass",
-      },
-      {
-        id: "open-props",
-      },
-      {
         id: "lucide-icons",
-      },
-      {
-        id: "next-themes",
-      },
-      {
-        id: "pino-logger",
       },
       {
         id: "vercel",
