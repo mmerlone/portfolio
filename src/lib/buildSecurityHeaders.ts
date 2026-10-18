@@ -8,8 +8,9 @@
  *
  * Vercel owns HSTS and transport controls at the edge, so this helper never emits
  * `Strict-Transport-Security`. The Content-Security-Policy is scoped to
- * origins the application actually uses: self-hosted assets, the always-on
- * Vercel web-analytics loader, Next.js RSC runtime inline scripts, and the
+ * origins the application actually uses: self-hosted assets, the Vercel
+ * web-analytics loader origin (needed once analytics consent is granted),
+ * Next.js RSC runtime inline scripts, and the
  * env-gated Google/Ahrefs script origins. Third-party origins that are not
  * enabled by an environment variable are never added to the policy.
  * 'unsafe-inline' is required for Next.js App Router RSC runtime scripts
@@ -20,16 +21,18 @@
 export function buildSecurityHeaders({
   env = process.env,
 }: { readonly env?: Partial<NodeJS.ProcessEnv> } = {}): Record<string, string> {
-  const hasGoogleAnalytics = Boolean(
-    env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ??
-    env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID,
-  );
+  // Truthiness (not nullishness) mirrors the runtime provider selection in
+  // AnalyticsWrapper, so an empty-string id never masks a valid one.
+  const hasGoogleAnalytics =
+    Boolean(env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID) ||
+    Boolean(env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID);
   const hasAhrefs = Boolean(env.NEXT_PUBLIC_AHREFS_ANALYTICS_KEY);
 
-  // Vercel Analytics and Speed Insights load from this domain in development;
-  // in production they fall back to same-origin `/_vercel/*`, which `self`
-  // already covers. Google GA/GTM and Ahrefs are only declared when their
-  // env-gated identifiers are actually set, so no enabled service is invented.
+  // The Vercel Analytics and Speed Insights loader origin is listed because it
+  // is needed once analytics consent is granted: in development the loader
+  // comes from this domain; in production it falls back to same-origin
+  // `/_vercel/*`, which `self` already covers. Google GA/GTM and Ahrefs are
+  // only declared when their env-gated identifiers are actually set.
   const scriptSrc = [
     "'self'",
     "https://va.vercel-scripts.com",
