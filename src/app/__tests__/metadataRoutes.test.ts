@@ -11,7 +11,7 @@ describe("metadata routes", () => {
       priority: 1,
       images: ["https://mmerlone.dev.br/images/profile/profile.png"],
     });
-    expect(entry.lastModified).toBeInstanceOf(Date);
+    expect(entry.lastModified ?? new Date(0)).toBeInstanceOf(Date);
   });
 
   it("publishes /about, /contact, /privacy, and /under-the-hood at or below homepage priority", () => {
@@ -49,7 +49,7 @@ describe("metadata routes", () => {
     });
 
     for (const entry of [about, contact, privacy, underTheHood]) {
-      expect(entry?.lastModified).toBeInstanceOf(Date);
+      expect(entry?.lastModified ?? new Date(0)).toBeInstanceOf(Date);
       expect(entry?.priority ?? 0).toBeLessThanOrEqual(homepage.priority ?? 1);
     }
   });
